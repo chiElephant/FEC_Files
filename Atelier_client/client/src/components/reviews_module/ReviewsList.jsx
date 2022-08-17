@@ -5,7 +5,7 @@ function ReviewsList ( {reviews, setSort} ) {
 
   const [sortType, setSortType] = useState('relevant');
 
-  function sortReviews(cb) {
+  const sortReviews = (cb) => {
     const sort = document.getElementById('sort-type').value;
     cb(sort);
     setSort(sort);

@@ -2,21 +2,19 @@ import React, { useState } from 'react';
 
 function AddReview ( {addReview, closeReview} ) {
 
-  var productName = 'Bright Future Sunglasses'
-
   const[stars, setStars] = useState()
   const[recommend, setRecommend] = useState('')
 
-  function handleChange(event) {
+  const handleChange = (event) => {
     let e = event;
     console.lot(e);
   }
 
-  function handleSubmit() {
+  const handleSubmit = () => {
     closeReview();
   }
 
-  function handleRecommend (value) {
+  const handleRecommend = (value) => {
     setRecommend(value);
   }
 
