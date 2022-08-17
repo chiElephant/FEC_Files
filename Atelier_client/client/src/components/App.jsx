@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react';
 import Overview from './Overview.jsx';
 
@@ -17,11 +18,16 @@ class App extends React.Component {
       </div>
     )
   }
+=======
+import React, { useState, useEffect } from 'react';
+
+function App (props) {
+  return (
+    <div>
+      <h1> The RedBean Atelier App </h1>
+    </div>
+  )
+>>>>>>> master
 }
 
 export default App;
-
-
-
-
-
