@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import ProdBreakdown from './ProdBreakdown.jsx';
+import ProductBreakdown from './ProductBreakdown.jsx';
 import { meta } from './seed_data.js';
 import axios from 'axios';
 
@@ -16,7 +16,7 @@ function RatingBreakdown ( {product_id} ) {
       <div>{JSON.stringify(ratings)}</div>
       <div>ratings breakdown graph</div>
       <div>{JSON.stringify(recommended)}</div>
-      <ProdBreakdown
+      <ProductBreakdown
         metadata={characteristics}/>
     </div>
   )
