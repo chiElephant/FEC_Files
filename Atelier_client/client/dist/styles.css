@@ -1,0 +1,9 @@
+
+/* Overview styling */
+
+.product_info_reviews {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 10px
+}
