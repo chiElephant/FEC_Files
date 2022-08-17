@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function ReviewTile ( {review} ) {
+function Review ( {review} ) {
 
   const[id, setId] = useState(review.review_id);
   const[rating, setRating] = useState(review.rating);
@@ -28,4 +28,4 @@ function ReviewTile ( {review} ) {
   )
 }
 
-export default ReviewTile;
+export default Review;
