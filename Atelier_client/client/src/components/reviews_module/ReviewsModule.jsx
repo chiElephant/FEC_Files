@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import RatingBreakdown from './RatingBreakdown.jsx';
+import RatingsBreakdown from './RatingsBreakdown.jsx';
 import ProductBreakdown from './ProductBreakdown.jsx';
 import ReviewsList from './ReviewsList.jsx';
 import AddReview from './AddReview.jsx';
@@ -30,7 +30,7 @@ function ReviewsModule ( { product_id } ) {
   return (
     <div>
       <h3> Ratings Module </h3>
-      <RatingBreakdown
+      <RatingsBreakdown
         product_id={product_id} />
       <ReviewsList
         reviews={revs}

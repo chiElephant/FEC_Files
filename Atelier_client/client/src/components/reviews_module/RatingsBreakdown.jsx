@@ -3,7 +3,7 @@ import ProductBreakdown from './ProductBreakdown.jsx';
 import { meta } from './seed_data.js';
 import axios from 'axios';
 
-function RatingBreakdown ( {product_id} ) {
+function RatingsBreakdown ( {product_id} ) {
 
   const [metadata, setMetadata] = useState(meta);
   const [ratings, setRatings] = useState (meta.ratings);
@@ -22,4 +22,4 @@ function RatingBreakdown ( {product_id} ) {
   )
 }
 
-export default RatingBreakdown;
+export default RatingsBreakdown;
