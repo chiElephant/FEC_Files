@@ -2,18 +2,18 @@ import React, { useState, useEffect } from 'react';
 import RatingsBreakdown from './RatingsBreakdown.jsx';
 import ProductBreakdown from './ProductBreakdown.jsx';
 import ReviewsList from './ReviewsList.jsx';
-import AddReview from './AddReview.jsx';
+import SubmitReview from './SubmitReview.jsx';
 
 function ReviewsModule ( { product_id } ) {
 
   const [reviews, setReviews] = useState([]);
   const [countShown, setCountShown] = useState(2);
   const [reviewsToShow, setreviewsToShow] = useState([]);
-  const [addReview, setAddReview] = useState(false);
+  const [showReviewModal, setShowReviewModal] = useState(false);
   const [sortType, setSortType] = useState('relevance');
 
   const closeReview = () => {
-    setAddReview(false);
+    showReviewModal(false);
   }
 
   const setSort = (type) => {
@@ -32,11 +32,11 @@ function ReviewsModule ( { product_id } ) {
       <ReviewsList
         reviews={reviews}
         setSort={setSort}/>
-      <AddReview
-        addReview={addReview}
+      <SubmitReview
+        showReviewModal={showReviewModal}
         closeReview={closeReview}/>
       <button onClick={() => handleClick(setCountShown, countShown + 2)} disabled={countShown >= reviews.length}>More Reviews</button>
-      <button onClick={() => handleClick(setAddReview, !addReview)}>Add Review</button>
+      <button onClick={() => handleClick(setshowReviewModal, !showReviewModal)}>Add Review</button>
     </div>
   )
 }

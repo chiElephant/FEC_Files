@@ -43,10 +43,6 @@ function AddReview ( {addReview, closeReview} ) {
           </fieldset>
         </div>
 
-        <span key={1} className= "fa fa-star empty-star star-modal" id='star-icon1'  onClick = {()=> {
-            }}>
-        </span>
-
       </div>
       <input type='submit' onClick={() => handleSubmit()}></input>
     </div>
