@@ -5,7 +5,7 @@ function ReviewsList ( {reviews, setSort} ) {
 
   const [sortType, setSortType] = useState('relevant');
 
-  const sortReviews = (cb) => {
+  const handleSortType = (cb) => {
     const sort = document.getElementById('sort-type').value;
     cb(sort);
     setSort(sort);
@@ -16,7 +16,7 @@ function ReviewsList ( {reviews, setSort} ) {
       <h3>Reviews List</h3>
       <div>
         <label>Sort on: </label>
-        <select id="sort-type" onChange={() => sortReviews(setSortType)}>
+        <select id="sort-type" onChange={() => handleSortType(setSortType)}>
           <option value="relevant">Relevant</option>
           <option value="newest">Newest</option>
           <option value="helpful">Helpful</option>

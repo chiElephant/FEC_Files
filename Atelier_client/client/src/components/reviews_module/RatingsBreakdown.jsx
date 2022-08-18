@@ -4,17 +4,17 @@ import axios from 'axios';
 
 function RatingsBreakdown ( {product_id} ) {
 
-  const [metadata, setMetadata] = useState(meta);
-  const [ratings, setRatings] = useState (meta.ratings);
-  const [recommended, setRecommend] = useState(meta.recommended);
-  const [characteristics, setCharacteristics] = useState(meta.characteristics);
+  const [metadata, setMetadata] = useState([]);
+  const [ratings, setRatings] = useState ('');
+  const [recommended, setRecommend] = useState('');
+  const [characteristics, setCharacteristics] = useState({});
 
   return (
     <div>
       <h3>Rating Breakdown</h3>
-      <div>{JSON.stringify(ratings)}</div>
+      <div>{'ratings'}</div>
       <div>ratings breakdown graph</div>
-      <div>{JSON.stringify(recommended)}</div>
+      <div>{'recommended'}</div>
       <ProductBreakdown
         metadata={characteristics}/>
     </div>

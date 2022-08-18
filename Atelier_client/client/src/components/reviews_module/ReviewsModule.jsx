@@ -3,18 +3,17 @@ import RatingsBreakdown from './RatingsBreakdown.jsx';
 import ProductBreakdown from './ProductBreakdown.jsx';
 import ReviewsList from './ReviewsList.jsx';
 import AddReview from './AddReview.jsx';
-import axios from 'axios';
 
 function ReviewsModule ( { product_id } ) {
 
   const [reviews, setReviews] = useState([]);
   const [countShown, setCountShown] = useState(2);
-  const [revsShown, setRevsShown] = useState([]]);
+  const [reviewsToShow, setreviewsToShow] = useState([]);
   const [addReview, setAddReview] = useState(false);
   const [sortType, setSortType] = useState('relevance');
 
   const closeReview = () => {
-    setAddReview(false)
+    setAddReview(false);
   }
 
   const setSort = (type) => {
@@ -31,7 +30,7 @@ function ReviewsModule ( { product_id } ) {
       <RatingsBreakdown
         product_id={product_id} />
       <ReviewsList
-        reviews={revs}
+        reviews={reviews}
         setSort={setSort}/>
       <AddReview
         addReview={addReview}

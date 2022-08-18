@@ -9,9 +9,9 @@ function ProductBreakdown ({ metadata } ) {
   return (
     <div>
       <h3>Product Breakdown</h3>
-      <div>{JSON.stringify(size)}</div>
-      <div>{JSON.stringify(width)}</div>
-      <div>{JSON.stringify(comfort)}</div>
+      <div>{'size'}</div>
+      <div>{'width'}</div>
+      <div>{'comfort'}</div>
     </div>
   )
 }
