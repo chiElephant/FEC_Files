@@ -1,35 +1,38 @@
 import axios from 'axios';
 
-const getReviews = (product_id, sortType, setReviews) => {
+const helpers = {
+  getReviews: (product_id, sortType, setReviews) => {
 
-  const options = {
-    params: { product_id, sort: sortType }
-  }
-  axios.get('/reviews', options)
-  .then(response => {
-    setReviews(response.data)
-  })
-  .catch(error => {
-    console.log(error);
-  })
-}
+    const options = {
+      params: { product_id, sort: sortType }
+    }
 
-const handleShown = () => {
-  const show = reviews.slice(0, countShown);
+    axios.get('/reviews', options)
+    .then(response => {
+      setReviews(response.data)
+    })
+    .catch(error => {
+      console.log(error);
+    })
+  },
 
-  setReviewsShown(show)
-}
+  handleShown: (reviews, countShown, setReviewsShown) => {
+    const show = reviews.slice(0, countShown);
 
-const closeReview = () => {
-  showReviewModal(false);
-}
+    setReviewsShown(show)
+  },
 
-const setSort = (type) => {
-  setSortType(type);
-}
+  closeReview: () => {
+    showReviewModal(false);
+  },
 
-const handleClick = (cb, value) => {
+  setSort: (type) => {
+    setSortType(type);
+  },
+
+  handleClick: (cb, value) => {
   cb(value);
+  }
 }
 
-export { getReviews }
+export default helpers;

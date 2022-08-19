@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getReviews } from './helper_functions/reviews_module.jsx'
+import helpers from './helper_functions/reviews_module.jsx'
 import RatingsBreakdown from './RatingsBreakdown.jsx';
 import ProductBreakdown from './ProductBreakdown.jsx';
 import SubmitReview from './SubmitReview.jsx';
@@ -17,30 +17,12 @@ function ReviewsModule ( props ) {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    getReviews(product_id, sortType, setReviews)
+    helpers.getReviews(product_id, sortType, setReviews)
   }, [product_id, countShown, sortType])
 
   useEffect(() => {
-    handleShown()
+    helpers.handleShown(reviews, countShown, setReviewsShown)
   }, [reviews, countShown])
-
-  const handleShown = () => {
-    const show = reviews.slice(0, countShown);
-
-    setReviewsShown(show)
-  }
-
-  const closeReview = () => {
-    showReviewModal(false);
-  }
-
-  const setSort = (type) => {
-    setSortType(type);
-  }
-
-  const handleClick = (cb, value) => {
-    cb(value);
-  }
 
   return (
     <div>
@@ -49,12 +31,12 @@ function ReviewsModule ( props ) {
         product_id={product_id} />
       <ReviewsList
         reviews={reviewsShown}
-        setSort={setSort}/>
+        setSort={helpers.setSort}/>
       <SubmitReview
         showReviewModal={showReviewModal}
-        closeReview={closeReview}/>
-      <button onClick={() => handleClick(setCountShown, countShown + 2)} disabled={countShown >= reviews.length}>More Reviews</button>
-      <button onClick={() => handleClick(setShowReviewModal, !showReviewModal)}>Add Review</button>
+        closeReview={helpers.closeReview}/>
+      <button onClick={() => helpers.handleClick(setCountShown, countShown + 2)} disabled={countShown >= reviews.length}>More Reviews</button>
+      <button onClick={() => helpers.handleClick(setShowReviewModal, !showReviewModal)}>Add Review</button>
     </div>
   )
 }

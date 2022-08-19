@@ -121,7 +121,6 @@ function handleRatings (ratings, setAvgRating, setTotalReviews) {
 
   avg = (sum/reviewsCount).toFixed(1);
 
-  console.log(reviewsCount, avg);
   setTotalReviews(reviewsCount);
   setAvgRating(avg);
 }
