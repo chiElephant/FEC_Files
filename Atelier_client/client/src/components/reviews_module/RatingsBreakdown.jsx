@@ -11,11 +11,14 @@ function RatingsBreakdown ( {product_id} ) {
   const [characteristics, setCharacteristics] = useState({});
   const [totalReviews, setTotalReviews] = useState(0)
   const [recsDiv, setRecsDiv] = useState([])
+  const [yesRec, setYesRec] = useState(0);
+  const [noRec, setNoRec] = useState(0);
+
 
 
   useEffect(() => {
     getMetaData()
-  }, [])
+  }, [product_id])
 
   const getMetaData = () => {
     const options = {
@@ -31,11 +34,12 @@ function RatingsBreakdown ( {product_id} ) {
     })
   }
 
-  const handleMetadata = async (metadata) => {
+  const handleMetadata = (metadata) => {
     setMetadata(metadata)
+    setCharacteristics(metadata.characteristics)
+
     handleRatings(metadata.ratings)
     handleRecommend(metadata.recommended)
-    // handleCharacteristics(metadata.characteristics)
   }
 
   const handleRatings = (ratings) => {
@@ -64,17 +68,11 @@ function RatingsBreakdown ( {product_id} ) {
     const yesCount = recCount.true;
 
     const recsDiv = ([
-      <div
-        key="1">
-          {`Yes: ${yesCount}`}
-      </div>,
-      <div
-        key ="0">
-          {`No: ${noCount}`}
-      </div>
     ])
 
     setRecsDiv(recsDiv);
+    setYesRec(yesCount);
+    setNoRec(noCount);
 
   }
 
@@ -84,16 +82,23 @@ function RatingsBreakdown ( {product_id} ) {
       <div>{`Average Rating: ${avgRating}`}</div>
       <div>{`Total Reviews: ${totalReviews}`}</div>
       <h4>Breakdown Graph</h4>
-      <div>5 stars: {ratings[5]}</div>
-      <div>4 stars: {ratings[4]}</div>
-      <div>3 stars: {ratings[3]}</div>
-      <div>2 stars: {ratings[2]}</div>
-      <div>1 stars: {ratings[1]}</div>
+      <div id='five-star'>
+          5 stars: {ratings[5]}</div>
+      <div id='four-star'>
+          4 stars: {ratings[4]}</div>
+      <div id='three-star'>
+          3 stars: {ratings[3]}</div>
+      <div id='two-star'>
+          2 stars: {ratings[2]}</div>
+      <div id='one-star'>
+          1 stars: {ratings[1]}</div>
       <h4>Recommended</h4>
-      {recsDiv}
-      {/* <div>{`Yes: `}</div>
-      <div>{`No: `}</div> */}
-
+      <div id="yes-rec">
+          {`Yes: ${yesRec}`}
+      </div>
+      <div id="no-rec">
+          {`No: ${noRec}`}
+      </div>
       <ProductBreakdown
         metadata={characteristics}/>
     </div>

@@ -17,7 +17,7 @@ function ReviewsModule ( props ) {
 
   useEffect(() => {
     getReviews()
-  }, [product_id])
+  }, [])
 
   const getReviews = () => {
 
@@ -27,15 +27,21 @@ function ReviewsModule ( props ) {
 
     axios.get('/reviews', options)
     .then(response => {
-      setReviews(response.data)
+      handleShown(response.data);
     })
     .catch(error => {
       console.log(error);
     })
   }
 
-  const handleShown = () => {
-    setCountShown(show);
+  const handleShown = (reviewData) => {
+    console.log(reviewData)
+    const show = reviewData.slice(0, countShown);
+
+    new Promise(() => {
+      setReviews(reviewData)
+    })
+    .then(setCountShown(show))
   }
 
   const closeReview = () => {
@@ -49,6 +55,7 @@ function ReviewsModule ( props ) {
   const handleClick = (cb, value) => {
     console.log(value);
     cb(value);
+    handleShown(reviews);
   }
 
   return (
@@ -57,7 +64,7 @@ function ReviewsModule ( props ) {
       <RatingsBreakdown
         product_id={product_id} />
       <ReviewsList
-        reviews={reviews}
+        reviews={reviewsShown}
         setSort={setSort}/>
       <SubmitReview
         showReviewModal={showReviewModal}
