@@ -1,36 +1,19 @@
 import React, { useState, useEffect } from 'react';
+import { createCharsDiv  } from './helper_functions/product_bd.jsx'
 
-function ProductBreakdown ({ metadata } ) {
+function ProductBreakdown ({ characteristics } ) {
   const [size, setSize] = useState('');
   const [width, setWidth] = useState('');
   const [comfort, setComfort] = useState('');
   const [quality, setQuality] = useState('');
+  const [length, setLength] = useState('');
+  const [fit, setFit] = useState('');
   const [divElement, setDivElement] = useState([])
 
   useEffect(() => {
-    handleMetadata()
-  }, [metadata])
-
-  const handleMetadata = () => {
-
-    const charDiv = []
-
-    for (let char in metadata) {
-      if(metadata[char] !== null) {
-        const key = metadata[char].id
-        const value = Math.floor(metadata[char].value)
-        charDiv.push(
-        <div
-          className="characteristic"
-          key={key}>
-          {`${char}: ${value} avg`}
-        </div>
-        )
-      }
-    }
-
-    setDivElement(charDiv)
-  }
+    const div = createCharsDiv(characteristics)
+    setDivElement(div)
+  }, [characteristics])
 
   return (
     <div>

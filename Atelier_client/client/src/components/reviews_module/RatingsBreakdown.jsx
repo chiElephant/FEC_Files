@@ -31,7 +31,7 @@ function RatingsBreakdown ( {product_id} ) {
         {ratingsDiv}
       <br></br>
       <ProductBreakdown
-        metadata={characteristics}/>
+        characteristics={characteristics}/>
     </div>
   )
 }
