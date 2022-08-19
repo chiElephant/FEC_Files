@@ -2,16 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ProductBreakdown from './ProductBreakdown.jsx';
 import axios from 'axios';
 
-import { handleRatings } from './helper_functions/ratings_bd.jsx'
-
-const handleRecommend = (recommend, setPercentRec) => {
-  const noCount = recommend.false;
-  const yesCount = recommend.true;
-  const totalCount = noCount + yesCount;
-  const avg = Math.floor(((yesCount / totalCount) * 100));
-
-  setPercentRec(avg);
-}
+import { handleRatings, handleRecommend } from './helper_functions/ratings_bd.jsx'
 
 const getMetaData = ( product_id, setMetadata, setRatings, setAvgRating, setTotalReviews, setPercentRec, setCharacteristics ) => {
   const options = {
