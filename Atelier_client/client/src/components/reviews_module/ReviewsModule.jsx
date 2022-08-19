@@ -19,29 +19,27 @@ function ReviewsModule ( props ) {
     getReviews()
   }, [])
 
-  const getReviews = () => {
+  useEffect(() => {
+    handleShown()
+  }, [reviews, countShown])
 
+  const getReviews = () => {
     const options = {
       params: { product_id, sort: sortType }
     }
-
     axios.get('/reviews', options)
     .then(response => {
-      handleShown(response.data);
+      setReviews(response.data)
     })
     .catch(error => {
       console.log(error);
     })
   }
 
-  const handleShown = (reviewData) => {
-    console.log(reviewData)
-    const show = reviewData.slice(0, countShown);
+  const handleShown = () => {
+    const show = reviews.slice(0, countShown);
 
-    new Promise(() => {
-      setReviews(reviewData)
-    })
-    .then(setCountShown(show))
+    setReviewsShown(show)
   }
 
   const closeReview = () => {
@@ -55,7 +53,6 @@ function ReviewsModule ( props ) {
   const handleClick = (cb, value) => {
     console.log(value);
     cb(value);
-    handleShown(reviews);
   }
 
   return (
