@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import moment from 'moment';
 
 function Review ( {review} ) {
 
+  const convertedTime = moment(review.date).format('MMMM DD YYYY')
+
   const[id, setId] = useState(review.review_id);
   const[rating, setRating] = useState(review.rating);
-  const[date, setDate] = useState(review.date);
+  const[date, setDate] = useState(convertedTime);
   const[username, setUsername] = useState(review.reviewer_name);
   const[summary, setSummary] = useState(review.summary);
   const[body, setBody] = useState(review.body);
@@ -16,10 +19,10 @@ function Review ( {review} ) {
   return (
     <div id="review">
       <h4>Review</h4>
-      <div>Rating: {rating}</div>
-      <div>Date: {date}</div>
+      <div>Avgerage Rating: {rating}</div>
+      <div>Date Reviews:    {date}</div>
       <div>{username}</div>
-      <div>{summary}</div>
+      <h3>{summary}</h3>
       <div>{body}</div>
       <div>{recommend}</div>
       <div>{response}</div>
