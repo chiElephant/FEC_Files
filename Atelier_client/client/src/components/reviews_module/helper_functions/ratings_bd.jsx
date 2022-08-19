@@ -82,7 +82,7 @@ function handleRecommend (recommend, setPercentRec) {
   setPercentRec(avg);
 }
 
-function getMetaData (
+function getMetadata (
   product_id, setMetadata, setRatings, setAvgRating, setTotalReviews, setPercentRec, setCharacteristics
 )  {
   const options = {
@@ -100,4 +100,4 @@ function getMetaData (
   })
 }
 
-export { metadata, ratings, characteristics, handleRatings, handleRecommend, getMetaData }
+export { metadata, ratings, characteristics, handleRatings, handleRecommend, getMetadata }

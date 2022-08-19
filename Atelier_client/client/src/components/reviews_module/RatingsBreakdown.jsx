@@ -2,25 +2,8 @@ import React, { useState, useEffect } from 'react';
 import ProductBreakdown from './ProductBreakdown.jsx';
 import axios from 'axios';
 
-import { handleRatings, handleRecommend } from './helper_functions/ratings_bd.jsx'
+import { handleRatings, handleRecommend, getMetadata } from './helper_functions/ratings_bd.jsx';
 
-const getMetaData = ( product_id, setMetadata, setRatings, setAvgRating, setTotalReviews, setPercentRec, setCharacteristics ) => {
-  const options = {
-    params: { product_id }
-  }
-  axios.get('/reviews/meta', options)
-  .then(res => {
-    setMetadata(res.data)
-    setCharacteristics(res.data.characteristics)
-    handleRecommend(res.data.recommended, setPercentRec)
-    handleRatings(res.data.ratings, setRatings, setAvgRating, setTotalReviews)
-  })
-  .catch(err => {
-    console.log(err)
-  })
-}
-
-// *** Ratings Breakdown Component ***
 function RatingsBreakdown ( {product_id} ) {
 
   const [metadata, setMetadata] = useState([]);
@@ -31,7 +14,7 @@ function RatingsBreakdown ( {product_id} ) {
   const [characteristics, setCharacteristics] = useState({});
 
   useEffect(() => {
-    getMetaData (
+    getMetadata (
       product_id, setMetadata, setRatings, setAvgRating, setTotalReviews, setPercentRec, setCharacteristics
     )
   }, [product_id])
