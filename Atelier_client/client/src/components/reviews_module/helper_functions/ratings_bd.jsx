@@ -50,59 +50,9 @@ const characteristics = metadata.Characteristics;
 
 // ******************** Helper Functions ******************** //
 
-function handleRatings (ratings, setRatings, setAvgRating, setTotalReviews) {
-  let reviewsCount = 0;
-  let sum = 0;
-  let avg;
+function createRatingsGraphDiv (ratings, setRatingsGraphDiv) {
 
-  for (const rating in ratings) {
-    const key = parseInt(rating, 10)
-    const value = parseInt(ratings[rating], 10)
-
-    reviewsCount += value;
-    sum += (key * value);
-  }
-
-  avg = (sum/reviewsCount).toFixed(1);
-
-  setRatings(ratings);
-  setAvgRating(avg);
-  setTotalReviews(reviewsCount)
-}
-
-function handleRecommend (recommend, setPercentRec) {
-  const noCount = recommend.false;
-  const yesCount = recommend.true;
-  const totalCount = noCount + yesCount;
-  const avg = Math.floor(((yesCount / totalCount) * 100));
-
-  setPercentRec(avg);
-}
-
-function getMetadata (product_id, {setMetadata, setAvgRating, setPercentRec, setRatingsDiv, setRatings, setTotalReviews})  {
-
-  let meta = {};
-  const options = {
-    params: { product_id }
-  }
-  axios.get('/reviews/meta', options)
-  .then(res => {
-    setMetadata(res.data)
-    handleRecommend(res.data.recommended, setPercentRec)
-    handleRatings(res.data.ratings, setRatings, setAvgRating, setTotalReviews)
-    createRatingsDiv(res.data.ratings, setRatingsDiv);
-  })
-  .catch(err => {
-    console.log(err)
-  })
-
-  return meta
-
-}
-
-function createRatingsDiv (ratings, setRatingsDiv) {
-
-  setRatingsDiv ([
+  setRatingsGraphDiv ([
     <div id='ratings-graph' key='0'>
       <div
         id='five-star'
@@ -126,6 +76,54 @@ function createRatingsDiv (ratings, setRatingsDiv) {
           1 stars: {ratings[1]}</div>
     </div>
   ])
+}
+
+function getMetadata (product_id, {setMetadata, setAvgRating, setPercentRec, setRatingsGraphDiv, setRatings, setTotalReviews})  {
+
+  const options = {
+    params: { product_id }
+  }
+
+  axios.get('/reviews/meta', options)
+  .then(res => {
+    handleRatings(res.data.ratings, setAvgRating, setTotalReviews)
+    handleRecommend(res.data.recommended, setPercentRec)
+    createRatingsGraphDiv(res.data.ratings, setRatingsGraphDiv);
+    setRatings(res.data.ratings);
+    setMetadata(res.data)
+  })
+  .catch(err => {
+    console.log(err)
+  })
+}
+
+function handleRecommend (recommend, setPercentRec) {
+  const noCount = recommend.false;
+  const yesCount = recommend.true;
+  const totalCount = noCount + yesCount;
+  const avg = Math.floor(((yesCount / totalCount) * 100));
+
+  setPercentRec(avg);
+}
+
+function handleRatings (ratings, setAvgRating, setTotalReviews) {
+  let reviewsCount = 0;
+  let sum = 0;
+  let avg;
+
+  for (const rating in ratings) {
+    const key = parseInt(rating, 10)
+    const value = parseInt(ratings[rating], 10)
+
+    reviewsCount += value;
+    sum += (key * value);
+  }
+
+  avg = (sum/reviewsCount).toFixed(1);
+
+  console.log(reviewsCount, avg);
+  setTotalReviews(reviewsCount);
+  setAvgRating(avg);
 }
 
 export { metadata, ratings, characteristics, getMetadata }

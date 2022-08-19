@@ -5,24 +5,24 @@ function Review ( {review} ) {
 
   const convertedTime = moment(review.date).format('MMMM DD YYYY')
 
-  const[id, setId] = useState(review.review_id);
-  const[rating, setRating] = useState(review.rating);
-  const[date, setDate] = useState(convertedTime);
+  const[helpfulness, setHelpfull] = useState(review.helpfulness);
   const[username, setUsername] = useState(review.reviewer_name);
-  const[summary, setSummary] = useState(review.summary);
-  const[body, setBody] = useState(review.body);
-  const[photos, setPhotos] = useState(review.photos);
   const[recommend, setRecommend] = useState(review.recommend);
   const[response, setResponse] = useState(review.response);
-  const[helpfulness, setHelpfull] = useState(review.helpfulness);
+  const[summary, setSummary] = useState(review.summary);
+  const[rating, setRating] = useState(review.rating);
+  const[photos, setPhotos] = useState(review.photos);
+  const[date, setDate] = useState(convertedTime);
+  const[id, setId] = useState(review.review_id);
+  const[body, setBody] = useState(review.body);
 
   return (
     <div id="review">
-      <h4>Review</h4>
+      <h4>**********</h4>
       <div>Avgerage Rating: {rating}</div>
       <div>Date Reviews:    {date}</div>
-      <div>{username}</div>
-      <h3>{summary}</h3>
+      <div>User: {username}</div>
+      <h4>{summary}</h4>
       <div>{body}</div>
       <div>{recommend}</div>
       <div>{response}</div>

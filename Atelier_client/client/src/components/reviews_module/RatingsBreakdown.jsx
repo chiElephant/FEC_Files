@@ -5,27 +5,28 @@ import { getMetadata, metadata, ratings, characteristics } from './helper_functi
 
 function RatingsBreakdown ( {product_id} ) {
 
+  const [characteristics, setCharacteristics] = useState(characteristics);
+  const [ratingsGraphDiv, setRatingsGraphDiv] = useState(<div></div>);
+  const [totalReviews, setTotalReviews] = useState(0);
   const [metadata, setMetadata] = useState(metadata);
   const [ratings, setRatings] = useState(ratings);
-  const [avgRating, setAvgRating] = useState(0);
-  const [totalReviews, setTotalReviews] = useState(0)
   const [percentRec, setPercentRec] = useState(0);
-  const [characteristics, setCharacteristics] = useState(characteristics);
-  const [ratingsDiv, setRatingsDiv] = useState(<div></div>);
+  const [avgRating, setAvgRating] = useState('');
 
   const setStates = {
-    setMetadata,
-    setRatings,
-    setAvgRating,
+    setCharacteristics,
+    setRatingsGraphDiv,
     setTotalReviews,
     setPercentRec,
-    setCharacteristics,
-    setRatingsDiv
+    setAvgRating,
+    setMetadata,
+    setRatings,
   }
 
   useEffect(() => {
     getMetadata(product_id, setStates)
   }, [product_id])
+
 
   return (
     <div>
@@ -33,9 +34,11 @@ function RatingsBreakdown ( {product_id} ) {
       <div>{`Average Rating: ${avgRating}`}</div>
       <div>{`Total Reviews: ${totalReviews}`}</div>
       <br></br>
-      <div id="rec-percent">{`${percentRec}% of reviewers recommend this product`}</div>
+      <div id="rec-percent">
+        {`${percentRec}% of reviewers recommend this product`}
+      </div>
       <br></br>
-        {ratingsDiv}
+        {ratingsGraphDiv}
       <br></br>
       <ProductBreakdown
         characteristics={characteristics}/>

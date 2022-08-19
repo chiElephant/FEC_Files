@@ -1,40 +1,28 @@
 import React, { useState, useEffect } from 'react';
+import { getReviews } from './helper_functions/reviews_module.jsx'
 import RatingsBreakdown from './RatingsBreakdown.jsx';
 import ProductBreakdown from './ProductBreakdown.jsx';
-import ReviewsList from './ReviewsList.jsx';
 import SubmitReview from './SubmitReview.jsx';
+import ReviewsList from './ReviewsList.jsx';
 import axios from 'axios';
 
 function ReviewsModule ( props ) {
 
-  const [reviews, setReviews] = useState([]);
-  const [countShown, setCountShown] = useState(2);
-  const [reviewsShown, setReviewsShown] = useState([]);
   const [showReviewModal, setShowReviewModal] = useState(false);
   const [sortType, setSortType] = useState('relevance');
+  const [reviewsShown, setReviewsShown] = useState([]);
   const [product_id, setProductId] = useState(71697);
   const [productName, setProductName] = useState('');
+  const [countShown, setCountShown] = useState(2);
+  const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    getReviews()
+    getReviews(product_id, sortType, setReviews)
   }, [product_id, countShown, sortType])
 
   useEffect(() => {
     handleShown()
   }, [reviews, countShown])
-
-  const getReviews = () => {
-    const options = {
-      params: { product_id, sort: sortType }
-    }
-    axios.get('/reviews', options)
-    .then(response => {
-      setReviews(response.data)
-    })
-    .catch(error => {
-      console.log(error);
-    })
-  }
 
   const handleShown = () => {
     const show = reviews.slice(0, countShown);
