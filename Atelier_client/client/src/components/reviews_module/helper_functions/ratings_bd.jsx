@@ -45,11 +45,8 @@ var metadata = {
 
 }
 
-
-var ratings  =  metadata.ratings
-
-var characteristics = metadata.Characteristics;
-
+const ratings  =  metadata.ratings
+const characteristics = metadata.Characteristics;
 
 // ******************** Helper Functions ******************** //
 
@@ -83,8 +80,9 @@ function handleRecommend (recommend, setPercentRec) {
 }
 
 function getMetadata (
-  product_id, setMetadata, setRatings, setAvgRating, setTotalReviews, setPercentRec, setCharacteristics
-)  {
+    product_id, setMetadata, setRatings, setAvgRating, setTotalReviews, setPercentRec, setCharacteristics, setRatingsDiv
+  )  {
+
   const options = {
     params: { product_id }
   }
@@ -94,10 +92,39 @@ function getMetadata (
     setCharacteristics(res.data.characteristics)
     handleRecommend(res.data.recommended, setPercentRec)
     handleRatings(res.data.ratings, setRatings, setAvgRating, setTotalReviews)
+    createRatingsDiv(res.data.ratings, setRatingsDiv);
   })
   .catch(err => {
     console.log(err)
   })
 }
 
-export { metadata, ratings, characteristics, handleRatings, handleRecommend, getMetadata }
+function createRatingsDiv (ratings, setRatingsDiv) {
+
+  setRatingsDiv ([
+    <div id='ratings-graph' key='0'>
+      <div
+        id='five-star'
+        key='5'>
+          5 stars: {ratings[5]}</div>
+      <div
+        id='four-star'
+        key='4'>
+          4 stars: {ratings[4]}</div>
+      <div
+        id='three-star'
+        key='3'>
+          3 stars: {ratings[3]}</div>
+      <div
+        id='two-star'
+        key='2'>
+          2 stars: {ratings[2]}</div>
+      <div
+        id='one-star'
+        key='1'>
+          1 stars: {ratings[1]}</div>
+    </div>
+  ])
+}
+
+export { metadata, ratings, characteristics, getMetadata }
