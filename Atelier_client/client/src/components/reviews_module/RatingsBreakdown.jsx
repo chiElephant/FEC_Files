@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import ProductBreakdown from './ProductBreakdown.jsx';
 import axios from 'axios';
 
-import { handleRatings, handleRecommend, getMetadata } from './helper_functions/ratings_bd.jsx';
+import { handleRatings, handleRecommend, getMetadata, metadata } from './helper_functions/ratings_bd.jsx';
 
 function RatingsBreakdown ( {product_id} ) {
 
-  const [metadata, setMetadata] = useState([]);
+  const [metadata, setMetadata] = useState(metadata);
   const [ratings, setRatings] = useState([]);
   const [avgRating, setAvgRating] = useState(0);
   const [totalReviews, setTotalReviews] = useState(0)
