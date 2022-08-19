@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { list_product, product_information, product_styles, related_products, product_reviews } from '../../example_data/example.js';
 import AddToCart from './AddToCart.jsx';
+import Gallery from './Gallery.jsx';
 
 function Styles (props) {
 
@@ -15,21 +16,28 @@ function Styles (props) {
     setSelectedStyle(props.styles[0])
   }, [props.styles]);
 
-  if (Object.keys(selectedStyle).length) {
-    console.log('This is the selectedStyle length: ', Object.keys(selectedStyle).length);
+  var handleSelect = (e) => {
+    e.preventDefault();
+    // console.log(JSON.parse(e.target.getAttribute('value')));
+    setSelectedStyle(JSON.parse(e.target.getAttribute('value')));
+  }
+
+  if (props.styles.length) {
+    console.log(`There are ${props.styles.length} styles`);
     return (
       <div className='product_overview_style_selector'>
 
         {
-          selectedStyle.photos.map((photo) => {
+          props.styles.map((style) => {
             return (
-              <div>
-                <img className='style_thumbnail' src={photo.thumbnail_url}></img>
-              </div>
+                <img className='style_thumbnail' onClick={(e) => {
+                  handleSelect(e);
+                }} value={JSON.stringify(style)} src={style.photos[0].thumbnail_url}></img>
             )
           })
         }
         <AddToCart style={selectedStyle}/>
+        <Gallery style={selectedStyle}/>
       </div>
     )
   }

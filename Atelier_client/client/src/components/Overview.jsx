@@ -3,6 +3,7 @@ import { list_product, product_information, product_styles, related_products, pr
 import ProductInfo from './ProductInfo.jsx';
 import Styles from './Styles.jsx';
 import AddToCart from './AddToCart.jsx';
+import Gallery from './Gallery.jsx';
 import axios from 'axios';
 
 

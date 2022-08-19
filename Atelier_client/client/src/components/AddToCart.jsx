@@ -6,6 +6,7 @@ function AddToCart (props) {
   const [outOfStock, setOutOfStock] = useState(true);
   const [sizeSelected, setSizeSelected] = useState('');
   const [quantities, setQuantities] = useState(0);
+  const [quantitySelected, setQuantitySelected] = useState(0)
 
   var availability = async (skus) => {
     var resultObj = {};
@@ -30,6 +31,10 @@ function AddToCart (props) {
     setSizeSelected(e.target.value);
   };
 
+  var handleQuantityChange = (e) => {
+    setQuantitySelected(e.target.value);
+  }
+
   useEffect(() => {
     console.log('The AddToCart component mounted!');
     availability(props.style.skus);
@@ -47,6 +52,18 @@ function AddToCart (props) {
     };
     setQuantities(qtys);
   }, [sizeSelected])
+
+  var handleAddToCart = (e) => {
+    e.preventDefault();
+    if (!outOfStock && sizeSelected !== '' && quantitySelected !== 0) {
+      console.log(`${quantitySelected} pieces of ${props.style.name} style in size ${sizeSelected} have been added to the cart `)
+    }
+
+    // else if (!outOfStock && sizeSelected === '') {
+
+
+    // }
+  }
 
   if (outOfStock === false) {
     return (
@@ -71,7 +88,9 @@ function AddToCart (props) {
               ? <select disabled>
                   <option> - </option>
                 </select>
-              : <select>
+              : <select onChange={(e) => {
+                  handleQuantityChange(e);
+                }}>
                   <option selected> 1 </option>
                   {
                     quantities.map((num) => {
@@ -81,11 +100,23 @@ function AddToCart (props) {
                     })
                   }
                 </select>
+
           }
+
+          <button onClick={(e) => {
+            handleAddToCart(e);
+          }}>Add to Cart</button>
+
 
       </div>
     )
 
+  } else {
+    return (
+      <select>
+        <option disabled>OUT OF STOCK</option>
+      </select>
+    )
   }
 }
 
