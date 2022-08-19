@@ -4,42 +4,42 @@ import axios from 'axios';
 
 var metadata = {
 
-  'product_id': '',
+  'product_id': null,
   'ratings': {
-      '1': '',
-      '2': '',
-      '3': '',
-      '4': '',
-      '5': ''
+      '1': null,
+      '2': null,
+      '3': null,
+      '4': null,
+      '5': null
   },
   'recommended': {
-      'false': '',
-      'true': ''
+      'false': null,
+      'true': null
   },
   'characteristics': {
       'Size': {
-        'id': '',
-        'value': ''
+        'id': null,
+        'value': null
       },
       'Fit': {
-        'id': '',
-        'value': ''
+        'id': null,
+        'value': null
       },
       'Width': {
-          'id': '',
-          'value': ''
+          'id': null,
+          'value': null
       },
       'Length': {
-          'id': '',
-          'value': ''
+          'id': null,
+          'value': null
       },
       'Comfort': {
-          'id': '',
-          'value': ''
+          'id': null,
+          'value': null
       },
       'Quality': {
-          'id': '',
-          'value': ''
+          'id': null,
+          'value': null
       }
   }
 

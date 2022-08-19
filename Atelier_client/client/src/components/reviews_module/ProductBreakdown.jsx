@@ -13,10 +13,10 @@ function ProductBreakdown ({ metadata } ) {
 
   const handleMetadata = () => {
 
-  const charDiv = []
+    const charDiv = []
 
-    if(Object.keys(metadata).length !== 0) {
-      for (let char in metadata) {
+    for (let char in metadata) {
+      if(metadata[char] !== null) {
         const key = metadata[char].id
         const value = Math.floor(metadata[char].value)
         charDiv.push(
@@ -28,6 +28,7 @@ function ProductBreakdown ({ metadata } ) {
         )
       }
     }
+
     setDivElement(charDiv)
   }
 

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import ProductBreakdown from './ProductBreakdown.jsx';
-import axios from 'axios';
 
 import { getMetadata, metadata, ratings, characteristics } from './helper_functions/ratings_bd.jsx';
 
@@ -11,7 +10,7 @@ function RatingsBreakdown ( {product_id} ) {
   const [avgRating, setAvgRating] = useState(0);
   const [totalReviews, setTotalReviews] = useState(0)
   const [percentRec, setPercentRec] = useState(0);
-  const [characteristics, setCharacteristics] = useState({});
+  const [characteristics, setCharacteristics] = useState(characteristics);
   const [ratingsDiv, setRatingsDiv] = useState('');
 
   useEffect(() => {
