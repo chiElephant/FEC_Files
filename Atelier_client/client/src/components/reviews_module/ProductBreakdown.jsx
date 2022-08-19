@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
 function ProductBreakdown ({ metadata } ) {
-
   const [size, setSize] = useState('');
   const [width, setWidth] = useState('');
   const [comfort, setComfort] = useState('');
@@ -24,7 +23,7 @@ function ProductBreakdown ({ metadata } ) {
         <div
           className="characteristic"
           key={key}>
-          {`${char}: average rating ${value}`}
+          {`${char}: ${value} avg`}
         </div>
         )
       }

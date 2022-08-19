@@ -2,86 +2,58 @@ import React, { useState, useEffect } from 'react';
 import ProductBreakdown from './ProductBreakdown.jsx';
 import axios from 'axios';
 
+import { handleRatings } from './helper_functions/ratings_bd.jsx'
+
+const handleRecommend = (recommend, setPercentRec) => {
+  const noCount = recommend.false;
+  const yesCount = recommend.true;
+  const totalCount = noCount + yesCount;
+  const avg = Math.floor(((yesCount / totalCount) * 100));
+
+  setPercentRec(avg);
+}
+
+const getMetaData = ( product_id, setMetadata, setRatings, setAvgRating, setTotalReviews, setPercentRec, setCharacteristics ) => {
+  const options = {
+    params: { product_id }
+  }
+  axios.get('/reviews/meta', options)
+  .then(res => {
+    setMetadata(res.data)
+    setCharacteristics(res.data.characteristics)
+    handleRecommend(res.data.recommended, setPercentRec)
+    handleRatings(res.data.ratings, setRatings, setAvgRating, setTotalReviews)
+  })
+  .catch(err => {
+    console.log(err)
+  })
+}
+
+// *** Ratings Breakdown Component ***
 function RatingsBreakdown ( {product_id} ) {
 
   const [metadata, setMetadata] = useState([]);
-  const [ratings, setRatings] = useState ({});
-  const [recommend, setRecommend] = useState({});
+  const [ratings, setRatings] = useState([]);
   const [avgRating, setAvgRating] = useState(0);
-  const [characteristics, setCharacteristics] = useState({});
   const [totalReviews, setTotalReviews] = useState(0)
-  const [recsDiv, setRecsDiv] = useState([])
-  const [yesRec, setYesRec] = useState(0);
-  const [noRec, setNoRec] = useState(0);
-
-
+  const [percentRec, setPercentRec] = useState(0);
+  const [characteristics, setCharacteristics] = useState({});
 
   useEffect(() => {
-    getMetaData()
+    getMetaData (
+      product_id, setMetadata, setRatings, setAvgRating, setTotalReviews, setPercentRec, setCharacteristics
+    )
   }, [product_id])
 
-  const getMetaData = () => {
-    const options = {
-      params: { product_id }
-    }
-
-    axios.get('/reviews/meta', options)
-    .then(res => {
-      handleMetadata(res.data)
-    })
-    .catch(err => {
-      console.log(err)
-    })
-  }
-
-  const handleMetadata = (metadata) => {
-    setMetadata(metadata)
-    setCharacteristics(metadata.characteristics)
-
-    handleRatings(metadata.ratings)
-    handleRecommend(metadata.recommended)
-  }
-
-  const handleRatings = (ratings) => {
-
-    let reviewsCount = 0;
-    let sum = 0;
-    let avg = 0;
-
-    for (const rating in ratings) {
-      const key = parseInt(rating, 10)
-      const value = parseInt(ratings[rating], 10)
-
-      reviewsCount += value;
-      sum += (key * value);
-
-      avg = (sum/reviewsCount).toFixed(1);
-    }
-
-    setAvgRating(avg);
-    setTotalReviews(reviewsCount)
-    setRatings(ratings);
-  }
-
-  const handleRecommend = (recCount) => {
-    const noCount = recCount.false;
-    const yesCount = recCount.true;
-
-    const recsDiv = ([
-    ])
-
-    setRecsDiv(recsDiv);
-    setYesRec(yesCount);
-    setNoRec(noCount);
-
-  }
 
   return (
     <div>
       <h3>Ratings Breakdown</h3>
       <div>{`Average Rating: ${avgRating}`}</div>
       <div>{`Total Reviews: ${totalReviews}`}</div>
-      <h4>Breakdown Graph</h4>
+      <br></br>
+      <div id="rec-percent">{`${percentRec}% of reviewers recommend this product`}</div>
+      <br></br>
       <div id='five-star'>
           5 stars: {ratings[5]}</div>
       <div id='four-star'>
@@ -92,13 +64,7 @@ function RatingsBreakdown ( {product_id} ) {
           2 stars: {ratings[2]}</div>
       <div id='one-star'>
           1 stars: {ratings[1]}</div>
-      <h4>Recommended</h4>
-      <div id="yes-rec">
-          {`Yes: ${yesRec}`}
-      </div>
-      <div id="no-rec">
-          {`No: ${noRec}`}
-      </div>
+      <br></br>
       <ProductBreakdown
         metadata={characteristics}/>
     </div>

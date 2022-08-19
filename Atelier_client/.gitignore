@@ -104,3 +104,6 @@ client/dist/bundle.js
 
 # TernJS port file
 .tern-port
+
+# Configuration Files
+config.js

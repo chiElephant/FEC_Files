@@ -17,7 +17,7 @@ function ReviewsModule ( props ) {
 
   useEffect(() => {
     getReviews()
-  }, [])
+  }, [product_id, countShown, sortType])
 
   useEffect(() => {
     handleShown()
@@ -51,7 +51,6 @@ function ReviewsModule ( props ) {
   }
 
   const handleClick = (cb, value) => {
-    console.log(value);
     cb(value);
   }
 
