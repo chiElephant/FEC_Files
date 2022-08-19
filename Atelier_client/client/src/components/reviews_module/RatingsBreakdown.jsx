@@ -11,13 +11,20 @@ function RatingsBreakdown ( {product_id} ) {
   const [totalReviews, setTotalReviews] = useState(0)
   const [percentRec, setPercentRec] = useState(0);
   const [characteristics, setCharacteristics] = useState(characteristics);
-  const [ratingsDiv, setRatingsDiv] = useState('');
+  const [ratingsDiv, setRatingsDiv] = useState(<div></div>);
+
+  const setStates = {
+    setMetadata,
+    setRatings,
+    setAvgRating,
+    setTotalReviews,
+    setPercentRec,
+    setCharacteristics,
+    setRatingsDiv
+  }
 
   useEffect(() => {
-    getMetadata (
-      product_id, setMetadata, setRatings, setAvgRating, setTotalReviews,
-      setPercentRec, setCharacteristics, setRatingsDiv
-    )
+    getMetadata(product_id, setStates)
   }, [product_id])
 
   return (

@@ -79,17 +79,15 @@ function handleRecommend (recommend, setPercentRec) {
   setPercentRec(avg);
 }
 
-function getMetadata (
-    product_id, setMetadata, setRatings, setAvgRating, setTotalReviews, setPercentRec, setCharacteristics, setRatingsDiv
-  )  {
+function getMetadata (product_id, {setMetadata, setAvgRating, setPercentRec, setRatingsDiv, setRatings, setTotalReviews})  {
 
+  let meta = {};
   const options = {
     params: { product_id }
   }
   axios.get('/reviews/meta', options)
   .then(res => {
     setMetadata(res.data)
-    setCharacteristics(res.data.characteristics)
     handleRecommend(res.data.recommended, setPercentRec)
     handleRatings(res.data.ratings, setRatings, setAvgRating, setTotalReviews)
     createRatingsDiv(res.data.ratings, setRatingsDiv);
@@ -97,6 +95,9 @@ function getMetadata (
   .catch(err => {
     console.log(err)
   })
+
+  return meta
+
 }
 
 function createRatingsDiv (ratings, setRatingsDiv) {
