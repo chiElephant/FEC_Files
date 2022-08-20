@@ -6,13 +6,13 @@ import SubmitReview from './SubmitReview.jsx';
 import ReviewsList from './ReviewsList.jsx';
 import axios from 'axios';
 
-function ReviewsModule ( props ) {
+function ReviewsModule ( productId, productName ) {
 
   const [reviewsShown, setReviewsShown] = useState(initial.reviewsShown);
   const [showReviewModal, setShowReviewModal] = useState(false);
   const [sortType, setSortType] = useState('relevance');
   const [product_id, setProductId] = useState(71699);
-  const [productName, setProductName] = useState('');
+  const [product_name, setProductName] = useState('');
   const [countShown, setCountShown] = useState(2);
   const [reviews, setReviews] = useState([]);
 
