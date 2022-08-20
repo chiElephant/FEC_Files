@@ -1,5 +1,23 @@
 import axios from 'axios';
 
+const initial = {
+
+  reviewsShown: [
+    {
+      "review_id": null,
+      "rating": null,
+      "summary": null,
+      "recommend": null,
+      "response": null,
+      "body": null,
+      "date": null,
+      "reviewer_name": null,
+      "helpfulness": null,
+      "photos": null
+   },
+  ]
+}
+
 const helpers = {
   getReviews: (product_id, sortType, setReviews) => {
 
@@ -35,4 +53,4 @@ const helpers = {
   }
 }
 
-export default helpers;
+export {helpers, initial};

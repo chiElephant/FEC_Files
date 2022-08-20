@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import helpers from './helper_functions/reviews_module.jsx'
+import { helpers, initial } from './helper_functions/reviews_module.jsx'
 import RatingsBreakdown from './RatingsBreakdown.jsx';
 import ProductBreakdown from './ProductBreakdown.jsx';
 import SubmitReview from './SubmitReview.jsx';
@@ -8,9 +8,9 @@ import axios from 'axios';
 
 function ReviewsModule ( props ) {
 
+  const [reviewsShown, setReviewsShown] = useState(initial.reviewsShown);
   const [showReviewModal, setShowReviewModal] = useState(false);
   const [sortType, setSortType] = useState('relevance');
-  const [reviewsShown, setReviewsShown] = useState([]);
   const [product_id, setProductId] = useState(71697);
   const [productName, setProductName] = useState('');
   const [countShown, setCountShown] = useState(2);

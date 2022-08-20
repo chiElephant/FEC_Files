@@ -1,20 +1,29 @@
-import React, { useState } from 'react';
-import moment from 'moment';
+import React, { useState, useEffect } from 'react';
+import { helpers } from './helper_functions/review.jsx'
 
 function Review ( {review} ) {
-
-  const convertedTime = moment(review.date).format('MMMM DD YYYY')
 
   const[helpfulness, setHelpfull] = useState(review.helpfulness);
   const[username, setUsername] = useState(review.reviewer_name);
   const[recommend, setRecommend] = useState(review.recommend);
   const[response, setResponse] = useState(review.response);
+  const[photosDiv, setPhotosDiv] = useState(<div></div>);
   const[summary, setSummary] = useState(review.summary);
   const[rating, setRating] = useState(review.rating);
-  const[photos, setPhotos] = useState(review.photos);
-  const[date, setDate] = useState(convertedTime);
+  const[photos, setPhotos] = useState([ {id: '', url: ''} ]);
   const[id, setId] = useState(review.review_id);
   const[body, setBody] = useState(review.body);
+  const[date, setDate] = useState('');
+
+  useEffect(() => {
+    const div = helpers.handlePhotos(review.photos)
+    setPhotosDiv(div);
+  }, [])
+
+  useEffect(() => {
+    const convertedDate = helpers.convertDate(review.date);
+    setDate(convertedDate)
+  }, [])
 
   return (
     <div id="review">
@@ -24,6 +33,7 @@ function Review ( {review} ) {
       <div>User: {username}</div>
       <h4>{summary}</h4>
       <div>{body}</div>
+      <div>{photosDiv}</div>
       <div>{recommend}</div>
       <div>{response}</div>
       <div>Helpfulness: {helpfulness}</div>
