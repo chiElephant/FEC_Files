@@ -78,24 +78,6 @@ function createRatingsGraphDiv (ratings, setRatingsGraphDiv) {
   ])
 }
 
-function getMetadata (product_id, {setMetadata, setAvgRating, setPercentRec, setRatingsGraphDiv, setRatings, setTotalReviews})  {
-
-  const options = {
-    params: { product_id }
-  }
-
-  axios.get('/reviews/meta', options)
-  .then(res => {
-    handleRatings(res.data.ratings, setAvgRating, setTotalReviews)
-    handleRecommend(res.data.recommended, setPercentRec)
-    createRatingsGraphDiv(res.data.ratings, setRatingsGraphDiv);
-    setRatings(res.data.ratings);
-    setMetadata(res.data)
-  })
-  .catch(err => {
-    console.log(err)
-  })
-}
 
 function handleRecommend (recommend, setPercentRec) {
   const noCount = recommend.false;
@@ -123,6 +105,25 @@ function handleRatings (ratings, setAvgRating, setTotalReviews) {
 
   setTotalReviews(reviewsCount);
   setAvgRating(avg);
+}
+
+function getMetadata (product_id, {setMetadata, setAvgRating, setPercentRec, setRatingsGraphDiv, setRatings, setTotalReviews, setCharacteristics})  {
+
+  const options = {
+    params: { product_id }
+  }
+
+  axios.get('/reviews/meta', options)
+  .then(res => {
+    handleRatings(res.data.ratings, setAvgRating, setTotalReviews);
+    createRatingsGraphDiv(res.data.ratings, setRatingsGraphDiv);
+    handleRecommend(res.data.recommended, setPercentRec);
+    setRatings(res.data.ratings);
+    setMetadata(res.data);
+  })
+  .catch(err => {
+    console.log(err);
+  })
 }
 
 export { metadata, ratings, characteristics, getMetadata }

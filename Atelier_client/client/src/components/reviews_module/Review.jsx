@@ -7,10 +7,10 @@ function Review ( {review} ) {
   const[username, setUsername] = useState(review.reviewer_name);
   const[recommend, setRecommend] = useState(review.recommend);
   const[response, setResponse] = useState(review.response);
-  const[photosDiv, setPhotosDiv] = useState(<div></div>);
+  const[photosDiv, setPhotosDiv] = useState(<div />);
   const[summary, setSummary] = useState(review.summary);
   const[rating, setRating] = useState(review.rating);
-  const[photos, setPhotos] = useState([ {id: '', url: ''} ]);
+  const[photos, setPhotos] = useState(review.photos);
   const[id, setId] = useState(review.review_id);
   const[body, setBody] = useState(review.body);
   const[date, setDate] = useState('');

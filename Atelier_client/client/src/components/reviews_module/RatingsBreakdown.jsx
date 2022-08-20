@@ -6,7 +6,7 @@ import { getMetadata, metadata, ratings, characteristics } from './helper_functi
 function RatingsBreakdown ( {product_id} ) {
 
   const [characteristics, setCharacteristics] = useState(characteristics);
-  const [ratingsGraphDiv, setRatingsGraphDiv] = useState(<div></div>);
+  const [ratingsGraphDiv, setRatingsGraphDiv] = useState(<div />);
   const [totalReviews, setTotalReviews] = useState(0);
   const [metadata, setMetadata] = useState(metadata);
   const [ratings, setRatings] = useState(ratings);
