@@ -7,6 +7,10 @@
         "prettier"
     ],
     "rules": {
+        "react/prop-types": "off",
+        "camelcase": "off",
+        "import/extensions": "off",
+        "react/button-has-type": "off",
         "prettier/prettier": "error",
         "no-unused-vars": "warn",
         "no-console": "off"
