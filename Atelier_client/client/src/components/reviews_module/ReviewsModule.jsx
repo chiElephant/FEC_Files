@@ -11,7 +11,7 @@ function ReviewsModule({ productId, productName }) {
   const [product_id, setProductId] = useState(productId);
   const [sortType, setSortType] = useState('relevance');
   const [countShown, setCountShown] = useState(2);
-  const [reviews, setReviews] = useState([]);
+  const [reviews, setReviews] = useState(initial.reviewModel);
 
   useEffect(() => {
     helpers.getReviews(product_id, sortType, setReviews);

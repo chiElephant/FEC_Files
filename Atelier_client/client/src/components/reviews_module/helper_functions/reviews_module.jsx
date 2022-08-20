@@ -3,7 +3,7 @@ import axios from 'axios';
 const initial = {
   reviewModel: [
     {
-      review_id: null,
+      review_id: 12345,
       rating: null,
       summary: null,
       recommend: null,
@@ -12,7 +12,7 @@ const initial = {
       date: null,
       reviewer_name: null,
       helpfulness: null,
-      photos: null,
+      photos: [],
     },
   ],
 };
