@@ -11,7 +11,7 @@ function ReviewsModule ( props ) {
   const [reviewsShown, setReviewsShown] = useState(initial.reviewsShown);
   const [showReviewModal, setShowReviewModal] = useState(false);
   const [sortType, setSortType] = useState('relevance');
-  const [product_id, setProductId] = useState(71697);
+  const [product_id, setProductId] = useState(71701);
   const [productName, setProductName] = useState('');
   const [countShown, setCountShown] = useState(2);
   const [reviews, setReviews] = useState([]);
