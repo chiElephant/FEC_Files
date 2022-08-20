@@ -1,21 +1,21 @@
-export function createCharsDiv (metadata) {
+import React from 'react';
 
-  const charDiv = []
+function createCharsDiv(metadata) {
+  const charDiv = [];
 
   for (let char in metadata) {
-    if(metadata[char] !== null) {
-      const key = metadata[char].id
-      const value = Math.floor(metadata[char].value)
+    if (metadata[char] !== null) {
+      const key = metadata[char].id;
+      const value = Math.floor(metadata[char].value);
       charDiv.push(
-      <div
-        className="characteristic"
-        key={key}>
-        {`${char}: ${value} avg`}
-      </div>
-      )
+        <div className="characteristic" key={key}>
+          {`${char}: ${value} avg`}
+        </div>
+      );
     }
   }
 
-  return charDiv
+  return charDiv;
 }
 
+export default createCharsDiv;

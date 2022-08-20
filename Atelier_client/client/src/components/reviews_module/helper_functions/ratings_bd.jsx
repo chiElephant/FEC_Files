@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // ******************** Initial State Variables ******************** //
 
-var metadata = {
+const metadata = {
   ratings: {
     1: 0,
     2: 0,
