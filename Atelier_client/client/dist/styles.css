@@ -7,3 +7,21 @@
   justify-content: flex-start;
   gap: 10px
 }
+
+.style-other-imgs {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+
+.style_thumbnail {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+
+.main-img {
+  width: 400px;
+  height: 400px;
+  object-fit: contain;
+}

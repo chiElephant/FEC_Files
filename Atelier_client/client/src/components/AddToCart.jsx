@@ -44,11 +44,11 @@ function AddToCart (props) {
     var qtys = [];
     console.log(styleAvail[sizeSelected]);
     var qty = styleAvail[sizeSelected];
-    for (var i = 0; i < qty; i++) {
+    for (var i = 1; i < qty; i++) {
       qtys.push(i+1);
     }
-    if (qtys.length > 15) {
-      qtys = qtys.slice(0, 15);
+    if (qtys.length > 14) {
+      qtys = qtys.slice(0, 14);
     };
     setQuantities(qtys);
   }, [sizeSelected])
