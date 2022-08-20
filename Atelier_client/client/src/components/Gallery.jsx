@@ -4,6 +4,7 @@ function Gallery (props) {
 
   const [selectedStyle, setSelectedStyle] = useState({});
   const [selectedPhoto, setSelectedPhoto] = useState('');
+  const [selectedIndex, setSelectedIndex] = useState(0)
   const [view, setView] = useState('default');
 
   useEffect(() => {
@@ -14,7 +15,7 @@ function Gallery (props) {
     const testAsync = async () => {
       const photos = await selectedStyle.photos;
       await console.log(photos);
-      setSelectedPhoto(photos[0].url);
+      setSelectedPhoto(photos[selectedIndex].url);
     }
     testAsync();
     // setSelectedPhoto(selectedStyle.photos[0].url)
@@ -24,6 +25,7 @@ function Gallery (props) {
     e.preventDefault();
     // console.log(e.target.src);
     setSelectedPhoto(e.target.src);
+    setSelectedIndex(Number(e.target.getAttribute('index')));
   }
 
   if (Object.keys(selectedStyle).length && Object.keys(selectedPhoto).length) {
@@ -34,13 +36,13 @@ function Gallery (props) {
           <img className='main-img' src={selectedPhoto}></img>
           {
             selectedStyle.photos.map((photo, index) => {
-              if (index > 0) {
+
                 return (
                   <img onClick={(e) => {
                     handleChangePhoto(e);
-                  }} className='style-other-imgs' src={photo.url}></img>
+                  }} className='style-other-imgs' src={photo.url} index={index}></img>
                 )
-              }
+
             })
           }
         </div>
