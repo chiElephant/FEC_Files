@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import ReviewsModule from './reviews_module/ReviewsModule.jsx'
+import ReviewsModule from './reviews_module/ReviewsModule.jsx';
 
 function App(props) {
   return (
@@ -7,7 +7,8 @@ function App(props) {
       <h1> The RedBean Atelier App </h1>
       <ReviewsModule
         productId={71698}
-        productName={'Bright Future Sunglasses'}/>
+        productName={'Bright Future Sunglasses'}
+      />
     </div>
   );
 }
