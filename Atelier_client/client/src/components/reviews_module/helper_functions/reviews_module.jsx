@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const initial = {
-  reviewsShown: [
+  reviewModel: [
     {
       review_id: null,
       rating: null,

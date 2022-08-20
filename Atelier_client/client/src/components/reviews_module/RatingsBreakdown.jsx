@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import ProductBreakdown from './ProductBreakdown.jsx';
 
-import { getMetadata, metadata, ratings, characteristics } from './helper_functions/ratings_bd.jsx';
+import {
+  getMetadata,
+  metadata,
+  ratings,
+  characteristics,
+} from './helper_functions/ratings_bd.jsx';
 
-function RatingsBreakdown ( {product_id} ) {
-
+function RatingsBreakdown({ product_id }) {
   const [characteristics, setCharacteristics] = useState(characteristics);
   const [ratingsGraphDiv, setRatingsGraphDiv] = useState(<div />);
   const [totalReviews, setTotalReviews] = useState(0);
@@ -21,12 +25,11 @@ function RatingsBreakdown ( {product_id} ) {
     setAvgRating,
     setMetadata,
     setRatings,
-  }
+  };
 
   useEffect(() => {
-    getMetadata(product_id, setStates)
-  }, [product_id])
-
+    getMetadata(product_id, setStates);
+  }, [product_id]);
 
   return (
     <div>
@@ -38,12 +41,11 @@ function RatingsBreakdown ( {product_id} ) {
         {`${percentRec}% of reviewers recommend this product`}
       </div>
       <br></br>
-        {ratingsGraphDiv}
+      {ratingsGraphDiv}
       <br></br>
-      <ProductBreakdown
-        characteristics={characteristics}/>
+      <ProductBreakdown characteristics={characteristics} />
     </div>
-  )
+  );
 }
 
 export default RatingsBreakdown;

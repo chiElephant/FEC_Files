@@ -5,7 +5,7 @@ import SubmitReview from './SubmitReview.jsx';
 import ReviewsList from './ReviewsList.jsx';
 
 function ReviewsModule({ productId, productName }) {
-  const [reviewsShown, setReviewsShown] = useState(initial.reviewsShown);
+  const [reviewsShown, setReviewsShown] = useState(initial.reviewModel);
   const [showReviewModal, setShowReviewModal] = useState(false);
   const [product_name, setProductName] = useState(productName);
   const [product_id, setProductId] = useState(productId);
@@ -27,7 +27,7 @@ function ReviewsModule({ productId, productName }) {
       <RatingsBreakdown product_id={product_id} />
       <ReviewsList
         reviews={reviewsShown}
-        setSort={helpers.setSort.bind(this)}
+        setSort={helpers.setSort}
         setType={setSortType}
         set
       />
