@@ -5,7 +5,9 @@ function App(props) {
   return (
     <div>
       <h1> The RedBean Atelier App </h1>
-      <ReviewsModule />
+      <ReviewsModule
+        productId={71698}
+        productName={'Bright Future Sunglasses'}/>
     </div>
   );
 }
