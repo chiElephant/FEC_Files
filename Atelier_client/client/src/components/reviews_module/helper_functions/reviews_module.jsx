@@ -44,8 +44,8 @@ const helpers = {
     showReviewModal(false);
   },
 
-  setSort: (type) => {
-    setSortType(type);
+  setSort: (type, setType) => {
+    setType(type);
   },
 
   handleClick: (cb, value) => {

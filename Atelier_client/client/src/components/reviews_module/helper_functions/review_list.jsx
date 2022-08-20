@@ -1,5 +1,4 @@
-export function handleSortType (setSortType) {
+export function handleSortType (setSort, setType) {
   const sort = document.getElementById('sort-type').value;
-  setSortType(sort);
-  setSort(sort);
+  setSort(sort, setType);
 }
