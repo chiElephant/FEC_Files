@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function SubmitReview ( {showReviewModal, setShowReviewModal, submitReview} ) {
+function SubmitReview ( {showReviewModal, setShowReviewModal, submitReview, productName} ) {
 
   const[stars, setStars] = useState()
   const[recommend, setRecommend] = useState('')
@@ -22,7 +22,7 @@ function SubmitReview ( {showReviewModal, setShowReviewModal, submitReview} ) {
     <div id="review-window">
       <div id ="review-form">
         <h1>Write Your Review</h1>
-        <h3>About the {'productName'}</h3>
+        <h3>About the {productName}</h3>
 
         {/* This div will ask the customer if they recommend the product*/}
         <div id='recommend'>

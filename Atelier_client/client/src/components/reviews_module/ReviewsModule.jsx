@@ -4,10 +4,10 @@ import RatingsBreakdown from './RatingsBreakdown.jsx';
 import SubmitReview from './SubmitReview.jsx';
 import ReviewsList from './ReviewsList.jsx';
 
-function ReviewsModule({ productId, productName }) {
+function ReviewsModule({ productId, product_name }) {
   const [reviewsShown, setReviewsShown] = useState(initial.reviewModel);
   const [showReviewModal, setShowReviewModal] = useState(false);
-  const [product_name, setProductName] = useState(productName);
+  const [productName, setProductName] = useState(product_name);
   const [product_id, setProductId] = useState(productId);
   const [sortType, setSortType] = useState('relevance');
   const [countShown, setCountShown] = useState(2);
@@ -15,6 +15,7 @@ function ReviewsModule({ productId, productName }) {
 
   useEffect(() => {
     helpers.getReviews(product_id, sortType, setReviews);
+    console.log(productName, product_id)
   }, [product_id, countShown, sortType]);
 
   useEffect(() => {
@@ -35,6 +36,7 @@ function ReviewsModule({ productId, productName }) {
         showReviewModal={showReviewModal}
         submitReview={helpers.submitReview}
         setShowReviewModal={setShowReviewModal}
+        productName = {productName}
       />
       <button
         onClick={() => helpers.handleClick(setCountShown, countShown + 2)}
