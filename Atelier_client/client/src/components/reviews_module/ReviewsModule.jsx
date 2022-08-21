@@ -24,7 +24,7 @@ function ReviewsModule({ product_id, product_name }) {
   return (
     <div>
       <h2> Ratings Module </h2>
-      <RatingsBreakdown product_id={productId} />
+      <RatingsBreakdown productId={productId} />
       <ReviewsList
         reviews={reviewsShown}
         setSort={helpers.setSort}

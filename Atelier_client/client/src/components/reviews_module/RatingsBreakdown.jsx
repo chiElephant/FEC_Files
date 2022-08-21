@@ -8,7 +8,7 @@ import {
   characteristics,
 } from './helper_functions/ratings_bd.jsx';
 
-function RatingsBreakdown({ product_id }) {
+function RatingsBreakdown({ productId }) {
   const [characteristics, setCharacteristics] = useState(characteristics);
   const [ratingsGraphDiv, setRatingsGraphDiv] = useState(<div />);
   const [totalReviews, setTotalReviews] = useState(0);
@@ -28,8 +28,8 @@ function RatingsBreakdown({ product_id }) {
   };
 
   useEffect(() => {
-    getMetadata(product_id, setStates);
-  }, [product_id]);
+    getMetadata(productId, setStates);
+  }, [productId]);
 
   return (
     <div>
