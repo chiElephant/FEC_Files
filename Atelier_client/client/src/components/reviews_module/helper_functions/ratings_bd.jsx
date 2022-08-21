@@ -81,7 +81,7 @@ function handleRecommend(recommend, setPercentRec) {
 function handleRatings(ratings, setAvgRating, setTotalReviews) {
   let reviewsCount = 0;
   let sum = 0;
-  let avg;
+  let avg = 0;
 
   for (const rating in ratings) {
     const key = parseInt(rating, 10);
@@ -97,35 +97,31 @@ function handleRatings(ratings, setAvgRating, setTotalReviews) {
   setAvgRating(avg);
 }
 
-function getMetadata(
-  product_id,
-  {
-    setMetadata,
-    setAvgRating,
-    setPercentRec,
-    setRatingsGraphDiv,
-    setRatings,
-    setTotalReviews,
-    setCharacteristics,
-  }
-) {
+function getMetadata(product_id, setState) {
   const options = {
     params: { product_id },
   };
 
   axios
     .get('/reviews/meta', options)
-    .then((res) => {
-      handleRatings(res.data.ratings, setAvgRating, setTotalReviews);
-      createRatingsGraphDiv(res.data.ratings, setRatingsGraphDiv);
-      handleRecommend(res.data.recommended, setPercentRec);
-      setCharacteristics(res.data.characteristics);
-      setRatings(res.data.ratings);
-      setMetadata(res.data);
+    .then((meta) => {
+      setState.setMetadata(meta.data);
+      setState.setCharacteristics(meta.data.characteristics);
+      setState.setRatings(meta.data.ratings);
+      return meta.data;
     })
-    .catch((err) => {
-      console.log(err);
-    });
+    .then((metadata) => {
+      createRatingsGraphDiv(metadata.ratings, setState.setRatingsGraphDiv);
+      handleRatings(
+        metadata.ratings,
+        setState.setAvgRating,
+        setState.setTotalReviews
+      );
+      handleRecommend(metadata.recommended, setState.setPercentRec)
+    })
+    .catch((err) =>
+      consle.log('Error fetching metadata: ', err)
+    );
 }
 
 export { metadata, ratings, characteristics, getMetadata };
