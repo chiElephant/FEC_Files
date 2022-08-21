@@ -1,14 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import markAnswerAsHelpful from './helper_functions/markAnswerAsHelpful.js';
+import reportAnswer from './helper_functions/reportAnswer.js';
 
 function Answer({ answer_id, answerer_name, body, date, answer_helpfulness }) {
   const [helpCount, setHelpCount] = useState(answer_helpfulness);
   const [allowUserVote, setAllowUserVote] = useState(false);
+  const [reportUser, setReportUser] = useState(false);
 
   function incrementHelpCount() {
     markAnswerAsHelpful(answer_id);
     setHelpCount((prevState) => prevState + 1);
     setAllowUserVote(true);
+  }
+
+  function handleReportAnswer() {
+    reportAnswer(answer_id);
+    setReportUser(true);
   }
 
   let userVote;
@@ -18,6 +25,17 @@ function Answer({ answer_id, answerer_name, body, date, answer_helpfulness }) {
     userVote = (
       <div className="question-yes" onClick={incrementHelpCount}>
         Yes({helpCount})
+      </div>
+    );
+  }
+
+  let report;
+  if (reportUser) {
+    report = <div className="answer-report">Reported</div>;
+  } else {
+    report = (
+      <div className="answer-report" onClick={handleReportAnswer}>
+        Report
       </div>
     );
   }
@@ -37,7 +55,7 @@ function Answer({ answer_id, answerer_name, body, date, answer_helpfulness }) {
           <div>Helpful?</div>
           {userVote}
         </div>
-        <div className="answer-report">Report</div>
+        {report}
       </div>
     </div>
   );

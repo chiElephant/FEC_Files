@@ -8,6 +8,7 @@ const {
   addAnswer,
   markQuestionAsHelpful,
   markAnswerAsHelpful,
+  reportAnswer,
 } = require('./questionsAnswersHelper.js');
 
 const app = express();
@@ -41,6 +42,7 @@ app.post('/question', addQuestion, (req, res) => {
   res.sendStatus(201);
 });
 
+// Add Answer
 app.post('/answer/:answer_id', addAnswer, (req, res) => {
   res.sendStatus(201);
 });
@@ -52,6 +54,11 @@ app.put('/helpful/question/:question_id', markQuestionAsHelpful, (req, res) => {
 
 // Mark Answer As Helpful
 app.put('/helpful/answer/:answer_id', markAnswerAsHelpful, (req, res) => {
+  res.sendStatus(204);
+});
+
+// Report Answer
+app.put('/answer/:answer_id/report', reportAnswer, (req, res) => {
   res.sendStatus(204);
 });
 

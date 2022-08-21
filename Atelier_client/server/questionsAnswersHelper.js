@@ -142,6 +142,26 @@ const markAnswerAsHelpful = (req, res, next) => {
     .catch(next);
 };
 
+const reportAnswer = (req, res, next) => {
+  const { answer_id } = req.params;
+
+  const url = `${URL}/qa/answers/${answer_id}/report`;
+
+  const options = {
+    method: 'put',
+    url,
+    headers: {
+      Authorization: TOKEN,
+    },
+  };
+
+  axios(options)
+    .then(() => {
+      next();
+    })
+    .catch(next);
+};
+
 module.exports = {
   getQuestions,
   getAnswers,
@@ -149,4 +169,5 @@ module.exports = {
   addAnswer,
   markQuestionAsHelpful,
   markAnswerAsHelpful,
+  reportAnswer,
 };
