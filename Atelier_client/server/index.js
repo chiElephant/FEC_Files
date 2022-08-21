@@ -1,7 +1,14 @@
 require('dotenv').config();
 const path = require('path');
 const express = require('express');
-const { getQuestions, getAnswers } = require('./questionsAnswersHelper.js');
+const {
+  getQuestions,
+  getAnswers,
+  addQuestion,
+  addAnswer,
+  markQuestionAsHelpful,
+  markAnswerAsHelpful,
+} = require('./questionsAnswersHelper.js');
 
 const app = express();
 
@@ -24,9 +31,28 @@ app.get('/questions/:product_id/:page/:count', getQuestions, (req, res) => {
   res.status(200).send(res.body);
 });
 
-// Answers List;
+// Answer List;
 app.get('/answers/:question_id/:page/:count', getAnswers, (req, res) => {
   res.status(200).send(res.body);
+});
+
+// Add Question
+app.post('/question', addQuestion, (req, res) => {
+  res.sendStatus(201);
+});
+
+app.post('/answer/:answer_id', addAnswer, (req, res) => {
+  res.sendStatus(201);
+});
+
+// Mark Question As Helpful
+app.put('/helpful/question/:question_id', markQuestionAsHelpful, (req, res) => {
+  res.sendStatus(204);
+});
+
+// Mark Answer As Helpful
+app.put('/helpful/answer/:answer_id', markAnswerAsHelpful, (req, res) => {
+  res.sendStatus(204);
 });
 
 app.use((err, req, res, next) => {

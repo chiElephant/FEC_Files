@@ -1,5 +1,6 @@
 require('dotenv').config();
 const axios = require('axios');
+const qs = require('qs');
 
 const { URL, TOKEN } = process.env;
 
@@ -9,11 +10,7 @@ const { URL, TOKEN } = process.env;
 const getQuestions = (req, res, next) => {
   const { product_id, page, count } = req.params;
 
-  console.log(product_id, page, count);
-
   const url = `${URL}/qa/questions?product_id=${product_id}&page=${page}&count=${count}`;
-
-  console.log(url);
 
   const options = {
     headers: { Authorization: TOKEN },
@@ -23,7 +20,6 @@ const getQuestions = (req, res, next) => {
     .get(url, options)
     .then((response) => {
       res.body = response.data;
-      console.log(response.data);
       next();
     })
     .catch(next);
@@ -32,11 +28,7 @@ const getQuestions = (req, res, next) => {
 const getAnswers = (req, res, next) => {
   const { question_id, page, count } = req.params;
 
-  console.log(question_id, page, count);
-
   const url = `${URL}/qa/questions/${question_id}/answers?page=${page}&count=${count}`;
-
-  console.log(url);
 
   const options = {
     headers: { Authorization: TOKEN },
@@ -46,7 +38,105 @@ const getAnswers = (req, res, next) => {
     .get(url, options)
     .then((response) => {
       res.body = response.data;
-      console.log(response.data);
+      next();
+    })
+    .catch(next);
+};
+
+const addQuestion = (req, res, next) => {
+  const url = `${URL}/qa/questions`;
+
+  const { body, name, email, product_id } = req.body;
+
+  const data = JSON.stringify({
+    body,
+    name,
+    email,
+    product_id,
+  });
+
+  const options = {
+    method: 'post',
+    url,
+    headers: {
+      Authorization: TOKEN,
+      'Content-Type': 'application/json',
+    },
+    data,
+  };
+
+  axios(options)
+    .then(() => {
+      next();
+    })
+    .catch(next);
+};
+
+const addAnswer = (req, res, next) => {
+  const url = `${URL}/qa/questions/${req.params.question_id}/answers`;
+  const { body, name, email, product_id } = req.body;
+
+  const data = JSON.stringify({
+    body,
+    name,
+    email,
+    product_id,
+  });
+
+  const options = {
+    method: 'post',
+    url,
+    headers: {
+      Authorization: TOKEN,
+      'Content-Type': 'application/json',
+    },
+    data,
+  };
+
+  axios(options)
+    .then(() => {
+      next();
+    })
+    .catch(next);
+};
+
+const markQuestionAsHelpful = (req, res, next) => {
+  const { question_id } = req.params;
+
+  const url = `${URL}/qa/questions/${question_id}/helpful`;
+
+  console.log(question_id, url);
+
+  const options = {
+    method: 'put',
+    url,
+    headers: {
+      Authorization: TOKEN,
+    },
+  };
+
+  axios(options)
+    .then(() => {
+      next();
+    })
+    .catch(next);
+};
+
+const markAnswerAsHelpful = (req, res, next) => {
+  const { answer_id } = req.params;
+
+  const url = `${URL}/qa/answers/${answer_id}/helpful`;
+
+  const options = {
+    method: 'put',
+    url,
+    headers: {
+      Authorization: TOKEN,
+    },
+  };
+
+  axios(options)
+    .then(() => {
       next();
     })
     .catch(next);
@@ -55,4 +145,8 @@ const getAnswers = (req, res, next) => {
 module.exports = {
   getQuestions,
   getAnswers,
+  addQuestion,
+  addAnswer,
+  markQuestionAsHelpful,
+  markAnswerAsHelpful,
 };

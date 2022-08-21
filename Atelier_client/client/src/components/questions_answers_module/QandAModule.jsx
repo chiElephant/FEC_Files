@@ -3,7 +3,7 @@ import SearchQ from './SearchQ.jsx';
 import QuestionList from './QuestionList.jsx';
 import getQuestions from './helper_functions/getQuestions.js';
 
-function QandAModule(props) {
+function QandAModule() {
   const [questionList, setQuestionList] = useState([]);
   const [productId, setProductId] = useState(71697);
   const [page, setPage] = useState(1);

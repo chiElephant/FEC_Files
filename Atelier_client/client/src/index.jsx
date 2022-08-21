@@ -10,4 +10,4 @@ const root = ReactDOM.createRoot(container);
 
 root.render(<App />);
 
-console.log('test: ', root);
+// console.log('test: ', root);

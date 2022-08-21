@@ -3,19 +3,21 @@ import Question from './Question.jsx';
 import AddQuestion from './AddQuestion.jsx';
 
 function QuestionList({ questionList }) {
-  console.log('questionList: ', questionList);
+  // console.log('questionList: ', questionList);
   return (
     <div>
-      Question List
       {questionList.map((q) => (
-        <Question key={q.question_id} question={q} />
+        <Question
+          key={q.question_id}
+          question_body={q.question_body}
+          question_helpfulness={q.question_helpfulness}
+          question_id={q.question_id}
+          reported={q.reported}
+        />
       ))}
-      <ul>
-        <Question />
-      </ul>
       <div>
         <button> More Answered Questions </button>
-        <AddQuestion />
+        <button> Add Question + </button>
       </div>
     </div>
   );

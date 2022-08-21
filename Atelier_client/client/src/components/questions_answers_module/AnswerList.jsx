@@ -1,13 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import Answer from './Answer.jsx';
 
-function AnswerList(props) {
+function AnswerList({ answerList }) {
   return (
     <div>
-      Answer List
-      <ul>
-        <Answer />
-      </ul>
+      <div>
+        {answerList.map((a) => (
+          <Answer
+            key={a.answer_id}
+            answerer_name={a.answerer_name}
+            body={a.body}
+            date={a.date}
+            helpfulness={a.helpfulness}
+          />
+        ))}
+      </div>
     </div>
   );
 }
