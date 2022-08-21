@@ -4,19 +4,18 @@ import RatingsBreakdown from './RatingsBreakdown.jsx';
 import SubmitReview from './SubmitReview.jsx';
 import ReviewsList from './ReviewsList.jsx';
 
-function ReviewsModule({ productId, product_name }) {
+function ReviewsModule({ product_id, product_name }) {
   const [reviewsShown, setReviewsShown] = useState(initial.reviewModel);
   const [showReviewModal, setShowReviewModal] = useState(false);
   const [productName, setProductName] = useState(product_name);
-  const [product_id, setProductId] = useState(productId);
+  const [productId, setProductId] = useState(product_id);
   const [sortType, setSortType] = useState('relevance');
   const [countShown, setCountShown] = useState(2);
   const [reviews, setReviews] = useState(initial.reviewModel);
 
   useEffect(() => {
-    helpers.getReviews(product_id, sortType, setReviews);
-    console.log(productName, product_id)
-  }, [product_id, countShown, sortType]);
+    helpers.getReviews(productId, sortType, setReviews);
+  }, [productId, countShown, sortType]);
 
   useEffect(() => {
     helpers.handleShown(reviews, countShown, setReviewsShown);
@@ -25,7 +24,7 @@ function ReviewsModule({ productId, product_name }) {
   return (
     <div>
       <h2> Ratings Module </h2>
-      <RatingsBreakdown product_id={product_id} />
+      <RatingsBreakdown product_id={productId} />
       <ReviewsList
         reviews={reviewsShown}
         setSort={helpers.setSort}

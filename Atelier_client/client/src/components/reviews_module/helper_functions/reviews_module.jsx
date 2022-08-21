@@ -25,7 +25,6 @@ const helpers = {
   },
 
   submitReview: (setShowReviewModal) => {
-    console.log('submit')
     setShowReviewModal(false);
   },
 
