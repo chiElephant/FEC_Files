@@ -33,7 +33,8 @@ function ReviewsModule({ productId, productName }) {
       />
       <SubmitReview
         showReviewModal={showReviewModal}
-        closeReview={helpers.closeReview}
+        submitReview={helpers.submitReview}
+        setShowReviewModal={setShowReviewModal}
       />
       <button
         onClick={() => helpers.handleClick(setCountShown, countShown + 2)}

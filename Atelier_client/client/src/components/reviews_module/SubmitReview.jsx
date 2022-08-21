@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function SubmitReview ( {showReviewModal, closeReviewModal} ) {
+function SubmitReview ( {showReviewModal, setShowReviewModal, submitReview} ) {
 
   const[stars, setStars] = useState()
   const[recommend, setRecommend] = useState('')
@@ -11,7 +11,7 @@ function SubmitReview ( {showReviewModal, closeReviewModal} ) {
   }
 
   const handleSubmit = () => {
-    closeReviewModal();
+    submitReview(setShowReviewModal);
   }
 
   const handleRecommend = (value) => {
@@ -30,21 +30,22 @@ function SubmitReview ( {showReviewModal, closeReviewModal} ) {
             <legend>Do you recommend this product?</legend>
             <div>
               <label>
-                <input type='radio' id='rec' value='yes' onClick={() => handleRecommend('true')}
+                <input type='radio' name='rec' value='yes' onClick={() => handleRecommend('true')}
                 /> Yes
               </label>
             </div>
             <div>
               <label>
-                <input type='radio' id='rec' value='no' onClick={() => handleRecommend('false')}
+                <input type='radio' name='rec' value='no' onClick={() => handleRecommend('false')}
                 /> No
               </label>
             </div>
           </fieldset>
+          <br />
+          <input type='submit' onClick={() => handleSubmit()}></input>
         </div>
 
       </div>
-      <input type='submit' onClick={() => handleSubmit()}></input>
     </div>
   )
 }

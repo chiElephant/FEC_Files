@@ -24,8 +24,9 @@ const helpers = {
     setReviewsShown(show);
   },
 
-  closeReview: () => {
-    showReviewModal(false);
+  submitReview: (setShowReviewModal) => {
+    console.log('submit')
+    setShowReviewModal(false);
   },
 
   setSort: (type, setType) => {
