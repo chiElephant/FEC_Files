@@ -81,10 +81,22 @@ function SubmitReview ( {showReviewModal, setShowReviewModal, submitReview, prod
             <textarea maxLength='60' placeholder={'Example: Best purchse ever!'} rows="3" cols="35"></textarea>
           </div>
         </fieldset>
+      </div>
+
+      {/* This div will allow a user to enter a review body */}
+
+      <div id='review-body-input'>
+        <fieldset>
+          <legend>Reviw</legend>
+          <div>
+            <textarea minLength='50' maxLength='1000' placeholder={'Why did you like this product or not?'} rows="5" cols="70" required='required' wrap="hard"></textarea>
+          </div>
+          <br />
+          <span>Minimum required characters left: 50</span>
+        </fieldset>
           <br />
           <input type='submit' onClick={() => handleSubmit()}></input>
       </div>
-
 
 
 
