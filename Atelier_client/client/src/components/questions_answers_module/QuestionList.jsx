@@ -1,23 +1,41 @@
 import React, { useState, useEffect } from 'react';
 import Question from './Question.jsx';
 import AddQuestion from './AddQuestion.jsx';
+import ModalQuestion from './ModalQuestion.jsx';
 
-function QuestionList({ questionList }) {
-  // console.log('questionList: ', questionList);
+function QuestionList({ questionList, productName, productId }) {
+  const [isModel, setIsModel] = useState(false);
+
+  function showModal() {
+    setIsModel(!isModel);
+  }
+
+  const model = isModel ? (
+    <ModalQuestion
+      productName={productName}
+      productId={productId}
+      showModal={() => {
+        showModal();
+      }}
+    />
+  ) : null;
+
   return (
     <div>
+      {model}
       {questionList.map((q) => (
         <Question
           key={q.question_id}
-          question_body={q.question_body}
-          question_helpfulness={q.question_helpfulness}
           question_id={q.question_id}
-          reported={q.reported}
+          body={q.question_body}
+          name={q.name}
+          email={q.email}
+          helpfulness={q.question_helpfulness}
         />
       ))}
       <div>
         <button> More Answered Questions </button>
-        <button> Add Question + </button>
+        <button onClick={showModal}> Add Question + </button>
       </div>
     </div>
   );

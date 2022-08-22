@@ -73,8 +73,10 @@ const addQuestion = (req, res, next) => {
 };
 
 const addAnswer = (req, res, next) => {
-  const url = `${URL}/qa/questions/${req.params.question_id}/answers`;
+  const { question_id } = req.params;
   const { body, name, email, product_id } = req.body;
+
+  const url = `${URL}/qa/questions/${question_id}/answers`;
 
   const data = JSON.stringify({
     body,

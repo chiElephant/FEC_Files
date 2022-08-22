@@ -43,7 +43,7 @@ app.post('/question', addQuestion, (req, res) => {
 });
 
 // Add Answer
-app.post('/answer/:answer_id', addAnswer, (req, res) => {
+app.post('/answer/:question_id', addAnswer, (req, res) => {
   res.sendStatus(201);
 });
 
