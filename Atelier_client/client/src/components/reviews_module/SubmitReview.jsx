@@ -59,7 +59,9 @@ function SubmitReview ( {showReviewModal, setShowReviewModal, submitReview, prod
         <fieldset>
           <legend>Characteristics</legend>
             <div>
-              <label> Quality
+              <span> None Selected </span>
+              <br />
+              <label> Quality:
                 <input type='radio' name='quality' value='1' onClick={() => console.log('quality 1')}/>
                 <input type='radio' name='quality' value='2' onClick={() => console.log('quality 2')}/>
                 <input type='radio' name='quality' value='3' onClick={() => console.log('quality 3')}/>
@@ -67,10 +69,22 @@ function SubmitReview ( {showReviewModal, setShowReviewModal, submitReview, prod
                 <input type='radio' name='quality' value='5' onClick={() => console.log('quality 5')}/>
               </label>
             </div>
+            <span> 1(lowest)      5(highest) </span>
+        </fieldset>
+      </div>
+
+      {/* This div will alllow the user to enter a summary */}
+      <div id='review-summary-input'>
+        <fieldset>
+          <legend>Summary</legend>
+          <div>
+            <textarea maxLength='60' placeholder={'Example: Best purchse ever!'} rows="3" cols="35"></textarea>
+          </div>
         </fieldset>
           <br />
           <input type='submit' onClick={() => handleSubmit()}></input>
       </div>
+
 
 
 
