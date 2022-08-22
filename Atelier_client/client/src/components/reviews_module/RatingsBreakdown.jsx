@@ -11,10 +11,10 @@ import {
 function RatingsBreakdown({ productId }) {
   const [characteristics, setCharacteristics] = useState(characteristics);
   const [ratingsGraphDiv, setRatingsGraphDiv] = useState(<div />);
-  const [totalReviews, setTotalReviews] = useState(0);
+  const [totalReviews, setTotalReviews] = useState('');
   const [metadata, setMetadata] = useState(metadata);
   const [ratings, setRatings] = useState(ratings);
-  const [percentRec, setPercentRec] = useState(0);
+  const [percentRec, setPercentRec] = useState('');
   const [avgRating, setAvgRating] = useState('');
 
   const setStates = {

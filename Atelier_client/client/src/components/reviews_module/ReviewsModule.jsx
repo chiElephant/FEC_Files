@@ -29,7 +29,6 @@ function ReviewsModule({ product_id, product_name }) {
         reviews={reviewsShown}
         setSort={helpers.setSort}
         setType={setSortType}
-        set
       />
       <SubmitReview
         showReviewModal={showReviewModal}

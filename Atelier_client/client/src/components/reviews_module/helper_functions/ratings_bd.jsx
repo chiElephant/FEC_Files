@@ -120,7 +120,7 @@ function getMetadata(product_id, setState) {
       handleRecommend(metadata.recommended, setState.setPercentRec)
     })
     .catch((err) =>
-      consle.log('Error fetching metadata: ', err)
+      console.log('Error fetching metadata: ', err)
     );
 }
 
