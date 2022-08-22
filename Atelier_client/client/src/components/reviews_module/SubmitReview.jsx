@@ -147,7 +147,6 @@ function SubmitReview({
                 wrap="hard"
               ></textarea>
             </div>
-            <br />
             <span>Minimum required characters left: 50</span>
           </fieldset>
         </div>
