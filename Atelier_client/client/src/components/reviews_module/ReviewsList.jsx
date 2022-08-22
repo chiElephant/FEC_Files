@@ -19,7 +19,7 @@ function ReviewsList({ reviews, setSort, setType }) {
           <option value="helpful">Helpful</option>
         </select>
       </div>
-      <ul>
+      <ul id='reviews'>
         {reviews.map((review) => (
           <Review key={review.review_id} review={review} />
         ))}

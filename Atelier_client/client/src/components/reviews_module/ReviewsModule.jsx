@@ -35,21 +35,21 @@ function ReviewsModule({ product_id, product_name }) {
         showReviewModal={showReviewModal}
         submitReview={helpers.submitReview}
         setShowReviewModal={setShowReviewModal}
-        productName = {productName}
+        productName={productName}
       />
       <div id="main-buttons">
-        <button
-          onClick={() => helpers.handleClick(setCountShown, countShown + 2)}
-          disabled={countShown >= reviews.length}
-        >
-          More Reviews
-        </button>
         <button
           onClick={() =>
             helpers.handleClick(setShowReviewModal, !showReviewModal)
           }
         >
           Add Review
+        </button>
+        <button
+          onClick={() => helpers.handleClick(setCountShown, countShown + 2)}
+          disabled={countShown >= reviews.length}
+        >
+          More Reviews
         </button>
       </div>
     </div>
