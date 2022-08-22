@@ -64,7 +64,7 @@ function SubmitReview({
       const img = document.createElement("img");
       img.classList.add("obj");
       img.file = file;
-      img.width = 120;
+      img.width = 80;
       images.appendChild(img);
 
       const reader = new FileReader();
