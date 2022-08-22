@@ -32,9 +32,10 @@ function ReviewsModule({ product_id, product_name }) {
       />
       <SubmitReview
         showReviewModal={showReviewModal}
-        submitReview={helpers.submitReview}
+        // submitReviewForm={helpers.submitReview}
         setShowReviewModal={setShowReviewModal}
         productName={productName}
+        product_id={productId}
       />
       <div id="main-buttons">
         <button

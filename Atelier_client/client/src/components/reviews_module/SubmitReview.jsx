@@ -1,27 +1,82 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { solid, regular } from '@fortawesome/fontawesome-svg-core/import.macro'; // <-- import styles to be used
+import { solid, regular } from '@fortawesome/fontawesome-svg-core/import.macro';
 
 function SubmitReview({
   showReviewModal,
   setShowReviewModal,
-  submitReview,
+  submitReviewForm,
   productName,
+  product_id,
 }) {
-  const [stars, setStars] = useState();
-  const [recommend, setRecommend] = useState('');
+  const characteristicsKey = {
+    Length: { id: '', value: '' },
+    Width: { id: '', value: '' },
+    Size: { id: '', value: '' },
+    Fit: { id: '', value: '' },
+    Quality: { id: '', value: '' },
+    Comfort: { id: '', value: '' },
+  };
 
-  const handleChange = (event) => {
-    let e = event;
-    console.lot(e);
+  const [characteristics, setCharacteristics] = useState(characteristicsKey);
+  const [addPhotoDiv, setAddPhotoDiv] = useState(<div />);
+  const [recommend, setRecommend] = useState(false);
+  const [summary, setSummary] = useState('');
+  const [rating, setRating] = useState(0);
+  const [photos, setPhotos] = useState([]);
+  const [email, setEmail] = useState('');
+  const [body, setBody] = useState('');
+  const [name, setName] = useState('');
+
+  const handleChange = (cb, value) => {
+    cb(value);
   };
 
   const handleSubmit = () => {
-    submitReview(setShowReviewModal);
+    setShowReviewModal(false);
+    axios.post('/reviews', {
+      product_id,
+      rating,
+      summary,
+      body,
+      recommend,
+      name,
+      email,
+      photos,
+      characteristics,
+    });
   };
 
-  const handleRecommend = (value) => {
-    setRecommend(value);
+  const handleClick = (cb, value) => {
+    cb(value);
+  };
+
+  const handlePhotos = (e) => {
+    let files = document.querySelector('#photo-input').files;
+
+    for(let i = 0; i < files.length; i++) {
+      const file = files[i];
+
+      if(!file.type.startsWith('image/')) {
+        continue }
+
+      const img = document.createElement("img");
+      img.classList.add("obj");
+      img.file = file;
+      img.width = 120;
+      images.appendChild(img);
+
+      const reader = new FileReader();
+      reader.onload = (e) => {img.src = e.target.result; };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleCharacteristics = (characteristic, value) => {
+    let currentChars = characteristics;
+    currentChars[characteristic] = value;
+    setCharacteristics(currentChars);
   };
 
   return !showReviewModal ? (
@@ -36,11 +91,41 @@ function SubmitReview({
         <div id="rate-by-star">
           <fieldset>
             <legend>Overall Rating</legend>
-            <FontAwesomeIcon icon={solid('star')} id="star-1" />
-            <FontAwesomeIcon icon={solid('star')} id="star-2" />
-            <FontAwesomeIcon icon={solid('star')} id="star-3" />
-            <FontAwesomeIcon icon={solid('star')} id="star-4" />
-            <FontAwesomeIcon icon={regular('star')} id="star-5" />
+            <FontAwesomeIcon
+              id="star-5"
+              icon={regular('star')}
+              onClick={() => {
+                handleClick(setRating, 5);
+              }}
+            />
+            <FontAwesomeIcon
+              id="star-4"
+              icon={regular('star')}
+              onClick={() => {
+                handleClick(setRating, 4);
+              }}
+            />
+            <FontAwesomeIcon
+              id="star-3"
+              icon={regular('star')}
+              onClick={() => {
+                handleClick(setRating, 3);
+              }}
+            />
+            <FontAwesomeIcon
+              id="star-2"
+              icon={regular('star')}
+              onClick={() => {
+                handleClick(setRating, 2);
+              }}
+            />
+            <FontAwesomeIcon
+              id="star-1"
+              icon={regular('star')}
+              onClick={() => {
+                handleClick(setRating, 1);
+              }}
+            />
           </fieldset>
         </div>
 
@@ -54,7 +139,7 @@ function SubmitReview({
                   type="radio"
                   name="rec"
                   value="yes"
-                  onClick={() => handleRecommend('true')}
+                  onClick={() => handleClick(setRecommend, 'true')}
                 />{' '}
                 Yes
               </label>
@@ -63,7 +148,7 @@ function SubmitReview({
                   type="radio"
                   name="rec"
                   value="no"
-                  onClick={() => handleRecommend('false')}
+                  onClick={() => handleClick(setRecommend, 'false')}
                 />{' '}
                 No
               </label>
@@ -84,31 +169,31 @@ function SubmitReview({
                   type="radio"
                   name="quality"
                   value="1"
-                  onClick={() => console.log('quality 1')}
+                  onClick={() => handleCharacteristics('Quality', 1)}
                 />
                 <input
                   type="radio"
                   name="quality"
                   value="2"
-                  onClick={() => console.log('quality 2')}
+                  onClick={() => handleCharacteristics('Quality', 2)}
                 />
                 <input
                   type="radio"
                   name="quality"
                   value="3"
-                  onClick={() => console.log('quality 3')}
+                  onClick={() => handleCharacteristics('Quality', 3)}
                 />
                 <input
                   type="radio"
                   name="quality"
                   value="4"
-                  onClick={() => console.log('quality 4')}
+                  onClick={() => handleCharacteristics('Quality', 4)}
                 />
                 <input
                   type="radio"
                   name="quality"
                   value="5"
-                  onClick={() => console.log('quality 5')}
+                  onClick={() => handleCharacteristics('Quality', 5)}
                 />
               </label>
             </div>
@@ -126,6 +211,7 @@ function SubmitReview({
                 placeholder={'Example: Best purchse ever!'}
                 rows="2"
                 cols="35"
+                onChange={(e) => handleChange(setSummary, e.target.value)}
               ></textarea>
             </div>
           </fieldset>
@@ -145,6 +231,7 @@ function SubmitReview({
                 cols="70"
                 required="required"
                 wrap="hard"
+                onChange={(e) => handleChange(setBody, e.target.value)}
               ></textarea>
             </div>
             <span>Minimum required characters left: 50</span>
@@ -153,37 +240,60 @@ function SubmitReview({
 
         {/* This div will allow the user to upload photos to the review */}
 
-        <div id="photo-input">
+        <div>
           <fieldset>
             <legend>Upload your photos</legend>
-            <input type="file" className="photo-input" accept='image/png, image/jpeg' multiple></input>
+            <input
+              id="photo-input"
+              type="file"
+              accept="image/png, image/jpeg"
+              multiple
+              onChange={(e) => handlePhotos(e)}
+            ></input>
+            <div id='images'></div>
+            {addPhotoDiv}
           </fieldset>
         </div>
 
-        {/* This div will ask the user to enter their enter their nickname */}
+        {/* This div will ask the user to enter their enter their name */}
 
-        <div id='nickname-input'>
+        <div id="name-input">
           <fieldset>
-            <legend>What is your nickname?</legend>
-            <input type='text' className='nickname-input' placeholder="Example: jackson11!" maxLength="60" size="35"></input>
+            <legend>What is your Name?</legend>
+            <input
+              type="text"
+              className="name-input"
+              placeholder="Example: jackson11!"
+              maxLength="60"
+              size="35"
+              onChange={(e) => handleChange(setName, e.target.value)}
+            ></input>
             <br />
-            <span>For privacy reasons, do not use your full name or email address</span>
+            <span>
+              For privacy reasons, do not use your full name or email address
+            </span>
           </fieldset>
         </div>
 
         {/* This div will ask the user to enter their email */}
 
-        <div id='email-input'>
+        <div id="email-input">
           <fieldset>
             <legend>Your email</legend>
-            <input type='email' className='nickname-input' placeholder="Example: jackson11@email.com" maxLength="60" size="35"></input>
+            <input
+              type="email"
+              className="email-input"
+              placeholder="Example: jackson11@email.com"
+              maxLength="60"
+              size="35"
+              onChange={(e) => handleChange(setEmail, e.target.value)}
+            ></input>
             <br />
             <span>For authentication reasons, you will not be emailed</span>
           </fieldset>
           <br />
-          <input type='submit' onClick={() => handleSubmit()}></input>
+          <input type="submit" onClick={(e) => handleSubmit()}></input>
         </div>
-
       </div>
     </div>
   );
