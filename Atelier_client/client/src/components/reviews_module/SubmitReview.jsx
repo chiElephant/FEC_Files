@@ -112,7 +112,7 @@ function SubmitReview({
                 />
               </label>
             </div>
-            <span> lowest(1) highest(5) </span>
+            <p> {`lowest(1)......highest(5)`} </p>
           </fieldset>
         </div>
 
@@ -124,7 +124,7 @@ function SubmitReview({
               <textarea
                 maxLength="60"
                 placeholder={'Example: Best purchse ever!'}
-                rows="3"
+                rows="2"
                 cols="35"
               ></textarea>
             </div>
@@ -141,7 +141,7 @@ function SubmitReview({
                 minLength="50"
                 maxLength="1000"
                 placeholder={'Why did you like this product or not?'}
-                rows="5"
+                rows="3"
                 cols="70"
                 required="required"
                 wrap="hard"
@@ -156,12 +156,35 @@ function SubmitReview({
 
         <div id="photo-input">
           <fieldset>
-            <legend>Review</legend>
+            <legend>Upload your photos</legend>
             <input type="file" className="photo-input" accept='image/png, image/jpeg' multiple></input>
           </fieldset>
-          <br />
-          <input type="submit" onClick={() => handleSubmit()}></input>
         </div>
+
+        {/* This div will ask the user to enter their enter their nickname */}
+
+        <div id='nickname-input'>
+          <fieldset>
+            <legend>What is your nickname?</legend>
+            <input type='text' className='nickname-input' placeholder="Example: jackson11!" maxLength="60" size="35"></input>
+            <br />
+            <span>For privacy reasons, do not use your full name or email address</span>
+          </fieldset>
+        </div>
+
+        {/* This div will ask the user to enter their email */}
+
+        <div id='email-input'>
+          <fieldset>
+            <legend>Your email</legend>
+            <input type='email' className='nickname-input' placeholder="Example: jackson11@email.com" maxLength="60" size="35"></input>
+            <br />
+            <span>For authentication reasons, you will not be emailed</span>
+          </fieldset>
+          <br />
+          <input type='submit' onClick={() => handleSubmit()}></input>
+        </div>
+
       </div>
     </div>
   );
