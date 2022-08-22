@@ -52,24 +52,26 @@ function SubmitReview({
     cb(value);
   };
 
-  const handlePhotos = (e) => {
+  const handlePhotos = () => {
     let files = document.querySelector('#photo-input').files;
 
-    for(let i = 0; i < files.length; i++) {
-      const file = files[i];
+    if (files.length <= 5) {
+      for(let i = 0; i < files.length; i++) {
+        const file = files[i];
 
-      if(!file.type.startsWith('image/')) {
-        continue }
+        if(!file.type.startsWith('image/')) {
+          continue }
 
-      const img = document.createElement("img");
-      img.classList.add("obj");
-      img.file = file;
-      img.width = 80;
-      images.appendChild(img);
+        const img = document.createElement("img");
+        img.file = file;
+        img.width = 80;
 
-      const reader = new FileReader();
-      reader.onload = (e) => {img.src = e.target.result; };
-      reader.readAsDataURL(file);
+        images.appendChild(img);
+
+        const reader = new FileReader();
+        reader.onload = (e) => {img.src = e.target.result; };
+        reader.readAsDataURL(file);
+      }
     }
   };
 
@@ -248,7 +250,7 @@ function SubmitReview({
               type="file"
               accept="image/png, image/jpeg"
               multiple
-              onChange={(e) => handlePhotos(e)}
+              onChange={() => handlePhotos()}
             ></input>
             <div id='images'></div>
             {addPhotoDiv}
