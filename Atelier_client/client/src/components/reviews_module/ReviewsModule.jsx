@@ -37,19 +37,21 @@ function ReviewsModule({ product_id, product_name }) {
         setShowReviewModal={setShowReviewModal}
         productName = {productName}
       />
-      <button
-        onClick={() => helpers.handleClick(setCountShown, countShown + 2)}
-        disabled={countShown >= reviews.length}
-      >
-        More Reviews
-      </button>
-      <button
-        onClick={() =>
-          helpers.handleClick(setShowReviewModal, !showReviewModal)
-        }
-      >
-        Add Review
-      </button>
+      <div id="main-buttons">
+        <button
+          onClick={() => helpers.handleClick(setCountShown, countShown + 2)}
+          disabled={countShown >= reviews.length}
+        >
+          More Reviews
+        </button>
+        <button
+          onClick={() =>
+            helpers.handleClick(setShowReviewModal, !showReviewModal)
+          }
+        >
+          Add Review
+        </button>
+      </div>
     </div>
   );
 }

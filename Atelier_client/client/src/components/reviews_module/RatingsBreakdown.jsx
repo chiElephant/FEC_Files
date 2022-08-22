@@ -32,7 +32,7 @@ function RatingsBreakdown({ productId }) {
   }, [productId]);
 
   return (
-    <div>
+    <div id="ratings-breakdown">
       <h3>Ratings Breakdown</h3>
       <div>{`Average Rating: ${avgRating}`}</div>
       <div>{`Total Reviews: ${totalReviews}`}</div>

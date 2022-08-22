@@ -6,7 +6,7 @@ function ReviewsList({ reviews, setSort, setType }) {
   const [sortType, setSortType] = useState('relevance');
 
   return (
-    <div>
+    <div id="reviews-list">
       <h3>Reviews List</h3>
       <div>
         <label>Sort on: </label>
