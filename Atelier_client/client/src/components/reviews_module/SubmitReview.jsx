@@ -50,7 +50,7 @@ function SubmitReview({
       console.log(response)
     })
     .catch(error => {
-      console.log(error)
+      console.log("post error: ", error)
     })
   };
 

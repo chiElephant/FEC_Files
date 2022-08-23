@@ -18,7 +18,10 @@ app.get('/reviews', (req, res) => {
 })
 
 app.post('/reviews', (req, res) => {
-  console.log(req.body)
+  console.log(req.body);
+  reviewsHelper.postReview(req.body, (err, data) => {
+    err ? res.json(err) : res.json(data)
+  })
 })
 
 

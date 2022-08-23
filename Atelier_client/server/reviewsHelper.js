@@ -18,12 +18,11 @@ const getReviews = (query, sendToClient) => {
     sendToClient(response.data.results)
   })
   .catch(error => {
-    sendToClient(error)
+    sendToClient('Error fetching from API: ', error)
   })
 }
 
 const getMetaData = (query, sendToClient) => {
-
 
   const options = {
     headers: {Authorization: token},
@@ -34,10 +33,32 @@ const getMetaData = (query, sendToClient) => {
   .then(res => {
     sendToClient(res.data)
   })
+  .catch(error => {
+    sendToClient('Error fetching from API: ', error)
+  })
+
+}
+
+const postReview = (body, sendToClient) => {
+
+  const options = {
+    headers: {Authorization: token},
+    data: body
+  }
+
+  axios.post(endpoint, options)
+  .then(res => {
+    console.log(res.data);
+    sendToClient(res.data)
+  })
+  .catch(error => {
+    sendToClient('Error posting to API: ', error)
+  })
 
 }
 
 module.exports = {
   getReviews,
-  getMetaData
+  getMetaData,
+  postReview
 }
