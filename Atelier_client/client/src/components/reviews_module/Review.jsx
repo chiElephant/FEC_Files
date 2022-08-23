@@ -21,7 +21,6 @@ function Review({ review }) {
 
   useEffect(() => {
     const convertedDate = helpers.convertDate(review.date);
-    console.log(convertedDate)
     setDate(convertedDate);
   }, []);
 

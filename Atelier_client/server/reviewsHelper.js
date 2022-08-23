@@ -48,7 +48,6 @@ const postReview = (body, sendToClient) => {
 
   axios.post(endpoint, options)
   .then(res => {
-    console.log(res.data);
     sendToClient(res.data)
   })
   .catch(error => {

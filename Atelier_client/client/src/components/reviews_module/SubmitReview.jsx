@@ -60,6 +60,7 @@ function SubmitReview({
 
   const handlePhotos = () => {
     let files = document.querySelector('#photo-input').files;
+    let fileURLs = photos;
 
     if (files.length <= 5) {
       for(let i = 0; i < files.length; i++) {
@@ -75,9 +76,10 @@ function SubmitReview({
         images.appendChild(img);
 
         const reader = new FileReader();
-        reader.onload = (e) => {img.src = e.target.result; };
+        reader.onload = (e) => {img.src = e.target.result; (fileURLs.push(e.target.result))};
         reader.readAsDataURL(file);
       }
+      setPhotos(fileURLs)
     };
   }
 
@@ -99,13 +101,14 @@ function SubmitReview({
         <div id="rate-by-star">
           <fieldset>
             <legend>Overall Rating</legend>
-            <FontAwesomeIcon
-              id="star-1"
-              icon={regular('star')}
-              onClick={() => {
-                handleClick(setRating, 1);
-              }}
-            />
+              <FontAwesomeIcon
+                id="star-1"
+                icon={regular('star')}
+                onClick={() => {
+                  handleClick(setRating, 1);
+                }}
+              />
+
             <FontAwesomeIcon
               id="star-2"
               icon={regular('star')}
