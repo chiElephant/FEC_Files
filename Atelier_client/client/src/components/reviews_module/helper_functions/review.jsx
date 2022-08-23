@@ -2,7 +2,10 @@ import React from 'react';
 import moment from 'moment';
 
 const helpers = {
-  convertDate: (date) => {if (date !== '') {moment(date).format('MMMM DD YYYY')}},
+  convertDate: (date) => {
+    if (date !== '') {
+     return moment(date).format('MMMM DD YYYY')
+  }},
 
   handlePhotos: (photos) => {
     const photoDiv = [];

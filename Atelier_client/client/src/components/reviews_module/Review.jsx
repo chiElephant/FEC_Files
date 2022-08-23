@@ -21,6 +21,7 @@ function Review({ review }) {
 
   useEffect(() => {
     const convertedDate = helpers.convertDate(review.date);
+    console.log(convertedDate)
     setDate(convertedDate);
   }, []);
 
@@ -28,7 +29,7 @@ function Review({ review }) {
     <div id="review">
       <h4>**********</h4>
       <div>Avgerage Rating: {rating}</div>
-      <div>Date Reviews: {date}</div>
+      <div>Date Reviewed: {date}</div>
       <div>User: {username}</div>
       <h4>{summary}</h4>
       <div>{body}</div>
