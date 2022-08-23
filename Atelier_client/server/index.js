@@ -17,6 +17,11 @@ app.get('/reviews', (req, res) => {
   })
 })
 
+app.post('/reviews', (req, res) => {
+  console.log(req.body)
+})
+
+
 app.get('/reviews/meta', (req, res) => {
   reviewsHelper.getMetaData(req.query, (err, data) => {
     err ? res.json(err) : res.json(data)

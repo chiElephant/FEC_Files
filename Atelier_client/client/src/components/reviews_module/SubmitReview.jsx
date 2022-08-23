@@ -45,7 +45,13 @@ function SubmitReview({
       email,
       photos,
       characteristics,
-    });
+    })
+    .then(response => {
+      console.log(response)
+    })
+    .catch(error => {
+      console.log(error)
+    })
   };
 
   const handleClick = (cb, value) => {
@@ -72,8 +78,8 @@ function SubmitReview({
         reader.onload = (e) => {img.src = e.target.result; };
         reader.readAsDataURL(file);
       }
-    }
-  };
+    };
+  }
 
   const handleCharacteristics = (characteristic, value) => {
     let currentChars = characteristics;
@@ -94,24 +100,10 @@ function SubmitReview({
           <fieldset>
             <legend>Overall Rating</legend>
             <FontAwesomeIcon
-              id="star-5"
+              id="star-1"
               icon={regular('star')}
               onClick={() => {
-                handleClick(setRating, 5);
-              }}
-            />
-            <FontAwesomeIcon
-              id="star-4"
-              icon={regular('star')}
-              onClick={() => {
-                handleClick(setRating, 4);
-              }}
-            />
-            <FontAwesomeIcon
-              id="star-3"
-              icon={regular('star')}
-              onClick={() => {
-                handleClick(setRating, 3);
+                handleClick(setRating, 1);
               }}
             />
             <FontAwesomeIcon
@@ -122,10 +114,24 @@ function SubmitReview({
               }}
             />
             <FontAwesomeIcon
-              id="star-1"
+              id="star-3"
               icon={regular('star')}
               onClick={() => {
-                handleClick(setRating, 1);
+                handleClick(setRating, 3);
+              }}
+            />
+            <FontAwesomeIcon
+              id="star-4"
+              icon={regular('star')}
+              onClick={() => {
+                handleClick(setRating, 4);
+              }}
+            />
+            <FontAwesomeIcon
+              id="star-5"
+              icon={regular('star')}
+              onClick={() => {
+                handleClick(setRating, 5);
               }}
             />
           </fieldset>
