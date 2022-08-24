@@ -114,7 +114,7 @@ exports[`Reviews Module renders correctly 1`] = `
           Avgerage Rating: 
         </div>
         <div>
-          Date Reviews: 
+          Date Reviewed: 
         </div>
         <div>
           User: 

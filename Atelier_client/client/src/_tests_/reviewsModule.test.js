@@ -15,20 +15,20 @@ test('Reviews Module renders correctly', () => {
 });
 
 
-//Ratings Breakdown
-test('Ratings Breakdown renders correctly', () => {
-  const tree = renderer
-    .create(<RatingsBreakdown />)
-    .toJSON();
-  expect(tree).toMatchSnapshot();
-});
+// //Ratings Breakdown
+// test('Ratings Breakdown renders correctly', () => {
+//   const tree = renderer
+//     .create(<RatingsBreakdown />)
+//     .toJSON();
+//   expect(tree).toMatchSnapshot();
+// });
 
-//Add Reviews
-test('Submit Review renders correctly', () => {
-  const tree = renderer
-    .create(<SubmitReview />)
-    .toJSON();
-  expect(tree).toMatchSnapshot();
-});
+// //Add Reviews
+// test('Submit Review renders correctly', () => {
+//   const tree = renderer
+//     .create(<SubmitReview />)
+//     .toJSON();
+//   expect(tree).toMatchSnapshot();
+// });
 
 
