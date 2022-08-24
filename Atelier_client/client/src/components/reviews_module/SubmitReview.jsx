@@ -103,7 +103,7 @@ function SubmitReview({
             <legend>Overall Rating</legend>
               <FontAwesomeIcon
                 id="star-1"
-                icon={regular('star')}
+                icon={solid('star')}
                 onClick={() => {
                   handleClick(setRating, 1);
                 }}

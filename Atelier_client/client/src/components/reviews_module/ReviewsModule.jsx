@@ -13,13 +13,13 @@ function ReviewsModule({ product_id, product_name }) {
   const [countShown, setCountShown] = useState(2);
   const [reviews, setReviews] = useState(initial.reviewModel);
 
-  // useEffect(() => {
-  //   helpers.getReviews(productId, sortType, setReviews);
-  // }, [productId, countShown, sortType]);
+  useEffect(() => {
+    helpers.getReviews(productId, sortType, setReviews);
+  }, [productId, countShown, sortType]);
 
-  // useEffect(() => {
-  //   helpers.handleShown(reviews, countShown, setReviewsShown);
-  // }, [reviews, countShown]);
+  useEffect(() => {
+    helpers.handleShown(reviews, countShown, setReviewsShown);
+  }, [reviews, countShown]);
 
   return (
     <div>

@@ -6,7 +6,7 @@ function App(props) {
     <div>
       <h1> The RedBean Atelier App </h1>
       <ReviewsModule
-        product_id={71698}
+        product_id={71699}
         product_name={'Bright Future Sunglasses'}
       />
     </div>
