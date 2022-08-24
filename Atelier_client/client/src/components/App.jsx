@@ -5,7 +5,7 @@ function App(props) {
   return (
     <div>
       <h1> The RedBean Atelier App </h1>
-      {/* <QandAModule /> */}
+      <QandAModule />
     </div>
   );
 }
