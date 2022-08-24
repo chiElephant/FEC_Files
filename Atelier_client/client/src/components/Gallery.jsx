@@ -31,20 +31,21 @@ function Gallery (props) {
   if (Object.keys(selectedStyle).length && Object.keys(selectedPhoto).length) {
     if (view === 'default') {
       return (
-        <div>
-          <h1>Gallery Component</h1>
+        <div className='gallery-container'>
           <img className='main-img' src={selectedPhoto}></img>
-          {
-            selectedStyle.photos.map((photo, index) => {
+          <div className='photo-container'>
+            {
+              selectedStyle.photos.map((photo, index) => {
 
-                return (
-                  <img onClick={(e) => {
-                    handleChangePhoto(e);
-                  }} className='style-other-imgs' src={photo.url} index={index}></img>
-                )
+                  return (
+                    <img onClick={(e) => {
+                      handleChangePhoto(e);
+                    }} className='style-other-imgs' src={photo.url} index={index}></img>
+                  )
 
-            })
-          }
+              })
+            }
+          </div>
         </div>
       )
     } else if (view === 'expanded') {
