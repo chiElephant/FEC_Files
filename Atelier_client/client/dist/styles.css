@@ -1,4 +1,5 @@
 
+
 /**
  *
  * Based on Josh Comeau's CSS Reset: https://www.joshwcomeau.com/css/custom-css-reset/.
@@ -166,60 +167,44 @@ div.answer-report {
   padding-left: 10px;
 }
 
+/* Reviews Module */
 
+#ratings-breakdown,
+  #reviews-list  {
+  float: left;
+  width: 50%;
+  height: 50%
+}
 
- /* div.words {
-   display: flex;
-   flex-direction: column;
-   justify-content: space-around;
-   align-items: flex-start;
-   flex-wrap: nowrap;
-   margin-top: 10px;
-   padding: 20px;
-   border-radius: 20px;
-   border: solid;
-   border-color: red;
-   align-items: stretch;
- }
+button {
+  float: right;
+}
 
- form.group-search {
-   display: flex;
-   flex-direction: row;
-   justify-content: space-between;
- }
+#reviews {
+  overflow-y: scroll;
+  height: 70vh;
+}
 
- div.search {
-   display: flex;
-   flex-direction: column;
- }
+/* Modal */
+#review-window {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.2);
 
- div.group-words {
-   display: flex;
-   flex-direction: column;
- }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
- div.entry {
-   display: flex;
-   flex-direction: column;
-   margin-top: 20px;
-   border-radius: 20px;
- }
+#review-form {
+  position: relative;
+  padding: 32px;
+  max-width: 640px;
+  right: 16px;
+  background-color: rgb(35, 35, 35);
+  color: rgb(162, 162, 162);
+}
 
- div.word-container {
-   display: flex;
-   flex-direction: row;
-   align-items: center;
-   justify-content: space-between;
- }
-
- label {
-   padding-right: 10px;
- }
-
- div.word-container > div {
-   display: flex;
- }
-
- div.group-words > button {
-   margin-top: 20px;
- } */
