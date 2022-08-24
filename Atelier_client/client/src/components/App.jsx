@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Overview from './Overview.jsx';
+import QandAModule from './questions_answers_module/QandAModule.jsx';
 import ReviewsModule from './reviews_module/ReviewsModule.jsx';
 
 function App (props) {
@@ -15,7 +16,7 @@ function App (props) {
         product_id={71699}
         product_name={'Bright Future Sunglasses'}
       />
-
+      <QandAModule />
     </div>
   )
 }
