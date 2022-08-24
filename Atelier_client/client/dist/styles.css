@@ -1,4 +1,44 @@
 
+/* Overview styling */
+
+.product_info_reviews {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 10px
+}
+
+.style-other-imgs {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+
+.style_thumbnail {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+
+.main-img {
+  width: 700px;
+  height: 700px;
+  object-fit: contain;
+}
+
+.photo-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 5px;
+
+}
+
+.gallery-container {
+  position: relative;
 
 /**
  *
@@ -165,6 +205,7 @@ div.question-add-answer {
 div.answer-report {
   text-decoration: underline;
   padding-left: 10px;
+>>>>>>> master
 }
 
 /* Reviews Module */
