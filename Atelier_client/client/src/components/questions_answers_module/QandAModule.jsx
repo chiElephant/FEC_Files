@@ -18,11 +18,11 @@ function QandAModule() {
     <div>
       <h1>Questions & Answers</h1>
       <SearchQ />
-      {/* <QuestionList
+      <QuestionList
         questionList={questionList}
         productName={productName}
         productId={productId}
-      /> */}
+      />
     </div>
   );
 }

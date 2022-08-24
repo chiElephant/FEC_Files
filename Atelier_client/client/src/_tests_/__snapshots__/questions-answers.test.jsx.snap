@@ -1,14 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Questions & Answers module renders correctly 1`] = `
-<div>
-  <h1>
-    Questions & Answers
-  </h1>
-</div>
-`;
-
-exports[`Questions & Answwers module renders correctly 1`] = `
+exports[`QandAModule renders correctly 1`] = `
 <div>
   <h1>
     Questions & Answers
