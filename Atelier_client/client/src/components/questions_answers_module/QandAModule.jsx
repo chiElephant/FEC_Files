@@ -10,19 +10,19 @@ function QandAModule() {
   const [productName, setProductName] = useState('Camo Onesie');
   const [page, setPage] = useState(1);
 
-  useEffect(() => {
-    getQuestions(productId, page, setQuestionList);
-  }, []);
+  // useEffect(() => {
+  //   getQuestions(productId, page, setQuestionList);
+  // }, []);
 
   return (
     <div>
       <h1>Questions & Answers</h1>
       <SearchQ />
-      <QuestionList
+      {/* <QuestionList
         questionList={questionList}
         productName={productName}
         productId={productId}
-      />
+      /> */}
     </div>
   );
 }

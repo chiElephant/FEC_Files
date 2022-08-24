@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import addQuestion from './helper_functions/addQuestion';
+import addAnswer from './helper_functions/addAnswer';
 
-function ModalQuestion({ productName, productId, showModal }) {
+function ModalAnswer({ productName, productId, showModal, questionBody }) {
   function onClose() {
     showModal();
   }
@@ -10,9 +10,11 @@ function ModalQuestion({ productName, productId, showModal }) {
     <div className="modal">
       <div className="content">
         <h1>Ask Your Question</h1>
-        <h2>About the {productName}</h2>
+        <h2>
+          {productName}:{questionBody}
+        </h2>
         <div>
-          <label>Your Question</label>
+          <label>Your Answer</label>
           <textarea></textarea>
         </div>
         <div>
@@ -31,4 +33,4 @@ function ModalQuestion({ productName, productId, showModal }) {
   );
 }
 
-export default ModalQuestion;
+export default ModalAnswer;

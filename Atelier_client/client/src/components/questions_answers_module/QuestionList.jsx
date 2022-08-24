@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Question from './Question.jsx';
-import AddQuestion from './AddQuestion.jsx';
 import ModalQuestion from './ModalQuestion.jsx';
 
 function QuestionList({ questionList, productName, productId }) {
@@ -25,11 +24,11 @@ function QuestionList({ questionList, productName, productId }) {
       {model}
       {questionList.map((q) => (
         <Question
+          productName={productName}
+          productId={productId}
           key={q.question_id}
           question_id={q.question_id}
           body={q.question_body}
-          name={q.name}
-          email={q.email}
           helpfulness={q.question_helpfulness}
         />
       ))}
