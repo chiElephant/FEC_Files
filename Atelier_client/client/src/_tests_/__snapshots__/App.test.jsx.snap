@@ -119,5 +119,36 @@ exports[`renders correctly 1`] = `
       </button>
     </div>
   </div>
+  <div>
+    <h1>
+      Questions & Answers
+    </h1>
+    <div>
+      <form
+        onSubmit={[Function]}
+      >
+        <input
+          type="text"
+        />
+        <button
+          type="submit"
+        >
+          Search
+        </button>
+      </form>
+    </div>
+    <div>
+      <div>
+        <button>
+           More Answered Questions 
+        </button>
+        <button
+          onClick={[Function]}
+        >
+           Add Question + 
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
 `;

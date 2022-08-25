@@ -3,16 +3,14 @@ import SearchQ from './SearchQ.jsx';
 import QuestionList from './QuestionList.jsx';
 import getQuestions from './helper_functions/getQuestions.js';
 
-function QandAModule() {
+function QandAModule({ product_id, product_name }) {
   // set props at {product_id, product_name}
   const [questionList, setQuestionList] = useState([]);
-  const [productId, setProductId] = useState(71697);
-  const [productName, setProductName] = useState('Camo Onesie');
   const [page, setPage] = useState(1);
 
-  // useEffect(() => {
-  //   getQuestions(productId, page, setQuestionList);
-  // }, []);
+  useEffect(() => {
+    getQuestions(product_id, page, setQuestionList);
+  }, []);
 
   return (
     <div>
@@ -20,8 +18,8 @@ function QandAModule() {
       <SearchQ />
       <QuestionList
         questionList={questionList}
-        productName={productName}
-        productId={productId}
+        productName={product_name}
+        productId={product_id}
       />
     </div>
   );
