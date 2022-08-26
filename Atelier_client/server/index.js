@@ -66,7 +66,6 @@ app.put('/answer/:answer_id/report', reportAnswer, (req, res) => {
   res.sendStatus(204);
 });
 
-<<<<<<< HEAD
 app.use((err, req, res, next) => {
   res.status(500).send({ error: err.message });
 });
@@ -98,8 +97,6 @@ app.get('/products/:id/styles', (req, res) => {
   });
 })
 
-
-=======
 /////////////// OVERVIEW COMPONENT //////////////////////
 
 app.get('/products/:id', (req, res) => {
@@ -130,7 +127,6 @@ app.get('/products/:id/styles', (req, res) => {
       res.send(product_styles.data);
     });
 });
->>>>>>> master
 
 app.get('/reviews', (req, res) => {
   reviewsHelper.getReviews(req.query, (err, data) => {
