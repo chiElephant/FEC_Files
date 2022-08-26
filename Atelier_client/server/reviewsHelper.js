@@ -1,6 +1,6 @@
 require('dotenv').config();
 const axios = require('axios');
-const express = require('express');
+
 const endpoint = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/`;
 const metaEndpoint = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/meta/`;
 const token = process.env.TOKEN;

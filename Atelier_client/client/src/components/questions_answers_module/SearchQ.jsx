@@ -11,7 +11,10 @@ function SearchQ(props) {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <input type="text" />
+        <input
+          type="text"
+          placeholder="Have a question? Search for answers..."
+        />
         <button type="submit">Search</button>
       </form>
     </div>

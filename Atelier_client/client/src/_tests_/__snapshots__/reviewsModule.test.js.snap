@@ -1,38 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Ratings Breakdown renders correctly 1`] = `
-<div
-  id="ratings-breakdown"
->
-  <h3>
-    Ratings Breakdown
-  </h3>
-  <div>
-    Average Rating: 
-  </div>
-  <div>
-    Total Reviews: 
-  </div>
-  <br />
-  <div
-    id="rec-percent"
-  >
-    % of reviewers recommend this product
-  </div>
-  <br />
-  <div />
-  <br />
-  <div>
-    <h3>
-      Product Breakdown
-    </h3>
-    <div
-      id="char-div"
-    />
-  </div>
-</div>
-`;
-
 exports[`Reviews Module renders correctly 1`] = `
 <div>
   <h2>
@@ -149,5 +116,3 @@ exports[`Reviews Module renders correctly 1`] = `
   </div>
 </div>
 `;
-
-exports[`Submit Review renders correctly 1`] = `null`;
