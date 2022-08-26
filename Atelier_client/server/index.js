@@ -18,7 +18,7 @@ const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
 const reviewsHelper = require('./reviewsHelper.js');
 
 app.use('/', (req, res, next) => {
-  // console.log(`${req.method} REQUEST ON ${req.url}`);
+  console.log(`${req.method} REQUEST ON ${req.url}`);
   next();
 });
 
