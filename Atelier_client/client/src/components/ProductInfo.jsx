@@ -14,7 +14,7 @@ function ProductInfo(props) {
     return (
       <div>
         <div className="product_info_reviews">
-          <div>This product has 4 stars reviews</div>
+          <div data-testid='star-rating'>This product has 4 stars reviews</div>
           <button>Read all reviews</button>
         </div>
         <div>{props.product.category}</div>
