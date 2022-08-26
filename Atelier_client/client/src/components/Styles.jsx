@@ -31,7 +31,7 @@ function Styles(props) {
     console.log(`There are ${props.styles.length} styles`);
     return (
       <div>
-        <div className="product_overview_style_selector">
+        <div data-testid='style-selector' className="product_overview_style_selector">
           {props.styles.map((style) => {
             return (
               <img

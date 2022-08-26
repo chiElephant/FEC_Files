@@ -9,7 +9,6 @@ import {
 
 function ProductInfo(props) {
   console.log('These are the product features: ', props.product);
-
   if (Object.keys(props.product).length) {
     return (
       <div>
@@ -28,6 +27,16 @@ function ProductInfo(props) {
           })}
         </ul>
 
+        <button>Add to My Outfit</button>
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <div className="product_info_reviews">
+          <div data-testid='star-rating'>This product has 4 stars reviews</div>
+          <button>Read all reviews</button>
+        </div>
         <button>Add to My Outfit</button>
       </div>
     );
