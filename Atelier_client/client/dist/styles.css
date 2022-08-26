@@ -60,49 +60,35 @@
  }
 
 
-/* Overview styling */
 
-.product_info_reviews {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  gap: 10px
-}
+ /* .FormEntry {
+   display: flex;
+   flex-direction: column;
+   padding: 20px;
+   justify-content: space-around;
+   align-items: stretch;
+   flex-wrap: nowrap;
+   border-radius: 20px;
+   border: solid;
+   border-color: red;
+ }
 
-.style-other-imgs {
-  width: 100px;
-  height: 100px;
-  object-fit: contain;
-}
+ form.FormEntry>input {
+   align-self: flex-start;
+   margin-bottom: 20px;
+ }
 
-.style_thumbnail {
-  width: 100px;
-  height: 100px;
-  object-fit: contain;
-}
+ textarea {
+   resize: none;
+   height: 100px;
+   margin-bottom: 20px;
+ }
 
-.main-img {
-  width: 700px;
-  height: 700px;
-  object-fit: contain;
-}
-
-.photo-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  padding: 5px;
-
-}
-
-.gallery-container {
-  position: relative;
-}
-
-/* Questions and Answers Module */
+ button {
+   width: 200px;
+   margin-bottom: 10px;
+   align-self: flex-end;
+ } */
 
  div.question {
   display: flex;
@@ -221,3 +207,48 @@ button {
   color: rgb(162, 162, 162);
 }
 
+/* Overview styling */
+
+.product_info_reviews {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 10px
+}
+
+.style-other-imgs {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+
+.style_thumbnail {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+
+.main-img {
+  width: 700px;
+  height: 700px;
+  object-fit: contain;
+}
+
+.photo-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 5px;
+
+}
+
+.gallery-container {
+  position: relative;
+}
+
+.product_overview_style_selector {
+  display: flex;
+}
