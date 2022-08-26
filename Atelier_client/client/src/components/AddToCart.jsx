@@ -22,8 +22,6 @@ function AddToCart (props) {
         setOutOfStock(false);
       }
     }
-    console.log(outOfStock);
-
   };
 
   var handleSizeChange = (e) => {
@@ -36,13 +34,11 @@ function AddToCart (props) {
   }
 
   useEffect(() => {
-    console.log('The AddToCart component mounted!');
     availability(props.style.skus);
   }, [props.style]);
 
   useEffect(() => {
     var qtys = [];
-    console.log(styleAvail[sizeSelected]);
     var qty = styleAvail[sizeSelected];
     for (var i = 1; i < qty; i++) {
       qtys.push(i+1);
@@ -56,7 +52,6 @@ function AddToCart (props) {
   var handleAddToCart = (e) => {
     e.preventDefault();
     if (!outOfStock && sizeSelected !== '' && quantitySelected !== 0) {
-      console.log(`${quantitySelected} pieces of ${props.style.name} style in size ${sizeSelected} have been added to the cart `)
     }
 
     // else if (!outOfStock && sizeSelected === '') {

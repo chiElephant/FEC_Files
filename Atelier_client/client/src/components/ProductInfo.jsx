@@ -4,7 +4,7 @@ import { list_product, product_information, product_styles, related_products, pr
 
 function ProductInfo (props) {
 
-  console.log('These are the product features: ', props.product)
+  // console.log('These are the product features: ', props.product)
 
   if (Object.keys(props.product).length) {
     return (

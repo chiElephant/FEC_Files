@@ -14,7 +14,7 @@ function Gallery (props) {
   useEffect(() => {
     const testAsync = async () => {
       const photos = await selectedStyle.photos;
-      await console.log(photos);
+      // await console.log(photos);
       setSelectedPhoto(photos[selectedIndex].url);
     }
     testAsync();

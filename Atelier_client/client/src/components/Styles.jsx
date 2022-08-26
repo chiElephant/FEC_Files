@@ -5,7 +5,7 @@ import Gallery from './Gallery.jsx';
 
 function Styles (props) {
 
-  console.log('These are the props for styles component: ', props.styles);
+  // console.log('These are the props for styles component: ', props.styles);
   const [selectedStyle, setSelectedStyle] = useState({});
 
   useEffect(() => {
@@ -23,7 +23,7 @@ function Styles (props) {
   }
 
   if (props.styles.length) {
-    console.log(`There are ${props.styles.length} styles`);
+    // console.log(`There are ${props.styles.length} styles`);
     return (
       <div className='product_overview_style_selector'>
 

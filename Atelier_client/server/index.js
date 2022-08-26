@@ -18,7 +18,7 @@ const reviewsHelper = require('./reviewsHelper.js')
 
 
 app.use('/', (req, res, next) => {
-  console.log(`${req.method} REQUEST ON ${req.url}`);
+  // console.log(`${req.method} REQUEST ON ${req.url}`);
   next();
 });
 
@@ -68,20 +68,19 @@ app.put('/answer/:answer_id/report', reportAnswer, (req, res) => {
 });
 
 app.use((err, req, res, next) => {
-  console.log('error in express error handler: ', err.message);
   res.status(500).send({ error: err.message });
 });
 
 /////////////// OVERVIEW COMPONENT //////////////////////
 
 app.get('/products/:id', (req, res) => {
-  console.log(`Received a get request to get the prodcut information for product: ${req.params.id} and  url: ${req.url}`);
+  // console.log(`Received a get request to get the prodcut information for product: ${req.params.id} and  url: ${req.url}`);
   axios.get(url + req.url, {
     headers: {
       Authorization: process.env.GIT
     }
   }).then((product_info) => {
-    console.log('This is the product info: ', product_info.data);
+    // console.log('This is the product info: ', product_info.data);
     res.send(product_info.data);
   })
 
@@ -94,7 +93,7 @@ app.get('/products/:id/styles', (req, res) => {
       Authorization: process.env.GIT
     }
   }).then((product_styles) => {
-    console.log('These are the product styles: ', product_styles.data);
+    // console.log('These are the product styles: ', product_styles.data);
     res.send(product_styles.data);
   });
 })
