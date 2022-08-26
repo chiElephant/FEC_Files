@@ -11,9 +11,9 @@ function Question({ question_id, body, helpfulness, productName, productId }) {
   const [allowUserVote, setAllowUserVote] = useState(false);
   const [isModel, setIsModel] = useState(false);
 
-  // useEffect(() => {
-  //   getAnswers(question_id, page, setAnswerList);
-  // }, []);
+  useEffect(() => {
+    getAnswers(question_id, page, setAnswerList);
+  }, []);
 
   function showModal() {
     setIsModel(!isModel);

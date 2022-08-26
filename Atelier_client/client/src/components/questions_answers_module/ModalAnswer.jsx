@@ -9,7 +9,7 @@ function ModalAnswer({ productName, productId, showModal, questionBody }) {
   return (
     <div className="modal">
       <div className="content">
-        <h1>Ask Your Question</h1>
+        <h1>Submit your Answer</h1>
         <h2>
           {productName}:{questionBody}
         </h2>
