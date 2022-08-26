@@ -5,9 +5,11 @@ exports[`renders correctly 1`] = `
   <h1>
      The RedBean Atelier App 
   </h1>
-  <div>
+  <div
+    id="reviews-module"
+  >
     <h2>
-       Ratings Module 
+       Ratings and Reviews 
     </h2>
     <div
       id="ratings-breakdown"
@@ -79,10 +81,11 @@ exports[`renders correctly 1`] = `
           id="review"
         >
           <h4>
-            **********
+            Review
           </h4>
           <div>
             Avgerage Rating: 
+            0
           </div>
           <div>
             Date Reviewed: 
@@ -99,6 +102,7 @@ exports[`renders correctly 1`] = `
           <div />
           <div>
             Helpfulness: 
+            0
           </div>
         </div>
       </ul>
@@ -128,6 +132,7 @@ exports[`renders correctly 1`] = `
         onSubmit={[Function]}
       >
         <input
+          placeholder="Have a question? Search for answers..."
           type="text"
         />
         <button

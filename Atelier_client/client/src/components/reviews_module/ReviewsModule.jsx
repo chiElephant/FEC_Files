@@ -23,7 +23,7 @@ function ReviewsModule({ product_id, product_name }) {
 
   return (
     <div id="reviews-module">
-      <h2> Ratings Module </h2>
+      <h2> Ratings and Reviews </h2>
       <RatingsBreakdown productId={productId} />
       <ReviewsList
         reviews={reviewsShown}
