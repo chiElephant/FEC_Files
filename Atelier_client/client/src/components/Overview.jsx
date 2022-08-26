@@ -50,7 +50,6 @@ function Overview(props) {
   });
 
   useEffect(() => {
-<<<<<<< HEAD
     axios.get(`/products/${props.product_id}`)
       .then((data) => {
         // console.log(data.data);
@@ -64,7 +63,6 @@ function Overview(props) {
         // console.log(data.data);
         setStyles(data.data);
       });
-=======
     axios.get(`/products/${props.product_id}`).then((data) => {
       console.log(data.data);
       setProduct(data.data);
@@ -76,7 +74,7 @@ function Overview(props) {
       console.log(data.data);
       setStyles(data.data);
     });
->>>>>>> master
+
   }, []);
 
   if (Object.keys(product).length) {

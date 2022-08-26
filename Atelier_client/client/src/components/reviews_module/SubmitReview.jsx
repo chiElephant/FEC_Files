@@ -101,42 +101,81 @@ function SubmitReview({
         <div id="rate-by-star">
           <fieldset>
             <legend>Overall Rating</legend>
-              <FontAwesomeIcon
-                id="star-1"
-                icon={solid('star')}
-                onClick={() => {
-                  handleClick(setRating, 1);
-                }}
-              />
-
-            <FontAwesomeIcon
+            {rating >= 1
+              ? <FontAwesomeIcon
+                  id="star-1"
+                  icon={solid('star')}
+                  onClick={() => {
+                    handleClick(setRating, 1);
+                  }}
+                />
+              : <FontAwesomeIcon
+              id="star-1"
+              icon={regular('star')}
+              onClick={() => {
+                handleClick(setRating, 1);
+              }}/>
+            }
+            {rating >= 2
+              ? <FontAwesomeIcon
+                  id="star-2"
+                  icon={solid('star')}
+                  onClick={() => {
+                    handleClick(setRating, 2);
+                  }}
+                />
+              : <FontAwesomeIcon
               id="star-2"
               icon={regular('star')}
               onClick={() => {
                 handleClick(setRating, 2);
-              }}
-            />
-            <FontAwesomeIcon
+              }}/>
+            }
+            {rating >= 3
+              ? <FontAwesomeIcon
+                  id="star-3"
+                  icon={solid('star')}
+                  onClick={() => {
+                    handleClick(setRating, 3);
+                  }}
+                />
+              : <FontAwesomeIcon
               id="star-3"
               icon={regular('star')}
               onClick={() => {
                 handleClick(setRating, 3);
-              }}
-            />
-            <FontAwesomeIcon
+              }}/>
+            }
+            {rating >= 4
+              ? <FontAwesomeIcon
+                  id="star-4"
+                  icon={solid('star')}
+                  onClick={() => {
+                    handleClick(setRating, 4);
+                  }}
+                />
+              : <FontAwesomeIcon
               id="star-4"
               icon={regular('star')}
               onClick={() => {
                 handleClick(setRating, 4);
-              }}
-            />
-            <FontAwesomeIcon
+              }}/>
+            }
+            {rating === 5
+              ? <FontAwesomeIcon
+                  id="star-5"
+                  icon={solid('star')}
+                  onClick={() => {
+                    handleClick(setRating, 5);
+                  }}
+                />
+              : <FontAwesomeIcon
               id="star-5"
               icon={regular('star')}
               onClick={() => {
                 handleClick(setRating, 5);
-              }}
-            />
+              }}/>
+            }
           </fieldset>
         </div>
 

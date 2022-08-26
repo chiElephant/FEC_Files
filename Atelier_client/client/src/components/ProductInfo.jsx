@@ -7,15 +7,9 @@ import {
   product_reviews,
 } from '../../example_data/example.js';
 
-<<<<<<< HEAD
-
-function ProductInfo (props) {
-
   // console.log('These are the product features: ', props.product)
-=======
 function ProductInfo(props) {
   console.log('These are the product features: ', props.product);
->>>>>>> master
 
   if (Object.keys(props.product).length) {
     return (
