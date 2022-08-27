@@ -11,12 +11,10 @@ function SubmitReview({
   product_id,
 }) {
   const characteristicsKey = {
-    Length: { id: '', value: '' },
-    Width: { id: '', value: '' },
-    Size: { id: '', value: '' },
-    Fit: { id: '', value: '' },
-    Quality: { id: '', value: '' },
-    Comfort: { id: '', value: '' },
+      "240582": 3,
+      "240583": 3,
+      "240584": 3,
+      "240585": 3
   };
 
   const [characteristics, setCharacteristics] = useState(characteristicsKey);
@@ -189,7 +187,7 @@ function SubmitReview({
                   type="radio"
                   name="rec"
                   value="yes"
-                  onClick={() => handleClick(setRecommend, 'true')}
+                  onClick={() => handleClick(setRecommend, true)}
                 />{' '}
                 Yes
               </label>
@@ -198,7 +196,7 @@ function SubmitReview({
                   type="radio"
                   name="rec"
                   value="no"
-                  onClick={() => handleClick(setRecommend, 'false')}
+                  onClick={() => handleClick(setRecommend, false)}
                 />{' '}
                 No
               </label>

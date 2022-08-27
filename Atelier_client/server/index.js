@@ -135,8 +135,8 @@ app.get('/reviews', (req, res) => {
 });
 
 app.post('/reviews', (req, res) => {
-  reviewsHelper.postReview(req.body, (err, data) => {
-    err ? res.json(err) : res.json(data);
+  reviewsHelper.postReview(req, (err, data) => {
+    err ? res.status(500).json(err) : res.status(201).json(data);
   });
 });
 
