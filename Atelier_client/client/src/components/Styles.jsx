@@ -8,7 +8,7 @@ import {
 } from '../../example_data/example.js';
 import AddToCart from './AddToCart.jsx';
 import Gallery from './Gallery.jsx';
-
+  // console.log('These are the props for styles component: ', props.styles);
 function Styles(props) {
   console.log('These are the props for styles component: ', props.styles);
   const [selectedStyle, setSelectedStyle] = useState({});
@@ -28,7 +28,7 @@ function Styles(props) {
   };
 
   if (props.styles.length) {
-    console.log(`There are ${props.styles.length} styles`);
+    // console.log(`There are ${props.styles.length} styles`);
     return (
       <div>
         <div className="product_overview_style_selector">

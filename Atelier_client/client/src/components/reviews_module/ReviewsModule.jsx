@@ -22,8 +22,8 @@ function ReviewsModule({ product_id, product_name }) {
   }, [reviews, countShown]);
 
   return (
-    <div>
-      <h2> Ratings Module </h2>
+    <div id="reviews-module">
+      <h2> Ratings and Reviews </h2>
       <RatingsBreakdown productId={productId} />
       <ReviewsList
         reviews={reviewsShown}

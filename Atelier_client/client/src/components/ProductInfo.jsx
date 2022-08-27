@@ -7,6 +7,7 @@ import {
   product_reviews,
 } from '../../example_data/example.js';
 
+  // console.log('These are the product features: ', props.product)
 function ProductInfo(props) {
   console.log('These are the product features: ', props.product);
 
