@@ -6,6 +6,7 @@ import ReviewsList from './ReviewsList.jsx';
 
 function ReviewsModule({ product_id, product_name }) {
   const [reviewsShown, setReviewsShown] = useState(initial.reviewModel);
+  const [characteristics, setCharacteristics] = useState({})
   const [showReviewModal, setShowReviewModal] = useState(false);
   const [productName, setProductName] = useState(product_name);
   const [productId, setProductId] = useState(product_id);
@@ -24,7 +25,9 @@ function ReviewsModule({ product_id, product_name }) {
   return (
     <div id="reviews-module">
       <h2> Ratings and Reviews </h2>
-      <RatingsBreakdown productId={productId} />
+      <RatingsBreakdown productId={productId}
+        setCharacteristics={setCharacteristics}
+        characteristics={characteristics} />
       <ReviewsList
         reviews={reviewsShown}
         setSort={helpers.setSort}
@@ -32,10 +35,10 @@ function ReviewsModule({ product_id, product_name }) {
       />
       <SubmitReview
         showReviewModal={showReviewModal}
-        // submitReviewForm={helpers.submitReview}
         setShowReviewModal={setShowReviewModal}
         productName={productName}
         product_id={productId}
+        characteristics={characteristics}
       />
       <div id="main-buttons">
         <button

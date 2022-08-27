@@ -9,15 +9,10 @@ function SubmitReview({
   submitReviewForm,
   productName,
   product_id,
+  characteristics
 }) {
-  const characteristicsKey = {
-      "240582": 3,
-      "240583": 3,
-      "240584": 3,
-      "240585": 3
-  };
 
-  const [characteristics, setCharacteristics] = useState(characteristicsKey);
+  const [productChars, setProductChars] = useState({});
   const [addPhotoDiv, setAddPhotoDiv] = useState(<div />);
   const [recommend, setRecommend] = useState(false);
   const [summary, setSummary] = useState('');
@@ -42,7 +37,7 @@ function SubmitReview({
       name,
       email,
       photos,
-      characteristics,
+      productChars,
     })
     .then(response => {
       console.log(response)
