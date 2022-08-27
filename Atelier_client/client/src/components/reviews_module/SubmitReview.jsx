@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid, regular } from '@fortawesome/fontawesome-svg-core/import.macro';
@@ -9,11 +9,11 @@ function SubmitReview({
   submitReviewForm,
   productName,
   product_id,
-  characteristics
+  characteristics,
 }) {
-
   const [productChars, setProductChars] = useState({});
   const [addPhotoDiv, setAddPhotoDiv] = useState(<div />);
+  const [charsDiv, setCharsDiv] = useState(<div />);
   const [recommend, setRecommend] = useState(false);
   const [summary, setSummary] = useState('');
   const [rating, setRating] = useState(0);
@@ -22,29 +22,79 @@ function SubmitReview({
   const [body, setBody] = useState('');
   const [name, setName] = useState('');
 
+  useEffect(() => {
+    createCharsDiv();
+  }, [characteristics]);
+
   const handleChange = (cb, value) => {
     cb(value);
   };
 
   const handleSubmit = () => {
     setShowReviewModal(false);
-    axios.post('/reviews', {
-      product_id,
-      rating,
-      summary,
-      body,
-      recommend,
-      name,
-      email,
-      photos,
-      productChars,
-    })
-    .then(response => {
-      console.log(response)
-    })
-    .catch(error => {
-      console.log("post error: ", error)
-    })
+    axios
+      .post('/reviews', {
+        product_id,
+        rating,
+        summary,
+        body,
+        recommend,
+        name,
+        email,
+        photos,
+        productChars,
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log('post error: ', error);
+      });
+  };
+
+  const charsKey = {
+    Size: {
+      1: 'A size too small',
+      2: '1/2 size too small',
+      3: 'Perfect',
+      4: '1/2 size too big',
+      5: 'A size too wide',
+    },
+    Width: {
+      1: 'Too narrow',
+      2: 'Slightly narrow',
+      3: 'Perfect',
+      4: 'Slightly wide',
+      5: 'Too wide',
+    },
+    Comfort: {
+      1: 'Uncomfortable',
+      2: 'Slightly uncomfortable',
+      3: 'Ok',
+      4: 'Comfortable',
+      5: 'Perfect',
+    },
+    Quality: {
+      1: 'Poor',
+      2: 'Below Average',
+      3: 'What I expected',
+      4: 'Pretty great',
+      5: 'Perfect',
+    },
+    Length: {
+      1: 'Runs short',
+      2: 'Runs slightly short',
+      3: 'Perfect',
+      4: 'Runs slightly long',
+      5: 'Runs long',
+    },
+    Fit: {
+      1: 'Runs tight',
+      2: 'Runs slightly tight',
+      3: 'Perfect',
+      4: 'Runs slightly long',
+      5: 'Runs long',
+    },
   };
 
   const handleClick = (cb, value) => {
@@ -56,30 +106,96 @@ function SubmitReview({
     let fileURLs = photos;
 
     if (files.length <= 5) {
-      for(let i = 0; i < files.length; i++) {
+      for (let i = 0; i < files.length; i++) {
         const file = files[i];
 
-        if(!file.type.startsWith('image/')) {
-          continue }
+        if (!file.type.startsWith('image/')) {
+          continue;
+        }
 
-        const img = document.createElement("img");
+        const img = document.createElement('img');
         img.file = file;
         img.width = 80;
 
         images.appendChild(img);
 
         const reader = new FileReader();
-        reader.onload = (e) => {img.src = e.target.result; (fileURLs.push(e.target.result))};
+        reader.onload = (e) => {
+          img.src = e.target.result;
+          fileURLs.push(e.target.result);
+        };
         reader.readAsDataURL(file);
       }
-      setPhotos(fileURLs)
-    };
-  }
+      setPhotos(fileURLs);
+    }
+  };
 
-  const handleCharacteristics = (characteristic, value) => {
-    let currentChars = characteristics;
-    currentChars[characteristic] = value;
-    setCharacteristics(currentChars);
+  const handleCharacteristics = (char, id, value) => {
+    const chars = productChars;
+    chars[id] = value;
+    setProductChars(chars);
+    handleCharSelection(char, id, value);
+  };
+
+  const handleCharSelection = (char, id, value) => {
+    const currentDisplay = document.getElementById(id);
+    console.log(char)
+    const newDisplay = charsKey[char][value]
+    console.log(newDisplay)
+    currentDisplay.textContent = newDisplay;
+  };
+
+  const createCharsDiv = () => {
+    let div = [];
+
+    for (let char in characteristics) {
+      div.push(
+        <div key={characteristics[char].id}>
+          <span id={characteristics[char].id}>None Selected</span>
+          <br />
+          <label>
+            {`${char}`}
+            <input
+              className={characteristics[char].id}
+              type="radio"
+              name={`${char}`}
+              value="1"
+              onClick={() => handleCharacteristics(char, characteristics[char].id, 1)}
+            />
+            <input
+              className={characteristics[char].id}
+              type="radio"
+              name={`${char}`}
+              value="2"
+              onClick={() => handleCharacteristics(char, characteristics[char].id, 2)}
+            />
+            <input
+              className={characteristics[char].id}
+              type="radio"
+              name={`${char}`}
+              value="3"
+              onClick={() => handleCharacteristics(char, characteristics[char].id, 3)}
+            />
+            <input
+              className={characteristics[char].id}
+              type="radio"
+              name={`${char}`}
+              value="4"
+              onClick={() => handleCharacteristics(char, characteristics[char].id, 4)}
+            />
+            <input
+              className={characteristics[char].id}
+              type="radio"
+              name={`${char}`}
+              value="5"
+              onClick={() => handleCharacteristics(char, characteristics[char].id, 5)}
+            />
+          </label>
+          <br />
+        </div>
+      );
+    }
+    setCharsDiv(div);
   };
 
   return !showReviewModal ? (
@@ -94,81 +210,91 @@ function SubmitReview({
         <div id="rate-by-star">
           <fieldset>
             <legend>Overall Rating</legend>
-            {rating >= 1
-              ? <FontAwesomeIcon
-                  id="star-1"
-                  icon={solid('star')}
-                  onClick={() => {
-                    handleClick(setRating, 1);
-                  }}
-                />
-              : <FontAwesomeIcon
-              id="star-1"
-              icon={regular('star')}
-              onClick={() => {
-                handleClick(setRating, 1);
-              }}/>
-            }
-            {rating >= 2
-              ? <FontAwesomeIcon
-                  id="star-2"
-                  icon={solid('star')}
-                  onClick={() => {
-                    handleClick(setRating, 2);
-                  }}
-                />
-              : <FontAwesomeIcon
-              id="star-2"
-              icon={regular('star')}
-              onClick={() => {
-                handleClick(setRating, 2);
-              }}/>
-            }
-            {rating >= 3
-              ? <FontAwesomeIcon
-                  id="star-3"
-                  icon={solid('star')}
-                  onClick={() => {
-                    handleClick(setRating, 3);
-                  }}
-                />
-              : <FontAwesomeIcon
-              id="star-3"
-              icon={regular('star')}
-              onClick={() => {
-                handleClick(setRating, 3);
-              }}/>
-            }
-            {rating >= 4
-              ? <FontAwesomeIcon
-                  id="star-4"
-                  icon={solid('star')}
-                  onClick={() => {
-                    handleClick(setRating, 4);
-                  }}
-                />
-              : <FontAwesomeIcon
-              id="star-4"
-              icon={regular('star')}
-              onClick={() => {
-                handleClick(setRating, 4);
-              }}/>
-            }
-            {rating === 5
-              ? <FontAwesomeIcon
-                  id="star-5"
-                  icon={solid('star')}
-                  onClick={() => {
-                    handleClick(setRating, 5);
-                  }}
-                />
-              : <FontAwesomeIcon
-              id="star-5"
-              icon={regular('star')}
-              onClick={() => {
-                handleClick(setRating, 5);
-              }}/>
-            }
+            {rating >= 1 ? (
+              <FontAwesomeIcon
+                id="star-1"
+                icon={solid('star')}
+                onClick={() => {
+                  handleClick(setRating, 1);
+                }}
+              />
+            ) : (
+              <FontAwesomeIcon
+                id="star-1"
+                icon={regular('star')}
+                onClick={() => {
+                  handleClick(setRating, 1);
+                }}
+              />
+            )}
+            {rating >= 2 ? (
+              <FontAwesomeIcon
+                id="star-2"
+                icon={solid('star')}
+                onClick={() => {
+                  handleClick(setRating, 2);
+                }}
+              />
+            ) : (
+              <FontAwesomeIcon
+                id="star-2"
+                icon={regular('star')}
+                onClick={() => {
+                  handleClick(setRating, 2);
+                }}
+              />
+            )}
+            {rating >= 3 ? (
+              <FontAwesomeIcon
+                id="star-3"
+                icon={solid('star')}
+                onClick={() => {
+                  handleClick(setRating, 3);
+                }}
+              />
+            ) : (
+              <FontAwesomeIcon
+                id="star-3"
+                icon={regular('star')}
+                onClick={() => {
+                  handleClick(setRating, 3);
+                }}
+              />
+            )}
+            {rating >= 4 ? (
+              <FontAwesomeIcon
+                id="star-4"
+                icon={solid('star')}
+                onClick={() => {
+                  handleClick(setRating, 4);
+                }}
+              />
+            ) : (
+              <FontAwesomeIcon
+                id="star-4"
+                icon={regular('star')}
+                onClick={() => {
+                  handleClick(setRating, 4);
+                }}
+              />
+            )}
+            {rating === 5 ? (
+              <FontAwesomeIcon
+                id="star-5"
+                icon={solid('star')}
+                onClick={() => {
+                  handleClick(setRating, 5);
+                }}
+              />
+            ) : (
+              <FontAwesomeIcon
+                id="star-5"
+                icon={regular('star')}
+                onClick={() => {
+                  handleClick(setRating, 5);
+                }}
+              />
+            )}
           </fieldset>
         </div>
 
@@ -202,44 +328,7 @@ function SubmitReview({
         <div id="characteristics-radios">
           <fieldset>
             <legend>Characteristics</legend>
-            <div>
-              <span> None Selected </span>
-              <br />
-              <label>
-                {' '}
-                Quality:
-                <input
-                  type="radio"
-                  name="quality"
-                  value="1"
-                  onClick={() => handleCharacteristics('Quality', 1)}
-                />
-                <input
-                  type="radio"
-                  name="quality"
-                  value="2"
-                  onClick={() => handleCharacteristics('Quality', 2)}
-                />
-                <input
-                  type="radio"
-                  name="quality"
-                  value="3"
-                  onClick={() => handleCharacteristics('Quality', 3)}
-                />
-                <input
-                  type="radio"
-                  name="quality"
-                  value="4"
-                  onClick={() => handleCharacteristics('Quality', 4)}
-                />
-                <input
-                  type="radio"
-                  name="quality"
-                  value="5"
-                  onClick={() => handleCharacteristics('Quality', 5)}
-                />
-              </label>
-            </div>
+            {charsDiv}
             <p> {`lowest(1)......highest(5)`} </p>
           </fieldset>
         </div>
@@ -293,7 +382,7 @@ function SubmitReview({
               multiple
               onChange={() => handlePhotos()}
             ></input>
-            <div id='images'></div>
+            <div id="images"></div>
             {addPhotoDiv}
           </fieldset>
         </div>
