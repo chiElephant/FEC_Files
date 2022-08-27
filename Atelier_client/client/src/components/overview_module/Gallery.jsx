@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Expanded from './Expanded.jsx';
 
 function Gallery(props) {
   const [selectedStyle, setSelectedStyle] = useState({});
@@ -20,18 +21,26 @@ function Gallery(props) {
     // setSelectedPhoto(selectedStyle.photos[0].url)
   }, [selectedStyle.photos]);
 
-  var handleChangePhoto = (e) => {
+  const handleChangePhoto = (e) => {
     e.preventDefault();
     // console.log(e.target.src);
     setSelectedPhoto(e.target.src);
     setSelectedIndex(Number(e.target.getAttribute('index')));
   };
 
+  const handleChangeViewExpanded = () => {
+    setView('expanded');
+  }
+
+  const handleChangeViewDefault = () => {
+    setView('default');
+  }
+
   if (Object.keys(selectedStyle).length && Object.keys(selectedPhoto).length) {
     if (view === 'default') {
       return (
         <div className="gallery-container">
-          <img className="main-img" src={selectedPhoto}></img>
+          <img className="main-img" src={selectedPhoto} onClick={handleChangeViewExpanded}></img>
           <div className="photo-container">
             {selectedStyle.photos.map((photo, index) => {
               return (
@@ -49,7 +58,9 @@ function Gallery(props) {
         </div>
       );
     } else if (view === 'expanded') {
-      return null;
+      return (
+        <Expanded changeViewDefault={handleChangeViewDefault} photos={selectedStyle.photos} selectedPhoto={selectedPhoto}/>
+      )
     }
   }
 }

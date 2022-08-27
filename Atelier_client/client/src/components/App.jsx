@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Overview from './Overview.jsx';
+import Overview from './overview_module/Overview.jsx';
 import QandAModule from './questions_answers_module/QandAModule.jsx';
 import ReviewsModule from './reviews_module/ReviewsModule.jsx';
 
