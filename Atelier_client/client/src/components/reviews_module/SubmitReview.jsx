@@ -139,9 +139,7 @@ function SubmitReview({
 
   const handleCharSelection = (char, id, value) => {
     const currentDisplay = document.getElementById(id);
-    console.log(char)
     const newDisplay = charsKey[char][value]
-    console.log(newDisplay)
     currentDisplay.textContent = newDisplay;
   };
 
@@ -329,7 +327,7 @@ function SubmitReview({
           <fieldset>
             <legend>Characteristics</legend>
             {charsDiv}
-            <p> {`lowest(1)......highest(5)`} </p>
+            <p> {`lowest(1)...........highest(5)`} </p>
           </fieldset>
         </div>
 
@@ -366,7 +364,7 @@ function SubmitReview({
                 onChange={(e) => handleChange(setBody, e.target.value)}
               ></textarea>
             </div>
-            <span>Minimum required characters left: 50</span>
+            <span>{body.length < 50 ? `Minimum required characters left: ${50 - body.length}` : 'Minimum Reached'}</span>
           </fieldset>
         </div>
 
