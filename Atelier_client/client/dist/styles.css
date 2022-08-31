@@ -265,12 +265,17 @@ button {
 .modalContainer {
   width: 500px;
   height: 500px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
   border-radius: 12px;
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   display: flex;
   flex-direction: column;
   padding: 25px;
+
 }
 
 .expanded-photo-gallery {
@@ -278,6 +283,20 @@ button {
   flex-direction: row;
 
 }
-/* height:100%
-height:100vh.
-position:absolute. */
+
+.main-img-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.main-img-and-arrows {
+  display: flex;
+  flex-direction: row;
+}
+
+.style-other-imgs-selected {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  border: 5px solid #555;
+}

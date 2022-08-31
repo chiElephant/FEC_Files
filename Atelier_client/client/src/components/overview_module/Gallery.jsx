@@ -36,6 +36,26 @@ function Gallery(props) {
     setView('default');
   }
 
+  const previousPhoto = (e) => {
+    e.preventDefault();
+    if (selectedIndex > 0) {
+      var newIndex = selectedIndex - 1;
+      setSelectedIndex(newIndex);
+      var newPhoto = selectedStyle.photos[newIndex].url;
+      setSelectedPhoto(newPhoto)
+    }
+  }
+
+  const nextPhoto = (e) => {
+    e.preventDefault();
+    if (selectedIndex < selectedStyle.photos.length - 1) {
+      var newIndex = selectedIndex + 1;
+      setSelectedIndex(newIndex);
+      var newPhoto = selectedStyle.photos[newIndex].url;
+      setSelectedPhoto(newPhoto)
+    }
+  }
+
   if (Object.keys(selectedStyle).length && Object.keys(selectedPhoto).length) {
     if (view === 'default') {
       return (
@@ -43,23 +63,36 @@ function Gallery(props) {
           <img className="main-img" src={selectedPhoto} onClick={handleChangeViewExpanded}></img>
           <div className="photo-container">
             {selectedStyle.photos.map((photo, index) => {
-              return (
-                <img
-                  onClick={(e) => {
-                    handleChangePhoto(e);
-                  }}
-                  className="style-other-imgs"
-                  src={photo.url}
-                  index={index}
-                ></img>
-              );
+              if (index === selectedIndex) {
+                return (
+                  <img
+                    onClick={(e) => {
+                      handleChangePhoto(e);
+                    }}
+                    className="style-other-imgs-selected"
+                    src={photo.url}
+                    index={index}
+                  ></img>
+                );
+              } else {
+                return (
+                  <img
+                    onClick={(e) => {
+                      handleChangePhoto(e);
+                    }}
+                    className="style-other-imgs"
+                    src={photo.url}
+                    index={index}
+                  ></img>
+                );
+              }
             })}
           </div>
         </div>
       );
     } else if (view === 'expanded') {
       return (
-        <Expanded changeViewDefault={handleChangeViewDefault} photos={selectedStyle.photos} selectedPhoto={selectedPhoto}/>
+        <Expanded nextPhoto={nextPhoto} previousPhoto={previousPhoto} changeViewDefault={handleChangeViewDefault} photos={selectedStyle.photos} selectedPhoto={selectedPhoto} changeSelectedPhoto={handleChangePhoto} selectedIndex={selectedIndex}/>
       )
     }
   }
