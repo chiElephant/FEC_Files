@@ -11,6 +11,7 @@ import Styles from './Styles.jsx';
 import AddToCart from './AddToCart.jsx';
 import Gallery from './Gallery.jsx';
 import axios from 'axios';
+import
 
 function Overview(props) {
   const [product, setProduct] = useState({});
@@ -62,6 +63,10 @@ function Overview(props) {
       setStyles(data.data);
     });
   }, []);
+
+  useEffect(() = > {
+    axios.get(`/reviews`)
+  }, [])
 
   if (Object.keys(product).length) {
     return (
