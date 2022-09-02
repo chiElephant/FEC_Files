@@ -14,21 +14,6 @@ import axios from 'axios';
 
 function Overview(props) {
   const [product, setProduct] = useState({});
-  // const [styles, setStyles] = useState({});
-
-  // const [product, setProduct] = useState({
-  //   campus: "",
-  //   category: "",
-  //   created_at: "",
-  //   default_price: "",
-  //   description: "",
-  //   features: [],
-  //   id: 1,
-  //   name: "",
-  //   slogan: "",
-  //   updated_at: ""
-  // });
-
   const [styles, setStyles] = useState({
     product_id: '',
     results: [
@@ -84,7 +69,7 @@ function Overview(props) {
   if (Object.keys(product).length) {
     return (
       <div>
-        <ProductInfo product={product} features={product.features} />
+        <ProductInfo product_id={props.product_id} product={product} features={product.features} />
         <Styles product={product} styles={styles.results} />
       </div>
     );

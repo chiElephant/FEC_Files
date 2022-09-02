@@ -1,20 +1,79 @@
 import React, { useState, useEffect } from 'react';
-// import {
-//   list_product,
-//   product_information,
-//   product_styles,
-//   related_products,
-//   product_reviews,
-// } from '../../example_data/example.js';
+import axios from 'axios';
+import getAvgRating from './helper-functions/helper.js';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { solid, regular } from '@fortawesome/fontawesome-svg-core/import.macro';
 
-  // console.log('These are the product features: ', props.product)
 function ProductInfo(props) {
-  console.log('These are the product features: ', props.product);
-  if (Object.keys(props.product).length) {
+
+  const [avgRating, setAvgRating] = useState(null);
+
+  useEffect(() => {
+    axios.get('/reviews/meta', { params: {product_id: props.product.id }})
+      .then((data) => {
+        // console.log('The reviews meta data is: ', data.data.ratings);
+        // console.log(`The avg rating is: ${getAvgRating(data.data.ratings)}`)
+        setAvgRating(getAvgRating(data.data.ratings));
+      })
+  }, []);
+
+  if (Object.keys(props.product).length && avgRating !== null) {
     return (
       <div>
         <div className="product_info_reviews">
           <div data-testid="star-rating">This product has 4 stars reviews</div>
+          <fieldset>
+            {avgRating >= 1
+                ? <FontAwesomeIcon
+                    id="star-1"
+                    icon={solid('star')}
+                  />
+                : <FontAwesomeIcon
+                id="star-1"
+                icon={regular('star')}
+                />
+            }
+            {avgRating >= 2
+              ? <FontAwesomeIcon
+                  id="star-2"
+                  icon={solid('star')}
+                />
+              : <FontAwesomeIcon
+              id="star-2"
+              icon={regular('star')}
+              />
+            }
+            {avgRating >= 3
+              ? <FontAwesomeIcon
+                  id="star-3"
+                  icon={solid('star')}
+                />
+              : <FontAwesomeIcon
+              id="star-3"
+              icon={regular('star')}
+              />
+            }
+            {avgRating >= 4
+              ? <FontAwesomeIcon
+                  id="star-4"
+                  icon={solid('star')}
+                />
+              : <FontAwesomeIcon
+              id="star-4"
+              icon={regular('star')}
+              />
+            }
+            {avgRating === 5
+              ? <FontAwesomeIcon
+                  id="star-5"
+                  icon={solid('star')}
+                />
+              : <FontAwesomeIcon
+              id="star-5"
+              icon={regular('star')}
+              />
+            }
+          </fieldset>
           <button>Read all reviews</button>
         </div>
         <div>{props.product.category}</div>
