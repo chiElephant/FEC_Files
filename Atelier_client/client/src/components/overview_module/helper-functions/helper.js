@@ -15,7 +15,11 @@ function avgRating(ratings) {
 
   avg = (sum / reviewsCount).toFixed(1);
 
-  return avg;
+  var result = {
+    avg: avg,
+    reviewsCount: reviewsCount
+  }
+  return result;
 }
 
 export default avgRating;

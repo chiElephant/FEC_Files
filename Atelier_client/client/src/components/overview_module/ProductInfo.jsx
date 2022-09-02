@@ -7,13 +7,15 @@ import { solid, regular } from '@fortawesome/fontawesome-svg-core/import.macro';
 function ProductInfo(props) {
 
   const [avgRating, setAvgRating] = useState(null);
+  const [totalReviews, setTotalReviews] = useState(null);
 
   useEffect(() => {
     axios.get('/reviews/meta', { params: {product_id: props.product.id }})
       .then((data) => {
         // console.log('The reviews meta data is: ', data.data.ratings);
         // console.log(`The avg rating is: ${getAvgRating(data.data.ratings)}`)
-        setAvgRating(getAvgRating(data.data.ratings));
+        setAvgRating(getAvgRating(data.data.ratings).avg);
+        setTotalReviews(getAvgRating(data.data.ratings).reviewsCount);
       })
   }, []);
 
@@ -21,7 +23,6 @@ function ProductInfo(props) {
     return (
       <div>
         <div className="product_info_reviews">
-          <div data-testid="star-rating">This product has 4 stars reviews</div>
           <fieldset>
             {avgRating >= 1
                 ? <FontAwesomeIcon
@@ -74,7 +75,7 @@ function ProductInfo(props) {
               />
             }
           </fieldset>
-          <button>Read all reviews</button>
+          <button>Read all reviews &#40;{totalReviews}&#41;</button>
         </div>
         <div>{props.product.category}</div>
         <div>{props.product.name}</div>
