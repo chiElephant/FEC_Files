@@ -1,6 +1,7 @@
 require('dotenv').config();
 const axios = require('axios');
 
+
 const endpoint = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/`;
 const metaEndpoint = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/meta/`;
 const token = process.env.TOKEN;
@@ -46,6 +47,7 @@ const postReview = (body, sendToClient) => {
   axios
     .post(endpoint, options)
     .then((res) => {
+      console.log(res.status)
       sendToClient(res.data);
     })
     .catch((error) => {
