@@ -3,6 +3,7 @@ import axios from 'axios';
 import getAvgRating from './helper-functions/helper.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid, regular } from '@fortawesome/fontawesome-svg-core/import.macro';
+import { Link } from 'react-scroll';
 
 function ProductInfo(props) {
 
@@ -88,7 +89,7 @@ function ProductInfo(props) {
               />
             }
           </fieldset>
-          <button onClick={props.scrollToReviews}>Read all &#40;{totalReviews}&#41; reviews</button>
+          <Link to='reviews-module' smooth={true} duration={500}>Read all &#40;{totalReviews}&#41; reviews </Link>
         </div>
         <div>{props.product.category}</div>
         <div>{props.product.name}</div>
