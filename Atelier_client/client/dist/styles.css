@@ -209,9 +209,9 @@ div.answer-report {
 
 /* Reviews Module */
 
-#reviews-module {
+/* #reviews-module {
   height: 50%;
-}
+} */
 
 #ratings-breakdown,
   #reviews-list  {
@@ -242,10 +242,12 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow-y: scroll;
+
 }
 
 #review-form {
-  position: relative;
+  /* position: relative; */
   padding: 32px;
   max-width: 640px;
   right: 16px;
@@ -253,9 +255,11 @@ button {
   color: rgb(162, 162, 162);
 }
 
-#reviews-module {
-  margin-bottom: 16px;
+#reviews {
+  padding: 0;
+  margin-bottom: 0;
 }
+
 /* Overview styling */
 
 .product_info_reviews {

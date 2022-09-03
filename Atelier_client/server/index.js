@@ -130,19 +130,18 @@ app.get('/products/:id/styles', (req, res) => {
 
 app.get('/reviews', (req, res) => {
   reviewsHelper.getReviews(req.query, (err, data) => {
-    err ? res.json(err) : res.json(data);
+    err ? res.send(err) : res.send(data);
   });
 });
 
-app.post('/reviews', (req, res) => {
-  reviewsHelper.postReview(req.body, (err, data) => {
-    err ? res.json(err) : res.json(data);
-  });
+app.post('/reviews', reviewsHelper.postReview, (req, res) => {
+  console.log('Im Here')
+  res.sendStatus(201);
 });
 
 app.get('/reviews/meta', (req, res) => {
   reviewsHelper.getMetaData(req.query, (err, data) => {
-    err ? res.json(err) : res.json(data);
+    err ? res.send(err) : res.send(data);
   });
 });
 
