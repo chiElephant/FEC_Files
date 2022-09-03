@@ -9,25 +9,25 @@ function SubmitReview({
   submitReviewForm,
   productName,
   product_id,
-  characteristics,
+  chars,
 }) {
   const [productChars, setProductChars] = useState({});
   const [addPhotoDiv, setAddPhotoDiv] = useState(<div />);
   const [charsDiv, setCharsDiv] = useState(<div />);
   const [recommend, setRecommend] = useState(false);
-  const [summary, setSummary] = useState('');
+  const [summary, setSummary] = useState("");
   const [rating, setRating] = useState(0);
   const [photos, setPhotos] = useState([]);
-  const [email, setEmail] = useState('');
-  const [body, setBody] = useState('');
-  const [name, setName] = useState('');
+  const [email, setEmail] = useState("");
+  const [body, setBody] = useState("");
+  const [name, setName] = useState("");
 
   useEffect(() => {
     createCharsDiv();
-  }, [characteristics]);
+  }, [chars]);
 
   const handleChange = (cb, value) => {
-    cb(value);
+    cb(`${value}`);
   };
 
   const handleSubmit = () => {
@@ -42,7 +42,7 @@ function SubmitReview({
         name,
         email,
         photos,
-        productChars,
+        characteristics: productChars,
       })
       .then((response) => {
         console.log(response);
@@ -131,62 +131,74 @@ function SubmitReview({
   };
 
   const handleCharacteristics = (char, id, value) => {
-    const chars = productChars;
-    chars[id] = value;
+    let chars = productChars;
+    chars[`${id}`] = value;
+    console.log(productChars)
+    console.log(chars)
     setProductChars(chars);
     handleCharSelection(char, id, value);
   };
 
   const handleCharSelection = (char, id, value) => {
     const currentDisplay = document.getElementById(id);
-    const newDisplay = charsKey[char][value]
+    const newDisplay = charsKey[char][value];
     currentDisplay.textContent = newDisplay;
   };
 
   const createCharsDiv = () => {
     let div = [];
 
-    for (let char in characteristics) {
+    for (let char in chars) {
       div.push(
-        <div key={characteristics[char].id}>
-          <span id={characteristics[char].id}>None Selected</span>
+        <div key={chars[char].id}>
+          <span id={chars[char].id}>None Selected</span>
           <br />
           <label>
             {`${char}`}
             <input
-              className={characteristics[char].id}
+              className={chars[char].id}
               type="radio"
               name={`${char}`}
               value="1"
-              onClick={() => handleCharacteristics(char, characteristics[char].id, 1)}
+              onClick={() =>
+                handleCharacteristics(char, chars[char].id, 1)
+              }
             />
             <input
-              className={characteristics[char].id}
+              className={chars[char].id}
               type="radio"
               name={`${char}`}
               value="2"
-              onClick={() => handleCharacteristics(char, characteristics[char].id, 2)}
+              onClick={() =>
+                handleCharacteristics(char, chars[char].id, 2)
+              }
             />
             <input
-              className={characteristics[char].id}
+              className={chars[char].id}
               type="radio"
               name={`${char}`}
               value="3"
-              onClick={() => handleCharacteristics(char, characteristics[char].id, 3)}
+              onClick={() =>
+                handleCharacteristics(char, char[char].id, 3)
+              }
             />
             <input
-              className={characteristics[char].id}
+              className={chars[char].id}
               type="radio"
               name={`${char}`}
               value="4"
-              onClick={() => handleCharacteristics(char, characteristics[char].id, 4)}
+              onClick={() =>
+                handleCharacteristics(char, chars[char].id, 4)
+              }
             />
             <input
-              className={characteristics[char].id}
+              className={chars[char].id}
               type="radio"
               name={`${char}`}
               value="5"
-              onClick={() => handleCharacteristics(char, characteristics[char].id, 5)}
+              onClick={() =>
+                handleCharacteristics(char, `${chars[char].id}`, 5)
+              }
             />
           </label>
           <br />
@@ -364,7 +376,11 @@ function SubmitReview({
                 onChange={(e) => handleChange(setBody, e.target.value)}
               ></textarea>
             </div>
-            <span>{body.length < 50 ? `Minimum required characters left: ${50 - body.length}` : 'Minimum Reached'}</span>
+            <span>
+              {body.length < 50
+                ? `Minimum required characters left: ${50 - body.length}`
+                : 'Minimum Reached'}
+            </span>
           </fieldset>
         </div>
 

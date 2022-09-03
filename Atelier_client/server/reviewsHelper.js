@@ -38,10 +38,11 @@ const getMetaData = (query, sendToClient) => {
     });
 };
 
-const postReview = (req, sendToClient) => {
+const postReview = (req, res, next) => {
   const { body, name, email, product_id, rating, summary, recommend, photos, characteristics } = req.body;
+  console.log(req.body)
 
-  const data = {
+  const data = JSON.stringify({
     product_id,
     rating,
     summary,
@@ -51,7 +52,8 @@ const postReview = (req, sendToClient) => {
     email,
     photos,
     characteristics
-  };
+  });
+  // console.log(data);
 
   const options = {
     method: 'post',
@@ -60,12 +62,12 @@ const postReview = (req, sendToClient) => {
       Authorization: token,
       'Content-Type': 'application/json',
     },
-    data,
+    data
   };
 
   axios(options)
     .then((res) => {
-      sendToClient(res);
+      next();
     })
     .catch(err => {console.log("POST error: ", err)});
 };
