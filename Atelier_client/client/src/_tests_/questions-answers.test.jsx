@@ -57,14 +57,14 @@ describe('Questions and Answers renders correctly', () => {
     });
   });
 
-  // describe('Answer', () => {
-  //   test(`Should display a 'Helpful?' option`, () => {
-  //     render(<Answer />);
-  //     const element = screen.getByText(/helpful\?/i);
+  describe('Answer', () => {
+    test(`Should display a 'Helpful?' option`, () => {
+      render(<Answer />);
+      const element = screen.getByText(/helpful\?/i);
 
-  //     expect(element).toBeInTheDocument();
-  //   });
-  // });
+      expect(element).toBeInTheDocument();
+    });
+  });
 
   describe('SearchQ', () => {
     test(`Should display a 'Search' button`, () => {
@@ -84,6 +84,13 @@ describe('Questions and Answers renders correctly', () => {
       });
       expect(element).toBeInTheDocument();
     });
+
+    test(`should display a 'What is your nickname' label`, () => {
+      render(<ModalQuestion />);
+      const element = screen.getByText(/What is your nickname/i);
+
+      expect(element).toBeInTheDocument();
+    });
   });
 
   describe('ModalAnswer', () => {
@@ -92,6 +99,13 @@ describe('Questions and Answers renders correctly', () => {
       const element = screen.getByRole('heading', {
         name: /submit your answer/i,
       });
+      expect(element).toBeInTheDocument();
+    });
+
+    test(`should display a 'What is your nickname' label`, () => {
+      render(<ModalAnswer />);
+      const element = screen.getByText(/What is your nickname/i);
+
       expect(element).toBeInTheDocument();
     });
   });

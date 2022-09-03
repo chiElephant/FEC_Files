@@ -47,14 +47,14 @@ function Answer({
       </div>
     );
   }
-  console.log(body);
+  // console.log('photos: ', photos);
   return (
     <div className="answer">
       <div>
         <h3>A:</h3>
         <p>{body}</p>
       </div>
-      <AnswerPhotosList photos={photos} />
+      {photos !== undefined && <AnswerPhotosList photos={photos} />}
       <div className="answer-options">
         <p>
           by {answerer_name}, {date}
