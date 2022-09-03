@@ -21,12 +21,14 @@ function Styles(props) {
 
   useEffect(() => {
     setSelectedStyle(props.styles[0]);
+    props.changeStyleSelected(props.styles[0]);
   }, [props.styles]);
 
   const handleSelect = (e) => {
     e.preventDefault();
     // console.log(JSON.parse(e.target.getAttribute('value')));
     setSelectedStyle(JSON.parse(e.target.getAttribute('value')));
+    props.changeStyleSelected(JSON.parse(e.target.getAttribute('value')));
   };
 
   if (props.styles.length) {

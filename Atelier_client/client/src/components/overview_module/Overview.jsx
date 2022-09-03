@@ -32,6 +32,7 @@ function Overview(props) {
       },
     ],
   });
+  const [selectedStyle, setSelectedStyle] = useState({});
 
   useEffect(() => {
     axios.get(`/products/${props.product_id}`).then((data) => {
@@ -57,6 +58,12 @@ function Overview(props) {
       setStyles(data.data);
     });
   }, []);
+
+  const changeStyleSelected = (style) => {
+    console.log(`The selected style is: ${style}`);
+    setSelectedStyle(style);
+  };
+
   if (Object.keys(product).length) {
     return (
       <div>
@@ -64,8 +71,13 @@ function Overview(props) {
           product_id={props.product_id}
           product={product}
           features={product.features}
+          style={selectedStyle}
         />
-        <Styles product={product} styles={styles.results} />
+        <Styles
+          product={product}
+          styles={styles.results}
+          changeStyleSelected={changeStyleSelected}
+        />
       </div>
     );
   }

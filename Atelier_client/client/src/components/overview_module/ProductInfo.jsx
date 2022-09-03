@@ -10,6 +10,7 @@ import getAvgRating from './helper-functions/helper.js';
 function ProductInfo(props) {
   const [avgRating, setAvgRating] = useState(0);
   const [totalReviews, setTotalReviews] = useState(0);
+  const [selectedStyle, setSelectedStyle] = useState({});
 
   // Make a request to get the reviews information, calculate avg, and set state
 
@@ -23,6 +24,11 @@ function ProductInfo(props) {
         setTotalReviews(getAvgRating(data.data.ratings).reviewsCount);
       });
   }, []);
+
+  useEffect(() => {
+    console.log(`You changed the selected style to ${props.style.name}`);
+    setSelectedStyle(props.style);
+  }, [props.style]);
 
   if (Object.keys(props.product).length && avgRating !== null) {
     return (
@@ -66,6 +72,7 @@ function ProductInfo(props) {
         </div>
         <div>{props.product.category}</div>
         <div>{props.product.name}</div>
+        <div>{selectedStyle.name}</div>
         <div>{props.product.default_price}</div>
         <h4>{props.product.slogan}</h4>
         <div>{props.product.description}</div>

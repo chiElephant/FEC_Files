@@ -10,7 +10,6 @@ function Gallery(props) {
   const [view, setView] = useState('default');
 
   useEffect(() => {
-    console.log('He cambiado el estilo');
     setSelectedStyle(props.style);
   }, [props.style]);
 
