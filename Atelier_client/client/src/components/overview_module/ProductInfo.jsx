@@ -89,7 +89,7 @@ function ProductInfo(props) {
               />
             }
           </fieldset>
-          <Link to='reviews-module' smooth={true} duration={500}>Read all &#40;{totalReviews}&#41; reviews </Link>
+          <Link clasName='scroll-review' to='reviews-module' smooth={true} duration={500}>Read all &#40;{totalReviews}&#41; reviews </Link>
         </div>
         <div>{props.product.category}</div>
         <div>{props.product.name}</div>
