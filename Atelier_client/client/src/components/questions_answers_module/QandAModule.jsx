@@ -7,9 +7,10 @@ function QandAModule({ product_id, product_name }) {
   // set props at {product_id, product_name}
   const [questionList, setQuestionList] = useState([]);
   const [page, setPage] = useState(1);
+  const [count, setCount] = useState(100);
 
   useEffect(() => {
-    getQuestions(product_id, page, setQuestionList);
+    getQuestions(product_id, page, count, setQuestionList);
   }, []);
 
   return (

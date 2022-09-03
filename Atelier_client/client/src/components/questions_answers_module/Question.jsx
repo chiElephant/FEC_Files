@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Axios } from 'axios';
 import AnswerList from './AnswerList.jsx';
 import markQuestionAsHelpful from './helper_functions/markQuestionAsHelpful.js';
 import getAnswers from './helper_functions/getAnswers.js';
@@ -10,9 +11,10 @@ function Question({ question_id, body, helpfulness, productName, productId }) {
   const [helpCount, setHelpCount] = useState(helpfulness);
   const [allowUserVote, setAllowUserVote] = useState(false);
   const [isModel, setIsModel] = useState(false);
+  const [count, setCount] = useState(5);
 
   useEffect(() => {
-    getAnswers(question_id, page, setAnswerList);
+    getAnswers(question_id, page, count, setAnswerList);
   }, []);
 
   function showModal() {
@@ -40,12 +42,15 @@ function Question({ question_id, body, helpfulness, productName, productId }) {
     <ModalAnswer
       productName={productName}
       productId={productId}
+      question_id={question_id}
       questionBody={body}
       showModal={() => {
         showModal();
       }}
     />
   ) : null;
+
+  // console.log(answerList);
 
   return (
     <div>

@@ -4,7 +4,7 @@ import QandAModule from './questions_answers_module/QandAModule.jsx';
 import ReviewsModule from './reviews_module/ReviewsModule.jsx';
 
 function App(props) {
-  const [product_id, setProduct_id] = useState(71697);
+  const [product_id, setProduct_id] = useState(71700);
   const [productName, setProductName] = useState('Camo Onesie');
 
   return (

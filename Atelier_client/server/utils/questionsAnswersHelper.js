@@ -1,5 +1,6 @@
 require('dotenv').config();
 const axios = require('axios');
+const { uploadToCloudinary } = require('./uploadToCloudinary');
 
 const { URL, TOKEN } = process.env;
 
@@ -37,6 +38,7 @@ const getAnswers = (req, res, next) => {
     .get(url, options)
     .then((response) => {
       res.body = response.data;
+
       next();
     })
     .catch(next);
@@ -46,6 +48,8 @@ const addQuestion = (req, res, next) => {
   const url = `${URL}/qa/questions`;
 
   const { body, name, email, product_id } = req.body;
+
+  console.log(req.body);
 
   const data = JSON.stringify({
     body,
@@ -73,7 +77,7 @@ const addQuestion = (req, res, next) => {
 
 const addAnswer = (req, res, next) => {
   const { question_id } = req.params;
-  const { body, name, email, product_id } = req.body;
+  const { body, name, email, photoUrls } = req.body;
 
   const url = `${URL}/qa/questions/${question_id}/answers`;
 
@@ -81,8 +85,10 @@ const addAnswer = (req, res, next) => {
     body,
     name,
     email,
-    product_id,
+    photos: photoUrls,
   });
+
+  console.log(data);
 
   const options = {
     method: 'post',

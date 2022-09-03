@@ -20,13 +20,8 @@ const initial = {
 const helpers = {
   handleShown: (reviews, countShown, setReviewsShown) => {
     const show = reviews.slice(0, countShown);
-
     setReviewsShown(show);
   },
-
-  // submitReview: (newReview) => {
-  //   console.log(newReview);
-  // },
 
   setSort: (type, setType) => {
     setType(type);
@@ -36,9 +31,10 @@ const helpers = {
     cb(value);
   },
 
-  getReviews: (product_id, sortType, setReviews) => {
+  getReviews: (product_id, sort, setReviews) => {
+
     const options = {
-      params: { product_id, sort: sortType },
+      params: { product_id, sort },
     };
 
     axios

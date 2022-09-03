@@ -1,8 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import markAnswerAsHelpful from './helper_functions/markAnswerAsHelpful.js';
 import reportAnswer from './helper_functions/reportAnswer.js';
+import AnswerPhotosList from './AnswerPhotosList.jsx';
 
-function Answer({ answer_id, answerer_name, body, date, answer_helpfulness }) {
+function Answer({
+  answer_id,
+  answerer_name,
+  body,
+  date,
+  answer_helpfulness,
+  photos,
+}) {
   const [helpCount, setHelpCount] = useState(answer_helpfulness);
   const [allowUserVote, setAllowUserVote] = useState(false);
   const [reportUser, setReportUser] = useState(false);
@@ -39,14 +47,14 @@ function Answer({ answer_id, answerer_name, body, date, answer_helpfulness }) {
       </div>
     );
   }
-
+  // console.log('photos: ', photos);
   return (
     <div className="answer">
       <div>
         <h3>A:</h3>
         <p>{body}</p>
       </div>
-
+      {photos !== undefined && <AnswerPhotosList photos={photos} />}
       <div className="answer-options">
         <p>
           by {answerer_name}, {date}

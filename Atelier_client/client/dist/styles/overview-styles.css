@@ -1,0 +1,136 @@
+/* Overview styling */
+
+.product_info_reviews {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 10px
+}
+
+.style-other-imgs {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+
+.style_thumbnail {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+
+.main-img {
+  width: 700px;
+  height: 700px;
+  object-fit: contain;
+}
+
+.photo-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 5px;
+
+}
+
+.gallery-container {
+  position: relative;
+}
+
+/* Overview styling */
+
+.product_info_reviews {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 10px
+}
+
+.style-other-imgs {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+
+.style_thumbnail {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+
+.main-img {
+  width: 700px;
+  height: 700px;
+  object-fit: contain;
+}
+
+.photo-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 5px;
+
+}
+
+.gallery-container {
+  position: relative;
+}
+
+.product_overview_style_selector {
+  display: flex;
+}
+
+.modalBackground {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background: rgba(44, 43, 43, 0.7);
+  z-index: 10;
+}
+
+.modalContainer {
+  width: 500px;
+  height: 500px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+  border-radius: 12px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+
+}
+
+.expanded-photo-gallery {
+  display: flex;
+  flex-direction: row;
+
+}
+
+.main-img-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.main-img-and-arrows {
+  display: flex;
+  flex-direction: row;
+}
+
+.style-other-imgs-selected {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  border: 5px solid #555;
+}
