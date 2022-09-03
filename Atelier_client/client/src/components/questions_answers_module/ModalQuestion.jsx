@@ -1,32 +1,128 @@
 import React, { useState, useEffect } from 'react';
 import addQuestion from './helper_functions/addQuestion';
+import FormInput from './FormInput.jsx';
+import FormErrorList from './FormErrorList.jsx';
 
 function ModalQuestion({ productName, productId, showModal }) {
-  function onClose() {
+  const [values, setValues] = useState({
+    question: '',
+    nickname: '',
+    email: '',
+  });
+  const [validEntries, setValidEntries] = useState({
+    question: false,
+    nickname: false,
+    email: false,
+  });
+  const [formError, setFormError] = useState(false);
+
+  const inputs = [
+    {
+      id: 1,
+      label: 'Your Question',
+      name: 'question',
+      type: 'text',
+      tagType: 'textarea',
+      maxLength: '100',
+      placeholder: null,
+      message: null,
+      errorMessage: 'please enter a question',
+      pattern: null,
+      required: true,
+    },
+    {
+      id: 2,
+      label: 'What is your nickname',
+      name: 'nickname',
+      type: 'text',
+      maxLength: '60',
+      placeholder: 'Example: jackson11!',
+      message: 'For privacy reasons, do not use your full name or email',
+      errorMessage: 'please enter a nickname',
+      pattern: null,
+      required: true,
+    },
+    {
+      id: 3,
+      label: 'Your email',
+      name: 'email',
+      type: 'email',
+      maxLength: '60',
+      placeholder: 'Why did you like the product or not?',
+      message: 'For authentication reasons, you will not be emailed',
+      errorMessage: 'please enter a valid email address',
+      required: true,
+    },
+  ];
+
+  const validateForm = () => {
+    const error = Object.values(validEntries).every((item) => !item);
+    if (error) {
+      setFormError(error);
+    } else {
+      setFormError(!error);
+    }
+  };
+
+  const handleSubmit = (e) => {
+    const { question, nickname, email } = values;
+    addQuestion(productId, question, nickname, email);
+    e.preventDefault();
     showModal();
+  };
+
+  const onChange = (e) => {
+    const isValueValid = e.target.validity.valid;
+    const targetName = e.target.name;
+    const targetValue = e.target.value;
+
+    if (isValueValid) {
+      setValidEntries({
+        ...validEntries,
+        [targetName]: true,
+      });
+    } else {
+      setValidEntries({
+        ...validEntries,
+        [targetName]: false,
+      });
+    }
+
+    setValues({
+      ...values,
+      [targetName]: targetValue,
+    });
+  };
+
+  let displayError;
+  if (formError === true) {
+    displayError = (
+      <FormErrorList validEntries={validEntries} inputs={inputs} />
+    );
+  } else {
+    displayError = null;
   }
 
   return (
-    <div className="modal">
-      <div className="content">
+    <div id="new-question-window">
+      <form id="question-form" onSubmit={handleSubmit}>
         <h1>Ask Your Question</h1>
         <h2>About the {productName}</h2>
-        <div>
-          <label>Your Question</label>
-          <textarea></textarea>
-        </div>
-        <div>
-          <label>What is your nickname</label>
-          {/* <input type="text"> */}
-        </div>
-        <div>
-          <label>Your email</label>
-          {/* <input type="text"> */}
-        </div>
-      </div>
-      <button className="toggle-button" onClick={onClose}>
-        close
-      </button>
+
+        {inputs.map((input) => (
+          <FormInput
+            key={input.id}
+            {...input}
+            value={values[input.name]}
+            onChange={onChange}
+          />
+        ))}
+
+        {displayError}
+        <button id="submit-question-button" onClick={validateForm}>
+          Submit question
+        </button>
+      </form>
     </div>
   );
 }

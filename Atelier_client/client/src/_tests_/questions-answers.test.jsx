@@ -57,14 +57,14 @@ describe('Questions and Answers renders correctly', () => {
     });
   });
 
-  describe('Answer', () => {
-    test(`Should display a 'Helpful?' option`, () => {
-      render(<Answer />);
-      const element = screen.getByText(/helpful\?/i);
+  // describe('Answer', () => {
+  //   test(`Should display a 'Helpful?' option`, () => {
+  //     render(<Answer />);
+  //     const element = screen.getByText(/helpful\?/i);
 
-      expect(element).toBeInTheDocument();
-    });
-  });
+  //     expect(element).toBeInTheDocument();
+  //   });
+  // });
 
   describe('SearchQ', () => {
     test(`Should display a 'Search' button`, () => {

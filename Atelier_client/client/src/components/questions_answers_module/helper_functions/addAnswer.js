@@ -16,6 +16,9 @@ export default function addAnswer(
     name,
     email,
     photos,
+    headers: {
+      'Content-Type': 'application/json',
+    },
   });
 
   const options = {

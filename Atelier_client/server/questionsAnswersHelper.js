@@ -37,6 +37,7 @@ const getAnswers = (req, res, next) => {
     .get(url, options)
     .then((response) => {
       res.body = response.data;
+      console.log(res.body.results[0].photos);
       next();
     })
     .catch(next);
@@ -46,6 +47,8 @@ const addQuestion = (req, res, next) => {
   const url = `${URL}/qa/questions`;
 
   const { body, name, email, product_id } = req.body;
+
+  console.log(req.body);
 
   const data = JSON.stringify({
     body,
