@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import {
-  list_product,
-  product_information,
-  product_styles,
-  related_products,
-  product_reviews,
-} from '../../example_data/example.js';
+// import {
+//   list_product,
+//   product_information,
+//   product_styles,
+//   related_products,
+//   product_reviews,
+// } from '../../example_data/example.js';
 import AddToCart from './AddToCart.jsx';
 import Gallery from './Gallery.jsx';
   // console.log('These are the props for styles component: ', props.styles);
@@ -31,7 +31,7 @@ function Styles(props) {
     // console.log(`There are ${props.styles.length} styles`);
     return (
       <div>
-        <div className="product_overview_style_selector">
+        <div data-testid='style-selector' className="product_overview_style_selector">
           {props.styles.map((style) => {
             return (
               <img
