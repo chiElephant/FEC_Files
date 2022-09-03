@@ -6,11 +6,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid, regular } from '@fortawesome/fontawesome-svg-core/import.macro';
 import { Link } from 'react-scroll';
 import getAvgRating from './helper-functions/helper.js';
+import findDefaultStyle from './helper-functions/findDefaultStyle.js';
 
 function ProductInfo(props) {
   const [avgRating, setAvgRating] = useState(0);
   const [totalReviews, setTotalReviews] = useState(0);
   const [selectedStyle, setSelectedStyle] = useState({});
+  const [styles, setStyles] = useState({});
 
   // Make a request to get the reviews information, calculate avg, and set state
 
@@ -30,7 +32,21 @@ function ProductInfo(props) {
     setSelectedStyle(props.style);
   }, [props.style]);
 
-  if (Object.keys(props.product).length && avgRating !== null) {
+  useEffect(() => {
+    setStyles(props.styles.results);
+  }, [props.styles]);
+
+  // useEffect(() => {
+  //   const selected = findDefaultStyle(styles);
+  //   console.log(`The selected style is: ${selected}`);
+  //   setSelectedStyle(selected);
+  // }, [styles]);
+
+  if (
+    Object.keys(props.product).length &&
+    avgRating !== null &&
+    Object.keys(selectedStyle).length
+  ) {
     return (
       <div>
         <div className="product_info_reviews">
@@ -62,7 +78,7 @@ function ProductInfo(props) {
             )}
           </fieldset>
           <Link
-            clasName="scroll-review"
+            className="scroll-review"
             to="reviews-module"
             smooth
             duration={500}
@@ -73,7 +89,7 @@ function ProductInfo(props) {
         <div>{props.product.category}</div>
         <div>{props.product.name}</div>
         <div>{selectedStyle.name}</div>
-        <div>{props.product.default_price}</div>
+        <div>{selectedStyle.original_price}</div>
         <h4>{props.product.slogan}</h4>
         <div>{props.product.description}</div>
         <ul>

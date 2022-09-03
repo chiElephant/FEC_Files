@@ -72,6 +72,7 @@ function Overview(props) {
           product={product}
           features={product.features}
           style={selectedStyle}
+          styles={styles}
         />
         <Styles
           product={product}
