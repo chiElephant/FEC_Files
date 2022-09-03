@@ -5,11 +5,9 @@ import {
   getMetadata,
   metadata,
   ratings,
-  characteristics,
 } from './helper_functions/ratings_bd.jsx';
 
-function RatingsBreakdown({ productId }) {
-  const [characteristics, setCharacteristics] = useState(characteristics);
+function RatingsBreakdown({ productId, setCharacteristics, characteristics }) {
   const [ratingsGraphDiv, setRatingsGraphDiv] = useState(<div />);
   const [totalReviews, setTotalReviews] = useState('');
   const [metadata, setMetadata] = useState(metadata);

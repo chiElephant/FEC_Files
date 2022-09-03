@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid, regular } from '@fortawesome/fontawesome-svg-core/import.macro';
@@ -9,18 +9,11 @@ function SubmitReview({
   submitReviewForm,
   productName,
   product_id,
+  chars,
 }) {
-  const characteristicsKey = {
-    Length: { id: '', value: '' },
-    Width: { id: '', value: '' },
-    Size: { id: '', value: '' },
-    Fit: { id: '', value: '' },
-    Quality: { id: '', value: '' },
-    Comfort: { id: '', value: '' },
-  };
-
-  const [characteristics, setCharacteristics] = useState(characteristicsKey);
+  const [productChars, setProductChars] = useState({});
   const [addPhotoDiv, setAddPhotoDiv] = useState(<div />);
+  const [charsDiv, setCharsDiv] = useState(<div />);
   const [recommend, setRecommend] = useState(false);
   const [summary, setSummary] = useState('');
   const [rating, setRating] = useState(0);
@@ -29,8 +22,12 @@ function SubmitReview({
   const [body, setBody] = useState('');
   const [name, setName] = useState('');
 
+  useEffect(() => {
+    createCharsDiv();
+  }, [chars]);
+
   const handleChange = (cb, value) => {
-    cb(value);
+    cb(`${value}`);
   };
 
   const handleSubmit = () => {
@@ -45,7 +42,7 @@ function SubmitReview({
         name,
         email,
         photos,
-        characteristics,
+        characteristics: productChars,
       })
       .then((response) => {
         console.log(response);
@@ -53,6 +50,51 @@ function SubmitReview({
       .catch((error) => {
         console.log('post error: ', error);
       });
+  };
+
+  const charsKey = {
+    Size: {
+      1: 'A size too small',
+      2: '1/2 size too small',
+      3: 'Perfect',
+      4: '1/2 size too big',
+      5: 'A size too wide',
+    },
+    Width: {
+      1: 'Too narrow',
+      2: 'Slightly narrow',
+      3: 'Perfect',
+      4: 'Slightly wide',
+      5: 'Too wide',
+    },
+    Comfort: {
+      1: 'Uncomfortable',
+      2: 'Slightly uncomfortable',
+      3: 'Ok',
+      4: 'Comfortable',
+      5: 'Perfect',
+    },
+    Quality: {
+      1: 'Poor',
+      2: 'Below Average',
+      3: 'What I expected',
+      4: 'Pretty great',
+      5: 'Perfect',
+    },
+    Length: {
+      1: 'Runs short',
+      2: 'Runs slightly short',
+      3: 'Perfect',
+      4: 'Runs slightly long',
+      5: 'Runs long',
+    },
+    Fit: {
+      1: 'Runs tight',
+      2: 'Runs slightly tight',
+      3: 'Perfect',
+      4: 'Runs slightly long',
+      5: 'Runs long',
+    },
   };
 
   const handleClick = (cb, value) => {
@@ -67,9 +109,9 @@ function SubmitReview({
       for (let i = 0; i < files.length; i++) {
         const file = files[i];
 
-        if (!file.type.startsWith('image/')) {
-          continue;
-        }
+        // if (!file.type.startsWith('image/')) {
+        //   continue;
+        // }
 
         const img = document.createElement('img');
         img.file = file;
@@ -81,18 +123,84 @@ function SubmitReview({
         reader.onload = (e) => {
           img.src = e.target.result;
           fileURLs.push(e.target.result);
+          console.log(fileURLs);
+          setPhotos(fileURLs);
         };
         reader.readAsDataURL(file);
       }
-      setPhotos(fileURLs);
     }
   };
-  console.log('reviews photos: ', photos);
-  const handleCharacteristics = (characteristic, value) => {
-    let currentChars = characteristics;
-    currentChars[characteristic] = value;
-    setCharacteristics(currentChars);
+
+  const handleCharacteristics = (char, id, value) => {
+    let chars = productChars;
+    chars[`${id}`] = value;
+    console.log(productChars);
+    console.log(chars);
+    setProductChars(chars);
+    handleCharSelection(char, id, value);
   };
+
+  const handleCharSelection = (char, id, value) => {
+    const currentDisplay = document.getElementById(id);
+    const newDisplay = charsKey[char][value];
+    currentDisplay.textContent = newDisplay;
+  };
+
+  const createCharsDiv = () => {
+    let div = [];
+
+    for (let char in chars) {
+      div.push(
+        <div key={chars[char].id}>
+          <span id={chars[char].id}>None Selected</span>
+          <br />
+          <label>
+            {`${char}`}
+            <input
+              className={chars[char].id}
+              type="radio"
+              name={`${char}`}
+              value="1"
+              onClick={() => handleCharacteristics(char, chars[char].id, 1)}
+            />
+            <input
+              className={chars[char].id}
+              type="radio"
+              name={`${char}`}
+              value="2"
+              onClick={() => handleCharacteristics(char, chars[char].id, 2)}
+            />
+            <input
+              className={chars[char].id}
+              type="radio"
+              name={`${char}`}
+              value="3"
+              onClick={() => handleCharacteristics(char, char[char].id, 3)}
+            />
+            <input
+              className={chars[char].id}
+              type="radio"
+              name={`${char}`}
+              value="4"
+              onClick={() => handleCharacteristics(char, chars[char].id, 4)}
+            />
+            <input
+              className={chars[char].id}
+              type="radio"
+              name={`${char}`}
+              value="5"
+              onClick={() =>
+                handleCharacteristics(char, `${chars[char].id}`, 5)
+              }
+            />
+          </label>
+          <br />
+        </div>
+      );
+    }
+    setCharsDiv(div);
+  };
+
   return !showReviewModal ? (
     ''
   ) : (
@@ -203,7 +311,7 @@ function SubmitReview({
                   type="radio"
                   name="rec"
                   value="yes"
-                  onClick={() => handleClick(setRecommend, 'true')}
+                  onClick={() => handleClick(setRecommend, true)}
                 />{' '}
                 Yes
               </label>
@@ -212,7 +320,7 @@ function SubmitReview({
                   type="radio"
                   name="rec"
                   value="no"
-                  onClick={() => handleClick(setRecommend, 'false')}
+                  onClick={() => handleClick(setRecommend, false)}
                 />{' '}
                 No
               </label>
@@ -223,45 +331,8 @@ function SubmitReview({
         <div id="characteristics-radios">
           <fieldset>
             <legend>Characteristics</legend>
-            <div>
-              <span> None Selected </span>
-              <br />
-              <label>
-                {' '}
-                Quality:
-                <input
-                  type="radio"
-                  name="quality"
-                  value="1"
-                  onClick={() => handleCharacteristics('Quality', 1)}
-                />
-                <input
-                  type="radio"
-                  name="quality"
-                  value="2"
-                  onClick={() => handleCharacteristics('Quality', 2)}
-                />
-                <input
-                  type="radio"
-                  name="quality"
-                  value="3"
-                  onClick={() => handleCharacteristics('Quality', 3)}
-                />
-                <input
-                  type="radio"
-                  name="quality"
-                  value="4"
-                  onClick={() => handleCharacteristics('Quality', 4)}
-                />
-                <input
-                  type="radio"
-                  name="quality"
-                  value="5"
-                  onClick={() => handleCharacteristics('Quality', 5)}
-                />
-              </label>
-            </div>
-            <p> {`lowest(1)......highest(5)`} </p>
+            {charsDiv}
+            <p> {`lowest(1)...........highest(5)`} </p>
           </fieldset>
         </div>
 
@@ -298,7 +369,11 @@ function SubmitReview({
                 onChange={(e) => handleChange(setBody, e.target.value)}
               ></textarea>
             </div>
-            <span>Minimum required characters left: 50</span>
+            <span>
+              {body.length < 50
+                ? `Minimum required characters left: ${50 - body.length}`
+                : 'Minimum Reached'}
+            </span>
           </fieldset>
         </div>
 

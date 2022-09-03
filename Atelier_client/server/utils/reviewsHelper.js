@@ -38,21 +38,38 @@ const getMetaData = (query, sendToClient) => {
     });
 };
 
-const postReview = (body, sendToClient) => {
+const postReview = (req, res, next) => {
+  const { body, name, email, product_id, rating, summary, recommend, photos, characteristics } = req.body;
+  console.log(req.body)
+
+  const data = JSON.stringify({
+    product_id,
+    rating,
+    summary,
+    body,
+    recommend,
+    name,
+    email,
+    photos,
+    characteristics
+  });
+  // console.log(data);
+
   const options = {
-    headers: { Authorization: token },
-    data: body,
+    method: 'post',
+    url: endpoint,
+    headers: {
+      Authorization: token,
+      'Content-Type': 'application/json',
+    },
+    data
   };
 
-  axios
-    .post(endpoint, options)
+  axios(options)
     .then((res) => {
-      console.log(res.status)
-      sendToClient(res.data);
+      next();
     })
-    .catch((error) => {
-      sendToClient('Error posting to API: ', error);
-    });
+    .catch(err => {console.log("POST error: ", err)});
 };
 
 module.exports = {

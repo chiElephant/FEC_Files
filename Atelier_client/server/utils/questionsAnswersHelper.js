@@ -1,6 +1,6 @@
 require('dotenv').config();
 const axios = require('axios');
-const { cloudinary } = require('./utils/cloudinary');
+const { uploadToCloudinary } = require('./uploadToCloudinary');
 
 const { URL, TOKEN } = process.env;
 

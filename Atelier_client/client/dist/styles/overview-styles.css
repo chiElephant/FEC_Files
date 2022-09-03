@@ -1,4 +1,3 @@
-
 /* Overview styling */
 
 .product_info_reviews {
@@ -41,51 +40,6 @@
   position: relative;
 }
 
-/* Reviews Module */
-
-#reviews-module {
-  height: 50%;
-}
-
-#ratings-breakdown,
-  #reviews-list  {
-  float: left;
-  width: 50%;
-  height: 50%
-}
-
-#reviews {
-  overflow-y: scroll;
-  height: 70vh;
-  margin-bottom: 48px;
-}
-
-/* Modal */
-#review-window {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.2);
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#review-form {
-  position: relative;
-  padding: 32px;
-  max-width: 640px;
-  right: 16px;
-  background-color: rgb(35, 35, 35);
-  color: rgb(162, 162, 162);
-}
-
-#reviews-module {
-  margin-bottom: 16px;
-}
 /* Overview styling */
 
 .product_info_reviews {
@@ -130,4 +84,53 @@
 
 .product_overview_style_selector {
   display: flex;
+}
+
+.modalBackground {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background: rgba(44, 43, 43, 0.7);
+  z-index: 10;
+}
+
+.modalContainer {
+  width: 500px;
+  height: 500px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+  border-radius: 12px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+
+}
+
+.expanded-photo-gallery {
+  display: flex;
+  flex-direction: row;
+
+}
+
+.main-img-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.main-img-and-arrows {
+  display: flex;
+  flex-direction: row;
+}
+
+.style-other-imgs-selected {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  border: 5px solid #555;
 }
