@@ -6,41 +6,38 @@ const endpoint = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/`;
 const metaEndpoint = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/meta/`;
 const token = process.env.TOKEN;
 
-const getReviews = (query, sendToClient) => {
+const getReviews = (req, res, next) => {
   const options = {
     headers: { Authorization: token },
-    params: query,
+    params: req.query,
   };
 
   axios
     .get(endpoint, options)
     .then((response) => {
-      sendToClient(response.data.results);
+      res.body = response.data.results;
+      next();
     })
-    .catch((error) => {
-      sendToClient('Error fetching from API: ', error);
-    });
+    .catch(next);
 };
 
-const getMetaData = (query, sendToClient) => {
+const getMetaData = (req, res, next) => {
   const options = {
     headers: { Authorization: token },
-    params: query,
+    params: req.query,
   };
 
   axios
     .get(metaEndpoint, options)
-    .then((res) => {
-      sendToClient(res.data);
+    .then((response) => {
+      res.body = response.data
+      next();
     })
-    .catch((error) => {
-      sendToClient('Error fetching from API: ', error);
-    });
+    .catch(next);
 };
 
 const postReview = (req, res, next) => {
   const { body, name, email, product_id, rating, summary, recommend, photos, characteristics } = req.body;
-  console.log(req.body)
 
   const data = JSON.stringify({
     product_id,
@@ -53,7 +50,6 @@ const postReview = (req, res, next) => {
     photos,
     characteristics
   });
-  // console.log(data);
 
   const options = {
     method: 'post',
@@ -69,7 +65,7 @@ const postReview = (req, res, next) => {
     .then((res) => {
       next();
     })
-    .catch(err => {console.log("POST error: ", err)});
+    .catch(next);
 };
 
 module.exports = {
@@ -77,3 +73,4 @@ module.exports = {
   getMetaData,
   postReview,
 };
+

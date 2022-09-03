@@ -123,7 +123,6 @@ function SubmitReview({
         reader.onload = (e) => {
           img.src = e.target.result;
           fileURLs.push(e.target.result);
-          console.log(fileURLs)
           setPhotos(fileURLs);
         };
         reader.readAsDataURL(file);
@@ -134,8 +133,6 @@ function SubmitReview({
   const handleCharacteristics = (char, id, value) => {
     let chars = productChars;
     chars[`${id}`] = value;
-    console.log(productChars)
-    console.log(chars)
     setProductChars(chars);
     handleCharSelection(char, id, value);
   };
