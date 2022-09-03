@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
+
 import addAnswer from './helper_functions/addAnswer';
 import FormInput from './FormInput.jsx';
 import FormErrorList from './FormErrorList.jsx';
 import convertToBase64url from './helper_functions/convertToBase64url';
 
-function ModalAnswer({ productName, productId, showModal, questionBody }) {
+const MAX_FILE_COUNT = 5;
+
+function ModalAnswer({ productName, question_id, showModal, questionBody }) {
   const [values, setValues] = useState({
     answer: '',
     nickname: '',
@@ -68,26 +71,27 @@ function ModalAnswer({ productName, productId, showModal, questionBody }) {
   ];
 
   const handleUpload = (e) => {
-    convertToBase64url(e)
+    const { errorMessage } = inputs[3];
+    console.log(e.target.files);
+    convertToBase64url(e, errorMessage)
       .then((res) => {
-        console.log(res);
         const copyArray = values.photos.slice();
-
         res.forEach((item) => {
-          if (item === undefined) {
-            throw Error('invalid files selected');
-          }
-          if (values.photos.indexOf(item) === -1 && values.photos.length < 5) {
+          if (
+            values.photos.indexOf(item) === -1 &&
+            values.photos.length < MAX_FILE_COUNT
+          ) {
             copyArray.push(item);
           }
         });
-
         const newObj = { ...values, photos: copyArray };
         setValues(newObj);
         setValidEntries({ ...validEntries, photos: true });
       })
       .catch((error) => {
-        setValidEntries({ ...validEntries, photos: false });
+        if (values.photos.length === 0) {
+          setValidEntries({ ...validEntries, photos: false });
+        }
         console.log('error: ', error);
       });
   };
@@ -102,8 +106,8 @@ function ModalAnswer({ productName, productId, showModal, questionBody }) {
   };
 
   const handleSubmit = () => {
-    const { question, nickname, email, photos } = values;
-    addAnswer(productId, question, nickname, email, photos);
+    const { answer, nickname, email, photos } = values;
+    addAnswer(question_id, answer, nickname, email, photos);
     showModal();
   };
 
@@ -124,14 +128,10 @@ function ModalAnswer({ productName, productId, showModal, questionBody }) {
       });
     }
 
-    if (targetName === 'photos') {
-      handleUpload(e);
-    } else {
-      setValues({
-        ...values,
-        [targetName]: targetValue,
-      });
-    }
+    setValues({
+      ...values,
+      [targetName]: targetValue,
+    });
   };
 
   let displayError;
@@ -157,6 +157,7 @@ function ModalAnswer({ productName, productId, showModal, questionBody }) {
             {...input}
             value={values[input.name]}
             onChange={onChange}
+            handleUpload={handleUpload}
           />
         ))}
 

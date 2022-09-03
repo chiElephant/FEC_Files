@@ -8,11 +8,13 @@ function FormInput(props) {
     label,
     name,
     message,
+    accept,
     onChange,
+    handleUpload,
     required,
     value,
   } = props;
-  console.log(value);
+  console.log(type);
 
   let input;
   switch (type) {
@@ -23,10 +25,11 @@ function FormInput(props) {
             id="formInput"
             name={name}
             type={type}
+            accept={accept}
             multiple
             placeholder={placeholder}
             maxLength={maxLength}
-            onChange={onChange}
+            onChange={handleUpload}
           />
           <div id="answer-img">
             {value.map((item) => (

@@ -47,7 +47,7 @@ function Answer({
       </div>
     );
   }
-
+  console.log(body);
   return (
     <div className="answer">
       <div>

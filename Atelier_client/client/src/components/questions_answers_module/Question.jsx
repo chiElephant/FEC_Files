@@ -11,7 +11,7 @@ function Question({ question_id, body, helpfulness, productName, productId }) {
   const [helpCount, setHelpCount] = useState(helpfulness);
   const [allowUserVote, setAllowUserVote] = useState(false);
   const [isModel, setIsModel] = useState(false);
-  const [count, setCount] = useState(10);
+  const [count, setCount] = useState(5);
 
   useEffect(() => {
     getAnswers(question_id, page, count, setAnswerList);
@@ -42,6 +42,7 @@ function Question({ question_id, body, helpfulness, productName, productId }) {
     <ModalAnswer
       productName={productName}
       productId={productId}
+      question_id={question_id}
       questionBody={body}
       showModal={() => {
         showModal();

@@ -21,9 +21,8 @@ function ModalQuestion({ productName, productId, showModal }) {
       id: 1,
       label: 'Your Question',
       name: 'question',
-      type: 'text',
-      tagType: 'textarea',
-      maxLength: '100',
+      type: null,
+      maxLength: '1000',
       placeholder: null,
       message: null,
       errorMessage: 'please enter a question',
@@ -56,7 +55,9 @@ function ModalQuestion({ productName, productId, showModal }) {
   ];
 
   const validateForm = () => {
+    console.log('validate!');
     const error = Object.values(validEntries).every((item) => !item);
+    console.log('error: ', error);
     if (error) {
       setFormError(error);
     } else {
@@ -67,7 +68,6 @@ function ModalQuestion({ productName, productId, showModal }) {
   const handleSubmit = (e) => {
     const { question, nickname, email } = values;
     addQuestion(productId, question, nickname, email);
-    e.preventDefault();
     showModal();
   };
 
@@ -75,7 +75,7 @@ function ModalQuestion({ productName, productId, showModal }) {
     const isValueValid = e.target.validity.valid;
     const targetName = e.target.name;
     const targetValue = e.target.value;
-
+    console.log('isValueValid: ', isValueValid);
     if (isValueValid) {
       setValidEntries({
         ...validEntries,
@@ -102,7 +102,8 @@ function ModalQuestion({ productName, productId, showModal }) {
   } else {
     displayError = null;
   }
-
+  console.log('formError: ', formError);
+  console.log('validEntries: ', validEntries);
   return (
     <div id="new-question-window">
       <form id="question-form" onSubmit={handleSubmit}>

@@ -4,8 +4,8 @@ import QandAModule from './questions_answers_module/QandAModule.jsx';
 import ReviewsModule from './reviews_module/ReviewsModule.jsx';
 
 function App(props) {
-  const [product_id, setProduct_id] = useState(71699);
-  const [productName, setProductName] = useState('Morning Joggers');
+  const [product_id, setProduct_id] = useState(71697);
+  const [productName, setProductName] = useState('Camo Onesie');
 
   return (
     <div>

@@ -11,6 +11,7 @@ const {
   markAnswerAsHelpful,
   reportAnswer,
 } = require('./questionsAnswersHelper.js');
+const { uploadToCloudinary } = require('./utils/uploadToCloudinary');
 
 const { URL, TOKEN } = process.env;
 const app = express();
@@ -47,7 +48,7 @@ app.post('/question', addQuestion, (req, res) => {
 });
 
 // Add Answer
-app.post('/answer/:question_id', addAnswer, (req, res) => {
+app.post('/answer/:question_id', uploadToCloudinary, addAnswer, (req, res) => {
   res.sendStatus(201);
 });
 
@@ -64,10 +65,6 @@ app.put('/helpful/answer/:answer_id', markAnswerAsHelpful, (req, res) => {
 // Report Answer
 app.put('/answer/:answer_id/report', reportAnswer, (req, res) => {
   res.sendStatus(204);
-});
-
-app.use((err, req, res, next) => {
-  res.status(500).send({ error: err.message });
 });
 
 /////////////// OVERVIEW COMPONENT //////////////////////
