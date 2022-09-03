@@ -127,21 +127,22 @@ app.get('/products/:id/styles', (req, res) => {
     });
 });
 
-app.get('/reviews', (req, res) => {
-  reviewsHelper.getReviews(req.query, (err, data) => {
-    err ? res.send(err) : res.send(data);
-  });
+//*** RATINGS and REVIEWS ***//
+
+//GET reviews
+app.get('/reviews', reviewsHelper.getReviews, (req, res) => {
+  res.status(200).send(res.body);
 });
 
+//POST reviews
 app.post('/reviews', reviewsHelper.postReview, (req, res) => {
   console.log('Im Here');
   res.sendStatus(201);
 });
 
-app.get('/reviews/meta', (req, res) => {
-  reviewsHelper.getMetaData(req.query, (err, data) => {
-    err ? res.send(err) : res.send(data);
-  });
+//GET review metadata
+app.get('/reviews/meta', reviewsHelper.getMetaData, (req, res) => {
+  res.status(200).send(res.body);
 });
 
 app.use((err, req, res, next) => {
