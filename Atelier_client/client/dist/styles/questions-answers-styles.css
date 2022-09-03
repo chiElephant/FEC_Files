@@ -1,0 +1,156 @@
+/* Questions and Answers styling */
+
+/* Modal */
+#new-question-window {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.2);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+form#question-form {
+  padding: 0px 60px;
+  width: 800px;
+  right: 16px;
+  background-color: rgb(35, 35, 35);
+  color: white;
+  font-size: 20px;
+}
+
+div#form-entry {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 10px;
+}
+
+input#formInput {
+  font-size: 20px;
+  width: 400px;
+}
+
+textarea#formInput {
+  font-size: 20px;
+  resize: none;
+  height: 400px;
+}
+
+div#form-entry > label {
+  color: rgb(205, 194, 194);
+}
+
+div#form-entry > div {
+  color: rgb(205, 194, 194);
+}
+
+button#submit-question-button {
+  margin-bottom:20px;
+}
+
+div#questions-answers-form-error {
+  padding: 3px;
+  color:red;
+}
+div#answer-img {
+  display: flex;
+}
+
+div#answer-img > img {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin: 10px;
+  width: 100px;
+}
+
+
+
+/* input:invalid#formInput ~ span {
+  display: block;
+}
+
+textarea:invalid#formInput ~ span {
+  display: block;
+} */
+
+/****************/
+
+ div.question {
+  display: flex;
+  justify-content: space-between;
+}
+
+div.question>div {
+  display: flex;
+  justify-content: space-between;
+}
+
+div.answer {
+  display: flex;
+  flex-direction: column;
+}
+
+div.answer>div {
+  display: flex;
+  align-items: flex-end;
+}
+
+div.question-options {
+  display: flex;
+}
+
+div.answer-options>p {
+  display: flex;
+  border-right: solid;
+  padding-right: 10px;
+}
+
+div.answer-options {
+  display: flex;
+}
+
+div.question-helpful {
+  display: flex;
+  justify-content: space-between;
+  border-right: solid;
+  padding-right: 10px;
+}
+
+div.question-helpful>div {
+  padding-right: 10px;
+}
+
+div.answer-helpful {
+  display: flex;
+  justify-content: space-between;
+  border-right: solid;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+div.answer-helpful>div {
+  padding-right: 10px;
+}
+
+div.question-yes {
+  text-decoration: underline;
+}
+
+div.answer-yes {
+  text-decoration: underline;
+}
+
+div.question-add-answer {
+  text-decoration: underline;
+  padding-left: 10px;
+}
+
+div.answer-report {
+  text-decoration: underline;
+  padding-left: 10px;
+}
+

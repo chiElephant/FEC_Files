@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-export default function getAnswers(questionId, page, setQlist) {
+export default function getAnswers(questionId, page, count, setQlist) {
   // console.log(questionId, page);
 
-  const url = `/answers/${questionId}/${page}/100`;
+  const url = `/answers/${questionId}/${page}/${count}`;
 
   // console.log(url);
 

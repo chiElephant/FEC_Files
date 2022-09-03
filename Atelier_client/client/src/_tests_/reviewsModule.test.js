@@ -8,7 +8,6 @@ import RatingsBreakdown from '../components/reviews_module/RatingsBreakdown.jsx'
 import SubmitReview from '../components/reviews_module/SubmitReview.jsx';
 
 describe('Ratings and Reviews renders correctly', () => {
-
   describe('RatingsModule', () => {
     test('Reviews Module heading is displayed', () => {
       render(<ReviewsModule />);
@@ -32,7 +31,7 @@ describe('Ratings and Reviews renders correctly', () => {
 
   describe('SubmitReview', () => {
     test(`Should display a 'Write Your Review' heading`, () => {
-      render(<SubmitReview showReviewModal={true}/>);
+      render(<SubmitReview showReviewModal={true} />);
       const element = screen.getByRole('heading', {
         hidden: true,
         name: /write your review/i,
@@ -49,26 +48,25 @@ describe('Ratings and Reviews renders correctly', () => {
     });
   });
 
-    describe('RatingsBreakdown', () => {
-      test('Ratings Breakdonw heading is displayed', () => {
-        render(<RatingsBreakdown />);
-        const element = screen.getByRole('heading', {
-          hidden: true,
-          name: /ratings breakdown/i,
-        });
-        expect(element).toBeInTheDocument();
+  describe('RatingsBreakdown', () => {
+    test('Ratings Breakdonw heading is displayed', () => {
+      render(<RatingsBreakdown />);
+      const element = screen.getByRole('heading', {
+        hidden: true,
+        name: /ratings breakdown/i,
       });
+      expect(element).toBeInTheDocument();
     });
+  });
 
-    describe('ProductBreakdown', () => {
-      test('Product Breakdown heading is displayed', () => {
-        render(<ProductBreakdown />);
-        const element = screen.getByRole('heading', {
-          hidden: true,
-          name: /product breakdown/i,
-        });
-        expect(element).toBeInTheDocument();
+  describe('ProductBreakdown', () => {
+    test('Product Breakdown heading is displayed', () => {
+      render(<ProductBreakdown />);
+      const element = screen.getByRole('heading', {
+        hidden: true,
+        name: /product breakdown/i,
       });
+      expect(element).toBeInTheDocument();
     });
-
+  });
 });

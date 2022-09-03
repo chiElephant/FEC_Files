@@ -13,6 +13,7 @@ function AnswerList({ answerList }) {
             body={a.body}
             date={a.date}
             answer_helpfulness={a.helpfulness}
+            photos={a.photos}
           />
         ))}
       </div>

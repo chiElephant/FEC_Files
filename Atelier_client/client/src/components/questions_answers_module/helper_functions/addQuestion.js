@@ -9,11 +9,14 @@ export default function addQuestion(product_id, body, name, email) {
     name,
     email,
   });
-
+  console.log(data);
   const options = {
     method: 'post',
     url,
     data,
+    headers: {
+      'Content-Type': 'application/json',
+    },
   };
 
   axios(options)

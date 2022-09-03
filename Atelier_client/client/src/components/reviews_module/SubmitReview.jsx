@@ -15,12 +15,12 @@ function SubmitReview({
   const [addPhotoDiv, setAddPhotoDiv] = useState(<div />);
   const [charsDiv, setCharsDiv] = useState(<div />);
   const [recommend, setRecommend] = useState(false);
-  const [summary, setSummary] = useState("");
+  const [summary, setSummary] = useState('');
   const [rating, setRating] = useState(0);
   const [photos, setPhotos] = useState([]);
-  const [email, setEmail] = useState("");
-  const [body, setBody] = useState("");
-  const [name, setName] = useState("");
+  const [email, setEmail] = useState('');
+  const [body, setBody] = useState('');
+  const [name, setName] = useState('');
 
   useEffect(() => {
     createCharsDiv();
@@ -123,7 +123,6 @@ function SubmitReview({
         reader.onload = (e) => {
           img.src = e.target.result;
           fileURLs.push(e.target.result);
-          console.log(fileURLs)
           setPhotos(fileURLs);
         };
         reader.readAsDataURL(file);
@@ -134,8 +133,6 @@ function SubmitReview({
   const handleCharacteristics = (char, id, value) => {
     let chars = productChars;
     chars[`${id}`] = value;
-    console.log(productChars)
-    console.log(chars)
     setProductChars(chars);
     handleCharSelection(char, id, value);
   };
@@ -161,36 +158,28 @@ function SubmitReview({
               type="radio"
               name={`${char}`}
               value="1"
-              onClick={() =>
-                handleCharacteristics(char, chars[char].id, 1)
-              }
+              onClick={() => handleCharacteristics(char, chars[char].id, 1)}
             />
             <input
               className={chars[char].id}
               type="radio"
               name={`${char}`}
               value="2"
-              onClick={() =>
-                handleCharacteristics(char, chars[char].id, 2)
-              }
+              onClick={() => handleCharacteristics(char, chars[char].id, 2)}
             />
             <input
               className={chars[char].id}
               type="radio"
               name={`${char}`}
               value="3"
-              onClick={() =>
-                handleCharacteristics(char, char[char].id, 3)
-              }
+              onClick={() => handleCharacteristics(char, char[char].id, 3)}
             />
             <input
               className={chars[char].id}
               type="radio"
               name={`${char}`}
               value="4"
-              onClick={() =>
-                handleCharacteristics(char, chars[char].id, 4)
-              }
+              onClick={() => handleCharacteristics(char, chars[char].id, 4)}
             />
             <input
               className={chars[char].id}

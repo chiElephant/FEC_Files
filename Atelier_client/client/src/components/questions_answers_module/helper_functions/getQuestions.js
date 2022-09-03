@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-export default function getQuestions(productId, page, setQlist) {
+export default function getQuestions(productId, page, count, setQlist) {
   // console.log(productId, page);
 
-  const url = `/questions/${productId}/${page}/100`;
+  const url = `/questions/${productId}/${page}/${count}`;
 
   // console.log(url);
 
