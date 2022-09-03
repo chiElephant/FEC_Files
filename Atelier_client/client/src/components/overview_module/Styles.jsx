@@ -32,7 +32,7 @@ function Styles(props) {
     return (
       <div>
         <div data-testid='style-selector' className="product_overview_style_selector">
-          {props.styles.map((style) => {
+          {props.styles.map((style, index) => {
             return (
               <img
                 className="style_thumbnail"
@@ -41,6 +41,7 @@ function Styles(props) {
                 }}
                 value={JSON.stringify(style)}
                 src={style.photos[0].thumbnail_url}
+                key={index}
               ></img>
             );
           })}

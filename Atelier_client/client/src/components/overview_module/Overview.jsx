@@ -61,11 +61,6 @@ function Overview(props) {
     });
 
   }, []);
-
-  // useEffect(() = > {
-  //   axios.get(`/reviews`)
-  // }, [])
-
   if (Object.keys(product).length) {
     return (
       <div>

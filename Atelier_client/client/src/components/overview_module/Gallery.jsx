@@ -57,7 +57,7 @@ function Gallery(props) {
   }
 
   if (Object.keys(selectedStyle).length && Object.keys(selectedPhoto).length) {
-    if (view === 'default') {
+    if (view === 'default' && Object.keys(selectedStyle.photos).length) {
       return (
         <div className="gallery-container">
           <img className="main-img" src={selectedPhoto} onClick={handleChangeViewExpanded}></img>
@@ -71,7 +71,7 @@ function Gallery(props) {
                     }}
                     className="style-other-imgs-selected"
                     src={photo.url}
-                    index={index}
+                    key={index}
                   ></img>
                 );
               } else {
@@ -82,7 +82,7 @@ function Gallery(props) {
                     }}
                     className="style-other-imgs"
                     src={photo.url}
-                    index={index}
+                    key={index}
                   ></img>
                 );
               }

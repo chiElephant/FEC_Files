@@ -60,7 +60,7 @@ function AddToCart (props) {
     // }
   }
 
-  if (outOfStock === false) {
+  if (outOfStock === false && Object.keys(styleAvail).length) {
     return (
       <div className='add-to-cart'>
         <select selected='Select Size' onChange={(e) => {
@@ -68,10 +68,10 @@ function AddToCart (props) {
         }}>
           <option value="" selected disabled hidden>Select Size</option>
           {
-            Object.keys(styleAvail).map((size) => {
+            Object.keys(styleAvail).map((size, index) => {
               if (styleAvail[size] !== 0) {
                 return (
-                  <option value={size}>{size}</option>
+                  <option value={size} key={index}>{size}</option>
                 )
               }
             })
@@ -88,9 +88,9 @@ function AddToCart (props) {
                 }}>
                   <option selected> 1 </option>
                   {
-                    quantities.map((num) => {
+                    quantities.map((num, index) => {
                       return (
-                        <option value={num}>{num}</option>
+                        <option value={num} key={index}>{num}</option>
                       )
                     })
                   }

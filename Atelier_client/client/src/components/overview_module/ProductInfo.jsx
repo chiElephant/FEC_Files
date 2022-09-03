@@ -6,8 +6,10 @@ import { solid, regular } from '@fortawesome/fontawesome-svg-core/import.macro';
 
 function ProductInfo(props) {
 
-  const [avgRating, setAvgRating] = useState(null);
-  const [totalReviews, setTotalReviews] = useState(null);
+  const [avgRating, setAvgRating] = useState(0);
+  const [totalReviews, setTotalReviews] = useState(0);
+
+  // Make a request to get the reviews information, calculate avg, and set state
 
   useEffect(() => {
     axios.get('/reviews/meta', { params: {product_id: props.product.id }})
@@ -19,6 +21,7 @@ function ProductInfo(props) {
       })
   }, []);
 
+
   if (Object.keys(props.product).length && avgRating !== null) {
     return (
       <div>
@@ -28,54 +31,64 @@ function ProductInfo(props) {
                 ? <FontAwesomeIcon
                     id="star-1"
                     icon={solid('star')}
+                    key='1'
                   />
                 : <FontAwesomeIcon
                 id="star-1"
                 icon={regular('star')}
+                key='1'
                 />
             }
             {avgRating >= 2
               ? <FontAwesomeIcon
                   id="star-2"
                   icon={solid('star')}
+                  key='2'
                 />
               : <FontAwesomeIcon
               id="star-2"
               icon={regular('star')}
+              key='2'
               />
             }
             {avgRating >= 3
               ? <FontAwesomeIcon
                   id="star-3"
                   icon={solid('star')}
+                  key='3'
                 />
               : <FontAwesomeIcon
               id="star-3"
               icon={regular('star')}
+              key='3'
               />
             }
             {avgRating >= 4
               ? <FontAwesomeIcon
                   id="star-4"
                   icon={solid('star')}
+                  key='4'
                 />
               : <FontAwesomeIcon
               id="star-4"
               icon={regular('star')}
+              key='4'
               />
             }
             {avgRating === 5
               ? <FontAwesomeIcon
                   id="star-5"
                   icon={solid('star')}
+                  key='5'
                 />
               : <FontAwesomeIcon
               id="star-5"
               icon={regular('star')}
+              key='5'
               />
             }
           </fieldset>
-          <button>Read all reviews &#40;{totalReviews}&#41;</button>
+          <button onClick={props.scrollToReviews}>Read all &#40;{totalReviews}&#41; reviews</button>
         </div>
         <div>{props.product.category}</div>
         <div>{props.product.name}</div>
@@ -83,8 +96,8 @@ function ProductInfo(props) {
         <h4>{props.product.slogan}</h4>
         <div>{props.product.description}</div>
         <ul>
-          {props.product.features.map((feature) => {
-            return <li>{feature.value + ' ' + feature.feature}</li>;
+          {props.product.features.map((feature, index) => {
+            return <li key={index}>{feature.value + ' ' + feature.feature}</li>;
           })}
         </ul>
 
