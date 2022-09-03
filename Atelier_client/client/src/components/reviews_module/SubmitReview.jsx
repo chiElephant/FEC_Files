@@ -109,9 +109,9 @@ function SubmitReview({
       for (let i = 0; i < files.length; i++) {
         const file = files[i];
 
-        if (!file.type.startsWith('image/')) {
-          continue;
-        }
+        // if (!file.type.startsWith('image/')) {
+        //   continue;
+        // }
 
         const img = document.createElement('img');
         img.file = file;
@@ -123,10 +123,11 @@ function SubmitReview({
         reader.onload = (e) => {
           img.src = e.target.result;
           fileURLs.push(e.target.result);
+          console.log(fileURLs)
+          setPhotos(fileURLs);
         };
         reader.readAsDataURL(file);
       }
-      setPhotos(fileURLs);
     }
   };
 
