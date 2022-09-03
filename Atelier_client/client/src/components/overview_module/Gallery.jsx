@@ -1,3 +1,5 @@
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable react/destructuring-assignment */
 import React, { useState, useEffect } from 'react';
 import Expanded from './Expanded.jsx';
 
@@ -8,6 +10,7 @@ function Gallery(props) {
   const [view, setView] = useState('default');
 
   useEffect(() => {
+    console.log('He cambiado el estilo');
     setSelectedStyle(props.style);
   }, [props.style]);
 
@@ -25,42 +28,47 @@ function Gallery(props) {
     e.preventDefault();
     // console.log(e.target.src);
     setSelectedPhoto(e.target.src);
+    console.log(Number(e.target.getAttribute('index')));
     setSelectedIndex(Number(e.target.getAttribute('index')));
   };
 
   const handleChangeViewExpanded = () => {
     setView('expanded');
-  }
+  };
 
   const handleChangeViewDefault = () => {
     setView('default');
-  }
+  };
 
   const previousPhoto = (e) => {
     e.preventDefault();
     if (selectedIndex > 0) {
-      var newIndex = selectedIndex - 1;
+      const newIndex = selectedIndex - 1;
       setSelectedIndex(newIndex);
-      var newPhoto = selectedStyle.photos[newIndex].url;
-      setSelectedPhoto(newPhoto)
+      const newPhoto = selectedStyle.photos[newIndex].url;
+      setSelectedPhoto(newPhoto);
     }
-  }
+  };
 
   const nextPhoto = (e) => {
     e.preventDefault();
     if (selectedIndex < selectedStyle.photos.length - 1) {
-      var newIndex = selectedIndex + 1;
+      const newIndex = selectedIndex + 1;
       setSelectedIndex(newIndex);
-      var newPhoto = selectedStyle.photos[newIndex].url;
-      setSelectedPhoto(newPhoto)
+      const newPhoto = selectedStyle.photos[newIndex].url;
+      setSelectedPhoto(newPhoto);
     }
-  }
+  };
 
   if (Object.keys(selectedStyle).length && Object.keys(selectedPhoto).length) {
     if (view === 'default' && Object.keys(selectedStyle.photos).length) {
       return (
         <div className="gallery-container">
-          <img className="main-img" src={selectedPhoto} onClick={handleChangeViewExpanded}></img>
+          <img
+            className="main-img"
+            src={selectedPhoto}
+            onClick={handleChangeViewExpanded}
+          />
           <div className="photo-container">
             {selectedStyle.photos.map((photo, index) => {
               if (index === selectedIndex) {
@@ -71,29 +79,39 @@ function Gallery(props) {
                     }}
                     className="style-other-imgs-selected"
                     src={photo.url}
+                    index={index}
                     key={index}
-                  ></img>
-                );
-              } else {
-                return (
-                  <img
-                    onClick={(e) => {
-                      handleChangePhoto(e);
-                    }}
-                    className="style-other-imgs"
-                    src={photo.url}
-                    key={index}
-                  ></img>
+                  />
                 );
               }
+              return (
+                <img
+                  onClick={(e) => {
+                    handleChangePhoto(e);
+                  }}
+                  className="style-other-imgs"
+                  src={photo.url}
+                  index={index}
+                  key={index}
+                />
+              );
             })}
           </div>
         </div>
       );
-    } else if (view === 'expanded') {
+    }
+    if (view === 'expanded') {
       return (
-        <Expanded nextPhoto={nextPhoto} previousPhoto={previousPhoto} changeViewDefault={handleChangeViewDefault} photos={selectedStyle.photos} selectedPhoto={selectedPhoto} changeSelectedPhoto={handleChangePhoto} selectedIndex={selectedIndex}/>
-      )
+        <Expanded
+          nextPhoto={nextPhoto}
+          previousPhoto={previousPhoto}
+          changeViewDefault={handleChangeViewDefault}
+          photos={selectedStyle.photos}
+          selectedPhoto={selectedPhoto}
+          changeSelectedPhoto={handleChangePhoto}
+          selectedIndex={selectedIndex}
+        />
+      );
     }
   }
 }

@@ -1,3 +1,5 @@
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable react/destructuring-assignment */
 import React, { useState, useEffect } from 'react';
 // import {
 //   list_product,
@@ -8,7 +10,7 @@ import React, { useState, useEffect } from 'react';
 // } from '../../example_data/example.js';
 import AddToCart from './AddToCart.jsx';
 import Gallery from './Gallery.jsx';
-  // console.log('These are the props for styles component: ', props.styles);
+// console.log('These are the props for styles component: ', props.styles);
 function Styles(props) {
   console.log('These are the props for styles component: ', props.styles);
   const [selectedStyle, setSelectedStyle] = useState({});
@@ -21,7 +23,7 @@ function Styles(props) {
     setSelectedStyle(props.styles[0]);
   }, [props.styles]);
 
-  var handleSelect = (e) => {
+  const handleSelect = (e) => {
     e.preventDefault();
     // console.log(JSON.parse(e.target.getAttribute('value')));
     setSelectedStyle(JSON.parse(e.target.getAttribute('value')));
@@ -31,20 +33,21 @@ function Styles(props) {
     // console.log(`There are ${props.styles.length} styles`);
     return (
       <div>
-        <div data-testid='style-selector' className="product_overview_style_selector">
-          {props.styles.map((style, index) => {
-            return (
-              <img
-                className="style_thumbnail"
-                onClick={(e) => {
-                  handleSelect(e);
-                }}
-                value={JSON.stringify(style)}
-                src={style.photos[0].thumbnail_url}
-                key={index}
-              ></img>
-            );
-          })}
+        <div
+          data-testid="style-selector"
+          className="product_overview_style_selector"
+        >
+          {props.styles.map((style, index) => (
+            <img
+              className="style_thumbnail"
+              onClick={(e) => {
+                handleSelect(e);
+              }}
+              value={JSON.stringify(style)}
+              src={style.photos[0].thumbnail_url}
+              key={index}
+            />
+          ))}
         </div>
         <AddToCart style={selectedStyle} />
         <Gallery style={selectedStyle} />
