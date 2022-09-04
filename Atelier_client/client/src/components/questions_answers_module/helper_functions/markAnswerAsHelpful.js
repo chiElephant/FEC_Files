@@ -3,7 +3,7 @@ import axios from 'axios';
 export default function markAnswerAsHelpful(answer_id) {
   // console.log(productId, page);
 
-  const url = `helpful/question/${answer_id}`;
+  const url = `helpful/answer/${answer_id}`;
 
   const options = {
     method: 'put',

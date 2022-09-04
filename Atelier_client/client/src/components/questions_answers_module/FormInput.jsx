@@ -14,7 +14,6 @@ function FormInput(props) {
     required,
     value,
   } = props;
-  console.log(type);
 
   let input;
   switch (type) {

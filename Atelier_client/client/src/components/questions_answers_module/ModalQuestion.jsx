@@ -108,8 +108,7 @@ function ModalQuestion({ productName, productId, showModal }) {
   } else {
     displayError = null;
   }
-  console.log('formError: ', formError);
-  console.log('validEntries: ', validEntries);
+
   return (
     <div id="new-question-window">
       <form ref={domNode} id="question-form" onSubmit={handleSubmit}>
