@@ -30,11 +30,11 @@ function Gallery(props) {
 
   const handleChangeViewExpanded = () => {
     setView('expanded');
-  }
+  };
 
   const handleChangeViewDefault = () => {
     setView('default');
-  }
+  };
 
   const previousPhoto = (e) => {
     e.preventDefault();
@@ -42,9 +42,9 @@ function Gallery(props) {
       var newIndex = selectedIndex - 1;
       setSelectedIndex(newIndex);
       var newPhoto = selectedStyle.photos[newIndex].url;
-      setSelectedPhoto(newPhoto)
+      setSelectedPhoto(newPhoto);
     }
-  }
+  };
 
   const nextPhoto = (e) => {
     e.preventDefault();
@@ -52,15 +52,19 @@ function Gallery(props) {
       var newIndex = selectedIndex + 1;
       setSelectedIndex(newIndex);
       var newPhoto = selectedStyle.photos[newIndex].url;
-      setSelectedPhoto(newPhoto)
+      setSelectedPhoto(newPhoto);
     }
-  }
+  };
 
   if (Object.keys(selectedStyle).length && Object.keys(selectedPhoto).length) {
     if (view === 'default') {
       return (
         <div className="gallery-container">
-          <img className="main-img" src={selectedPhoto} onClick={handleChangeViewExpanded}></img>
+          <img
+            className="main-img"
+            src={selectedPhoto}
+            onClick={handleChangeViewExpanded}
+          ></img>
           <div className="photo-container">
             {selectedStyle.photos.map((photo, index) => {
               if (index === selectedIndex) {
@@ -92,8 +96,16 @@ function Gallery(props) {
       );
     } else if (view === 'expanded') {
       return (
-        <Expanded nextPhoto={nextPhoto} previousPhoto={previousPhoto} changeViewDefault={handleChangeViewDefault} photos={selectedStyle.photos} selectedPhoto={selectedPhoto} changeSelectedPhoto={handleChangePhoto} selectedIndex={selectedIndex}/>
-      )
+        <Expanded
+          nextPhoto={nextPhoto}
+          previousPhoto={previousPhoto}
+          changeViewDefault={handleChangeViewDefault}
+          photos={selectedStyle.photos}
+          selectedPhoto={selectedPhoto}
+          changeSelectedPhoto={handleChangePhoto}
+          selectedIndex={selectedIndex}
+        />
+      );
     }
   }
 }

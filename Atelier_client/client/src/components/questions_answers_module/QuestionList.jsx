@@ -2,12 +2,24 @@ import React, { useState, useEffect, useRef } from 'react';
 import Question from './Question.jsx';
 import ModalQuestion from './ModalQuestion.jsx';
 
-function QuestionList({ questionList, productName, productId }) {
+function QuestionList({
+  displayList,
+  productName,
+  productId,
+  showMoreQuestions,
+  setCountShown,
+  handleShowMoreQuestions,
+}) {
   const [isModel, setIsModel] = useState(false);
 
-  function showModal() {
+  const showModal = () => {
     setIsModel(!isModel);
-  }
+  };
+
+  // const handleIncrementCount = () => {
+  //   setCountShown((prevState) => prevState + 2);
+  //   handleShowMoreQuestions();
+  // };
 
   const model = isModel ? (
     <ModalQuestion
@@ -19,10 +31,14 @@ function QuestionList({ questionList, productName, productId }) {
     />
   ) : null;
 
+  const showMoreQuestionsButton = showMoreQuestions ? (
+    <button onClick={handleShowMoreQuestions}> More Answered Questions </button>
+  ) : null;
+
   return (
     <div>
       {model}
-      {questionList.map((q) => (
+      {displayList.map((q) => (
         <Question
           productName={productName}
           productId={productId}
@@ -32,8 +48,8 @@ function QuestionList({ questionList, productName, productId }) {
           helpfulness={q.question_helpfulness}
         />
       ))}
-      <div>
-        <button> More Answered Questions </button>
+      <div id="questions-buttons">
+        {showMoreQuestionsButton}
         <button onClick={showModal}> Add Question + </button>
       </div>
     </div>

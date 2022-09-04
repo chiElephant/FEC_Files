@@ -32,7 +32,6 @@ const helpers = {
   },
 
   getReviews: (product_id, sort, setReviews) => {
-
     const options = {
       params: { product_id, sort },
     };
