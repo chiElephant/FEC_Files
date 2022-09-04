@@ -26,7 +26,6 @@ function QandAModule({ product_id, product_name }) {
       setPage,
       displayList,
       setDisplayList,
-      questionListLength,
       setShowMoreQuestions
     );
   }, [page]);
@@ -51,11 +50,11 @@ function QandAModule({ product_id, product_name }) {
     }
   };
 
-  // console.log('questionList: ', questionList);
-  // console.log('displayList: ', displayList);
-  // console.log('countShown: ', countShown);
-  // console.log('questionListLength: ', questionListLength);
-  // console.log('displayListLength: ', displayListLength);
+  console.log('questionList: ', questionList);
+  console.log('displayList: ', displayList);
+  console.log('countShown: ', countShown);
+  console.log('showMoreQuestions: ', showMoreQuestions);
+  console.log('displayListLength: ', displayListLength);
   return (
     <div id="QandAtop">
       <h1>Questions & Answers</h1>

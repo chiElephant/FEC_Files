@@ -4,11 +4,10 @@ export default function getQuestions(
   productId,
   page,
   count,
-  setQlist,
+  setQuestionList,
   setPage,
   displayList,
   setDisplayList,
-  questionListLength,
   setShowMoreQuestions
 ) {
   const url = `/questions/${productId}/${page}/${count}`;
@@ -18,7 +17,7 @@ export default function getQuestions(
     .then((response) => {
       const questionList = response.data.results;
       // const questionList = [];
-      setQlist((prevstate) => prevstate.concat(response.data.results));
+      setQuestionList((prevstate) => prevstate.concat(response.data.results));
 
       if (questionList.length > 2 && displayList.length === 0) {
         const grabFirstTwo = questionList.slice(0, 2);

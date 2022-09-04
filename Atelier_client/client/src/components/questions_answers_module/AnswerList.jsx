@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import Answer from './Answer.jsx';
 
-function AnswerList({ answerList }) {
+function AnswerList({ displayList, showMoreAnswers, handleSeeMoreAnswers }) {
+  const showMoreAnswersToggle = showMoreAnswers ? (
+    <div onClick={handleSeeMoreAnswers}>See more answers</div>
+  ) : null;
+
   return (
     <>
       <div>
-        {answerList.map((a) => (
+        {displayList.map((a) => (
           <Answer
             key={a.answer_id}
             answer_id={a.answer_id}
@@ -17,7 +21,7 @@ function AnswerList({ answerList }) {
           />
         ))}
       </div>
-      <div>See more answers</div>
+      {showMoreAnswersToggle}
     </>
   );
 }

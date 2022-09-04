@@ -16,11 +16,6 @@ function QuestionList({
     setIsModel(!isModel);
   };
 
-  // const handleIncrementCount = () => {
-  //   setCountShown((prevState) => prevState + 2);
-  //   handleShowMoreQuestions();
-  // };
-
   const model = isModel ? (
     <ModalQuestion
       productName={productName}
