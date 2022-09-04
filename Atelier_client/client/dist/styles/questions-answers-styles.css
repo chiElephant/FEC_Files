@@ -89,6 +89,7 @@ textarea:invalid#formInput ~ span {
  div.question {
   display: flex;
   justify-content: space-between;
+  padding-top: 10px;
 }
 
 div.question>div {
@@ -99,6 +100,7 @@ div.question>div {
 div.answer {
   display: flex;
   flex-direction: column;
+  padding-top: 10px;
 }
 
 div.answer>div {
@@ -159,5 +161,44 @@ div.question-add-answer {
 div.answer-report {
   text-decoration: underline;
   padding-left: 10px;
+}
+
+/* Search Bar */
+
+div.search {
+  background-color: #ffffff;
+  border: 0;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+div.searchInputs  {
+  display:flex;
+  justify-content: flex-start;
+  border: solid 2px black;
+  align-items: center;
+}
+
+div.searchInputs >input {
+  font-size: 20px;
+  display:flex;
+  height: 60px;
+  width: 100%;
+  padding-left:10px;
+  border: none;
+}
+
+#QandAtop > div.search > div.searchInputs > svg {
+  font-size: 30px;
+  padding-right: 20px;
+}
+
+
+div.searchInputs > input:focus {
+  outline:none;
+}
+
+.searchIcon svg {
+  font-size: 35px;
 }
 

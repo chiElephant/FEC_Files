@@ -3,7 +3,7 @@ import Answer from './Answer.jsx';
 
 function AnswerList({ answerList }) {
   return (
-    <div>
+    <>
       <div>
         {answerList.map((a) => (
           <Answer
@@ -17,7 +17,8 @@ function AnswerList({ answerList }) {
           />
         ))}
       </div>
-    </div>
+      <div>See more answers</div>
+    </>
   );
 }
 
