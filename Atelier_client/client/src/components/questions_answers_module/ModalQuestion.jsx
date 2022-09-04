@@ -1,7 +1,9 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { useState, useEffect } from 'react';
 import addQuestion from './helper_functions/addQuestion';
 import FormInput from './FormInput.jsx';
 import FormErrorList from './FormErrorList.jsx';
+import useClickOutside from './custom_hooks/useClickOutside.jsx';
 
 function ModalQuestion({ productName, productId, showModal }) {
   const [values, setValues] = useState({
@@ -94,6 +96,10 @@ function ModalQuestion({ productName, productId, showModal }) {
     });
   };
 
+  const domNode = useClickOutside(() => {
+    showModal();
+  });
+
   let displayError;
   if (formError === true) {
     displayError = (
@@ -106,7 +112,7 @@ function ModalQuestion({ productName, productId, showModal }) {
   console.log('validEntries: ', validEntries);
   return (
     <div id="new-question-window">
-      <form id="question-form" onSubmit={handleSubmit}>
+      <form ref={domNode} id="question-form" onSubmit={handleSubmit}>
         <h1>Ask Your Question</h1>
         <h2>About the {productName}</h2>
 

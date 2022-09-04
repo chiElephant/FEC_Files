@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable react/jsx-props-no-spreading */
+import React, { useState, useEffect, useRef } from 'react';
 
 import addAnswer from './helper_functions/addAnswer';
 import FormInput from './FormInput.jsx';
 import FormErrorList from './FormErrorList.jsx';
 import convertToBase64url from './helper_functions/convertToBase64url';
+import useClickOutside from './custom_hooks/useClickOutside.jsx';
 
 const MAX_FILE_COUNT = 5;
 
@@ -72,7 +74,7 @@ function ModalAnswer({ productName, question_id, showModal, questionBody }) {
 
   const handleUpload = (e) => {
     const { errorMessage } = inputs[3];
-    console.log(e.target.files);
+
     convertToBase64url(e, errorMessage)
       .then((res) => {
         const copyArray = values.photos.slice();
@@ -134,6 +136,10 @@ function ModalAnswer({ productName, question_id, showModal, questionBody }) {
     });
   };
 
+  const domNode = useClickOutside(() => {
+    showModal();
+  });
+
   let displayError;
   if (formError === true) {
     displayError = (
@@ -146,7 +152,7 @@ function ModalAnswer({ productName, question_id, showModal, questionBody }) {
   console.log('values:', values);
   return (
     <div id="new-question-window">
-      <form id="question-form" onSubmit={handleSubmit}>
+      <form ref={domNode} id="question-form" onSubmit={handleSubmit}>
         <h1>Submit Your Answer</h1>
         <h2>
           {productName}: {questionBody}

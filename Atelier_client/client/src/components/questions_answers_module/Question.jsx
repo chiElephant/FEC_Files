@@ -10,7 +10,7 @@ function Question({ question_id, body, helpfulness, productName, productId }) {
   const [page, setPage] = useState(1);
   const [helpCount, setHelpCount] = useState(helpfulness);
   const [allowUserVote, setAllowUserVote] = useState(false);
-  const [isModel, setIsModel] = useState(false);
+  const [isModal, setIsModal] = useState(false);
   const [count, setCount] = useState(5);
 
   useEffect(() => {
@@ -18,7 +18,7 @@ function Question({ question_id, body, helpfulness, productName, productId }) {
   }, []);
 
   function showModal() {
-    setIsModel(!isModel);
+    setIsModal(!isModal);
   }
 
   function incrementHelpCount() {
@@ -38,7 +38,7 @@ function Question({ question_id, body, helpfulness, productName, productId }) {
     );
   }
 
-  const model = isModel ? (
+  const modal = isModal ? (
     <ModalAnswer
       productName={productName}
       productId={productId}
@@ -54,7 +54,7 @@ function Question({ question_id, body, helpfulness, productName, productId }) {
 
   return (
     <div>
-      {model}
+      {modal}
       <div className="question">
         <div>
           <h3>Q:</h3>

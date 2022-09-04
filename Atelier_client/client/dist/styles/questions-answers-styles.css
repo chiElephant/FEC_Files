@@ -79,6 +79,13 @@ textarea:invalid#formInput ~ span {
 
 /****************/
 
+/* #QandAtop {
+  display: flex;
+  flex-direction: column;
+  border: solid;
+  border-color: blueviolet;
+} */
+
  div.question {
   display: flex;
   justify-content: space-between;
