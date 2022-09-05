@@ -103,3 +103,10 @@
   color: red;
   margin-right: 5%;
 }
+
+.selected-style-thumbnail {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  border: 5px solid #555;
+}

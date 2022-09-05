@@ -10,10 +10,8 @@ import React, { useState, useEffect } from 'react';
 // } from '../../example_data/example.js';
 import AddToCart from './AddToCart.jsx';
 import Gallery from './Gallery.jsx';
-import findDefaultStyle from './helper-functions/findDefaultStyle.js';
-// console.log('These are the props for styles component: ', props.styles);
+
 function Styles(props) {
-  console.log('These are the props for styles component: ', props.styles);
   const [selectedStyle, setSelectedStyle] = useState({});
 
   useEffect(() => {
@@ -40,17 +38,33 @@ function Styles(props) {
           data-testid="style-selector"
           className="product_overview_style_selector"
         >
-          {props.styles.map((style, index) => (
-            <img
-              className="style_thumbnail"
-              onClick={(e) => {
-                handleSelect(e);
-              }}
-              value={JSON.stringify(style)}
-              src={style.photos[0].thumbnail_url}
-              key={index}
-            />
-          ))}
+          {props.styles.map((style, index) => {
+            if (style.name === selectedStyle.name) {
+              console.log('This is the style selected: ', style.name);
+              return (
+                <img
+                  className="selected-style-thumbnail"
+                  onClick={(e) => {
+                    handleSelect(e);
+                  }}
+                  value={JSON.stringify(style)}
+                  src={style.photos[0].thumbnail_url}
+                  key={index}
+                />
+              );
+            }
+            return (
+              <img
+                className="style_thumbnail"
+                onClick={(e) => {
+                  handleSelect(e);
+                }}
+                value={JSON.stringify(style)}
+                src={style.photos[0].thumbnail_url}
+                key={index}
+              />
+            );
+          })}
         </div>
         <AddToCart style={selectedStyle} />
         <Gallery style={selectedStyle} />
