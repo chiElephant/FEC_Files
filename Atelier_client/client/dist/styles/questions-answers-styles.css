@@ -103,6 +103,7 @@ div.question>div {
 
 div.question>div > h3{
   padding-right: 10px;
+  font-size: 25px;
 }
 
 #answer-under {
@@ -115,11 +116,16 @@ div.question>div > h3{
 div.answer {
   display: flex;
   flex-direction: column;
-  padding-top: 20px;
+  padding-top: 10px;
+}
+
+div.answer > div > p {
+  font-size: 18px;
 }
 
 div.answer>div > h3 {
   padding-right: 10px;
+  font-size: 25px;
 }
 
 div.answer>div {
@@ -245,8 +251,9 @@ div#questions-buttons > button {
 }
 
 div.more-answers {
-  margin-top: 10px;
-  margin-left: 30px;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  padding-left: 30px;
   font-weight: bold;
 }
 
