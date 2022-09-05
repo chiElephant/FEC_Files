@@ -33,17 +33,32 @@ function Styles(props) {
   if (props.styles.length) {
     // console.log(`There are ${props.styles.length} styles`);
     return (
-      <div>
-        <div
-          data-testid="style-selector"
-          className="product_overview_style_selector"
-        >
-          {props.styles.map((style, index) => {
-            if (style.name === selectedStyle.name) {
-              console.log('This is the style selected: ', style.name);
+      <div className="gallery-styles-container">
+        <Gallery style={selectedStyle} />
+        <div className="right">
+          <h4 className="selected-style-name">{selectedStyle.name}</h4>
+          <div
+            data-testid="style-selector"
+            className="product_overview_style_selector"
+          >
+            {props.styles.map((style, index) => {
+              if (style.name === selectedStyle.name) {
+                console.log('This is the style selected: ', style.name);
+                return (
+                  <img
+                    className="selected-style-thumbnail"
+                    onClick={(e) => {
+                      handleSelect(e);
+                    }}
+                    value={JSON.stringify(style)}
+                    src={style.photos[0].thumbnail_url}
+                    key={index}
+                  />
+                );
+              }
               return (
                 <img
-                  className="selected-style-thumbnail"
+                  className="style_thumbnail"
                   onClick={(e) => {
                     handleSelect(e);
                   }}
@@ -52,22 +67,10 @@ function Styles(props) {
                   key={index}
                 />
               );
-            }
-            return (
-              <img
-                className="style_thumbnail"
-                onClick={(e) => {
-                  handleSelect(e);
-                }}
-                value={JSON.stringify(style)}
-                src={style.photos[0].thumbnail_url}
-                key={index}
-              />
-            );
-          })}
+            })}
+          </div>
+          <AddToCart style={selectedStyle} />
         </div>
-        <AddToCart style={selectedStyle} />
-        <Gallery style={selectedStyle} />
       </div>
     );
   }

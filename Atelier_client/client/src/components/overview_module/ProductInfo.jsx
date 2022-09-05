@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/destructuring-assignment */
 import React, { useState, useEffect } from 'react';
@@ -22,9 +23,9 @@ function ProductInfo(props) {
     } else {
       setPrice({ amount: style.original_price, discounted: false });
     }
-    console.log(
-      `Just changed the price to: ${price.amount} and ${price.discounted}`
-    );
+    // console.log(
+    //   `Just changed the price to: ${price.amount} and ${price.discounted}`
+    // );
   };
 
   useEffect(() => {
@@ -109,13 +110,15 @@ function ProductInfo(props) {
         <div>
           {price.discounted ? (
             <div className="price-container">
-              <div className="discounted-price">{price.amount}</div>
+              <div className="discounted-price">${price.amount}</div>
               <div className="original-price">
-                {selectedStyle.original_price}
+                ${selectedStyle.original_price}
               </div>
             </div>
           ) : (
-            <div className="original-price">{selectedStyle.original_price}</div>
+            <div className="original-price">
+              ${selectedStyle.original_price}
+            </div>
           )}
         </div>
         <h4>{props.product.slogan}</h4>

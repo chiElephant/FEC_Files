@@ -67,6 +67,8 @@ function Overview(props) {
     for (let i = 0; i < styles.results.length; i++) {
       if (styles.results[i]['default?']) {
         def = styles.results[i];
+        styles.results.splice(i, 1);
+        styles.results.unshift(def);
       }
     }
     setSelectedStyle(def);

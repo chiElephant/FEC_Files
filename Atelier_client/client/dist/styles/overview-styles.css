@@ -17,7 +17,9 @@
 .style_thumbnail {
   width: 100px;
   height: 100px;
+  object-fit: cover;
   object-fit: contain;
+  border-radius: 50%;
 }
 
 .main-img {
@@ -39,6 +41,7 @@
 
 .gallery-container {
   position: relative;
+  width: 50%;
 }
 
 .product_overview_style_selector {
@@ -109,4 +112,20 @@
   height: 100px;
   object-fit: contain;
   border: 5px solid #555;
+  border-radius: 50%;
+}
+
+.gallery-styles-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: auto;
+}
+
+.right {
+  width: 50%;
+}
+
+.gallery-container {
+
 }
