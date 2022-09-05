@@ -39,20 +39,10 @@ function Overview(props) {
       // console.log(data.data);
       setProduct(data.data);
     });
-  }, []);
-
-  useEffect(() => {
     axios.get(`/products/${props.product_id}/styles`).then((data) => {
       // console.log(data.data);
       setStyles(data.data);
     });
-    axios.get(`/products/${props.product_id}`).then((data) => {
-      console.log(data.data);
-      setProduct(data.data);
-    });
-  }, []);
-
-  useEffect(() => {
     axios.get(`/products/${props.product_id}/styles`).then((data) => {
       console.log(data.data);
       setStyles(data.data);
