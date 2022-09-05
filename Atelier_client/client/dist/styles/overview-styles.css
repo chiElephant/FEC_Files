@@ -1,6 +1,11 @@
 
 /* Overview styling */
 
+.product-info-container {
+  display: flex;
+  flex-direction: column;
+}
+
 .product_info_reviews {
   display: flex;
   flex-direction: row;
@@ -24,28 +29,33 @@
 
 .main-img {
   width: 700px;
-  height: 700px;
-  object-fit: contain;
+  height: 400px;
+  object-fit: cover;
 }
 
 .photo-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-evenly;
-  position: absolute;
+  /* position: absolute;
   top: 10px;
   left: 10px;
-  padding: 5px;
+  padding: 5px; */
 
 }
 
 .gallery-container {
+  display: flex;
+  flex-direction: column;
   position: relative;
-  width: 50%;
+  width: 70%;
+  overflow: hidden;
 }
 
 .product_overview_style_selector {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .modalBackground {
@@ -120,12 +130,48 @@
   flex-direction: row;
   width: 100%;
   height: auto;
+  align-items: center;
+  margin: 20px;
 }
 
 .right {
   width: 50%;
+  justify-content: center;
+  align-content: center;
+  margin-left: 20px;
 }
 
 .gallery-container {
+  align-content: center;
+  justify-content: center;
+}
 
+.addto-outfit {
+
+  width: fit-content;
+  transition-duration: 0.4s;
+  background-color: white;
+  color: black;
+  border: 2px solid #555555;
+}
+
+.addto-outfit:hover {
+  background-color: #555555;
+  color: white;
+}
+
+.scroll-review {
+  transition-duration: 0.4s;
+  background-color: white;
+  color: black;
+  border: 2px solid #555555;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-align: center;
+}
+
+.scroll-review:hover {
+  background-color: #555555;
+  color: white;
 }

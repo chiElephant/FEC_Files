@@ -66,7 +66,7 @@ function ProductInfo(props) {
     Object.keys(selectedStyle).length
   ) {
     return (
-      <div>
+      <div className="product-info-container">
         <div className="product_info_reviews">
           <fieldset>
             {avgRating >= 1 ? (
@@ -129,7 +129,7 @@ function ProductInfo(props) {
           ))}
         </ul>
 
-        <button>Add to My Outfit</button>
+        <button className="addto-outfit">Add to My Outfit</button>
       </div>
     );
   }
@@ -137,7 +137,7 @@ function ProductInfo(props) {
     <div>
       <div className="product_info_reviews">
         <div data-testid="star-rating">This product has 4 stars reviews</div>
-        <button>Read all reviews</button>
+        <button className="read-reviews">Read all reviews</button>
       </div>
       <button>Add to My Outfit</button>
     </div>
