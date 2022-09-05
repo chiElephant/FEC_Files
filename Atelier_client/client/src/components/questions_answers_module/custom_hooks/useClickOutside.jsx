@@ -1,3 +1,4 @@
+/* global document */
 import React, { useEffect, useRef } from 'react';
 
 const useClickOutside = (handler) => {

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import SearchQ from './SearchQ.jsx';
 import QuestionList from './QuestionList.jsx';
 import getQuestions from './helper_functions/getQuestions.js';
+import useFilterByMatchingText from './custom_hooks/useFilterByMatchingText.jsx';
 
 const RESULTS_PER_PAGE = 100;
 
@@ -11,9 +12,20 @@ function QandAModule({ product_id, product_name }) {
   const [countShown, setCountShown] = useState(2);
   const [page, setPage] = useState(1);
   const [showMoreQuestions, setShowMoreQuestions] = useState(false);
+  const [searchText, setSearchText] = useState('');
+  const [shouldSearch, setShouldSearch] = useState(false);
+
+  const filteredList = useFilterByMatchingText(
+    questionList,
+    searchText,
+    'question_body'
+  );
   const questionListLength = questionList.length;
   const displayListLength = displayList.length;
 
+  console.log('filteredList: ', filteredList);
+  console.log('shouldSearch: ', shouldSearch);
+  console.log('searchText length: ', searchText.length);
   //grab all questions
   useEffect(() => {
     getQuestions(
@@ -38,6 +50,20 @@ function QandAModule({ product_id, product_name }) {
     }
   }, [countShown]);
 
+  useEffect(() => {
+    if (searchText.length >= 3) {
+      setShouldSearch(true);
+      setShowMoreQuestions(false);
+    } else {
+      setShowMoreQuestions(true);
+      setShouldSearch(false);
+    }
+  }, [searchText]);
+
+  const handleUpdateSearchText = (e) => {
+    setSearchText(e.target.value);
+  };
+
   const handleShowMoreQuestions = () => {
     setCountShown((prevState) => prevState + 2);
     if (
@@ -48,18 +74,35 @@ function QandAModule({ product_id, product_name }) {
     }
   };
 
+  const list = shouldSearch ? (
+    <QuestionList
+      displayList={filteredList}
+      productName={product_name}
+      productId={product_id}
+      showMoreQuestions={showMoreQuestions}
+      setCountShown={setCountShown}
+      handleShowMoreQuestions={handleShowMoreQuestions}
+    />
+  ) : (
+    <QuestionList
+      displayList={displayList}
+      productName={product_name}
+      productId={product_id}
+      showMoreQuestions={showMoreQuestions}
+      setCountShown={setCountShown}
+      handleShowMoreQuestions={handleShowMoreQuestions}
+    />
+  );
+
   return (
     <div id="QandAtop">
       <h1>Questions & Answers</h1>
-      <SearchQ questionList={questionList} />
-      <QuestionList
-        displayList={displayList}
-        productName={product_name}
-        productId={product_id}
-        showMoreQuestions={showMoreQuestions}
-        setCountShown={setCountShown}
-        handleShowMoreQuestions={handleShowMoreQuestions}
+      <SearchQ
+        handleUpdateSearchText={handleUpdateSearchText}
+        questionList={questionList}
+        searchText={searchText}
       />
+      {list}
     </div>
   );
 }
