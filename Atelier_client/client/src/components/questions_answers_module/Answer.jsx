@@ -62,17 +62,19 @@ function Answer({
         <h3>A:</h3>
         <p>{body}</p>
       </div>
-      {photos !== undefined && <AnswerPhotosList photos={photos} />}
-      <div className="answer-options">
-        <div>
-          <label>by</label>
-          {displayName}, {moment(date).format('MMMM DD YYYY')}
+      <div id="answer-under">
+        <AnswerPhotosList photos={photos} />
+        <div className="answer-options">
+          <div>
+            <label>by</label>
+            {displayName}, {moment(date).format('MMMM DD YYYY')}
+          </div>
+          <div className="answer-helpful">
+            <div>Helpful?</div>
+            {userVote}
+          </div>
+          {report}
         </div>
-        <div className="answer-helpful">
-          <div>Helpful?</div>
-          {userVote}
-        </div>
-        {report}
       </div>
     </div>
   );

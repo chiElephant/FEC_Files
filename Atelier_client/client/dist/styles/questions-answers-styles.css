@@ -93,6 +93,7 @@ textarea:invalid#formInput ~ span {
   display: flex;
   justify-content: space-between;
   padding-top: 10px;
+  align-items: baseline;
 }
 
 div.question>div {
@@ -100,15 +101,30 @@ div.question>div {
   justify-content: space-between;
 }
 
+div.question>div > h3{
+  padding-right: 10px;
+}
+
+#answer-under {
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  padding-left: 20px;
+}
+
 div.answer {
   display: flex;
   flex-direction: column;
-  padding-top: 10px;
+  padding-top: 20px;
+}
+
+div.answer>div > h3 {
+  padding-right: 10px;
 }
 
 div.answer>div {
   display: flex;
-  align-items: flex-end;
+  align-items: baseline;
 }
 
 div.question-options {
@@ -127,6 +143,7 @@ div.answer-options > div:nth-child(1) > label:nth-child(1) {
 
 div.answer-options {
   display: flex;
+  padding-top: 10px;
 }
 
 div.question-helpful {
@@ -229,6 +246,7 @@ div#questions-buttons > button {
 
 div.more-answers {
   margin-top: 10px;
+  margin-left: 30px;
   font-weight: bold;
 }
 
@@ -237,7 +255,8 @@ img#answer-img {
   width:  200px;
   height: 200px;
   object-fit: cover;
-  margin:10px;
+  margin-right:10px;
+  margin-top:10px;
 }
 
 div#answer-list {
