@@ -14,6 +14,23 @@ function ProductInfo(props) {
   const [selectedStyle, setSelectedStyle] = useState({});
   const [styles, setStyles] = useState({});
 
+  const [price, setPrice] = useState({ amount: '', discounted: false });
+
+  const showPrice = (style) => {
+    if (style.sale_price !== null) {
+      setPrice({ amount: style.sale_price, discounted: true });
+    } else {
+      setPrice({ amount: style.original_price, discounted: false });
+    }
+    console.log(
+      `Just changed the price to: ${price.amount} and ${price.discounted}`
+    );
+  };
+
+  useEffect(() => {
+    showPrice(selectedStyle);
+  }, [selectedStyle]);
+
   // Make a request to get the reviews information, calculate avg, and set state
 
   useEffect(() => {
@@ -89,7 +106,18 @@ function ProductInfo(props) {
         <div>{props.product.category}</div>
         <div>{props.product.name}</div>
         <div>{selectedStyle.name}</div>
-        <div>{selectedStyle.original_price}</div>
+        <div>
+          {price.discounted ? (
+            <div className="price-container">
+              <div className="discounted-price">{price.amount}</div>
+              <div className="original-price">
+                {selectedStyle.original_price}
+              </div>
+            </div>
+          ) : (
+            <div className="original-price">{selectedStyle.original_price}</div>
+          )}
+        </div>
         <h4>{props.product.slogan}</h4>
         <div>{props.product.description}</div>
         <ul>
