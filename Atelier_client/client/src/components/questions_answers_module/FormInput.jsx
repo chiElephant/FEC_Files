@@ -32,7 +32,7 @@ function FormInput(props) {
           />
           <div id="answer-img">
             {value.map((item) => (
-              <img key={item} src={item} />
+              <img key={item} alt="not available" src={item} />
             ))}
           </div>
         </>
