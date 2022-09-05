@@ -10,18 +10,19 @@ import React, { useState, useEffect } from 'react';
 // } from '../../example_data/example.js';
 import AddToCart from './AddToCart.jsx';
 import Gallery from './Gallery.jsx';
+import findDefaultStyle from './helper-functions/findDefaultStyle.js';
 // console.log('These are the props for styles component: ', props.styles);
 function Styles(props) {
   console.log('These are the props for styles component: ', props.styles);
   const [selectedStyle, setSelectedStyle] = useState({});
 
   useEffect(() => {
-    setSelectedStyle(props.styles[0]);
+    setSelectedStyle(props.style);
   }, []);
 
   useEffect(() => {
-    setSelectedStyle(props.styles[0]);
-    props.changeStyleSelected(props.styles[0]);
+    setSelectedStyle(props.style);
+    props.changeStyleSelected(props.style);
   }, [props.styles]);
 
   const handleSelect = (e) => {

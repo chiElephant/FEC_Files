@@ -32,7 +32,20 @@ function Overview(props) {
       },
     ],
   });
-  const [selectedStyle, setSelectedStyle] = useState({});
+  const [selectedStyle, setSelectedStyle] = useState({
+    style_id: 1,
+    name: '',
+    original_price: '',
+    sale_price: 0,
+    default: true,
+    photos: [
+      {
+        thumbnail_url: '',
+        url: '',
+      },
+    ],
+    skus: {},
+  });
 
   useEffect(() => {
     axios.get(`/products/${props.product_id}`).then((data) => {
@@ -48,6 +61,16 @@ function Overview(props) {
       setStyles(data.data);
     });
   }, []);
+
+  useEffect(() => {
+    let def = {};
+    for (let i = 0; i < styles.results.length; i++) {
+      if (styles.results[i]['default?']) {
+        def = styles.results[i];
+      }
+    }
+    setSelectedStyle(def);
+  }, [styles]);
 
   const changeStyleSelected = (style) => {
     console.log(`The selected style is: ${style}`);
@@ -68,6 +91,7 @@ function Overview(props) {
           product={product}
           styles={styles.results}
           changeStyleSelected={changeStyleSelected}
+          style={selectedStyle}
         />
       </div>
     );
