@@ -1,16 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Question from './Question.jsx';
 import ModalQuestion from './ModalQuestion.jsx';
+import useAutoScroll from './custom_hooks/useAutoScroll.jsx';
 
 function QuestionList({
   displayList,
   productName,
   productId,
   showMoreQuestions,
-  setCountShown,
   handleShowMoreQuestions,
 }) {
   const [isModel, setIsModel] = useState(false);
+  const containerRef = useAutoScroll(displayList.length);
 
   const showModal = () => {
     setIsModel(!isModel);
@@ -31,23 +32,25 @@ function QuestionList({
   ) : null;
 
   return (
-    <div>
+    <>
       {model}
-      {displayList.map((q) => (
-        <Question
-          productName={productName}
-          productId={productId}
-          key={q.question_id}
-          question_id={q.question_id}
-          body={q.question_body}
-          helpfulness={q.question_helpfulness}
-        />
-      ))}
+      <div ref={containerRef} id="question-list">
+        {displayList.map((q) => (
+          <Question
+            productName={productName}
+            productId={productId}
+            key={q.question_id}
+            question_id={q.question_id}
+            body={q.question_body}
+            helpfulness={q.question_helpfulness}
+          />
+        ))}
+      </div>
       <div id="questions-buttons">
         {showMoreQuestionsButton}
         <button onClick={showModal}> Add Question + </button>
       </div>
-    </div>
+    </>
   );
 }
 

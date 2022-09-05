@@ -19,7 +19,7 @@ export default function getQuestions(
       // const questionList = [];
       setQuestionList((prevstate) => prevstate.concat(response.data.results));
 
-      if (questionList.length > 2 && displayList.length === 0) {
+      if (questionList.length > 0 && displayList.length === 0) {
         const grabFirstTwo = questionList.slice(0, 2);
         setDisplayList(grabFirstTwo);
         setShowMoreQuestions(true);

@@ -1,26 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { Axios } from 'axios';
 import AnswerList from './AnswerList.jsx';
 import markQuestionAsHelpful from './helper_functions/markQuestionAsHelpful.js';
 import getAnswers from './helper_functions/getAnswers.js';
 import ModalAnswer from './ModalAnswer.jsx';
+import useSortListByValue from './custom_hooks/useSortListByValue.jsx';
 
-const RESULTS_PER_PAGE = 100;
+const RESULTS_PER_PAGE = 1000;
 
 function Question({ question_id, body, helpfulness, productName, productId }) {
   const [answerList, setAnswerList] = useState([]);
   const [displayList, setDisplayList] = useState([]);
-  const [countShown, setCountShown] = useState(2);
   const [page, setPage] = useState(1);
   const [showMoreAnswers, setShowMoreAnswers] = useState(false);
   const [helpCount, setHelpCount] = useState(helpfulness);
   const [allowUserVote, setAllowUserVote] = useState(false);
   const [isModal, setIsModal] = useState(false);
   const answerListLength = answerList.length;
-  const displayListLength = displayList.length;
 
   useEffect(() => {
-    // getAnswers(question_id, page, count, setAnswerList);
     getAnswers(
       question_id,
       page,
@@ -33,35 +30,27 @@ function Question({ question_id, body, helpfulness, productName, productId }) {
     );
   }, [page]);
 
-  useEffect(() => {
-    if (countShown > 2) {
-      console.log('2nd useEffect fire');
-      const grabNextTwo = answerList.slice(countShown - 2, countShown);
-      console.log('grabNextTwo: ', grabNextTwo);
-      const newList = [...displayList, ...grabNextTwo];
-      setDisplayList(newList);
-    }
-  }, [countShown]);
-
   const handleSeeMoreAnswers = () => {
-    setCountShown((prevState) => prevState + 2);
-    if (
-      displayListLength === answerListLength - 2 ||
-      displayListLength === answerListLength - 1
-    ) {
-      setShowMoreAnswers(false);
-    }
+    setDisplayList(answerList);
+    setShowMoreAnswers(false);
   };
 
-  function showModal() {
-    setIsModal(!isModal);
-  }
+  const handleCollapseAnswers = () => {
+    const sliceDisplayList = displayList.slice(0, 2);
 
-  function incrementHelpCount() {
+    setDisplayList(sliceDisplayList);
+    setShowMoreAnswers(true);
+  };
+
+  const showModal = () => {
+    setIsModal(!isModal);
+  };
+
+  const incrementHelpCount = () => {
     markQuestionAsHelpful(question_id);
     setHelpCount((prevState) => prevState + 1);
     setAllowUserVote(true);
-  }
+  };
 
   let userVote;
   if (allowUserVote) {
@@ -86,8 +75,6 @@ function Question({ question_id, body, helpfulness, productName, productId }) {
     />
   ) : null;
 
-  // console.log(answerList);
-
   return (
     <div>
       {modal}
@@ -108,9 +95,11 @@ function Question({ question_id, body, helpfulness, productName, productId }) {
         </div>
       </div>
       <AnswerList
+        answerListLength={answerListLength}
         displayList={displayList}
         showMoreAnswers={showMoreAnswers}
         handleSeeMoreAnswers={handleSeeMoreAnswers}
+        handleCollapseAnswers={handleCollapseAnswers}
       />
     </div>
   );

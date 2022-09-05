@@ -1,11 +1,11 @@
 import React, { useEffect, useRef } from 'react';
 
 const useClickOutside = (handler) => {
-  const domNode = useRef();
+  const elementRef = useRef();
 
   useEffect(() => {
     const maybeHandler = (event) => {
-      if (!domNode.current.contains(event.target)) {
+      if (!elementRef.current.contains(event.target)) {
         handler();
       }
     };
@@ -17,6 +17,6 @@ const useClickOutside = (handler) => {
     };
   });
 
-  return domNode;
+  return elementRef;
 };
 export default useClickOutside;

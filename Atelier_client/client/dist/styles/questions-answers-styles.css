@@ -57,14 +57,17 @@ div#questions-answers-form-error {
   color:red;
 }
 div#answer-img {
-  display: flex;
+  display: flex;;
 }
 
 div#answer-img > img {
   border: 1px solid #ddd;
   border-radius: 4px;
   margin: 10px;
-  width: 100px;
+  float: left;
+  width:  100px;
+  height: 100px;
+  object-fit: cover;
 }
 
 
@@ -112,10 +115,14 @@ div.question-options {
   display: flex;
 }
 
-div.answer-options>p {
+div.answer-options > div:nth-child(1) {
   display: flex;
   border-right: solid;
   padding-right: 10px;
+}
+
+div.answer-options > div:nth-child(1) > label:nth-child(1) {
+  padding-right: 5px;
 }
 
 div.answer-options {
@@ -218,4 +225,32 @@ div#questions-buttons > button {
   width: 500px;
   height:60px;
   margin-right: 20px;
+}
+
+div.more-answers {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+img#answer-img {
+  float: left;
+  width:  200px;
+  height: 200px;
+  object-fit: cover;
+  margin:10px;
+}
+
+div#answer-list {
+  max-height: 50vh;
+  overflow: auto;
+}
+
+div#question-list {
+  max-height: 100vh;
+  padding-right:20px;
+  overflow: auto;
+}
+
+#seller-name {
+  font-weight: bold;
 }

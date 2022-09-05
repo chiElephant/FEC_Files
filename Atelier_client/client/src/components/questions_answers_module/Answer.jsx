@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import moment from 'moment';
 import markAnswerAsHelpful from './helper_functions/markAnswerAsHelpful.js';
 import reportAnswer from './helper_functions/reportAnswer.js';
 import AnswerPhotosList from './AnswerPhotosList.jsx';
@@ -47,7 +48,14 @@ function Answer({
       </div>
     );
   }
-  // console.log('photos: ', photos);
+
+  const displayName =
+    answerer_name === 'Seller' ? (
+      <label id="seller-name">{answerer_name}</label>
+    ) : (
+      <label>{answerer_name}</label>
+    );
+
   return (
     <div className="answer">
       <div>
@@ -56,9 +64,10 @@ function Answer({
       </div>
       {photos !== undefined && <AnswerPhotosList photos={photos} />}
       <div className="answer-options">
-        <p>
-          by {answerer_name}, {date}
-        </p>
+        <div>
+          <label>by</label>
+          {displayName}, {moment(date).format('MMMM DD YYYY')}
+        </div>
         <div className="answer-helpful">
           <div>Helpful?</div>
           {userVote}

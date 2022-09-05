@@ -85,7 +85,7 @@ const addAnswer = (req, res, next) => {
     body,
     name,
     email,
-    photos: photoUrls,
+    photos: photoUrls || [],
   });
 
   console.log(data);

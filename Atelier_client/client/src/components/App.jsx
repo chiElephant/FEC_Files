@@ -5,13 +5,13 @@ import ReviewsModule from './reviews_module/ReviewsModule.jsx';
 
 function App(props) {
   const [product_id, setProduct_id] = useState(71701);
-  const [productName, setProductName] = useState('Morning Joggers');
+  const [productName, setProductName] = useState('Heir Force Ones');
 
   return (
     <div>
       <h1> The RedBean Atelier App </h1>
-      {/* <Overview product_id={product_id} /> */}
-      {/* <ReviewsModule product_id={product_id} product_name={productName} /> */}
+      {/* <Overview product_id={product_id} />
+      <ReviewsModule product_id={product_id} product_name={productName} /> */}
       <QandAModule product_id={product_id} product_name={productName} />
     </div>
   );
