@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import convertToBase64url from '../../questions_answers_module/helper_functions/convertToBase64url.js'
 
 function Photos({ photos, setPhotos }) {
 

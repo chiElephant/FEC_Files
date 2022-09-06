@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import Characteristics from './form_inputs/Characteristics.jsx';
-import StarRating from './form_inputs/StarRating.jsx';
-import Photos from './form_inputs/Photos.jsx';
+import Characteristics from './Characteristics.jsx';
+import StarRating from './StarRating.jsx';
+import Photos from './Photos.jsx';
 
 function SubmitReview({
   showReviewModal,
@@ -33,35 +33,40 @@ function SubmitReview({
   };
 
   const validateUserData = () => {
-    console.log(Object.keys(productChars).length > 0)
-    if (rating > 0 && typeof recommend === 'boolean' && Object.keys(productChars).length > 0) {
+    const productCharsLength = Object.keys(productChars).length
+    const charsLength = Object.keys(chars).length
+    console.log(Object.keys(productChars), Object.keys(chars) )
+    if (rating > 0 && typeof recommend === 'boolean' && productCharsLength === charsLength) {
       handleSubmit()
+    } else {
+      throw new Error('You must enter the fallowing')
     }
   }
 
   const handleSubmit = () => {
 
     setShowReviewModal(false);
-    setRatings(0);
+    setRating(0);
+    console.log('In Submit')
 
-    axios
-      .post('/reviews', {
-        product_id,
-        rating,
-        summary,
-        body,
-        recommend,
-        name,
-        email,
-        photos,
-        characteristics: productChars,
-      })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log('post error: ', error);
-      });
+    // axios
+    //   .post('/reviews', {
+    //     product_id,
+    //     rating,
+    //     summary,
+    //     body,
+    //     recommend,
+    //     name,
+    //     email,
+    //     photos,
+    //     characteristics: productChars,
+    //   })
+    //   .then((response) => {
+    //     console.log(response);
+    //   })
+    //   .catch((error) => {
+    //     console.log('post error: ', error);
+    //   });
   };
 
   return !showReviewModal ?
@@ -69,7 +74,7 @@ function SubmitReview({
 
     (
       <div id="review-window">
-        <form id="review-form" onSubmit={handleSubmit}>
+        <form id="review-form" onSubmit={e => e.preventDefault()}>
 
           <h1>Write Your Review</h1>
           <h3>About the {productName}</h3>

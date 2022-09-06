@@ -1,5 +1,5 @@
 import React, { useState, onEffect } from 'react';
-import handleSortType  from './helper_functions/review_list.jsx';
+import handleSortType  from './helper_functions/review_list.js';
 import Review from './Review.jsx';
 
 function ReviewsList({ reviews, setSort, setType }) {

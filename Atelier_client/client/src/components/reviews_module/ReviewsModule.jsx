@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { helpers, initial } from './helper_functions/reviews_module.jsx';
+import { helpers, initial } from './helper_functions/reviews_module.js';
 import RatingsBreakdown from './RatingsBreakdown.jsx';
 import SubmitReview from './SubmitReview.jsx';
 import ReviewsList from './ReviewsList.jsx';

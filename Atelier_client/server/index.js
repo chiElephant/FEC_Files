@@ -144,6 +144,10 @@ app.get('/reviews/meta', reviewsHelper.getMetaData, (req, res) => {
   res.status(200).send(res.body);
 });
 
+app.get('/reviews/*', (req, res) => {
+  res.render('/');
+})
+
 app.use((err, req, res, next) => {
   console.log('error in express error handler: ', err.message);
   res.status(500).send({ error: err.message });

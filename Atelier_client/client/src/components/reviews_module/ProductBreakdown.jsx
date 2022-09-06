@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import createCharsDiv from './helper_functions/product_bd.jsx';
+import createCharsDiv from './helper_functions/product_bd';
 
 function ProductBreakdown({ characteristics }) {
   const [comfort, setComfort] = useState({ Comfort: { id: '', value: '' } });

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { helpers } from './helper_functions/review.jsx';
+import { helpers } from './helper_functions/review.js';
 
 function Review({ review }) {
   const [helpfulness, setHelpfullness] = useState(0);

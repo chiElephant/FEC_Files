@@ -5,7 +5,7 @@ import {
   getMetadata,
   metadata,
   ratings,
-} from './helper_functions/ratings_bd.jsx';
+} from './helper_functions/ratings_bd.js';
 
 function RatingsBreakdown({ productId, setCharacteristics, characteristics }) {
   const [ratingsGraphDiv, setRatingsGraphDiv] = useState(<div />);
