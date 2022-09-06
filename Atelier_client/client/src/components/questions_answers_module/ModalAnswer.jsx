@@ -75,6 +75,7 @@ function ModalAnswer({ productName, question_id, showModal, questionBody }) {
     console.log(e.target.files);
     convertToBase64url(e, errorMessage)
       .then((res) => {
+        console.log('his:', res)
         const copyArray = values.photos.slice();
         res.forEach((item) => {
           if (

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Characteristics from './form_inputs/Characteristics.jsx'
-import StarRating from './form_inputs/StarRating.jsx'
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { solid, regular } from '@fortawesome/fontawesome-svg-core/import.macro';
+
+import Characteristics from './form_inputs/Characteristics.jsx';
+import StarRating from './form_inputs/StarRating.jsx';
+import Photos from './form_inputs/Photos.jsx';
 
 function SubmitReview({
   showReviewModal,
@@ -11,21 +11,19 @@ function SubmitReview({
   submitReviewForm,
   productName,
   product_id,
-  characteristics,
+  chars,
 }) {
 
-  const [productChars, setProductChars] = useState({});
-  const [addPhotoDiv, setAddPhotoDiv] = useState(<div />);
   const [recommend, setRecommend] = useState('boolean');
+  const [productChars, setProductChars] = useState({});
   const [summary, setSummary] = useState('');
-  const [rating, setRating] = useState(0);
   const [photos, setPhotos] = useState([]);
+  const [rating, setRating] = useState(0);
   const [email, setEmail] = useState('');
   const [body, setBody] = useState('');
   const [name, setName] = useState('');
 
 
-  // Handles all onChange events
   const handleChange = (cb, value) => {
     cb(`${value}`);
   };
@@ -37,9 +35,7 @@ function SubmitReview({
   }
 
   // Handles submitting all user inputs from the add review from
-  const handleSubmit = (event) => {
-    console.log('clicked')
-    console.log(event)
+  const handleSubmit = () => {
     setShowReviewModal(false);
     axios
       .post('/reviews', {
@@ -66,31 +62,31 @@ function SubmitReview({
     cb(value);
   };
 
-  // Handles user uploaded photos in the add review form
-  const handlePhotos = () => {
-    let files = document.querySelector('#photo-input').files;
-    let fileURLs = photos;
+  // // Handles user uploaded photos in the add review form
+  // const handlePhotos = () => {
+  //   let files = document.querySelector('#photo-input').files;
+  //   let fileURLs = photos;
 
-    if (files.length <= 5) {
-      for (let i = 0; i < files.length; i++) {
-        const file = files[i];
+  //   if (files.length <= 5) {
+  //     for (let i = 0; i < files.length; i++) {
+  //       const file = files[i];
 
-        const img = document.createElement('img');
-        img.file = file;
-        img.width = 80;
+  //       const img = document.createElement('img');
+  //       img.file = file;
+  //       img.width = 80;
 
-        images.appendChild(img);
+  //       images.appendChild(img);
 
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          img.src = e.target.result;
-          fileURLs.push(e.target.result);
-          setPhotos(fileURLs);
-        };
-        reader.readAsDataURL(file);
-      }
-    }
-  };
+  //       const reader = new FileReader();
+  //       reader.onload = (e) => {
+  //         img.src = e.target.result;
+  //         fileURLs.push(e.target.result);
+  //         setPhotos(fileURLs);
+  //       };
+  //       reader.readAsDataURL(file);
+  //     }
+  //   }
+  // };
 
   return !showReviewModal ? (
     ''
@@ -105,100 +101,6 @@ function SubmitReview({
           rating={rating}
           setRating={setRating}/>
 
-        {/* This div will ask the customer to fill in a star rating */}
-        {/* <fieldset id="rate-by-star" >
-          <legend>Overall Rating</legend>
-
-          {rating >= 1 ? (
-            <FontAwesomeIcon
-              id="star-1"
-              icon={solid('star')}
-              onClick={() => {
-                handleClick(setRating, 1);
-              }}
-            />
-          ) : (
-            <FontAwesomeIcon
-              id="star-1"
-              icon={regular('star')}
-              onClick={() => {
-                handleClick(setRating, 1);
-              }}
-            />
-          )}
-
-          {rating >= 2 ? (
-            <FontAwesomeIcon
-              id="star-2"
-              icon={solid('star')}
-              onClick={() => {
-                handleClick(setRating, 2);
-              }}
-            />
-          ) : (
-            <FontAwesomeIcon
-              id="star-2"
-              icon={regular('star')}
-              onClick={() => {
-                handleClick(setRating, 2);
-              }}
-            />
-          )}
-
-          {rating >= 3 ? (
-            <FontAwesomeIcon
-              id="star-3"
-              icon={solid('star')}
-              onClick={() => {
-                handleClick(setRating, 3);
-              }}
-            />
-          ) : (
-            <FontAwesomeIcon
-              id="star-3"
-              icon={regular('star')}
-              onClick={() => {
-                handleClick(setRating, 3);
-              }}
-            />
-          )}
-
-          {rating >= 4 ? (
-            <FontAwesomeIcon
-              id="star-4"
-              icon={solid('star')}
-              onClick={() => {
-                handleClick(setRating, 4);
-              }}
-            />
-          ) : (
-            <FontAwesomeIcon
-              id="star-4"
-              icon={regular('star')}
-              onClick={() => {
-                handleClick(setRating, 4);
-              }}
-            />
-          )}
-
-          {rating === 5 ? (
-            <FontAwesomeIcon
-              id="star-5"
-              icon={solid('star')}
-              onClick={() => {
-                handleClick(setRating, 5);
-              }}
-            />
-          ) : (
-            <FontAwesomeIcon
-              id="star-5"
-              icon={regular('star')}
-              onClick={() => {
-                handleClick(setRating, 5);
-              }}
-            />
-          )}
-        </fieldset> */}
 
         {/* This div will ask the customer if they recommend the product*/}
         <fieldset id="recommend" required="required">
@@ -224,7 +126,7 @@ function SubmitReview({
         </fieldset>
 
         <Characteristics
-          characteristics={characteristics}
+          characteristics={chars}
           setProductChars={setProductChars}/>
 
         {/* This div will alllow the user to enter a summary */}
@@ -262,21 +164,9 @@ function SubmitReview({
           </span>
         </fieldset>
 
-        {/* This div will allow the user to upload photos to the review */}
-
-        <fieldset id="review-photos">
-          <legend>Upload your photos</legend>
-          <input
-            id="photo-input"
-            type="file"
-            accept="image/png, image/jpeg"
-            multiple
-            onChange={() => handlePhotos()}
-          ></input>
-          <div id="images"></div>
-          {addPhotoDiv}
-        </fieldset>
-
+        <Photos
+          photos={photos}
+          setPhotos={setPhotos}/>
 
         {/* This div will ask the user to enter their enter their name */}
         <fieldset id="name-input">
