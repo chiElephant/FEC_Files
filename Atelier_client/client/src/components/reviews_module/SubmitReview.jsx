@@ -33,13 +33,17 @@ function SubmitReview({
   };
 
   const validateUserData = () => {
+    console.log(Object.keys(productChars).length > 0)
     if (rating > 0 && typeof recommend === 'boolean' && Object.keys(productChars).length > 0) {
       handleSubmit()
     }
   }
 
   const handleSubmit = () => {
+
     setShowReviewModal(false);
+    setRatings(0);
+
     axios
       .post('/reviews', {
         product_id,

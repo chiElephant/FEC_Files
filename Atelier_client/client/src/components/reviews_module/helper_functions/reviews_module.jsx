@@ -31,10 +31,10 @@ const helpers = {
     cb(value);
   },
 
-  getReviews: (product_id, sort, setReviews) => {
+  getReviews: (product_id, sort, count, setReviews) => {
 
     const options = {
-      params: { product_id, sort },
+      params: { product_id, sort, count },
     };
 
     axios

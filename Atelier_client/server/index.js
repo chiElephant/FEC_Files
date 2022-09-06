@@ -136,7 +136,6 @@ app.get('/reviews', reviewsHelper.getReviews, (req, res) => {
 
 //POST reviews
 app.post('/reviews', uploadToCloudinary, reviewsHelper.postReview, (req, res) => {
-  console.log('Im Here');
   res.sendStatus(201);
 });
 

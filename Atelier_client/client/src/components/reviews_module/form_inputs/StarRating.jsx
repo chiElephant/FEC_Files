@@ -10,6 +10,16 @@ function StarRating ( {rating, setRating} ) {
     createStarDiv();
   }, [rating])
 
+  const starKey = {
+    1: 'Poor',
+    2: 'Fair',
+    3: 'Average',
+    4: 'Good',
+    5: 'Great',
+  }
+
+  const keyText = starKey[rating];
+
   function createStarDiv () {
     let div = [];
 
@@ -32,6 +42,7 @@ function StarRating ( {rating, setRating} ) {
     <fieldset id="rate-by-star" >
       <legend>Overall Rating</legend>
       {starDiv}
+      {keyText}
     </fieldset>
   )
 }
