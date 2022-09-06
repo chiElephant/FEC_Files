@@ -48,7 +48,6 @@ const characteristics = metadata.Characteristics;
 // ******************** Helper Functions ******************** //
 
 function createRatingsGraphDiv(ratings, setRatingsGraphDiv) {
-  console.log(ratings);
   setRatingsGraphDiv([
     <div id="ratings-graph" key="0">
       <div id="five-star" key="5">

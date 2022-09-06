@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Characteristics from './form_inputs/Characteristics.jsx'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid, regular } from '@fortawesome/fontawesome-svg-core/import.macro';
 
@@ -9,11 +10,11 @@ function SubmitReview({
   submitReviewForm,
   productName,
   product_id,
-  chars,
+  characteristics,
 }) {
+
   const [productChars, setProductChars] = useState({});
   const [addPhotoDiv, setAddPhotoDiv] = useState(<div />);
-  const [charsDiv, setCharsDiv] = useState(<div />);
   const [recommend, setRecommend] = useState('boolean');
   const [summary, setSummary] = useState('');
   const [rating, setRating] = useState(0);
@@ -22,18 +23,22 @@ function SubmitReview({
   const [body, setBody] = useState('');
   const [name, setName] = useState('');
 
-  useEffect(() => {
-    createCharsDiv();
-    console.log(chars)
-  }, [chars]);
 
   // Handles all onChange events
   const handleChange = (cb, value) => {
     cb(`${value}`);
   };
 
+  const validateUserData = () => {
+    if (rating > 0 && typeof recommend === 'boolean' && Object.keys(productChars).length > 0) {
+      handleSubmit()
+    }
+  }
+
   // Handles submitting all user inputs from the add review from
-  const handleSubmit = () => {
+  const handleSubmit = (event) => {
+    console.log('clicked')
+    console.log(event)
     setShowReviewModal(false);
     axios
       .post('/reviews', {
@@ -53,52 +58,6 @@ function SubmitReview({
       .catch((error) => {
         console.log('post error: ', error);
       });
-  };
-
-  // Characteristics key for the text output above each characteristic in the add review form
-  const charsKey = {
-    Size: {
-      1: 'A size too small',
-      2: '1/2 size too small',
-      3: 'Perfect',
-      4: '1/2 size too big',
-      5: 'A size too wide',
-    },
-    Width: {
-      1: 'Too narrow',
-      2: 'Slightly narrow',
-      3: 'Perfect',
-      4: 'Slightly wide',
-      5: 'Too wide',
-    },
-    Comfort: {
-      1: 'Uncomfortable',
-      2: 'Slightly uncomfortable',
-      3: 'Ok',
-      4: 'Comfortable',
-      5: 'Perfect',
-    },
-    Quality: {
-      1: 'Poor',
-      2: 'Below Average',
-      3: 'What I expected',
-      4: 'Pretty great',
-      5: 'Perfect',
-    },
-    Length: {
-      1: 'Runs short',
-      2: 'Runs slightly short',
-      3: 'Perfect',
-      4: 'Runs slightly long',
-      5: 'Runs long',
-    },
-    Fit: {
-      1: 'Runs tight',
-      2: 'Runs slightly tight',
-      3: 'Perfect',
-      4: 'Runs slightly long',
-      5: 'Runs long',
-    },
   };
 
   // Handles all user clicks in the add review form
@@ -132,308 +91,228 @@ function SubmitReview({
     }
   };
 
-  // Handles user input on product characteristics when adding a review.
-  const handleCharacteristics = (char, id, value) => {
-    let chars = productChars;
-    chars[`${id}`] = value;
-    setProductChars(chars);
-    handleCharSelection(char, id, value);
-  };
-
-  // Handles the text output above each characteristic in the add review form.
-  const handleCharSelection = (char, id, value) => {
-    const currentDisplay = document.getElementById(id);
-    const newDisplay = charsKey[char][value];
-    currentDisplay.textContent = newDisplay;
-  };
-
-  // Creates the characteristics div in the add review form.
-  const createCharsDiv = () => {
-    let div = [];
-
-    for (let char in chars) {
-      div.push(
-        <div key={chars[char].id}>
-          <span id={chars[char].id}>None Selected</span>
-          <br />
-          <label>
-            {`${char}`}
-            <input
-              className={chars[char].id}
-              type="radio"
-              name={`${char}`}
-              value="1"
-              onClick={() => handleCharacteristics(char, chars[char].id, 1)}
-            />
-            <input
-              className={chars[char].id}
-              type="radio"
-              name={`${char}`}
-              value="2"
-              onClick={() => handleCharacteristics(char, chars[char].id, 2)}
-            />
-            <input
-              className={chars[char].id}
-              type="radio"
-              name={`${char}`}
-              value="3"
-              onClick={() => handleCharacteristics(char, chars[char].id, 3)}
-            />
-            <input
-              className={chars[char].id}
-              type="radio"
-              name={`${char}`}
-              value="4"
-              onClick={() => handleCharacteristics(char, chars[char].id, 4)}
-            />
-            <input
-              className={chars[char].id}
-              type="radio"
-              name={`${char}`}
-              value="5"
-              onClick={() =>
-                handleCharacteristics(char, `${chars[char].id}`, 5)
-              }
-            />
-          </label>
-          <br />
-        </div>
-      );
-    }
-    setCharsDiv(div);
-  };
-
   return !showReviewModal ? (
     ''
   ) : (
     <div id="review-window">
-      <div id="review-form">
+      <form id="review-form" onSubmit={handleSubmit}>
+
         <h1>Write Your Review</h1>
         <h3>About the {productName}</h3>
 
         {/* This div will ask the customer to fill in a star rating */}
-        <div id="rate-by-star">
-          <fieldset>
+        <fieldset id="rate-by-star" >
+          <legend>Overall Rating</legend>
 
-            <legend>Overall Rating</legend>
-            {rating >= 1 ? (
-              <FontAwesomeIcon
-                id="star-1"
-                icon={solid('star')}
-                onClick={() => {
-                  handleClick(setRating, 1);
-                }}
-              />
-            ) : (
-              <FontAwesomeIcon
-                id="star-1"
-                icon={regular('star')}
-                onClick={() => {
-                  handleClick(setRating, 1);
-                }}
-              />
-            )}
-            {rating >= 2 ? (
-              <FontAwesomeIcon
-                id="star-2"
-                icon={solid('star')}
-                onClick={() => {
-                  handleClick(setRating, 2);
-                }}
-              />
-            ) : (
-              <FontAwesomeIcon
-                id="star-2"
-                icon={regular('star')}
-                onClick={() => {
-                  handleClick(setRating, 2);
-                }}
-              />
-            )}
-            {rating >= 3 ? (
-              <FontAwesomeIcon
-                id="star-3"
-                icon={solid('star')}
-                onClick={() => {
-                  handleClick(setRating, 3);
-                }}
-              />
-            ) : (
-              <FontAwesomeIcon
-                id="star-3"
-                icon={regular('star')}
-                onClick={() => {
-                  handleClick(setRating, 3);
-                }}
-              />
-            )}
-            {rating >= 4 ? (
-              <FontAwesomeIcon
-                id="star-4"
-                icon={solid('star')}
-                onClick={() => {
-                  handleClick(setRating, 4);
-                }}
-              />
-            ) : (
-              <FontAwesomeIcon
-                id="star-4"
-                icon={regular('star')}
-                onClick={() => {
-                  handleClick(setRating, 4);
-                }}
-              />
-            )}
-            {rating === 5 ? (
-              <FontAwesomeIcon
-                id="star-5"
-                icon={solid('star')}
-                onClick={() => {
-                  handleClick(setRating, 5);
-                }}
-              />
-            ) : (
-              <FontAwesomeIcon
-                id="star-5"
-                icon={regular('star')}
-                onClick={() => {
-                  handleClick(setRating, 5);
-                }}
-              />
-            )}
-          </fieldset>
-        </div>
+          {rating >= 1 ? (
+            <FontAwesomeIcon
+              id="star-1"
+              icon={solid('star')}
+              onClick={() => {
+                handleClick(setRating, 1);
+              }}
+            />
+          ) : (
+            <FontAwesomeIcon
+              id="star-1"
+              icon={regular('star')}
+              onClick={() => {
+                handleClick(setRating, 1);
+              }}
+            />
+          )}
+
+          {rating >= 2 ? (
+            <FontAwesomeIcon
+              id="star-2"
+              icon={solid('star')}
+              onClick={() => {
+                handleClick(setRating, 2);
+              }}
+            />
+          ) : (
+            <FontAwesomeIcon
+              id="star-2"
+              icon={regular('star')}
+              onClick={() => {
+                handleClick(setRating, 2);
+              }}
+            />
+          )}
+
+          {rating >= 3 ? (
+            <FontAwesomeIcon
+              id="star-3"
+              icon={solid('star')}
+              onClick={() => {
+                handleClick(setRating, 3);
+              }}
+            />
+          ) : (
+            <FontAwesomeIcon
+              id="star-3"
+              icon={regular('star')}
+              onClick={() => {
+                handleClick(setRating, 3);
+              }}
+            />
+          )}
+
+          {rating >= 4 ? (
+            <FontAwesomeIcon
+              id="star-4"
+              icon={solid('star')}
+              onClick={() => {
+                handleClick(setRating, 4);
+              }}
+            />
+          ) : (
+            <FontAwesomeIcon
+              id="star-4"
+              icon={regular('star')}
+              onClick={() => {
+                handleClick(setRating, 4);
+              }}
+            />
+          )}
+
+          {rating === 5 ? (
+            <FontAwesomeIcon
+              id="star-5"
+              icon={solid('star')}
+              onClick={() => {
+                handleClick(setRating, 5);
+              }}
+            />
+          ) : (
+            <FontAwesomeIcon
+              id="star-5"
+              icon={regular('star')}
+              onClick={() => {
+                handleClick(setRating, 5);
+              }}
+            />
+          )}
+        </fieldset>
 
         {/* This div will ask the customer if they recommend the product*/}
-        <div id="recommend">
-          <fieldset>
-            <legend>Do you recommend this product?</legend>
-            <div>
-              <label>
-                <input
-                  type="radio"
-                  name="rec"
-                  value="yes"
-                  onClick={() => handleClick(setRecommend, true)}
-                />{' '}
-                Yes
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="rec"
-                  value="no"
-                  onClick={() => handleClick(setRecommend, false)}
-                />{' '}
-                No
-              </label>
-            </div>
-          </fieldset>
-        </div>
+        <fieldset id="recommend" required="required">
+          <legend>Do you recommend this product?</legend>
+          <label>
+            <input
+              type="radio"
+              name="rec"
+              value="yes"
+              onClick={() => handleClick(setRecommend, true)}
+            />
+            Yes
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="rec"
+              value="no"
+              onClick={() => handleClick(setRecommend, false)}
+            />
+            No
+          </label>
+        </fieldset>
 
         {/* // This div asks the customer about different product characteristics */}
-        <div id="characteristics-radios">
-          <fieldset>
-            <legend>Characteristics</legend>
-            {charsDiv}
-            <p> {`lowest(1)...........highest(5)`} </p>
-          </fieldset>
-        </div>
+        <fieldset id="characteristics-radios">
+          <legend>Characteristics</legend>
+          <Characteristics
+            characteristics={characteristics}
+            setProductChars={setProductChars}/>
+        </fieldset>
 
         {/* This div will alllow the user to enter a summary */}
-        <div id="review-summary-input">
-          <fieldset>
-            <legend>Summary</legend>
-            <div>
-              <textarea
-                maxLength="60"
-                placeholder={'Example: Best purchse ever!'}
-                rows="2"
-                cols="35"
-                onChange={(e) => handleChange(setSummary, e.target.value)}
-              ></textarea>
-            </div>
-          </fieldset>
-        </div>
+        <fieldset id="review-summary-input">
+          <legend>Summary</legend>
+          <textarea
+            maxLength="60"
+            placeholder={'Example: Best purchse ever!'}
+            rows="2"
+            cols="35"
+            required="required"
+            onChange={(e) => handleChange(setSummary, e.target.value)}>
+          </textarea>
+        </fieldset>
 
         {/* This div will allow a user to enter a review body */}
-        <div id="review-body-input">
-          <fieldset>
-            <legend>Review</legend>
-            <div>
-              <textarea
-                minLength="50"
-                maxLength="1000"
-                placeholder={'Why did you like this product or not?'}
-                rows="3"
-                cols="70"
-                required="required"
-                wrap="hard"
-                onChange={(e) => handleChange(setBody, e.target.value)}
-              ></textarea>
-            </div>
-            <span>
-              {body.length < 50
-                ? `Minimum required characters left: ${50 - body.length}`
-                : 'Minimum Reached'}
-            </span>
-          </fieldset>
-        </div>
+        <fieldset id="review-body-input">
+          <legend>Review</legend>
+
+          <textarea
+            minLength="50"
+            maxLength="1000"
+            placeholder={'Why did you like this product or not?'}
+            rows="3"
+            cols="70"
+            wrap="hard"
+            required="required"
+            onChange={(e) => handleChange(setBody, e.target.value)}
+          ></textarea>
+
+          <span>
+            {body.length < 50
+              ? `Minimum required characters left: ${50 - body.length}`
+              : 'Minimum Reached'}
+          </span>
+        </fieldset>
 
         {/* This div will allow the user to upload photos to the review */}
-        <div>
-          <fieldset>
-            <legend>Upload your photos</legend>
-            <input
-              id="photo-input"
-              type="file"
-              accept="image/png, image/jpeg"
-              multiple
-              onChange={() => handlePhotos()}
-            ></input>
-            <div id="images"></div>
-            {addPhotoDiv}
-          </fieldset>
-        </div>
+
+        <fieldset id="review-photos">
+          <legend>Upload your photos</legend>
+          <input
+            id="photo-input"
+            type="file"
+            accept="image/png, image/jpeg"
+            multiple
+            onChange={() => handlePhotos()}
+          ></input>
+          <div id="images"></div>
+          {addPhotoDiv}
+        </fieldset>
+
 
         {/* This div will ask the user to enter their enter their name */}
-        <div id="name-input">
-          <fieldset>
-            <legend>What is your Name?</legend>
-            <input
-              type="text"
-              className="name-input"
-              placeholder="Example: jackson11!"
-              maxLength="60"
-              size="35"
-              onChange={(e) => handleChange(setName, e.target.value)}
-            ></input>
-            <br />
-            <span>
-              For privacy reasons, do not use your full name or email address
-            </span>
-          </fieldset>
-        </div>
+        <fieldset id="name-input">
+          <legend>What is your Name?</legend>
+          <input
+            type="text"
+            className="name-input"
+            placeholder="Example: jackson11!"
+            maxLength="60"
+            size="35"
+            required="required"
+            onChange={(e) => handleChange(setName, e.target.value)}
+          ></input>
+          <br />
+          <span>
+            For privacy reasons, do not use your full name or email address
+          </span>
+        </fieldset>
 
         {/* This div will ask the user to enter their email */}
-        <div id="email-input">
-          <fieldset>
-            <legend>Your email</legend>
-            <input
-              type="email"
-              className="email-input"
-              placeholder="Example: jackson11@email.com"
-              maxLength="60"
-              size="35"
-              onChange={(e) => handleChange(setEmail, e.target.value)}
-            ></input>
-            <br />
-            <span>For authentication reasons, you will not be emailed</span>
-          </fieldset>
+        <fieldset id="email-input">
+          <legend>Your email</legend>
+          <input
+            type="email"
+            className="email-input"
+            placeholder="Example: jackson11@email.com"
+            maxLength="60"
+            size="35"
+            required="required"
+            onChange={(e) => handleChange(setEmail, e.target.value)}
+          ></input>
           <br />
-          <input type="submit" onClick={(e) => handleSubmit()}></input>
-        </div>
-      </div>
+          <span>For authentication reasons, you will not be emailed</span>
+        </fieldset>
+        <br />
+        <button type="submit" onClick={() => validateUserData()}>Submit Review</button>
+      </form>
     </div>
   );
 }

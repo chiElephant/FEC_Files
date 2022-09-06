@@ -38,7 +38,7 @@ function ReviewsModule({ product_id, product_name }) {
         setShowReviewModal={setShowReviewModal}
         productName={productName}
         product_id={productId}
-        chars={characteristics}
+        characteristics={characteristics}
       />
       <div id="main-buttons">
         <button
