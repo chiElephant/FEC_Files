@@ -44,7 +44,7 @@ const postReview = (req, res, next) => {
     rating,
     summary,
     recommend,
-    photos,
+    photoUrls,
     characteristics,
   } = req.body;
 
@@ -56,7 +56,7 @@ const postReview = (req, res, next) => {
     recommend,
     name,
     email,
-    photos,
+    photos: photoUrls,
     characteristics,
   });
 
