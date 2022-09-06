@@ -112,7 +112,6 @@ function getMetadata(product_id, setState) {
       return meta.data;
     })
     .then((metadata) => {
-      console.log(metadata, 'meta')
       createRatingsGraphDiv(metadata.ratings, setState.setRatingsGraphDiv);
       handleRatings(
         metadata.ratings,
