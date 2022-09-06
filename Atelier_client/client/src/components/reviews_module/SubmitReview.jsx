@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Characteristics from './form_inputs/Characteristics.jsx'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { solid, regular } from '@fortawesome/fontawesome-svg-core/import.macro';
+import StarRating from './form_inputs/StarRating.jsx'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { solid, regular } from '@fortawesome/fontawesome-svg-core/import.macro';
 
 function SubmitReview({
   showReviewModal,
@@ -100,8 +101,12 @@ function SubmitReview({
         <h1>Write Your Review</h1>
         <h3>About the {productName}</h3>
 
+        <StarRating
+          rating={rating}
+          setRating={setRating}/>
+
         {/* This div will ask the customer to fill in a star rating */}
-        <fieldset id="rate-by-star" >
+        {/* <fieldset id="rate-by-star" >
           <legend>Overall Rating</legend>
 
           {rating >= 1 ? (
@@ -193,7 +198,7 @@ function SubmitReview({
               }}
             />
           )}
-        </fieldset>
+        </fieldset> */}
 
         {/* This div will ask the customer if they recommend the product*/}
         <fieldset id="recommend" required="required">
@@ -218,13 +223,9 @@ function SubmitReview({
           </label>
         </fieldset>
 
-        {/* // This div asks the customer about different product characteristics */}
-        <fieldset id="characteristics-radios">
-          <legend>Characteristics</legend>
-          <Characteristics
-            characteristics={characteristics}
-            setProductChars={setProductChars}/>
-        </fieldset>
+        <Characteristics
+          characteristics={characteristics}
+          setProductChars={setProductChars}/>
 
         {/* This div will alllow the user to enter a summary */}
         <fieldset id="review-summary-input">

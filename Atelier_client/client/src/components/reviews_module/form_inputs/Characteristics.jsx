@@ -127,9 +127,10 @@ function Characteristics ( { characteristics, setProductChars } ) {
   };
 
   return (
-    <div>
+    <fieldset id="characteristics-radios">
+      <legend>Characteristics</legend>
       {charsDiv}
-    </div>
+    </fieldset>
   )
 }
 
