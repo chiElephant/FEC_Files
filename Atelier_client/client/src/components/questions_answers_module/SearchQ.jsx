@@ -3,9 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 function SearchQ({ questionList, searchText, handleUpdateSearchText }) {
-  // console.log(questionList);
-
-  console.log(searchText);
+  // console.log(searchText);
   return (
     <div className="search">
       <div className="searchInputs">

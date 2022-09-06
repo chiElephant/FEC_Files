@@ -15,6 +15,7 @@ export default function getQuestions(
   axios
     .get(url)
     .then((response) => {
+      console.log('axios get questions');
       const questionList = response.data.results;
       // const questionList = [];
       setQuestionList((prevstate) => prevstate.concat(response.data.results));
