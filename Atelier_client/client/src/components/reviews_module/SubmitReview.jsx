@@ -14,7 +14,7 @@ function SubmitReview({
   const [productChars, setProductChars] = useState({});
   const [addPhotoDiv, setAddPhotoDiv] = useState(<div />);
   const [charsDiv, setCharsDiv] = useState(<div />);
-  const [recommend, setRecommend] = useState(false);
+  const [recommend, setRecommend] = useState('boolean');
   const [summary, setSummary] = useState('');
   const [rating, setRating] = useState(0);
   const [photos, setPhotos] = useState([]);
@@ -24,12 +24,15 @@ function SubmitReview({
 
   useEffect(() => {
     createCharsDiv();
+    console.log(chars)
   }, [chars]);
 
+  // Handles all onChange events
   const handleChange = (cb, value) => {
     cb(`${value}`);
   };
 
+  // Handles submitting all user inputs from the add review from
   const handleSubmit = () => {
     setShowReviewModal(false);
     axios
@@ -52,6 +55,7 @@ function SubmitReview({
       });
   };
 
+  // Characteristics key for the text output above each characteristic in the add review form
   const charsKey = {
     Size: {
       1: 'A size too small',
@@ -97,10 +101,12 @@ function SubmitReview({
     },
   };
 
+  // Handles all user clicks in the add review form
   const handleClick = (cb, value) => {
     cb(value);
   };
 
+  // Handles user uploaded photos in the add review form
   const handlePhotos = () => {
     let files = document.querySelector('#photo-input').files;
     let fileURLs = photos;
@@ -108,10 +114,6 @@ function SubmitReview({
     if (files.length <= 5) {
       for (let i = 0; i < files.length; i++) {
         const file = files[i];
-
-        // if (!file.type.startsWith('image/')) {
-        //   continue;
-        // }
 
         const img = document.createElement('img');
         img.file = file;
@@ -130,6 +132,7 @@ function SubmitReview({
     }
   };
 
+  // Handles user input on product characteristics when adding a review.
   const handleCharacteristics = (char, id, value) => {
     let chars = productChars;
     chars[`${id}`] = value;
@@ -137,12 +140,14 @@ function SubmitReview({
     handleCharSelection(char, id, value);
   };
 
+  // Handles the text output above each characteristic in the add review form.
   const handleCharSelection = (char, id, value) => {
     const currentDisplay = document.getElementById(id);
     const newDisplay = charsKey[char][value];
     currentDisplay.textContent = newDisplay;
   };
 
+  // Creates the characteristics div in the add review form.
   const createCharsDiv = () => {
     let div = [];
 
@@ -172,7 +177,7 @@ function SubmitReview({
               type="radio"
               name={`${char}`}
               value="3"
-              onClick={() => handleCharacteristics(char, char[char].id, 3)}
+              onClick={() => handleCharacteristics(char, chars[char].id, 3)}
             />
             <input
               className={chars[char].id}
@@ -209,6 +214,7 @@ function SubmitReview({
         {/* This div will ask the customer to fill in a star rating */}
         <div id="rate-by-star">
           <fieldset>
+
             <legend>Overall Rating</legend>
             {rating >= 1 ? (
               <FontAwesomeIcon
@@ -324,6 +330,7 @@ function SubmitReview({
             </div>
           </fieldset>
         </div>
+
         {/* // This div asks the customer about different product characteristics */}
         <div id="characteristics-radios">
           <fieldset>
@@ -350,7 +357,6 @@ function SubmitReview({
         </div>
 
         {/* This div will allow a user to enter a review body */}
-
         <div id="review-body-input">
           <fieldset>
             <legend>Review</legend>
@@ -375,7 +381,6 @@ function SubmitReview({
         </div>
 
         {/* This div will allow the user to upload photos to the review */}
-
         <div>
           <fieldset>
             <legend>Upload your photos</legend>
@@ -392,7 +397,6 @@ function SubmitReview({
         </div>
 
         {/* This div will ask the user to enter their enter their name */}
-
         <div id="name-input">
           <fieldset>
             <legend>What is your Name?</legend>
@@ -412,7 +416,6 @@ function SubmitReview({
         </div>
 
         {/* This div will ask the user to enter their email */}
-
         <div id="email-input">
           <fieldset>
             <legend>Your email</legend>
