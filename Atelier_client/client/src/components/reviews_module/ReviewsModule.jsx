@@ -13,11 +13,12 @@ function ReviewsModule({ product_id, product_name }) {
   const [sortType, setSortType] = useState('relevance');
   const [countShown, setCountShown] = useState(2);
   const [reviews, setReviews] = useState(initial.reviewModel);
+  const [reviewCount, setReviewCount] = useState(0);
 
   useEffect(() => {
-    const count = 100;
+    const count = 500;
 
-    helpers.getReviews(productId, sortType, count, setReviews);
+    helpers.getReviews(productId, sortType, count, setReviews, setReviewCount);
   }, [productId, countShown, sortType]);
 
   useEffect(() => {
@@ -32,8 +33,8 @@ function ReviewsModule({ product_id, product_name }) {
         characteristics={characteristics} />
       <ReviewsList
         reviews={reviewsShown}
-        setSort={helpers.setSort}
-        setType={setSortType}
+        setSortType={setSortType}
+        reviewCount={reviewCount}
       />
       <SubmitReview
         showReviewModal={showReviewModal}
