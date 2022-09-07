@@ -43,18 +43,18 @@ function ReviewsModule({ product_id, product_name }) {
         chars={characteristics}
       />
       <div id="main-buttons">
-        <button
+        <button className='reviews-btn'
           onClick={() =>
             helpers.handleClick(setShowReviewModal, !showReviewModal)
           }
         >
-          Add Review
+          ADD A REVIEW +
         </button>
-        <button
+        <button className='reviews-btn'
           onClick={() => helpers.handleClick(setCountShown, countShown + 2)}
           disabled={countShown >= reviews.length}
         >
-          More Reviews
+          MORE REVIEWS
         </button>
       </div>
     </div>

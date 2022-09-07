@@ -189,7 +189,7 @@ function SubmitReview({
             <span>For authentication reasons, you will not be emailed</span>
           </fieldset>
           <br />
-          <button type="submit" onClick={() => validateUserData()}>Submit Review</button>
+          <button type="submit" className="reviews-btn" onClick={() => validateUserData()}>Submit Review</button>
         </form>
       </div>
     );

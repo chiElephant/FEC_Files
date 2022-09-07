@@ -1,18 +1,5 @@
 /* Reviews Module */
 
-#ratings-breakdown,
-  #reviews-list  {
-  float: left;
-  width: 50%;
-  height: 50%;
-}
-
-#reviews {
-  overflow-y: scroll;
-  height: 70vh;
-  margin-bottom: 48px;
-}
-
 /* Modal */
 #review-window {
   position: fixed;
@@ -29,7 +16,6 @@
 }
 
 #review-form {
-  /* position: relative; */
   padding: 32px;
   max-width: 640px;
   margin-top: 35%;
@@ -39,23 +25,161 @@
   color: rgb(162, 162, 162);
 }
 
-#reviews {
-  padding: 0;
-  margin-top: 16px;
+/* Ratings List & Ratings Breakdown */
+#ratings-breakdown,
+#reviews-list  {
+  float: left;
+  width: 50%;
+  height: 75%;
+  padding: 12px;
+
 }
 
-.review-image {
-  float: left;
+#ratings-breakdown {
+  width: 30%;
+}
+
+#reviews-list {
+  width: 60%;
+}
+
+#review-sort {
+  width: 100%;
+  margin-bottom: 48px;
+}
+
+#reviews {
+  height: 70vh;
+  width: 100%;
   padding: 8px;
+  overflow-y: scroll;
 }
 
 #review {
-  border-radius: 25px;
-  border: 2px solid black;
-  padding: 20px;
-  margin-right: 20px;
-  margin-bottom: 10px;
+  padding: 16px;
+  border-bottom: 2px solid rgb(162, 162, 162);
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
 }
+
+#review-top-bar {
+  width: 100%;
+}
+
+#stars {
+  width: 15%;
+  display: flex;
+  justify-content: space-between;
+  color: rgb(82, 82, 82);
+}
+
+#username, #date {
+  font-size: small;
+  float: right;
+  color: rgb(125, 125, 125);
+  margin-right: 6px;
+}
+
+#username {
+  margin-left: 72px;
+}
+
+#stars, #body {
+  float: left;
+}
+
+#summary {
+  font-size: large;
+  font-weight: bolder;
+  width: 100%;
+  text-overflow: ellipsis;
+  text-align: left;
+  color: rgb(82, 82, 82)
+}
+
+#body {
+  font-size: medium;
+  color: rgb(103, 103, 103);
+  overflow-wrap: break-word;
+}
+
+#photos {
+  width: 100%;
+}
+
+.review-image {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin: 10px;
+  float: left;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+#recommend {
+  width: 100%;
+  margin-bottom: 12px;
+  color: rgb(125, 125, 125);
+}
+
+#user-rec {
+  padding-left: 8px;
+}
+
+#response {
+  width: 100%;
+  background-color: rgb(235, 235, 235);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+
+}
+
+.response {
+  margin-bottom: 12px;
+  font-weight: bold;
+  color:rgb(82, 82, 82)
+}
+
+.user-response {
+  color: rgb(125, 125, 125);
+}
+
+#helpfulness {
+  width: 100%;
+}
+
+#helpful-text {
+  width: 40%;
+  font-size: small;
+  color: rgb(125, 125, 125);
+  display: flex;
+  justify-content: space-evenly;
+
+}
+
+#review-top-bar, #summary, #body, #photos, #recommended, #helpfulness {
+  margin-bottom: 12px;
+}
+
+.reviews-btn {
+  background-color: white; /* Green */
+  border: solid 1px;
+  color: black;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-left: 12px;
+}
+
+
+
+
+
 
 
 

@@ -15,9 +15,10 @@ const helpers = {
         photoDiv.push(
           <img
             key={photo.id}
+            className='review-image'
             src={photo.url}
             alt="image not available"
-            width="120"
+            onClick={() => console.log(photo)}
           />
         );
       });
