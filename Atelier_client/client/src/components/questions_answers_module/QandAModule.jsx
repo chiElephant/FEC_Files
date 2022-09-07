@@ -10,11 +10,13 @@ function QandAModule({ product_id, product_name }) {
   const [displayList, setDisplayList] = useState([]);
   const [countShown, setCountShown] = useState(2);
   const [showMoreQuestions, setShowMoreQuestions] = useState(false);
+  const [fetchQuestions, setFetchQuestions] = useState(false);
 
   const questionList = useGetQuestions(
     product_id,
     setDisplayList,
-    setShowMoreQuestions
+    setShowMoreQuestions,
+    fetchQuestions
   );
 
   //filtered questions state
@@ -112,12 +114,19 @@ function QandAModule({ product_id, product_name }) {
     setFilterCountShown((prevState) => prevState + 2);
   };
 
-  console.log('filterCountShown: ', filterCountShown);
-  console.log('filteredList: ', filteredList);
-  console.log('displayFiltered: ', displayFiltered);
+  const handleFetchQuestions = () => {
+    setFetchQuestions((prevState) => !prevState);
+    setShowMoreQuestions(false);
+  };
+
+  // console.log('filterCountShown: ', filterCountShown);
+  // console.log('filteredList: ', filteredList);
+  // console.log('showMoreQuestions: ', showMoreQuestions);
+  // console.log('fetchQuestions: ', fetchQuestions);
 
   const list = filterMode ? (
     <QuestionList
+      handleFetchQuestions={handleFetchQuestions}
       displayList={displayFiltered}
       productName={product_name}
       productId={product_id}
@@ -126,6 +135,7 @@ function QandAModule({ product_id, product_name }) {
     />
   ) : (
     <QuestionList
+      handleFetchQuestions={handleFetchQuestions}
       displayList={displayList}
       productName={product_name}
       productId={product_id}

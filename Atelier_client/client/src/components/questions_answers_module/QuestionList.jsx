@@ -9,6 +9,7 @@ function QuestionList({
   productId,
   showMoreQuestions,
   handleShowMoreQuestions,
+  handleFetchQuestions,
 }) {
   const [isModel, setIsModel] = useState(false);
   const containerRef = useAutoScroll(displayList.length);
@@ -19,6 +20,7 @@ function QuestionList({
 
   const model = isModel ? (
     <ModalQuestion
+      handleFetchQuestions={handleFetchQuestions}
       productName={productName}
       productId={productId}
       showModal={() => {

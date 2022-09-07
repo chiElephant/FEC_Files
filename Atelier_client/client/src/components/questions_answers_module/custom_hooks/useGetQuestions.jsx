@@ -4,7 +4,8 @@ import React, { useState, useEffect } from 'react';
 export default function useGetQuestions(
   product_id,
   setDisplayList,
-  setShowMoreQuestions
+  setShowMoreQuestions,
+  fetchQuestions
 ) {
   const [questions, setQuestions] = useState([]);
 
@@ -24,7 +25,7 @@ export default function useGetQuestions(
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [fetchQuestions]);
 
   return questions;
 }

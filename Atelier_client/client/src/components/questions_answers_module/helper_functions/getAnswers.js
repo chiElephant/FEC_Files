@@ -10,7 +10,9 @@ export default function getAnswers(
   setPage,
   displayList,
   setDisplayList,
-  setShowMoreAnswers
+  setShowMoreAnswers,
+  displayAfterFetchCount,
+  setDisplayAfterFetchCount
 ) {
   const url = `/answers/${questionId}/${page}/${count}`;
 
@@ -36,6 +38,15 @@ export default function getAnswers(
           'answerer_name',
           'Seller'
         );
+        console.log('displayAfterFetchCount after: ', displayAfterFetchCount);
+        if (displayAfterFetchCount > 0) {
+          setDisplayAfterFetchCount((preState) => preState - 1);
+          setShowMoreAnswers(false);
+
+          // const grabAllWithNew = result.slice(0, result.length - 1);
+          setDisplayList(result);
+          return result;
+        }
 
         // if the entire list is not empty and display list is empty;
         //set display list to first two
@@ -44,9 +55,9 @@ export default function getAnswers(
           setDisplayList(grabFirstTwo);
         }
 
-        // if display list is 2 and there are more than 2 answers in entire list
-        // we will show the see more answers link;
         if (displayList.length === 2 && result.length > 2) {
+          // if display list is 2 and there are more than 2 answers in entire list
+          // we will show the see more answers link;
           setShowMoreAnswers(true);
         }
 

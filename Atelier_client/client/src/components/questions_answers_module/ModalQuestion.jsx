@@ -5,7 +5,12 @@ import FormInput from './FormInput.jsx';
 import FormErrorList from './FormErrorList.jsx';
 import useClickOutside from './custom_hooks/useClickOutside.jsx';
 
-function ModalQuestion({ productName, productId, showModal }) {
+function ModalQuestion({
+  productName,
+  productId,
+  showModal,
+  handleFetchQuestions,
+}) {
   const [values, setValues] = useState({
     question: '',
     nickname: '',
@@ -69,7 +74,7 @@ function ModalQuestion({ productName, productId, showModal }) {
 
   const handleSubmit = (e) => {
     const { question, nickname, email } = values;
-    addQuestion(productId, question, nickname, email);
+    addQuestion(productId, question, nickname, email, handleFetchQuestions);
     showModal();
   };
 

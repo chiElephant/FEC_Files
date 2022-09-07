@@ -9,7 +9,13 @@ import useClickOutside from './custom_hooks/useClickOutside.jsx';
 
 const MAX_FILE_COUNT = 5;
 
-function ModalAnswer({ productName, question_id, showModal, questionBody }) {
+function ModalAnswer({
+  productName,
+  question_id,
+  showModal,
+  questionBody,
+  handleFetchAnswers,
+}) {
   const [values, setValues] = useState({
     answer: '',
     nickname: '',
@@ -109,7 +115,7 @@ function ModalAnswer({ productName, question_id, showModal, questionBody }) {
 
   const handleSubmit = () => {
     const { answer, nickname, email, photos } = values;
-    addAnswer(question_id, answer, nickname, email, photos);
+    addAnswer(question_id, answer, nickname, email, photos, handleFetchAnswers);
     showModal();
   };
 

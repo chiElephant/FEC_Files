@@ -3,9 +3,8 @@ import AnswerList from './AnswerList.jsx';
 import markQuestionAsHelpful from './helper_functions/markQuestionAsHelpful.js';
 import getAnswers from './helper_functions/getAnswers.js';
 import ModalAnswer from './ModalAnswer.jsx';
-import useSortListByValue from './custom_hooks/useSortListByValue.jsx';
 
-const RESULTS_PER_PAGE = 1000;
+const RESULTS_PER_PAGE = 100;
 
 function Question({ question_id, body, helpfulness, productName, productId }) {
   const [answerList, setAnswerList] = useState([]);
@@ -15,9 +14,9 @@ function Question({ question_id, body, helpfulness, productName, productId }) {
   const [helpCount, setHelpCount] = useState(helpfulness);
   const [allowUserVote, setAllowUserVote] = useState(false);
   const [isModal, setIsModal] = useState(false);
+  const [fetchAnswers, setFetchAnswers] = useState(false);
+  const [displayAfterFetchCount, setDisplayAfterFetchCount] = useState(0);
   const answerListLength = answerList.length;
-
-  // console.log('answer page: ', page, question_id);
 
   useEffect(() => {
     getAnswers(
@@ -28,9 +27,11 @@ function Question({ question_id, body, helpfulness, productName, productId }) {
       setPage,
       displayList,
       setDisplayList,
-      setShowMoreAnswers
+      setShowMoreAnswers,
+      displayAfterFetchCount,
+      setDisplayAfterFetchCount
     );
-  }, [page]);
+  }, [page, fetchAnswers]);
 
   const handleSeeMoreAnswers = () => {
     setDisplayList(answerList);
@@ -54,6 +55,12 @@ function Question({ question_id, body, helpfulness, productName, productId }) {
     setAllowUserVote(true);
   };
 
+  const handleFetchAnswers = () => {
+    setPage(1);
+    setDisplayAfterFetchCount((prevState) => prevState + 1);
+    setFetchAnswers((prevState) => !prevState);
+    console.log('FETCH ANSWERS FIRE: ', fetchAnswers);
+  };
   let userVote;
   if (allowUserVote) {
     userVote = <div className="question-yes">Yes({helpCount})</div>;
@@ -64,9 +71,14 @@ function Question({ question_id, body, helpfulness, productName, productId }) {
       </div>
     );
   }
+  console.log('showMoreAnswers: ', showMoreAnswers);
+  console.log('answerList: ', answerList);
+  console.log('displayList: ', displayList);
+  console.log('displayAfterFetchCount before: ', displayAfterFetchCount);
 
   const modal = isModal ? (
     <ModalAnswer
+      handleFetchAnswers={handleFetchAnswers}
       productName={productName}
       productId={productId}
       question_id={question_id}
