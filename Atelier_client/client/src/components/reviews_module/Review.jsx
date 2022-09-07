@@ -35,7 +35,7 @@ function Review({ review }) {
   return (
     <div id="review">
       <h4>Review</h4>
-      <div>Avgerage Rating: {rating}</div>
+      <div id='average-rating'>Avgerage Rating: {rating}</div>
       <div>Date Reviewed: {date}</div>
       <div>User: {username}</div>
       <h4>{summary}</h4>

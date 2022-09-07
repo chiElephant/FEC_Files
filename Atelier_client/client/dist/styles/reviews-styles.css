@@ -4,7 +4,7 @@
   #reviews-list  {
   float: left;
   width: 50%;
-  height: 50%
+  height: 50%;
 }
 
 #reviews {
@@ -32,7 +32,8 @@
   /* position: relative; */
   padding: 32px;
   max-width: 640px;
-  margin-top: 45%;
+  margin-top: 35%;
+  margin-bottom: 15%;
   right: 16px;
   background-color: rgb(35, 35, 35);
   color: rgb(162, 162, 162);
@@ -40,12 +41,20 @@
 
 #reviews {
   padding: 0;
-  margin-bottom: 0;
+  margin-top: 16px;
 }
 
 .review-image {
   float: left;
   padding: 8px;
+}
+
+#review {
+  border-radius: 25px;
+  border: 2px solid black;
+  padding: 20px;
+  margin-right: 20px;
+  margin-bottom: 10px;
 }
 
 

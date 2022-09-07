@@ -23,7 +23,6 @@ function SubmitReview({
   const [body, setBody] = useState('');
   const [name, setName] = useState('');
 
-
   const handleChange = (cb, value) => {
     cb(`${value}`);
   };
@@ -35,11 +34,11 @@ function SubmitReview({
   const validateUserData = () => {
     const productCharsLength = Object.keys(productChars).length
     const charsLength = Object.keys(chars).length
-    console.log(Object.keys(productChars), Object.keys(chars) )
+    console.log(productChars, Object.keys(chars) )
     if (rating > 0 && typeof recommend === 'boolean' && productCharsLength === charsLength) {
       handleSubmit()
     } else {
-      throw new Error('You must enter the fallowing')
+      // throw new Error('You must enter the fallowing')
     }
   }
 
@@ -47,7 +46,7 @@ function SubmitReview({
 
     setShowReviewModal(false);
     setRating(0);
-    console.log('In Submit')
+    console.log(productChars)
 
     // axios
     //   .post('/reviews', {
@@ -68,6 +67,10 @@ function SubmitReview({
     //     console.log('post error: ', error);
     //   });
   };
+
+  function setPC () {
+    console.log(productChars)
+  }
 
   return !showReviewModal ?
     ('') :
@@ -108,7 +111,9 @@ function SubmitReview({
           </fieldset>
 
           <Characteristics
+            setPC={setPC}
             characteristics={chars}
+            productChars={productChars}
             setProductChars={setProductChars} />
 
           {/* This div will alllow the user to enter a summary */}

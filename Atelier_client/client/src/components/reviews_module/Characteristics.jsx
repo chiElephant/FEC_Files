@@ -1,69 +1,32 @@
 import React, { useState, useEffect } from 'react';
+import charsKey from './helper_functions/characteristics'
 
-function Characteristics ( { characteristics, setProductChars } ) {
+function Characteristics ( { characteristics, productChars, setProductChars} ) {
 
   const [charsDiv, setCharsDiv] = useState(<div />);
+  const [charRatings, setCharRatings] = useState({});
 
   useEffect(() => {
     createCharsDiv();
-  }, [characteristics])
+  }, [])
 
-   // Characteristics key for the text output above each characteristic in the add review form
-   const charsKey = {
-    Size: {
-      1: 'A size too small',
-      2: '1/2 size too small',
-      3: 'Perfect',
-      4: '1/2 size too big',
-      5: 'A size too wide',
-    },
-    Width: {
-      1: 'Too narrow',
-      2: 'Slightly narrow',
-      3: 'Perfect',
-      4: 'Slightly wide',
-      5: 'Too wide',
-    },
-    Comfort: {
-      1: 'Uncomfortable',
-      2: 'Slightly uncomfortable',
-      3: 'Ok',
-      4: 'Comfortable',
-      5: 'Perfect',
-    },
-    Quality: {
-      1: 'Poor',
-      2: 'Below Average',
-      3: 'What I expected',
-      4: 'Pretty great',
-      5: 'Perfect',
-    },
-    Length: {
-      1: 'Runs short',
-      2: 'Runs slightly short',
-      3: 'Perfect',
-      4: 'Runs slightly long',
-      5: 'Runs long',
-    },
-    Fit: {
-      1: 'Runs tight',
-      2: 'Runs slightly tight',
-      3: 'Perfect',
-      4: 'Runs slightly long',
-      5: 'Runs long',
-    },
-  };
 
    // Handles user input on product characteristics when adding a review.
    const handleCharacteristics = (char, id, value) => {
-    let chars = {};
-    chars[`${id}`] = value;
-    setProductChars(chars);
-    handleCharSelection(char, id, value);
+    console.log(char, id, value)
+
+    //it wont work beacause it keeps trying to rest the info to the original empty productChar object
+    setProductChars({
+      ...productChars,
+      [id]: value
+    });
+
+    handleCharText(char, id, value);
+    setProductChars(charRatings);
   };
 
   // Handles the text output above each characteristic in the add review form.
-  const handleCharSelection = (char, id, value) => {
+  const handleCharText = (char, id, value) => {
     const currentDisplay = document.getElementById(id);
     const newDisplay = charsKey[char][value];
     currentDisplay.textContent = newDisplay;
@@ -74,47 +37,52 @@ function Characteristics ( { characteristics, setProductChars } ) {
     let div = [];
 
     for (let char in characteristics) {
+      const id = characteristics[char].id;
       div.push(
-        <div key={characteristics[char].id}>
-          <span id={characteristics[char].id}>None Selected</span>
+        <div key={id}>
+          <span id={id}>None Selected</span>
           <br />
           <label>
             {`${char}`}
             <input
-              className={characteristics[char].id}
+              className={id}
               type="radio"
               name={`${char}`}
               value="1"
-              onClick={() => handleCharacteristics(char, characteristics[char].id, 1)}
+              onClick={() =>
+                handleCharacteristics(char, id, 1)}
             />
             <input
-              className={characteristics[char].id}
+              className={id}
               type="radio"
               name={`${char}`}
               value="2"
-              onClick={() => handleCharacteristics(char, characteristics[char].id, 2)}
+              onClick={() =>
+                handleCharacteristics(char, id, 2)}
             />
             <input
-              className={characteristics[char].id}
+              className={id}
               type="radio"
               name={`${char}`}
               value="3"
-              onClick={() => handleCharacteristics(char, characteristics[char].id, 3)}
+              onClick={() =>
+                handleCharacteristics(char, id, 3)}
             />
             <input
-              className={characteristics[char].id}
+              className={id}
               type="radio"
               name={`${char}`}
               value="4"
-              onClick={() => handleCharacteristics(char, characteristics[char].id, 4)}
+              onClick={() =>
+                handleCharacteristics(char, id, 4)}
             />
             <input
-              className={characteristics[char].id}
+              className={id}
               type="radio"
               name={`${char}`}
               value="5"
               onClick={() =>
-                handleCharacteristics(char, `${characteristics[char].id}`, 5)
+                handleCharacteristics(char, id, 5)
               }
             />
           </label>
