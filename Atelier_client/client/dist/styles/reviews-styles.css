@@ -45,7 +45,7 @@
 
 #review-sort {
   width: 100%;
-  margin-bottom: 48px;
+  margin-bottom: 24px;
 }
 
 #reviews {
@@ -101,6 +101,7 @@
 #body {
   font-size: medium;
   color: rgb(103, 103, 103);
+  word-break: break-all;
   overflow-wrap: break-word;
 }
 
@@ -174,6 +175,33 @@
   display: inline-block;
   font-size: 16px;
   margin-left: 12px;
+}
+
+#review-sort {
+  display: flex;
+  align-items: baseline;
+}
+
+#sort-text {
+  width: auto;
+  margin-right: 6px;
+  padding-left: 28px;
+}
+
+#sort-dropdown, #sort-text {
+  font-size: large;
+  font-weight: bolder;
+  color:rgb(82, 82, 82)
+}
+
+#sort-dropdown {
+  margin-right: 6px;
+  display: flex;
+  border-bottom: solid 2px;
+}
+
+#sort-icon {
+  margin: 2px 0 0 12px;
 }
 
 

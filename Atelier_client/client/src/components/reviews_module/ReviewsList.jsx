@@ -15,18 +15,23 @@ function ReviewsList({ reviews, setSort, setType }) {
           {'### reviews, sorted by'}
         </div>
         <div id="sort-dropdown">
-          {`${sortType}`}
-          <FontAwesomeIcon
-            icon={thin('angle-down')}/>
+          <div>
+            {`${sortType}`}
+          </div>
+          <div id='sort-icon'>
+            <FontAwesomeIcon
+              icon={light('angle-down')}
+              size='lg'/>
+          </div>
         </div>
-        <select
+        {/* <select
           id="sort-type"
           onChange={() => handleSortType(setSort, setType)}
         >
           <option value="relevant">Relevant</option>
           <option value="newest">Newest</option>
           <option value="helpful">Helpful</option>
-        </select>
+        </select> */}
       </div>
       <div id='reviews'>
         {reviews
