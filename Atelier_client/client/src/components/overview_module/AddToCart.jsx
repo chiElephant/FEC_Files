@@ -6,6 +6,7 @@
 /* eslint-disable no-empty */
 /* eslint-disable prefer-destructuring */
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 function AddToCart(props) {
   const [styleAvail, setStyleAvail] = useState({});
@@ -13,6 +14,16 @@ function AddToCart(props) {
   const [sizeSelected, setSizeSelected] = useState('');
   const [quantities, setQuantities] = useState(0);
   const [quantitySelected, setQuantitySelected] = useState(0);
+  const [sku, setSku] = useState('');
+
+  useEffect(() => {
+    const styleSkus = props.style.skus;
+    for (const s in styleSkus) {
+      if (styleSkus[s].size === sizeSelected) {
+        setSku(s);
+      }
+    }
+  }, [sizeSelected]);
 
   const availability = async (skus) => {
     const resultObj = {};
@@ -22,12 +33,33 @@ function AddToCart(props) {
       resultObj[sizesArray[1][1]] = sizesArray[0][1];
     });
     setStyleAvail(resultObj);
-
-    for (const size in resultObj) {
-      if (resultObj[size] > 0) {
-        setOutOfStock(false);
-      }
+    if (Object.keys(resultObj).length === 0) {
+      setOutOfStock(true);
+    } else {
+      setOutOfStock(false);
     }
+  };
+
+  const addToCart = (qty) => {
+    axios.post(`/cart/${sku}/${qty}`).then(() => {
+      console.log(
+        `${qty} units of ${props.style.name} in size ${sizeSelected} added to the cart`
+      );
+    });
+  };
+
+  const openDropdown = (e) => {
+    e.preventDefault();
+    const drop = document.getElementById('size-dropdown');
+    const add = document.getElementById('addto-cart');
+    add.addEventListener('mousedown', () => {
+      // eslint-disable-next-line no-restricted-globals
+      const evt = event;
+      setTimeout(() => {
+        drop.dispatchEvent(evt);
+      });
+    });
+    // drop.dropdown('toggle');
   };
 
   const handleSizeChange = (e) => {
@@ -58,17 +90,18 @@ function AddToCart(props) {
   const handleAddToCart = (e) => {
     e.preventDefault();
     if (!outOfStock && sizeSelected !== '' && quantitySelected !== 0) {
+      addToCart(quantitySelected);
+    } else if (!outOfStock && sizeSelected === '') {
+      console.log('Open the size selector');
+      openDropdown(e);
     }
-
-    // else if (!outOfStock && sizeSelected === '') {
-
-    // }
   };
 
   if (outOfStock === false && Object.keys(styleAvail).length) {
     return (
       <div className="add-to-cart">
         <select
+          id="size-dropdown"
           selected="Select Size"
           onChange={(e) => {
             handleSizeChange(e);
@@ -107,21 +140,26 @@ function AddToCart(props) {
           </select>
         )}
 
-        <button
-          onClick={(e) => {
-            handleAddToCart(e);
-          }}
-        >
-          Add to Cart
-        </button>
+        {!outOfStock ? (
+          <button
+            id="addto-cart"
+            onClick={(e) => {
+              handleAddToCart(e);
+            }}
+          >
+            Add to Cart
+          </button>
+        ) : null}
       </div>
     );
   }
-  return (
-    <select>
-      <option disabled>OUT OF STOCK</option>
-    </select>
-  );
+  if (outOfStock === true) {
+    return (
+      <select>
+        <option disabled>OUT OF STOCK</option>
+      </select>
+    );
+  }
 }
 
 export default AddToCart;
