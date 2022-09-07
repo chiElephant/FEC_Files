@@ -1,5 +1,5 @@
-// import React from 'react';
 import moment from 'moment';
+import axios from 'axios';
 
 const helpers = {
   convertDate: (date) => {
@@ -25,6 +25,19 @@ const helpers = {
     }
     return photoDiv;
   },
+
+  markHelpful: (review_id) => {
+    console.log('review_id: ', review_id)
+
+    const url = `reviews/${review_id}/helpful`
+    const options = {
+      method: 'put',
+      url
+    }
+    axios.put(options)
+    .then(res => console.log('Successfully marked as helpful'))
+    .catch(error => console.log('Error marking as helpful'))
+  }
 };
 
 export { helpers };

@@ -1,44 +1,67 @@
 import React, { useState, useEffect } from 'react';
 import { helpers } from './helper_functions/review.js';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { solid, regular, light, thin, duotone, icon } from '@fortawesome/fontawesome-svg-core/import.macro';
+import { solid, regular, light, thin } from '@fortawesome/fontawesome-svg-core/import.macro';
 
 function Review({ review }) {
-  const [helpfulness, setHelpfullness] = useState(0);
-  const [username, setUsername] = useState('');
+
+  const [photosDiv, setPhotosDiv] = useState(<div />);
+  const [helpfulness, setHelpfulness] = useState(0);
   const [recommend, setRecommend] = useState(false);
   const [response, setResponse] = useState(null);
-  const [photosDiv, setPhotosDiv] = useState(<div />);
+  const [review_id, setReview_id] = useState(0);
+  const [username, setUsername] = useState('');
+  const [stars, setStars] = useState(<div />);
   const [summary, setSummary] = useState('');
-  const [rating, setRating] = useState(0);
   const [photos, setPhotos] = useState([]);
-  const [id, setId] = useState(0);
+  const [rating, setRating] = useState(0);
   const [body, setBody] = useState('');
   const [date, setDate] = useState('');
-  const [stars, setStars] = useState(<div />);
+
+  useEffect(() => {
+    handleReviewData(review)
+  }, [review])
 
   useEffect(() => {
     if (review) {
-      const convertedDate = helpers.convertDate(review.date);
-      const div = helpers.handlePhotos(review.photos);
+      async function handleDate () {
+        const convertedDate = await helpers.convertDate(review.date);
+        setDate(convertedDate);
+      }
+      handleDate()
 
-      handleHelpfulness(review.helpfulness);
-      handleRecommend(review.recommend);
-      handleResponse(review.response);
-      createRatingsDiv(review.rating);
-
-      setUsername(review.reviewer_name.concat(','));
-      setSummary(review.summary);
-      setRating(review.rating);
-      setPhotos(review.photos);
-      setId(review.review_id);
-      setDate(convertedDate);
-      setBody(review.body)
-      setPhotosDiv(div);
     }
   }, [review]);
 
-  function createRatingsDiv(rating) {
+  useEffect(() => {
+    async function handlePhotos () {
+      const photos = await helpers.handlePhotos(review.photos);
+      setPhotosDiv(photos);
+    }
+    handlePhotos();
+  }, [review]);
+
+  useEffect(() => {
+    handleRatings(review.rating);
+    handleRecommend(review.recommend);
+    handleResponse(review.response);
+  }, [review]);
+
+  useEffect(() => {
+    handleHelpfulness(review.helpfulness);
+  }, [review]);
+
+  function handleReviewData(review) {
+    setReview_id(review.review_id);
+    setUsername(review.reviewer_name.concat(','));
+    setSummary(review.summary);
+    setRating(review.rating);
+    setPhotos(review.photos);
+    setBody(review.body);
+  }
+
+  function handleRatings(rating) {
     let starRating = []
     if (rating !== 0) {
       for (let i = 1; i <= rating; i++) {
@@ -55,7 +78,7 @@ function Review({ review }) {
           <FontAwesomeIcon
             key={`${i}-regular`}
             className='star'
-            icon={thin('star-sharp')}
+            icon={light('star-sharp')}
           />
         )
       }
@@ -108,8 +131,14 @@ function Review({ review }) {
         <div>
           {'Helpful?'}
         </div>
+        <div
+        className='helpful-yes'
+        onClick={() => markHelpful()}
+        >
+          {'Yes '}
+        </div>
         <div>
-          {'Yes '}{`(${helpful})`}
+          {`(${helpful})`}
         </div>
         <div>
           <FontAwesomeIcon
@@ -121,7 +150,15 @@ function Review({ review }) {
         </div>
       </div>
     )
-    setHelpfullness(helpfulDiv);
+    setHelpfulness(helpfulDiv);
+  }
+
+  function markHelpful() {
+
+    const addHelpful = helpfulness + 1;
+    handleHelpfulness(addHelpful);
+
+    helpers.markHelpful(review_id);
   }
 
   return (
