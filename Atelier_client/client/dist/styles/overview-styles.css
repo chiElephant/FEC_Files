@@ -16,14 +16,13 @@
 .style-other-imgs {
   width: 100px;
   height: 100px;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .style_thumbnail {
   width: 100px;
   height: 100px;
   object-fit: cover;
-  object-fit: contain;
   border-radius: 50%;
 }
 
@@ -34,6 +33,8 @@
 }
 
 .photo-container {
+
+  margin-top: 10%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -103,7 +104,7 @@
 .style-other-imgs-selected {
   width: 100px;
   height: 100px;
-  object-fit: contain;
+  object-fit: cover;
   border: 5px solid #555;
 }
 
@@ -120,7 +121,7 @@
 .selected-style-thumbnail {
   width: 100px;
   height: 100px;
-  object-fit: contain;
+  object-fit: cover;
   border: 5px solid #555;
   border-radius: 50%;
 }
@@ -138,7 +139,7 @@
   width: 50%;
   justify-content: center;
   align-content: center;
-  margin-left: 20px;
+  margin-left: 10%;
 }
 
 .gallery-container {
@@ -174,4 +175,12 @@
 .scroll-review:hover {
   background-color: #555555;
   color: white;
+}
+
+.add-to-cart {
+  margin-top: 10%;
+}
+
+.selected-style-name {
+  margin-bottom: 10%;
 }

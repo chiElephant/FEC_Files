@@ -46,7 +46,7 @@ function ProductInfo(props) {
   }, []);
 
   useEffect(() => {
-    console.log(`You changed the selected style to ${props.style.name}`);
+    // console.log(`You changed the selected style to ${props.style.name}`);
     setSelectedStyle(props.style);
   }, [props.style]);
 

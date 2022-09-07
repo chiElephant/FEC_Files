@@ -1,16 +1,10 @@
 /* eslint-disable react/destructuring-assignment */
 import React, { useState, useEffect } from 'react';
-// import {
-//   list_product,
-//   product_information,
-//   product_styles,
-//   related_products,
-//   product_reviews,
-// } from '../../../example_data/example.js';
 import axios from 'axios';
 import ProductInfo from './ProductInfo.jsx';
 import Styles from './Styles.jsx';
 
+// 71697
 function Overview(props) {
   const [product, setProduct] = useState({});
   const [styles, setStyles] = useState({
@@ -81,7 +75,7 @@ function Overview(props) {
 
   if (Object.keys(product).length) {
     return (
-      <div>
+      <div data-testid="overview">
         <ProductInfo
           product_id={props.product_id}
           product={product}

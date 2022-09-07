@@ -6,6 +6,7 @@
   "scripts": {
     "test": "jest",
     "test Q&A": "jest ./client/src/_tests_/questions-answers.test.jsx",
+    "test Overview": "jest ./client/src/_tests_/Overview.test.js",
     "coverage": "jest --coverage",
     "server-dev": "nodemon --watch server server/index.js",
     "client-dev": "npx webpack --watch"

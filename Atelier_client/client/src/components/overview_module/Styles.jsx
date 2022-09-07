@@ -1,13 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/destructuring-assignment */
 import React, { useState, useEffect } from 'react';
-// import {
-//   list_product,
-//   product_information,
-//   product_styles,
-//   related_products,
-//   product_reviews,
-// } from '../../example_data/example.js';
 import AddToCart from './AddToCart.jsx';
 import Gallery from './Gallery.jsx';
 
@@ -36,6 +29,8 @@ function Styles(props) {
       <div className="gallery-styles-container">
         <Gallery style={selectedStyle} />
         <div className="right">
+          <h1 className="selected-product-name">{props.product.name}</h1>
+          <h3 className="selected-product-slogan">{props.product.slogan}</h3>
           <h4 className="selected-style-name">{selectedStyle.name}</h4>
           <div
             data-testid="style-selector"
@@ -43,7 +38,6 @@ function Styles(props) {
           >
             {props.styles.map((style, index) => {
               if (style.name === selectedStyle.name) {
-                console.log('This is the style selected: ', style.name);
                 return (
                   <img
                     className="selected-style-thumbnail"
