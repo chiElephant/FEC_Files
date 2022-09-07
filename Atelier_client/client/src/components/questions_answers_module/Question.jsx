@@ -17,6 +17,8 @@ function Question({ question_id, body, helpfulness, productName, productId }) {
   const [isModal, setIsModal] = useState(false);
   const answerListLength = answerList.length;
 
+  // console.log('answer page: ', page, question_id);
+
   useEffect(() => {
     getAnswers(
       question_id,

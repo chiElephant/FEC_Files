@@ -1,21 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import SearchQ from './SearchQ.jsx';
 import QuestionList from './QuestionList.jsx';
-import getQuestions from './helper_functions/getQuestions.js';
+import useGetQuestions from './custom_hooks/useGetQuestions.jsx';
 import useDebounce from './custom_hooks/useDebounce.jsx';
 import useFilterByMatchingText from './custom_hooks/useFilterByMatchingText.jsx';
 
-const RESULTS_PER_PAGE = 100;
-
 function QandAModule({ product_id, product_name }) {
-  const [questionList, setQuestionList] = useState([]);
+  // display state
   const [displayList, setDisplayList] = useState([]);
   const [countShown, setCountShown] = useState(2);
-  const [page, setPage] = useState(1);
   const [showMoreQuestions, setShowMoreQuestions] = useState(false);
+
+  const questionList = useGetQuestions(
+    product_id,
+    setDisplayList,
+    setShowMoreQuestions
+  );
+
+  //filtered questions state
+  const [displayFiltered, setDisplayFiltered] = useState([]);
+  const [filterCountShown, setFilterCountShown] = useState(2);
+  const [showMoreFilteredQuestions, setShowMoreFilteredQuestions] =
+    useState(false);
+
+  //search text state
   const [searchText, setSearchText] = useState('');
-  const [shouldSearch, setShouldSearch] = useState(false);
-  const debouncedSearchText = useDebounce(searchText, 1000);
+  const [filterMode, setFilterMode] = useState(false);
+  const debouncedSearchText = useDebounce(searchText, 1500);
 
   const filteredList = useFilterByMatchingText(
     questionList,
@@ -23,44 +34,70 @@ function QandAModule({ product_id, product_name }) {
     'question_body'
   );
 
-  const questionListLength = questionList.length;
-  const displayListLength = displayList.length;
-
-  // console.log('filteredList: ', filteredList);
-  console.log('debouncedSearchText: ', debouncedSearchText);
-  // console.log('shouldSearch: ', shouldSearch);
-  // console.log('searchText length: ', searchText.length);
-  //grab all questions
-  useEffect(() => {
-    getQuestions(
-      product_id,
-      page,
-      RESULTS_PER_PAGE,
-      setQuestionList,
-      setPage,
-      displayList,
-      setDisplayList,
-      setShowMoreQuestions
-    );
-  }, [page]);
-
   //as we incement count, also increment questions to display by two
   useEffect(() => {
-    if (countShown > 2) {
-      const grabNextTwo = questionList.slice(countShown - 2, countShown);
+    if (countShown < questionList.length) {
+      let newList;
+      if (countShown === 2) {
+        newList = displayList;
+      } else {
+        const grabNextTwo = questionList.slice(countShown - 2, countShown);
+        newList = [...displayList, ...grabNextTwo];
+      }
 
-      const newList = [...displayList, ...grabNextTwo];
       setDisplayList(newList);
+      setShowMoreQuestions(true);
+    } else {
+      setDisplayList(questionList);
+      setShowMoreQuestions(false);
     }
   }, [countShown]);
 
+  //as we increment filtered count, also increment filtered questions to display by two
+  useEffect(() => {
+    if (filterCountShown < filteredList.length) {
+      let newList;
+      if (filterCountShown === 2) {
+        newList = displayFiltered;
+      } else {
+        const grabNextTwo = filteredList.slice(
+          filterCountShown - 2,
+          filterCountShown
+        );
+        newList = [...displayFiltered, ...grabNextTwo];
+      }
+
+      setDisplayFiltered(newList);
+      setShowMoreFilteredQuestions(true);
+    } else {
+      setDisplayFiltered(filteredList);
+      setShowMoreFilteredQuestions(false);
+    }
+  }, [filterCountShown]);
+
+  // handle searching, want to only display first two questions
   useEffect(() => {
     if (debouncedSearchText.length >= 3) {
-      setShouldSearch(true);
-      setShowMoreQuestions(false);
+      const grabFirstTwo = filteredList.slice(
+        filterCountShown - 2,
+        filterCountShown
+      );
+
+      if (filterCountShown < filteredList.length) {
+        setShowMoreFilteredQuestions(true);
+      } else {
+        setShowMoreFilteredQuestions(false);
+      }
+
+      setFilterMode(true);
+      setCountShown(2);
+      setDisplayFiltered(grabFirstTwo);
     } else {
-      setShowMoreQuestions(true);
-      setShouldSearch(false);
+      const grabFirstTwo = questionList.slice(0, 2);
+
+      setFilterMode(false);
+      setFilterCountShown(2);
+      setDisplayList(grabFirstTwo);
     }
   }, [debouncedSearchText]);
 
@@ -70,22 +107,19 @@ function QandAModule({ product_id, product_name }) {
 
   const handleShowMoreQuestions = () => {
     setCountShown((prevState) => prevState + 2);
-    if (
-      displayListLength === questionListLength - 2 ||
-      displayListLength === questionListLength - 1
-    ) {
-      setShowMoreQuestions(false);
-    }
   };
 
-  const list = shouldSearch ? (
+  const handleShowMoreFilteredQuestions = () => {
+    setFilterCountShown((prevState) => prevState + 2);
+  };
+
+  const list = filterMode ? (
     <QuestionList
-      displayList={filteredList}
+      displayList={displayFiltered}
       productName={product_name}
       productId={product_id}
-      showMoreQuestions={showMoreQuestions}
-      setCountShown={setCountShown}
-      handleShowMoreQuestions={handleShowMoreQuestions}
+      showMoreQuestions={showMoreFilteredQuestions}
+      handleShowMoreQuestions={handleShowMoreFilteredQuestions}
     />
   ) : (
     <QuestionList
@@ -93,7 +127,6 @@ function QandAModule({ product_id, product_name }) {
       productName={product_name}
       productId={product_id}
       showMoreQuestions={showMoreQuestions}
-      setCountShown={setCountShown}
       handleShowMoreQuestions={handleShowMoreQuestions}
     />
   );
@@ -103,7 +136,6 @@ function QandAModule({ product_id, product_name }) {
       <h1>Questions & Answers</h1>
       <SearchQ
         handleUpdateSearchText={handleUpdateSearchText}
-        questionList={questionList}
         searchText={searchText}
       />
       {list}

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
-function SearchQ({ questionList, searchText, handleUpdateSearchText }) {
+function SearchQ({ searchText, handleUpdateSearchText }) {
   // console.log(searchText);
   return (
     <div className="search">

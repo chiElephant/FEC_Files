@@ -1,8 +1,6 @@
 import axios from 'axios';
 
 export default function markQuestionAsHelpful(question_id) {
-  // console.log(productId, page);
-
   const url = `helpful/question/${question_id}`;
 
   const options = {

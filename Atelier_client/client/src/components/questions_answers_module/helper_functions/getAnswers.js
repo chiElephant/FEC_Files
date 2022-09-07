@@ -22,7 +22,7 @@ export default function getAnswers(
         'answerer_name',
         'Seller'
       );
-      console.log('axios get answers');
+
       //remove duplicates, sort by helpfullness, and sort by answerer name last
       setAnswerList((prevState) => {
         const removedDub = _.unionBy(answerList, prevState, 'answer_id');
