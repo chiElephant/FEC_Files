@@ -55,42 +55,41 @@ function QandAModule({ product_id, product_name }) {
 
   //as we increment filtered count, also increment filtered questions to display by two
   useEffect(() => {
-    if (filterCountShown < filteredList.length) {
-      let newList;
-      if (filterCountShown === 2) {
-        newList = displayFiltered;
-      } else {
-        const grabNextTwo = filteredList.slice(
-          filterCountShown - 2,
-          filterCountShown
-        );
-        newList = [...displayFiltered, ...grabNextTwo];
-      }
+    if (displayFiltered.length !== filterCountShown) {
+      if (filterCountShown < filteredList.length) {
+        let newList;
+        if (filterCountShown === 2) {
+          newList = displayFiltered;
+        } else {
+          const grabNextTwo = filteredList.slice(
+            filterCountShown - 2,
+            filterCountShown
+          );
+          newList = [...displayFiltered, ...grabNextTwo];
+        }
 
-      setDisplayFiltered(newList);
-      setShowMoreFilteredQuestions(true);
-    } else {
-      setDisplayFiltered(filteredList);
-      setShowMoreFilteredQuestions(false);
+        setDisplayFiltered(newList);
+        setShowMoreFilteredQuestions(true);
+      } else {
+        setDisplayFiltered(filteredList);
+        setShowMoreFilteredQuestions(false);
+      }
     }
   }, [filterCountShown]);
 
   // handle searching, want to only display first two questions
   useEffect(() => {
     if (debouncedSearchText.length >= 3) {
-      const grabFirstTwo = filteredList.slice(
-        filterCountShown - 2,
-        filterCountShown
-      );
+      const grabFirstTwo = filteredList.slice(0, 2);
 
       if (filterCountShown < filteredList.length) {
         setShowMoreFilteredQuestions(true);
       } else {
         setShowMoreFilteredQuestions(false);
       }
-
       setFilterMode(true);
       setCountShown(2);
+      setFilterCountShown(2);
       setDisplayFiltered(grabFirstTwo);
     } else {
       const grabFirstTwo = questionList.slice(0, 2);
@@ -112,6 +111,10 @@ function QandAModule({ product_id, product_name }) {
   const handleShowMoreFilteredQuestions = () => {
     setFilterCountShown((prevState) => prevState + 2);
   };
+
+  console.log('filterCountShown: ', filterCountShown);
+  console.log('filteredList: ', filteredList);
+  console.log('displayFiltered: ', displayFiltered);
 
   const list = filterMode ? (
     <QuestionList
