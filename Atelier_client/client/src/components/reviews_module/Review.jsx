@@ -4,22 +4,16 @@ import { helpers } from './helper_functions/review.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid, regular, light, thin } from '@fortawesome/fontawesome-svg-core/import.macro';
 
-function Review ( {helpfulness, review_id, date, username, summary, review, rating} ) {
+function Review ( {helpfulness, review_id, date, username, summary, review, rating, body, response, recommend, photos } ) {
 
   const [helpfulnessDiv, setHelpfulnessDiv] = useState(<div />);
+  const [recommendDiv, setRecommendDiv] = useState(<div />);
+  const [responseDiv, setResponseDiv] = useState(<div />);
   const [formatedDate, setFormatedDate] = useState('');
   const [photosDiv, setPhotosDiv] = useState(<div />);
-  const [recommend, setRecommend] = useState(<div />);
-  const [response, setResponse] = useState(<div />);
-  const [stars, setStars] = useState(<div />);
+  const [starsDiv, setStarsDiv] = useState(<div />);
 
-  const [photos, setPhotos] = useState([]);
-  const [body, setBody] = useState('');
-
-  useEffect(() => {
-    handleReviewData(review)
-  }, [])
-
+  let currentHelpfulness = helpfulness;
 
   useEffect(() => {
       async function handleDate () {
@@ -29,25 +23,20 @@ function Review ( {helpfulness, review_id, date, username, summary, review, rati
       handleDate();
 
       async function handlePhotos () {
-        const photos = await helpers.handlePhotos(review.photos);
-        setPhotosDiv(photos);
+        const div = await helpers.handlePhotos(photos);
+        setPhotosDiv(div);
       }
       handlePhotos();
   }, []);
 
   useEffect(() => {
-    handleRatings(review.rating);
-    handleRecommend(review.recommend);
-    handleResponse(review.response);
-    handleHelpfulness(helpfulness);
+    createStarDiv(rating);
+    createRecommendDiv(recommend);
+    createResponseDiv(response);
+    createHelpfulnessDiv(helpfulness);
   }, []);
 
-  function handleReviewData(review) {
-    setPhotos(review.photos);
-    setBody(review.body);
-  }
-
-  function handleRatings(rating) {
+  function createStarDiv(rating) {
     let starRating = []
     if (rating !== 0) {
       for (let i = 1; i <= rating; i++) {
@@ -69,10 +58,10 @@ function Review ( {helpfulness, review_id, date, username, summary, review, rati
         )
       }
     }
-    setStars(starRating);
+    setStarsDiv(starRating);
   }
 
-  function handleRecommend (recommend) {
+  function createRecommendDiv (recommend) {
     let recDiv = [];
 
     if (recommend) {
@@ -87,11 +76,11 @@ function Review ( {helpfulness, review_id, date, username, summary, review, rati
           </span>
         </div>
       );
-      setRecommend(recDiv);
+      setRecommendDiv(recDiv);
     }
   }
 
-  function handleResponse (response) {
+  function createResponseDiv (response) {
     let responseDiv = [];
 
     if (response) {
@@ -105,12 +94,11 @@ function Review ( {helpfulness, review_id, date, username, summary, review, rati
          </div>
         </div>
       )
-      setResponse(responseDiv)
+      setResponseDiv(responseDiv)
     }
   }
 
-  function handleHelpfulness (helpful) {
-    console.log('helpful', helpful)
+  function createHelpfulnessDiv (helpful) {
     let helpfulDiv = [];
 
     helpfulDiv.push(
@@ -125,7 +113,7 @@ function Review ( {helpfulness, review_id, date, username, summary, review, rati
           {'Yes '}
         </div>
         <div>
-          {`(${helpful})`}
+          {`(${currentHelpfulness})`}
         </div>
         <div>
           <FontAwesomeIcon
@@ -141,25 +129,23 @@ function Review ( {helpfulness, review_id, date, username, summary, review, rati
   }
 
   function markHelpful() {
-    // setHelpfulness(helpfulness + 1)
 
-    // // helpers.markHelpful(review_id);
-    // helpers.markHelpful('1275279');
-    console.log(review_id);
+    createHelpfulnessDiv(helpfulness += 1)
+    helpers.markHelpful(review_id);
   }
 
   return (
     <div id="review">
       <div id='review-top-bar'>
-        <div id='stars'>{stars}</div>
+        <div id='stars'>{starsDiv}</div>
         <div id='date'>{formatedDate}</div>
         <div id='username'>{`${username},`}</div>
       </div>
       <div id='summary'>{summary}</div>
       <div id='body'>{body}</div>
       <div id='photos'>{photosDiv}</div>
-      <div id='recommend'>{recommend}</div>
-      <div id={response !== null ? 'recommend' : ''}>{response}</div>
+      <div id='recommend'>{recommendDiv}</div>
+      <div id={response !== null ? 'recommend' : ''}>{responseDiv}</div>
       <div id='helpfulness'>{helpfulnessDiv}</div>
     </div>
   );

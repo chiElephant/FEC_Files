@@ -8,7 +8,6 @@ const helpers = {
   }},
 
   handlePhotos: (photos) => {
-    console.log(photos)
     const photoDiv = [];
 
     if ( photos.length !== 0 && photos !== undefined)  {

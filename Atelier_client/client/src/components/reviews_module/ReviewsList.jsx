@@ -54,8 +54,8 @@ function ReviewsList({ reviews, setSortType, reviewCount }) {
               key={review.review_id}
               review={review}
               helpfulness={review.helpfulness}
-              rec={review.recomend}
-              res={review.response}
+              recommend={review.recommend}
+              response={review.response}
               review_id={review.review_id}
               username={review.reviewer_name}
               summary={review.summary}
