@@ -21,17 +21,15 @@ function Review({ review }) {
 
   useEffect(() => {
     handleReviewData(review)
+    console.log(review.review_id)
   }, [review])
 
   useEffect(() => {
-    if (review) {
       async function handleDate () {
         const convertedDate = await helpers.convertDate(review.date);
         setDate(convertedDate);
       }
       handleDate()
-
-    }
   }, [review]);
 
   useEffect(() => {
@@ -158,7 +156,9 @@ function Review({ review }) {
     const addHelpful = helpfulness + 1;
     handleHelpfulness(addHelpful);
 
-    helpers.markHelpful(review_id);
+    // helpers.markHelpful(review_id);
+    helpers.markHelpful('1275279');
+
   }
 
   return (

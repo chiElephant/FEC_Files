@@ -27,16 +27,21 @@ const helpers = {
   },
 
   markHelpful: (review_id) => {
-    console.log('review_id: ', review_id)
 
     const url = `reviews/${review_id}/helpful`
+
     const options = {
       method: 'put',
-      url
-    }
-    axios.put(options)
-    .then(res => console.log('Successfully marked as helpful'))
-    .catch(error => console.log('Error marking as helpful'))
+      url,
+    };
+
+    axios(options)
+      .then(response => {
+        console.log(response.status);
+      })
+      .catch(error => {
+        console.log('Error marking helpful')
+      })
   }
 };
 

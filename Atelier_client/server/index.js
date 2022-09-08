@@ -144,6 +144,17 @@ app.get('/reviews/meta', reviewsHelper.getMetaData, (req, res) => {
   res.status(200).send(res.body);
 });
 
+//PUT mark review helpful
+app.put('/reviews/:review_id/helpful', (req, res) => {
+  reviewsHelper.markHelpful(req.params, (error, success) => {
+    if (error) {
+      res.status(500).send(error)
+    } else {
+      res.status(204)
+    }
+  })
+})
+
 app.get('/reviews/*', (req, res) => {
   res.render('/');
 })

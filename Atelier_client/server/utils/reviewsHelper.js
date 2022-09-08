@@ -1,18 +1,20 @@
 require('dotenv').config();
 const axios = require('axios');
 
-const endpoint = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/`;
-const metaEndpoint = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/meta/`;
-const token = process.env.TOKEN;
+const { URL, TOKEN } = process.env
+
+const helpfulEndpoint = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/:review_id/helpful`;
 
 const getReviews = (req, res, next) => {
+  const url = `${URL}/reviews`
+
   const options = {
-    headers: { Authorization: token },
+    headers: { Authorization: TOKEN },
     params: req.query,
   };
 
   axios
-    .get(endpoint, options)
+    .get(url, options)
     .then((response) => {
       res.body = response.data.results;
       next();
@@ -21,13 +23,14 @@ const getReviews = (req, res, next) => {
 };
 
 const getMetaData = (req, res, next) => {
+  const url = `${URL}/reviews/meta`
   const options = {
-    headers: { Authorization: token },
+    headers: { Authorization: TOKEN },
     params: req.query,
   };
 
   axios
-    .get(metaEndpoint, options)
+    .get(url, options)
     .then((response) => {
       res.body = response.data;
       next();
@@ -62,9 +65,9 @@ const postReview = (req, res, next) => {
 
   const options = {
     method: 'post',
-    url: endpoint,
+    url: `${URL}/reviews`,
     headers: {
-      Authorization: token,
+      Authorization: TOKEN,
       'Content-Type': 'application/json',
     },
     data,
@@ -77,8 +80,26 @@ const postReview = (req, res, next) => {
     .catch(next);
 };
 
+const markHelpful = (review_id, cb) => {
+
+  const url = `${URL}/reviews/?${review_id}/helpful`;
+
+  const options = {
+    method: 'put',
+    url,
+    headers: {
+      Authorization: TOKEN,
+    },
+  };
+
+  axios(options)
+    .then(res => cb(res.status))
+    .catch(err => cb(err))
+};
+
 module.exports = {
   getReviews,
   getMetaData,
   postReview,
+  markHelpful,
 };
