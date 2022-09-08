@@ -1,5 +1,37 @@
 /* Reviews Module */
 
+/* Bars and Meters */
+
+.char-meter {
+  width: 18%;
+  box-sizing: content-box;
+  height: 12px;
+  position: relative;
+  margin: 12px 6px 12px 0;
+  background: rgb(235, 235, 235);
+}
+
+.graph-meter {
+  width: 62%;
+  box-sizing: content-box;
+  height: 12px;
+  position: relative;
+  margin: 12px;
+  background: rgb(235, 235, 235);
+}
+
+.graph-meter > span {
+  display: block;
+  height: 100%;
+  background-color: rgb(82, 82, 82);
+  position: relative;
+  overflow: hidden;
+}
+
+#meters {
+  display: flex;
+}
+
 /* Modal */
 #review-window {
   position: fixed;
@@ -72,6 +104,7 @@
   display: flex;
   justify-content: space-between;
   color: rgb(82, 82, 82);
+  max-width: 100px;
 }
 
 #username, #date {
@@ -87,7 +120,6 @@
 
 #stars, #body {
   float: left;
-  max-width: 100px;
 }
 
 #summary {
@@ -292,43 +324,8 @@
   color:rgb(103, 103, 103);
 }
 
-#meters {
-  display: flex;
-}
 
-.char-meter {
-  width: 18%;
-  box-sizing: content-box;
-  height: 12px;
-  position: relative;
-  margin: 12px 6px 12px 0;
-  background: rgb(235, 235, 235);
-}
 
-.graph-meter {
-  width: 70%;
-  box-sizing: content-box;
-  height: 12px;
-  position: relative;
-  margin: 12px;
-  background: rgb(235, 235, 235);
-}
-
-.graph-meter > span {
-  width: 50%;
-  display: block;
-  height: 100%;
-  background-color: rgb(82, 82, 82);
-  background-image: linear-gradient(
-    center bottom,
-    rgb(82, 82, 82) 37%,
-    rgb(70, 70, 70) 69%
-  );
-  box-shadow: inset 0 2px 9px rgba(255, 255, 255, 0.3),
-    inset 0 -2px 6px rgba(0, 0, 0, 0.4);
-  position: relative;
-  overflow: hidden;
-}
 
 
 
