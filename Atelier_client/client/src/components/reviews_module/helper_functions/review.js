@@ -27,15 +27,10 @@ const helpers = {
   },
 
   markHelpful: (review_id) => {
-
+    console.log(review_id)
     const url = `reviews/${review_id}/helpful`
 
-    const options = {
-      method: 'put',
-      url,
-    };
-
-    axios(options)
+    axios.put(url)
       .then(response => {
         console.log(response.status);
       })

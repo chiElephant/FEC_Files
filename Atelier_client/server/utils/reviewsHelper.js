@@ -80,9 +80,9 @@ const postReview = (req, res, next) => {
     .catch(next);
 };
 
-const markHelpful = (review_id, cb) => {
+const markHelpful = (params, cb) => {
 
-  const url = `${URL}/reviews/?${review_id}/helpful`;
+  const url = `${URL}/reviews/${params.review_id}/helpful`;
 
   const options = {
     method: 'put',
@@ -94,7 +94,7 @@ const markHelpful = (review_id, cb) => {
 
   axios(options)
     .then(res => cb(res.status))
-    .catch(err => cb(err))
+    .catch(err => console.log('Axios express helper error'))
 };
 
 module.exports = {

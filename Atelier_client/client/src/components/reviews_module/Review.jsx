@@ -6,14 +6,18 @@ import { solid, regular, light, thin } from '@fortawesome/fontawesome-svg-core/i
 
 function Review ( {helpfulness, review_id, date, username, summary, review, rating, body, response, recommend, photos } ) {
 
+  const [currentHelpful, setCurrentHelpful] = useState(helpfulness);
+
+  const [reviewDivs, setReviewDivs] = useState({
+    helpfulnessDiv: '<div />'
+  })
+
   const [helpfulnessDiv, setHelpfulnessDiv] = useState(<div />);
   const [recommendDiv, setRecommendDiv] = useState(<div />);
   const [responseDiv, setResponseDiv] = useState(<div />);
   const [formatedDate, setFormatedDate] = useState('');
   const [photosDiv, setPhotosDiv] = useState(<div />);
   const [starsDiv, setStarsDiv] = useState(<div />);
-
-  let currentHelpfulness = helpfulness;
 
   useEffect(() => {
       async function handleDate () {
@@ -113,7 +117,7 @@ function Review ( {helpfulness, review_id, date, username, summary, review, rati
           {'Yes '}
         </div>
         <div>
-          {`(${currentHelpfulness})`}
+          {`(${currentHelpful})`}
         </div>
         <div>
           <FontAwesomeIcon
@@ -125,11 +129,11 @@ function Review ( {helpfulness, review_id, date, username, summary, review, rati
         </div>
       </div>
     )
-    setHelpfulnessDiv(helpfulDiv);
+    setHelpfulnessDiv(prevHelpfulDiv => helpfulDiv);
   }
 
   function markHelpful() {
-
+    setCurrentHelpful(prevCurrentHelpful => prevCurrentHelpful + 1)
     createHelpfulnessDiv(helpfulness += 1)
     helpers.markHelpful(review_id);
   }
