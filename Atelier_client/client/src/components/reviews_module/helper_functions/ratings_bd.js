@@ -58,7 +58,9 @@ function createRatingsGraphDiv(ratings, setRatingsGraphDiv) {
         <div className="graph-text">
           5 stars
         </div>
-        <div className="graph-bar"></div>
+        <div className="graph-meter">
+          <span></span>
+        </div>
         <div className="graph-rating">
           {ratings[5]}
         </div>
@@ -68,7 +70,9 @@ function createRatingsGraphDiv(ratings, setRatingsGraphDiv) {
         <div className="graph-text">
           4 stars
         </div>
-        <div className="graph-bar"></div>
+        <div className="graph-meter">
+          <span></span>
+        </div>
         <div className="graph-rating">
           {ratings[4]}
         </div>
@@ -78,7 +82,9 @@ function createRatingsGraphDiv(ratings, setRatingsGraphDiv) {
         <div className="graph-text">
           3 stars
         </div>
-        <div className="graph-bar"></div>
+        <div className="graph-meter">
+          <span></span>
+        </div>
         <div className="graph-rating">
           {ratings[3]}
         </div>
@@ -88,7 +94,9 @@ function createRatingsGraphDiv(ratings, setRatingsGraphDiv) {
         <div className="graph-text">
           2 stars
         </div>
-        <div className="graph-bar"></div>
+        <div className="graph-meter">
+          <span></span>
+        </div>
         <div className="graph-rating">
           {ratings[2]}
         </div>
@@ -98,7 +106,9 @@ function createRatingsGraphDiv(ratings, setRatingsGraphDiv) {
         <div className="graph-text">
           1 stars
         </div>
-        <div className="graph-bar"></div>
+        <div className="graph-meter">
+         <span></span>
+        </div>
         <div className="graph-rating">
           {ratings[1]}
         </div>
