@@ -161,7 +161,7 @@ function Review ( props ) {
   }
 
   function markHelpful() {
-    if (currentHelpful === helpful) {
+    if (currentHelpful === helpfulness) {
       const newHelpful = currentHelpful + 1
       console.log(newHelpful)
       setCurrentHelpful(currentHelpful => currentHelpful + 1)
