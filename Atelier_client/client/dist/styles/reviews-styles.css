@@ -237,6 +237,52 @@
   background-color:rgb(162, 162, 162)
 }
 
+#average-rating {
+  color:rgb(82, 82, 82);
+  display: flex;
+}
+
+#average {
+  font-size: 68px;
+  font-weight: bold;
+  height: 90px;
+}
+
+#breakdown-stars {
+  padding: 24px 0 0 12px
+}
+
+#review-count, #recommend-percent, #ratings-graph {
+  font-size: medium;
+  color: rgb(103, 103, 103);
+
+}
+
+#five-star, #four-star, #three-star, #two-star, #one-star {
+  display: inline-flex;
+}
+
+.graph-text {
+  border-bottom: solid 1px rgb(103, 103, 103);
+}
+
+.graph-bar {
+  width: 224px;
+}
+
+.graph-rating {
+  width: 16px;
+  font-size: small;
+  border: none;
+  float: right;
+}
+
+
+
+
+
+
+
 
 
 

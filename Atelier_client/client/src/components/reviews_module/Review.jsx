@@ -1,23 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { helpers } from './helper_functions/review.js';
+import uniqid from 'uniqid';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid, regular, light, thin } from '@fortawesome/fontawesome-svg-core/import.macro';
 
-function Review ( {helpfulness, review_id, date, username, summary, review, rating, body, response, recommend, photos } ) {
+function Review ( props ) {
+
+  const { helpfulness, review_id, date, username, summary, review, rating, body, response, recommend, photos } = props
 
   const [currentHelpful, setCurrentHelpful] = useState(helpfulness);
+  const [formatedDate, setFormatedDate] = useState('');
 
   const [reviewDivs, setReviewDivs] = useState({
-    helpfulnessDiv: '<div />'
-  })
+    helpfulnessDiv: [<div />],
+    recommendDiv: [<div />],
+    responseDiv: [<div />],
+    photosDiv: [<div />],
+    starsDiv: [<div />],
+  });
 
-  const [helpfulnessDiv, setHelpfulnessDiv] = useState(<div />);
-  const [recommendDiv, setRecommendDiv] = useState(<div />);
-  const [responseDiv, setResponseDiv] = useState(<div />);
-  const [formatedDate, setFormatedDate] = useState('');
-  const [photosDiv, setPhotosDiv] = useState(<div />);
-  const [starsDiv, setStarsDiv] = useState(<div />);
+  // const [helpfulnessDiv, setHelpfulnessDiv] = useState(<div />);
+  // const [recommendDiv, setRecommendDiv] = useState(<div />);
+  // const [responseDiv, setResponseDiv] = useState(<div />);
+  // const [photosDiv, setPhotosDiv] = useState(<div />);
+  // const [starsDiv, setStarsDiv] = useState(<div />);
 
   useEffect(() => {
       async function handleDate () {
@@ -28,25 +35,30 @@ function Review ( {helpfulness, review_id, date, username, summary, review, rati
 
       async function handlePhotos () {
         const div = await helpers.handlePhotos(photos);
-        setPhotosDiv(div);
+
+        const newPhotosDiv = { photosDiv: div};
+        setReviewDivs(reviewDiv => ({
+          ...reviewDiv,
+          ...newPhotosDiv
+        }));
       }
       handlePhotos();
   }, []);
 
   useEffect(() => {
-    createStarDiv(rating);
-    createRecommendDiv(recommend);
-    createResponseDiv(response);
-    createHelpfulnessDiv(helpfulness);
+    createStarDiv();
+    createRecommendDiv();
+    createResponseDiv();
+    createHelpfulnessDiv();
   }, []);
 
-  function createStarDiv(rating) {
+  function createStarDiv() {
     let starRating = []
     if (rating !== 0) {
       for (let i = 1; i <= rating; i++) {
         starRating.push(
           <FontAwesomeIcon
-            key={`${i}-solid`}
+            key={uniqid()}
             className='star'
             icon={solid('star-sharp')}
           />
@@ -55,24 +67,28 @@ function Review ( {helpfulness, review_id, date, username, summary, review, rati
       for (let i = rating; i < 5; i++) {
         starRating.push(
           <FontAwesomeIcon
-            key={`${i}-regular`}
+            key={uniqid()}
             className='star'
             icon={light('star-sharp')}
           />
         )
       }
     }
-    setStarsDiv(starRating);
+    const newStarsDiv = { starsDiv: starRating};
+    setReviewDivs(reviewDivs => ({
+      ...reviewDivs,
+      ...newStarsDiv
+    }));
   }
 
-  function createRecommendDiv (recommend) {
+  function createRecommendDiv () {
     let recDiv = [];
 
     if (recommend) {
       recDiv.push(
-        <div key='recommend' id='user-recommend'>
+        <div key={uniqid()} id='user-recommend'>
           <FontAwesomeIcon
-            key='1'
+            key={uniqid()}
             icon={regular('check')}
           />
           <span id='user-rec'>
@@ -80,16 +96,20 @@ function Review ( {helpfulness, review_id, date, username, summary, review, rati
           </span>
         </div>
       );
-      setRecommendDiv(recDiv);
+      const newRecDiv = { recommendDiv: recDiv};
+      setReviewDivs(recommendDiv => ({
+        ...recommendDiv,
+        ...newRecDiv
+      }));
     }
   }
 
-  function createResponseDiv (response) {
+  function createResponseDiv () {
     let responseDiv = [];
 
     if (response) {
       responseDiv.push(
-        <div key='response' id='user-response'>
+        <div key={uniqid()} id='user-response'>
          <div className='response'>
           {'Response:'}
          </div>
@@ -98,15 +118,19 @@ function Review ( {helpfulness, review_id, date, username, summary, review, rati
          </div>
         </div>
       )
-      setResponseDiv(responseDiv)
+      const newResponseDiv = { responseDiv: responseDiv};
+      setReviewDivs(recommendDiv => ({
+        ...responseDiv,
+        ...newResponseDiv,
+      }));
     }
   }
 
-  function createHelpfulnessDiv (helpful) {
+  function createHelpfulnessDiv () {
     let helpfulDiv = [];
 
     helpfulDiv.push(
-      <div id='helpful-text' key='helpful'>
+      <div id='helpful-text' key={uniqid()}>
         <div>
           {'Helpful?'}
         </div>
@@ -129,28 +153,36 @@ function Review ( {helpfulness, review_id, date, username, summary, review, rati
         </div>
       </div>
     )
-    setHelpfulnessDiv(prevHelpfulDiv => helpfulDiv);
+    const newHelpfulDiv = { helpfulnessDiv: helpfulDiv};
+    setReviewDivs(reviewDivs => ({
+      ...reviewDivs,
+      ...newHelpfulDiv
+    }));
   }
 
   function markHelpful() {
-    setCurrentHelpful(prevCurrentHelpful => prevCurrentHelpful + 1)
-    createHelpfulnessDiv(helpfulness += 1)
-    helpers.markHelpful(review_id);
+    if (currentHelpful === helpful) {
+      const newHelpful = currentHelpful + 1
+      console.log(newHelpful)
+      setCurrentHelpful(currentHelpful => currentHelpful + 1)
+      createHelpfulnessDiv(newHelpful)
+      helpers.markHelpful(review_id);
+    }
   }
 
   return (
     <div id="review">
       <div id='review-top-bar'>
-        <div id='stars'>{starsDiv}</div>
+        <div id='stars'>{reviewDivs.starsDiv}</div>
         <div id='date'>{formatedDate}</div>
         <div id='username'>{`${username},`}</div>
       </div>
       <div id='summary'>{summary}</div>
       <div id='body'>{body}</div>
-      <div id='photos'>{photosDiv}</div>
-      <div id='recommend'>{recommendDiv}</div>
-      <div id={response !== null ? 'recommend' : ''}>{responseDiv}</div>
-      <div id='helpfulness'>{helpfulnessDiv}</div>
+      <div id='photos'>{reviewDivs.photosDiv}</div>
+      <div id='recommend'>{reviewDivs.recommendDiv}</div>
+      <div id={response !== null ? 'recommend' : ''}>{reviewDivs.responseDiv}</div>
+      <div id='helpfulness'>{reviewDivs.helpfulnessDiv}</div>
     </div>
   );
 }

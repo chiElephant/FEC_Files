@@ -53,22 +53,58 @@ const characteristics = metadata.Characteristics;
 function createRatingsGraphDiv(ratings, setRatingsGraphDiv) {
   setRatingsGraphDiv([
     <div id="ratings-graph" key="0">
+
       <div id="five-star" key="5">
-        5 stars: {ratings[5]}
+        <div className="graph-text">
+          5 stars
+        </div>
+        <div className="graph-bar"></div>
+        <div className="graph-rating">
+          {ratings[5]}
+        </div>
       </div>
+
       <div id="four-star" key="4">
-        4 stars: {ratings[4]}
+        <div className="graph-text">
+          4 stars
+        </div>
+        <div className="graph-bar"></div>
+        <div className="graph-rating">
+          {ratings[4]}
+        </div>
       </div>
+
       <div id="three-star" key="3">
-        3 stars: {ratings[3]}
+        <div className="graph-text">
+          3 stars
+        </div>
+        <div className="graph-bar"></div>
+        <div className="graph-rating">
+          {ratings[3]}
+        </div>
       </div>
+
       <div id="two-star" key="2">
-        2 stars: {ratings[2]}
+        <div className="graph-text">
+          2 stars
+        </div>
+        <div className="graph-bar"></div>
+        <div className="graph-rating">
+          {ratings[2]}
+        </div>
       </div>
+
       <div id="one-star" key="1">
-        1 stars: {ratings[1]}
+        <div className="graph-text">
+          1 stars
+        </div>
+        <div className="graph-bar"></div>
+        <div className="graph-rating">
+          {ratings[1]}
+        </div>
       </div>
-    </div>,
+
+    </div>
   ]);
 }
 
