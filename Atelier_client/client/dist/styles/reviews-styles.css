@@ -87,6 +87,7 @@
 
 #stars, #body {
   float: left;
+  max-width: 100px;
 }
 
 #summary {
@@ -291,11 +292,16 @@
   color:rgb(103, 103, 103);
 }
 
+#meters {
+  display: flex;
+}
+
 .char-meter {
+  width: 18%;
   box-sizing: content-box;
   height: 12px;
   position: relative;
-  margin: 12px 0 12px 0;
+  margin: 12px 6px 12px 0;
   background: rgb(82, 82, 82);
 }
 

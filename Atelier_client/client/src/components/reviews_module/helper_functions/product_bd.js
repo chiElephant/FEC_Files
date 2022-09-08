@@ -12,7 +12,13 @@ function createCharsDiv(metadata) {
           <div className="char-name">
             {`${char}`}
           </div>
-          <div className="char-meter" />
+          <div id="meters">
+            <div className="char-meter" />
+            <div className="char-meter" />
+            <div className="char-meter" />
+            <div className="char-meter" />
+            <div className="char-meter" />
+          </div>
         </div>
       );
     }
