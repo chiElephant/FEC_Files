@@ -4,7 +4,7 @@ import { helpers } from './helper_functions/review.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid, regular, light, thin } from '@fortawesome/fontawesome-svg-core/import.macro';
 
-function Review({ review }) {
+function Review ( {helpfulnes, review}) {
 
   const [photosDiv, setPhotosDiv] = useState(<div />);
   const [helpfulness, setHelpfulness] = useState(0);
@@ -22,33 +22,29 @@ function Review({ review }) {
   useEffect(() => {
     handleReviewData(review)
     console.log(review.review_id)
-  }, [review])
+  }, [])
+
 
   useEffect(() => {
       async function handleDate () {
         const convertedDate = await helpers.convertDate(review.date);
         setDate(convertedDate);
       }
-      handleDate()
-  }, [review]);
+      handleDate();
 
-  useEffect(() => {
-    async function handlePhotos () {
-      const photos = await helpers.handlePhotos(review.photos);
-      setPhotosDiv(photos);
-    }
-    handlePhotos();
-  }, [review]);
+      async function handlePhotos () {
+        const photos = await helpers.handlePhotos(review.photos);
+        setPhotosDiv(photos);
+      }
+      handlePhotos();
+  }, []);
 
   useEffect(() => {
     handleRatings(review.rating);
     handleRecommend(review.recommend);
     handleResponse(review.response);
-  }, [review]);
-
-  useEffect(() => {
     handleHelpfulness(review.helpfulness);
-  }, [review]);
+  }, []);
 
   function handleReviewData(review) {
     setReview_id(review.review_id);
@@ -152,13 +148,11 @@ function Review({ review }) {
   }
 
   function markHelpful() {
+    // setHelpfulness(helpfulness + 1)
 
-    const addHelpful = helpfulness + 1;
-    handleHelpfulness(addHelpful);
-
-    // helpers.markHelpful(review_id);
-    helpers.markHelpful('1275279');
-
+    // // helpers.markHelpful(review_id);
+    // helpers.markHelpful('1275279');
+    console.log(review_id);
   }
 
   return (

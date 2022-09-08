@@ -58,7 +58,20 @@ function ReviewsList({ reviews, setSortType, reviewCount }) {
       <div id='reviews'>
         {reviews
           ? reviews.map((review) => (
-            <Review key={review.review_id} review={review} />
+            <Review
+              key={review.review_id}
+              review={review}
+              helpfulnes={review.helpfulness}
+              // rec={review.recomend}
+              // res={review.response}
+              // id={review.review_id}
+              // username={review.username}
+              // summary={review.summary}
+              // photos={review.photos}
+              // rating={review.rating}
+              // body={review.body}
+              // date={review.date}
+              />
             ))
           : ''
         }

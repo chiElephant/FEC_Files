@@ -1,5 +1,8 @@
 import axios from 'axios';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { solid, regular, light, thin } from '@fortawesome/fontawesome-svg-core/import.macro';
+
 // ******************** Initial State Variables ******************** //
 
 const metadata = {
@@ -78,7 +81,7 @@ function handleRecommend(recommend, setPercentRec) {
   setPercentRec(avg);
 }
 
-function handleRatings(ratings, setAvgRating, setTotalReviews) {
+function handleRatings(ratings, setAvgRating, setTotalReviews, setStarsDiv) {
   let reviewsCount = 0;
   let sum = 0;
   let avg = 0;
@@ -93,8 +96,10 @@ function handleRatings(ratings, setAvgRating, setTotalReviews) {
 
   avg = (sum / reviewsCount).toFixed(1);
 
+  createStarsRating(avg, setStarsDiv)
   setTotalReviews(reviewsCount);
   setAvgRating(avg);
+
 }
 
 function getMetadata(product_id, setState) {
@@ -115,7 +120,8 @@ function getMetadata(product_id, setState) {
       handleRatings(
         metadata.ratings,
         setState.setAvgRating,
-        setState.setTotalReviews
+        setState.setTotalReviews,
+        setState.setStarsDiv
       );
       handleRecommend(metadata.recommended, setState.setPercentRec)
     })
@@ -124,4 +130,29 @@ function getMetadata(product_id, setState) {
     );
 }
 
-export { metadata, ratings, characteristics, getMetadata };
+function createStarsRating(rating, setStarsDiv) {
+  let starRating = []
+  if (rating !== 0) {
+    for (let i = 1; i <= rating; i++) {
+      starRating.push(
+        <FontAwesomeIcon
+          key={`${i}-solid`}
+          className='star'
+          icon={solid('star-sharp')}
+        />
+      )
+    }
+    for (let i = rating; i < 5; i++) {
+      starRating.push(
+        <FontAwesomeIcon
+          key={`${i}-regular`}
+          className='star'
+          icon={light('star-sharp')}
+        />
+      )
+    }
+  }
+  setStarsDiv(starRating)
+}
+
+export { metadata, ratings, characteristics, getMetadata, createStarsRating };
