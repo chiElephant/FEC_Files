@@ -277,6 +277,17 @@
   float: right;
 }
 
+#ratings-reviews {
+  font-size: large;
+  color:rgb(82, 82, 82);
+  font-weight: 300;
+  padding-left: 12px;
+}
+
+#char-div {
+  color:rgb(103, 103, 103);
+}
+
 
 
 

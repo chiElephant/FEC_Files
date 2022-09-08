@@ -9,7 +9,12 @@ function createCharsDiv(metadata) {
       const value = Math.floor(metadata[char].value);
       charDiv.push(
         <div className="characteristic" key={key}>
-          {`${char}: ${value} avg`}
+          <div className="char-name">
+            {`${char}`}
+          </div>
+          <div className="char-bar">
+          </div>
+            {/* {`${value}`} */}
         </div>
       );
     }

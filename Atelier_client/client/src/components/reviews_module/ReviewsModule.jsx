@@ -27,7 +27,7 @@ function ReviewsModule({ product_id, product_name }) {
 
   return (
     <div id="reviews-module">
-      <h2> Ratings and Reviews </h2>
+      <h2 id="ratings-reviews"> Ratings and Reviews </h2>
       <RatingsBreakdown productId={productId}
         setCharacteristics={setCharacteristics}
         characteristics={characteristics} />

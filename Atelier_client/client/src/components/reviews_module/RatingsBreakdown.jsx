@@ -48,7 +48,8 @@ function RatingsBreakdown({ productId, setCharacteristics, characteristics }) {
       <br></br>
       {ratingsGraphDiv}
       <br></br>
-      <ProductBreakdown characteristics={characteristics} />
+      <ProductBreakdown
+        characteristics={characteristics} />
     </div>
   );
 }
