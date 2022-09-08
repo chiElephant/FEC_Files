@@ -4,7 +4,7 @@ import { helpers } from './helper_functions/review.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid, regular, light, thin } from '@fortawesome/fontawesome-svg-core/import.macro';
 
-function Review ( {helpfulness, review_id, date, username, review} ) {
+function Review ( {helpfulness, review_id, date, username, summary, review} ) {
 
   const [helpfulnessDiv, setHelpfulnessDiv] = useState(<div />);
   const [formatedDate, setFormatedDate] = useState('');
@@ -13,7 +13,6 @@ function Review ( {helpfulness, review_id, date, username, review} ) {
   const [response, setResponse] = useState(<div />);
   const [stars, setStars] = useState(<div />);
 
-  const [summary, setSummary] = useState('');
   const [photos, setPhotos] = useState([]);
   const [rating, setRating] = useState(0);
   const [body, setBody] = useState('');
@@ -45,7 +44,6 @@ function Review ( {helpfulness, review_id, date, username, review} ) {
   }, []);
 
   function handleReviewData(review) {
-    setSummary(review.summary);
     setRating(review.rating);
     setPhotos(review.photos);
     setBody(review.body);
