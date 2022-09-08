@@ -46,14 +46,6 @@ function ReviewsList({ reviews, setSortType, reviewCount }) {
               size='lg'/>
           </div>
         </div>
-        {/* <select
-          id="sort-type"
-          onChange={() => handleSortType(setSort, setType)}
-        >
-          <option value="relevant">Relevant</option>
-          <option value="newest">Newest</option>
-          <option value="helpful">Helpful</option>
-        </select> */}
       </div>
       <div id='reviews'>
         {reviews
@@ -61,16 +53,16 @@ function ReviewsList({ reviews, setSortType, reviewCount }) {
             <Review
               key={review.review_id}
               review={review}
-              helpfulnes={review.helpfulness}
-              // rec={review.recomend}
-              // res={review.response}
-              // id={review.review_id}
-              // username={review.username}
-              // summary={review.summary}
-              // photos={review.photos}
-              // rating={review.rating}
-              // body={review.body}
-              // date={review.date}
+              helpfulness={review.helpfulness}
+              rec={review.recomend}
+              res={review.response}
+              review_id={review.review_id}
+              username={review.reviewer_name}
+              summary={review.summary}
+              photos={review.photos}
+              rating={review.rating}
+              body={review.body}
+              date={review.date}
               />
             ))
           : ''
@@ -82,25 +74,3 @@ function ReviewsList({ reviews, setSortType, reviewCount }) {
 
 export default ReviewsList;
 
-{/* <div id="reviews-list">
-<h3>Reviews List</h3>
-<div>
-  <label>Sort on: </label>
-  <select
-    id="sort-type"
-    onChange={() => handleSortType(setSort, setType)}
-  >
-    <option value="relevant">Relevant</option>
-    <option value="newest">Newest</option>
-    <option value="helpful">Helpful</option>
-  </select>
-</div>
-<ul id='reviews'>
-  {reviews
-    ? reviews.map((review) => (
-      <Review key={review.review_id} review={review} />
-      ))
-    : ''
-  }
-</ul>
-</div> */}

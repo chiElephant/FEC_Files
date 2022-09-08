@@ -4,31 +4,29 @@ import { helpers } from './helper_functions/review.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid, regular, light, thin } from '@fortawesome/fontawesome-svg-core/import.macro';
 
-function Review ( {helpfulnes, review}) {
+function Review ( {helpfulness, review_id, date, username, review} ) {
 
+  const [helpfulnessDiv, setHelpfulnessDiv] = useState(<div />);
+  const [formatedDate, setFormatedDate] = useState('');
   const [photosDiv, setPhotosDiv] = useState(<div />);
-  const [helpfulness, setHelpfulness] = useState(0);
-  const [recommend, setRecommend] = useState(false);
-  const [response, setResponse] = useState(null);
-  const [review_id, setReview_id] = useState(0);
-  const [username, setUsername] = useState('');
+  const [recommend, setRecommend] = useState(<div />);
+  const [response, setResponse] = useState(<div />);
   const [stars, setStars] = useState(<div />);
+
   const [summary, setSummary] = useState('');
   const [photos, setPhotos] = useState([]);
   const [rating, setRating] = useState(0);
   const [body, setBody] = useState('');
-  const [date, setDate] = useState('');
 
   useEffect(() => {
     handleReviewData(review)
-    console.log(review.review_id)
   }, [])
 
 
   useEffect(() => {
       async function handleDate () {
-        const convertedDate = await helpers.convertDate(review.date);
-        setDate(convertedDate);
+        const convertedDate = await helpers.convertDate(date);
+        setFormatedDate(convertedDate);
       }
       handleDate();
 
@@ -43,12 +41,10 @@ function Review ( {helpfulnes, review}) {
     handleRatings(review.rating);
     handleRecommend(review.recommend);
     handleResponse(review.response);
-    handleHelpfulness(review.helpfulness);
+    handleHelpfulness(helpfulness);
   }, []);
 
   function handleReviewData(review) {
-    setReview_id(review.review_id);
-    setUsername(review.reviewer_name.concat(','));
     setSummary(review.summary);
     setRating(review.rating);
     setPhotos(review.photos);
@@ -118,6 +114,7 @@ function Review ( {helpfulnes, review}) {
   }
 
   function handleHelpfulness (helpful) {
+    console.log('helpful', helpful)
     let helpfulDiv = [];
 
     helpfulDiv.push(
@@ -144,7 +141,7 @@ function Review ( {helpfulnes, review}) {
         </div>
       </div>
     )
-    setHelpfulness(helpfulDiv);
+    setHelpfulnessDiv(helpfulDiv);
   }
 
   function markHelpful() {
@@ -159,15 +156,15 @@ function Review ( {helpfulnes, review}) {
     <div id="review">
       <div id='review-top-bar'>
         <div id='stars'>{stars}</div>
-        <div id='date'>{date}</div>
-        <div id='username'>{username}</div>
+        <div id='date'>{formatedDate}</div>
+        <div id='username'>{`${username},`}</div>
       </div>
       <div id='summary'>{summary}</div>
       <div id='body'>{body}</div>
       <div id='photos'>{photosDiv}</div>
       <div id='recommend'>{recommend}</div>
       <div id={response !== null ? 'recommend' : ''}>{response}</div>
-      <div id='helpfulness'>{helpfulness}</div>
+      <div id='helpfulness'>{helpfulnessDiv}</div>
     </div>
   );
 }
