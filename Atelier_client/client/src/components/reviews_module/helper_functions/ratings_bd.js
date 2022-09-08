@@ -50,7 +50,30 @@ const characteristics = metadata.Characteristics;
 
 // ******************** Helper Functions ******************** //
 
-function createRatingsGraphDiv(ratings, setRatingsGraphDiv) {
+function handleRatingsPercent(ratings) {
+  let sum = 0;
+
+  let percentKey = {
+    1: 0,
+    2: 0,
+    3: 0,
+    4: 0,
+    5: 0,
+  }
+
+  for (let rating in ratings) {
+    sum += parseInt(ratings[rating]);
+  }
+
+  for (let rating in ratings) {
+    const value = ratings[rating];
+    percentKey[rating] = Math.floor((value/sum) * 100);
+  }
+  return percentKey;
+}
+
+async function createRatingsGraphDiv(ratings, setRatingsGraphDiv) {
+  const ratingsPercent = await handleRatingsPercent(ratings);
   setRatingsGraphDiv([
     <div id="ratings-graph" key="0">
 
@@ -59,7 +82,7 @@ function createRatingsGraphDiv(ratings, setRatingsGraphDiv) {
           5 stars
         </div>
         <div className="graph-meter">
-          <span></span>
+          <span style={{width: ratingsPercent[5] + '%'}}></span>
         </div>
         <div className="graph-rating">
           {ratings[5]}
@@ -71,7 +94,7 @@ function createRatingsGraphDiv(ratings, setRatingsGraphDiv) {
           4 stars
         </div>
         <div className="graph-meter">
-          <span></span>
+          <span style={{width: ratingsPercent[4] + '%'}}></span>
         </div>
         <div className="graph-rating">
           {ratings[4]}
@@ -83,7 +106,7 @@ function createRatingsGraphDiv(ratings, setRatingsGraphDiv) {
           3 stars
         </div>
         <div className="graph-meter">
-          <span></span>
+          <span style={{width: ratingsPercent[3] + '%'}}></span>
         </div>
         <div className="graph-rating">
           {ratings[3]}
@@ -95,7 +118,7 @@ function createRatingsGraphDiv(ratings, setRatingsGraphDiv) {
           2 stars
         </div>
         <div className="graph-meter">
-          <span></span>
+          <span style={{width: ratingsPercent[2] + '%'}}></span>
         </div>
         <div className="graph-rating">
           {ratings[2]}
@@ -107,7 +130,7 @@ function createRatingsGraphDiv(ratings, setRatingsGraphDiv) {
           1 stars
         </div>
         <div className="graph-meter">
-         <span></span>
+         <span style={{width: ratingsPercent[1] + '%'}}></span>
         </div>
         <div className="graph-rating">
           {ratings[1]}
