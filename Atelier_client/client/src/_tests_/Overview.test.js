@@ -58,6 +58,7 @@ const features = [
 
 describe('Atelier topbar', () => {
   test('The Atelier Topbar renders correctly', () => {
+    // eslint-disable-next-line react/jsx-filename-extension
     render(<App />);
     const element = screen.getByRole('heading', {
       name: /The RedBean Atelier App/i,
@@ -67,22 +68,11 @@ describe('Atelier topbar', () => {
 });
 
 describe('Overview Component', () => {
-  describe('ProductInfo Component', () => {
-    render(<Overview product_id={71704} />);
-    setTimeout(() => {
-      console.log('5 seconds have passed');
-    }, 5000);
-    test('Renders the overview component', () => {
-      const element = screen.getByTestId('overview');
-      expect(element).toBeInTheDocument();
-    });
+  it('Renders the overview component', async () => {
+    render(<ProductInfo />);
+    const outfit = await waitFor(() =>
+      screen.getByRole('button', { name: /Add to My Outfit/i })
+    );
+    expect(outfit).toBeInTheDocument();
   });
-
-  // describe('Styles Component', () => {
-  //   test('Renders the style selector div', () => {
-  //     render(<Styles product={product} styles={styles.results} />);
-  //     const element = screen.getByTestId('style-selector');
-  //     expect(element).toBeInTheDocument();
-  //   });
-  // });
 });
