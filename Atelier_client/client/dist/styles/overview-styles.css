@@ -187,3 +187,7 @@
 .selected-style-name {
   margin-bottom: 10%;
 }
+
+.arrow {
+  z-index: 2;
+}

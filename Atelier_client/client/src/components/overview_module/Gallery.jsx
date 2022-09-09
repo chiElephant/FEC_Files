@@ -69,6 +69,7 @@ function Gallery(props) {
             onClick={handleChangeViewExpanded}
           />
           <div className="photo-container">
+            <button className="arrow-up">UP</button>
             {selectedStyle.photos.map((photo, index) => {
               if (index === selectedIndex) {
                 return (
@@ -95,6 +96,7 @@ function Gallery(props) {
                 />
               );
             })}
+            <button className="arrow">DOWN</button>
           </div>
         </div>
       );
