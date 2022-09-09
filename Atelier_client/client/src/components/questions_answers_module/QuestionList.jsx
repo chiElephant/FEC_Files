@@ -1,16 +1,26 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Question from './Question.jsx';
 import ModalQuestion from './ModalQuestion.jsx';
+import useAutoScroll from './custom_hooks/useAutoScroll.jsx';
 
-function QuestionList({ questionList, productName, productId }) {
+function QuestionList({
+  displayList,
+  productName,
+  productId,
+  showMoreQuestions,
+  handleShowMoreQuestions,
+  handleFetchQuestions,
+}) {
   const [isModel, setIsModel] = useState(false);
+  const containerRef = useAutoScroll(displayList.length);
 
-  function showModal() {
+  const showModal = () => {
     setIsModel(!isModel);
-  }
+  };
 
   const model = isModel ? (
     <ModalQuestion
+      handleFetchQuestions={handleFetchQuestions}
       productName={productName}
       productId={productId}
       showModal={() => {
@@ -19,24 +29,30 @@ function QuestionList({ questionList, productName, productId }) {
     />
   ) : null;
 
+  const showMoreQuestionsButton = showMoreQuestions ? (
+    <button onClick={handleShowMoreQuestions}> More Answered Questions </button>
+  ) : null;
+
   return (
-    <div>
+    <>
       {model}
-      {questionList.map((q) => (
-        <Question
-          productName={productName}
-          productId={productId}
-          key={q.question_id}
-          question_id={q.question_id}
-          body={q.question_body}
-          helpfulness={q.question_helpfulness}
-        />
-      ))}
-      <div>
-        <button> More Answered Questions </button>
+      <div data-testid="test-questions" ref={containerRef} id="question-list">
+        {displayList.map((q) => (
+          <Question
+            productName={productName}
+            productId={productId}
+            key={q.question_id}
+            question_id={q.question_id}
+            body={q.question_body}
+            helpfulness={q.question_helpfulness}
+          />
+        ))}
+      </div>
+      <div id="questions-buttons">
+        {showMoreQuestionsButton}
         <button onClick={showModal}> Add Question + </button>
       </div>
-    </div>
+    </>
   );
 }
 

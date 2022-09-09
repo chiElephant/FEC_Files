@@ -1,5 +1,6 @@
 require('dotenv').config();
 const axios = require('axios');
+const e = require('express');
 const { uploadToCloudinary } = require('./uploadToCloudinary');
 
 const { URL, TOKEN } = process.env;
@@ -8,21 +9,36 @@ const { URL, TOKEN } = process.env;
 // client will be in charge of sending mutiple requests
 
 const getQuestions = (req, res, next) => {
-  const { product_id, page, count } = req.params;
+  const { product_id } = req.params;
+  let store = [];
+  const count = 100;
 
-  const url = `${URL}/qa/questions?product_id=${product_id}&page=${page}&count=${count}`;
+  function get(page) {
+    const url = `${URL}/qa/questions?product_id=${product_id}&page=${page}&count=${count}`;
 
-  const options = {
-    headers: { Authorization: TOKEN },
-  };
+    const options = {
+      headers: { Authorization: TOKEN },
+    };
+    axios
+      .get(url, options)
+      .then((response) => {
+        const questionList = response.data.results;
 
-  axios
-    .get(url, options)
-    .then((response) => {
-      res.body = response.data;
-      next();
-    })
-    .catch(next);
+        if (questionList.length > 0) {
+          console.log('recurse');
+
+          store = [...store, ...questionList];
+          get(page + 1);
+        } else {
+          console.log('fire!');
+          res.body = store;
+          next();
+        }
+      })
+      .catch(next);
+  }
+
+  get(1);
 };
 
 const getAnswers = (req, res, next) => {
@@ -85,7 +101,7 @@ const addAnswer = (req, res, next) => {
     body,
     name,
     email,
-    photos: photoUrls,
+    photos: photoUrls || [],
   });
 
   console.log(data);

@@ -1,7 +1,10 @@
 module.exports = {
   collectCoverage: true,
-  collectCoverageFrom: ['./client/src/**/*.jsx'],
+  // collectCoverageFrom: ['./client/src/**/*.jsx'],
+  collectCoverageFrom: [
+    './client/src/components/questions_answers_module/**/*.jsx',
+  ],
   coverageDirectory: 'coverage',
   testEnvironment: 'jsdom',
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
+  setupFilesAfterEnv: ['./jest.setup.js'],
 };

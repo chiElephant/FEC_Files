@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import validUrl from 'valid-url';
+// import validUrl from 'valid-url';
 
 function AnswerPhotosList({ photos }) {
   return (
-    <div>
-      {photos.map((photo) => {
-        if (validUrl.isUri(photo.url)) {
-          return <img key={photo.id} src={photo.url} />;
-        }
-        return null;
-      })}
+    <div className="answer-img">
+      {photos.map((photo) => (
+        <img
+          id="answer-img"
+          alt="not available"
+          key={photo.id}
+          src={photo.url}
+        />
+      ))}
     </div>
   );
 }

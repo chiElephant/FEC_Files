@@ -1,6 +1,12 @@
 import axios from 'axios';
 
-export default function addQuestion(product_id, body, name, email) {
+export default function addQuestion(
+  product_id,
+  body,
+  name,
+  email,
+  handleFetchQuestions
+) {
   const url = `/question`;
 
   const data = JSON.stringify({
@@ -22,6 +28,7 @@ export default function addQuestion(product_id, body, name, email) {
   axios(options)
     .then((response) => {
       console.log(response.status);
+      handleFetchQuestions();
     })
     .catch((error) => {
       console.log(error);

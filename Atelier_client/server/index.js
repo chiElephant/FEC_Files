@@ -33,12 +33,13 @@ app.get('/', (req, res) => {
 // *** Q & A *** //
 
 // Question List;
-app.get('/questions/:product_id/:page/:count', getQuestions, (req, res) => {
+app.get('/questions/:product_id/', getQuestions, (req, res) => {
   res.status(200).send(res.body);
 });
 
 // Answer List;
 app.get('/answers/:question_id/:page/:count', getAnswers, (req, res) => {
+  console.log('answeers: ', res.body);
   res.status(200).send(res.body);
 });
 

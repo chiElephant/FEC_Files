@@ -3,6 +3,11 @@ const { cloudinary } = require('./cloudinary');
 const uploadToCloudinary = (req, res, next) => {
   const { photos } = req.body;
 
+  if (photos.length === 0) {
+    next();
+    return;
+  }
+
   const promises = photos.map((file) =>
     cloudinary.uploader
       .upload(file, {
