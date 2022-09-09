@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import PhotoModal from './PhotoModal.jsx';
 import { helpers } from './helper_functions/review.js';
-import uniqid from 'uniqid';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid, regular, light, thin } from '@fortawesome/fontawesome-svg-core/import.macro';
@@ -10,7 +10,9 @@ function Review ( props ) {
   const { helpfulness, review_id, date, username, summary, review, rating, body, response, recommend, photos } = props
 
   const [currentHelpful, setCurrentHelpful] = useState(helpfulness);
+  const [currentPhotoURL, setCurrentPhotoURL] = useState('')
   const [formatedDate, setFormatedDate] = useState('');
+  const [viewPhoto, setViewPhoto] = useState(false);
 
   const [reviewDivs, setReviewDivs] = useState({
     helpfulnessDiv: [<div key={'help'}/>],
@@ -28,7 +30,7 @@ function Review ( props ) {
       handleDate();
 
       async function handlePhotos () {
-        const div = await helpers.handlePhotos(photos);
+        const div = await createPhotosDiv(photos);
 
         const newPhotosDiv = { photosDiv: div};
         setReviewDivs(reviewDiv => ({
@@ -49,6 +51,30 @@ function Review ( props ) {
   useEffect(() => {
     createHelpfulnessDiv();
   }, [currentHelpful])
+
+
+  async function enlargePhotos (photo) {
+    await setCurrentPhotoURL(photo.url);
+    setViewPhoto((viewPhoto) => true);
+  }
+
+  function createPhotosDiv () {
+    const photoDiv = [];
+    if (photos)  {
+      photos.forEach((photo) => {
+        photoDiv.push(
+          <img
+            key={photo.id}
+            className='review-image'
+            src={photo.url}
+            alt="image not available"
+            onClick={() => enlargePhotos(photo)}
+          />
+        );
+      });
+    }
+    return photoDiv;
+  }
 
   function createStarDiv() {
     let starRating = []
@@ -158,7 +184,6 @@ function Review ( props ) {
     }
   }
 
-
   function markHelpful() {
     if (currentHelpful === helpfulness) {
       const newHelpful = currentHelpful + 1
@@ -166,6 +191,10 @@ function Review ( props ) {
       setCurrentHelpful(currentHelpful => newHelpful)
       helpers.markHelpful(review_id);
     }
+  }
+
+  function closePhotoModal() {
+    setViewPhoto(() => false)
   }
 
   return (
@@ -178,6 +207,10 @@ function Review ( props ) {
       <div id='summary'>{summary}</div>
       <div id='body'>{body}</div>
       <div id='photos'>{reviewDivs.photosDiv}</div>
+      <PhotoModal
+        photoURL={currentPhotoURL}
+        viewPhoto={viewPhoto}
+        closeModal={closePhotoModal}/>
       <div id='recommend'>{reviewDivs.recommendDiv}</div>
       <div id={response !== null ? 'recommend' : ''}>{reviewDivs.responseDiv}</div>
       <div id='helpfulness'>{reviewDivs.helpfulnessDiv}</div>

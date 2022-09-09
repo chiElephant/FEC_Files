@@ -18,6 +18,7 @@ const initial = {
 };
 
 const helpers = {
+
   handleShown: (reviews, countShown, setReviewsShown) => {
     const show = reviews.slice(0, countShown);
     setReviewsShown(show);

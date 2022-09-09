@@ -1,7 +1,7 @@
 /* Reviews Module */
 
 /* Review Modal */
-#review-window {
+#review-window, #photo-window {
   position: fixed;
   top: 0;
   left: 0;
@@ -15,7 +15,7 @@
   overflow-y: scroll;
 }
 
-#review-form {
+#review-form, #modal-photo {
   padding: 32px;
   max-width: 640px;
   margin-top: 35%;
@@ -23,6 +23,19 @@
   right: 16px;
   background-color: rgb(35, 35, 35);
   color: rgb(162, 162, 162);
+}
+
+#modal-photo {
+  margin: 0;
+}
+
+#photo-window {
+  display: flex;
+  flex-direction: column;
+}
+
+#photo-window-icon {
+  float: right;
 }
 
 /* Ratings List & Ratings Breakdown */
@@ -150,7 +163,7 @@
 }
 
 #helpfulness {
-  width: 100%;
+  width: 500px;
 }
 
 #helpful-text {
@@ -167,6 +180,11 @@
   color: rgb(125, 125, 125);
   margin: 0;
   height: 16px;
+  cursor: default;
+}
+
+.helpful-yes:hover {
+  color:rgb(35, 35, 35);
 }
 
 #review-top-bar, #summary, #body, #photos, #recommended, #helpfulness {
@@ -302,7 +320,7 @@
 }
 
 .graph-meter {
-  width: 240px;
+  width: 225px;
   box-sizing: content-box;
   height: 12px;
   position: relative;
@@ -324,6 +342,10 @@
 
 #char-icon {
   padding-top: 16px;
+}
+
+path {
+  padding: 10px;
 }
 
 

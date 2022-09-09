@@ -16,9 +16,9 @@ function ReviewsModule({ product_id, product_name }) {
   const [reviewCount, setReviewCount] = useState(0);
 
   useEffect(() => {
-    const count = 500;
+    const MAX_COUNT = 500;
 
-    helpers.getReviews(productId, sortType, count, setReviews, setReviewCount);
+    helpers.getReviews(productId, sortType, MAX_COUNT, setReviews, setReviewCount);
   }, [productId, countShown, sortType]);
 
   useEffect(() => {
@@ -51,9 +51,10 @@ function ReviewsModule({ product_id, product_name }) {
         >
           ADD A REVIEW +
         </button>
-        <button className='reviews-btn'
+        <button
+          id="more-reviews"
+          className='reviews-btn'
           onClick={() => helpers.handleClick(setCountShown, countShown + 2)}
-          disabled={countShown >= reviews.length}
         >
           MORE REVIEWS
         </button>
