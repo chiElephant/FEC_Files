@@ -18,28 +18,26 @@ const initial = {
 };
 
 const helpers = {
+
   handleShown: (reviews, countShown, setReviewsShown) => {
     const show = reviews.slice(0, countShown);
     setReviewsShown(show);
-  },
-
-  setSort: (type, setType) => {
-    setType(type);
   },
 
   handleClick: (cb, value) => {
     cb(value);
   },
 
-  getReviews: (product_id, sort, setReviews) => {
+  getReviews: (product_id, sort, count, setReviews, setReviewCount) => {
     const options = {
-      params: { product_id, sort },
+      params: { product_id, sort, count },
     };
 
     axios
       .get('/reviews', options)
       .then((response) => {
         setReviews(response.data);
+        setReviewCount(response.data.length)
       })
       .catch((error) => {
         console.log('Error fetching reviews: ', error);

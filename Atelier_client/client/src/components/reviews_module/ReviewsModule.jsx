@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { helpers, initial } from './helper_functions/reviews_module.jsx';
+import { helpers, initial } from './helper_functions/reviews_module.js';
 import RatingsBreakdown from './RatingsBreakdown.jsx';
 import SubmitReview from './SubmitReview.jsx';
 import ReviewsList from './ReviewsList.jsx';
@@ -13,27 +13,37 @@ function ReviewsModule({ product_id, product_name }) {
   const [sortType, setSortType] = useState('relevance');
   const [countShown, setCountShown] = useState(2);
   const [reviews, setReviews] = useState(initial.reviewModel);
+  const [reviewCount, setReviewCount] = useState(0);
 
   useEffect(() => {
-    helpers.getReviews(productId, sortType, setReviews);
+    const MAX_COUNT = 500;
+
+    helpers.getReviews(productId, sortType, MAX_COUNT, setReviews, setReviewCount);
   }, [productId, countShown, sortType]);
 
   useEffect(() => {
     helpers.handleShown(reviews, countShown, setReviewsShown);
   }, [reviews, countShown]);
 
+  function handleCountShown () {
+    if (countShown >= reviewCount) {
+      const element = document.getElementById("more-reviews");
+      element.remove();
+    }
+    setCountShown(countShown => countShown + 2);
+  }
+
   return (
     <div id="reviews-module">
-      <h2> Ratings and Reviews </h2>
-      <RatingsBreakdown
-        productId={productId}
+      <h2 id="ratings-reviews"> Ratings and Reviews </h2>
+      <RatingsBreakdown productId={productId}
         setCharacteristics={setCharacteristics}
         characteristics={characteristics}
       />
       <ReviewsList
         reviews={reviewsShown}
-        setSort={helpers.setSort}
-        setType={setSortType}
+        setSortType={setSortType}
+        reviewCount={reviewCount}
       />
       <SubmitReview
         showReviewModal={showReviewModal}
@@ -43,18 +53,19 @@ function ReviewsModule({ product_id, product_name }) {
         chars={characteristics}
       />
       <div id="main-buttons">
-        <button
+        <button className='reviews-btn'
           onClick={() =>
-            helpers.handleClick(setShowReviewModal, !showReviewModal)
+            setShowReviewModal((showReviewModal) => !showReviewModal)
           }
         >
-          Add Review
+          ADD A REVIEW +
         </button>
         <button
-          onClick={() => helpers.handleClick(setCountShown, countShown + 2)}
-          disabled={countShown >= reviews.length}
+          id="more-reviews"
+          className='reviews-btn'
+          onClick={() => handleCountShown()}
         >
-          More Reviews
+          MORE REVIEWS
         </button>
       </div>
     </div>

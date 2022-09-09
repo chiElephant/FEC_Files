@@ -1,34 +1,76 @@
 import React, { useState, onEffect } from 'react';
-import handleSortType  from './helper_functions/review_list.jsx';
 import Review from './Review.jsx';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { light } from '@fortawesome/fontawesome-svg-core/import.macro';
 
-function ReviewsList({ reviews, setSort, setType }) {
-  const [sortType, setSortType] = useState('relevance');
+
+function ReviewsList({ reviews, setSortType, reviewCount }) {
+  const [currentSort, setCurrentSort] = useState('relevance');
+
+  function handleSort (sort) {
+    const sortType = sort === 'relevant' ? 'relevance' : sort
+    setCurrentSort(sortType);
+    setSortType(sort);
+  }
 
   return (
     <div id="reviews-list">
-      <h3>Reviews List</h3>
-      <div>
-        <label>Sort on: </label>
-        <select
-          id="sort-type"
-          onChange={() => handleSortType(setSort, setType)}
-        >
-          <option value="relevant">Relevant</option>
-          <option value="newest">Newest</option>
-          <option value="helpful">Helpful</option>
-        </select>
+      <div id="review-sort">
+        <div id="sort-text">
+          {`${reviewCount} reviews, sorted by`}
+        </div>
+        <div id="sort-dropdown">
+          {currentSort}
+          <div id="sort-dropdown-content">
+            <ul className='review-sort-types'>
+              <li
+                className='relevant'
+                onClick={() => handleSort('relevant')}>
+                {'relevance'}
+              </li>
+              <li
+                className='newest'
+                onClick={() => handleSort('newest')}>
+                {'newest'}
+              </li>
+              <li
+                className='helpful'
+                onClick={() => handleSort('helpful')}>
+                {'helpful'}
+              </li>
+            </ul>
+          </div>
+          <div id='sort-icon'>
+            <FontAwesomeIcon
+              icon={light('angle-down')}
+              size='lg'/>
+          </div>
+        </div>
       </div>
-      <ul id='reviews'>
+      <div id='reviews'>
         {reviews
           ? reviews.map((review) => (
-            <Review key={review.review_id} review={review} />
+            <Review
+              key={review.review_id}
+              review={review}
+              helpfulness={review.helpfulness}
+              recommend={review.recommend}
+              response={review.response}
+              review_id={review.review_id}
+              username={review.reviewer_name}
+              summary={review.summary}
+              photos={review.photos}
+              rating={review.rating}
+              body={review.body}
+              date={review.date}
+              />
             ))
           : ''
         }
-      </ul>
+      </div>
     </div>
   );
 }
 
 export default ReviewsList;
+

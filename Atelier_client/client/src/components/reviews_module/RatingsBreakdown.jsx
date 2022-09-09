@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import ProductBreakdown from './ProductBreakdown.jsx';
 
 import {
+  createStarsRating,
   getMetadata,
   metadata,
   ratings,
-} from './helper_functions/ratings_bd.jsx';
+} from './helper_functions/ratings_bd.js';
 
 function RatingsBreakdown({ productId, setCharacteristics, characteristics }) {
   const [ratingsGraphDiv, setRatingsGraphDiv] = useState(<div />);
@@ -14,6 +15,7 @@ function RatingsBreakdown({ productId, setCharacteristics, characteristics }) {
   const [ratings, setRatings] = useState(ratings);
   const [percentRec, setPercentRec] = useState('');
   const [avgRating, setAvgRating] = useState('');
+  const [starsDiv, setStarsDiv] = useState(<div />)
 
   const setStates = {
     setCharacteristics,
@@ -21,6 +23,7 @@ function RatingsBreakdown({ productId, setCharacteristics, characteristics }) {
     setTotalReviews,
     setPercentRec,
     setAvgRating,
+    setStarsDiv,
     setMetadata,
     setRatings,
   };
@@ -31,17 +34,22 @@ function RatingsBreakdown({ productId, setCharacteristics, characteristics }) {
 
   return (
     <div id="ratings-breakdown">
-      <h3>Ratings Breakdown</h3>
-      <div>{`Average Rating: ${avgRating}`}</div>
-      <div>{`Total Reviews: ${totalReviews}`}</div>
+      <div id='average-rating'>
+        <div id='average'>{`${avgRating}`}</div>
+        <div id='breakdown-stars'>
+          {starsDiv}
+        </div>
+      </div>
+      <div id='review-count'>{`out of ${totalReviews} reviews`}</div>
       <br></br>
-      <div id="rec-percent">
+      <div id="recommend-percent">
         {`${percentRec}% of reviewers recommend this product`}
       </div>
       <br></br>
       {ratingsGraphDiv}
       <br></br>
-      <ProductBreakdown characteristics={characteristics} />
+      <ProductBreakdown
+        characteristics={characteristics} />
     </div>
   );
 }
