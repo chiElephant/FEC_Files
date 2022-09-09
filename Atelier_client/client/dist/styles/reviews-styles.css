@@ -272,6 +272,7 @@
 #review-count, #recommend-percent, #ratings-graph {
   font-size: medium;
   color: rgb(103, 103, 103);
+  margin-bottom: 16px;
 
 }
 

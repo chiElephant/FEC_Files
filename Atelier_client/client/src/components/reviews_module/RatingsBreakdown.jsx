@@ -15,7 +15,7 @@ function RatingsBreakdown({ productId, setCharacteristics, characteristics }) {
   const [ratings, setRatings] = useState(ratings);
   const [percentRec, setPercentRec] = useState('');
   const [avgRating, setAvgRating] = useState('');
-  const [starsDiv, setStarsDiv] = useState(<div />)
+  const [starsDiv, setStarsDiv] = useState(<div />);
 
   const setStates = {
     setCharacteristics,
@@ -34,22 +34,16 @@ function RatingsBreakdown({ productId, setCharacteristics, characteristics }) {
 
   return (
     <div id="ratings-breakdown">
-      <div id='average-rating'>
-        <div id='average'>{`${avgRating}`}</div>
-        <div id='breakdown-stars'>
-          {starsDiv}
-        </div>
+      <div id="average-rating">
+        <div id="average">{`${avgRating}`}</div>
+        <div id="breakdown-stars">{starsDiv}</div>
       </div>
-      <div id='review-count'>{`out of ${totalReviews} reviews`}</div>
-      <br></br>
+      <div id="review-count">{`out of ${totalReviews} reviews`}</div>
       <div id="recommend-percent">
         {`${percentRec}% of reviewers recommend this product`}
       </div>
-      <br></br>
-      {ratingsGraphDiv}
-      <br></br>
-      <ProductBreakdown
-        characteristics={characteristics} />
+      <div id="ratings-graph">{ratingsGraphDiv}</div>
+      <ProductBreakdown characteristics={characteristics} />
     </div>
   );
 }

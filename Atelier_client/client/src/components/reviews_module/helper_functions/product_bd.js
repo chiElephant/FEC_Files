@@ -38,7 +38,7 @@ function createCharsDiv(metadata) {
             <FontAwesomeIcon
               id="char-icon"
               icon={(solid('triangle'))}
-              style={{width: (value * 40) + '%'}}
+              style={{width: (value * 20) + '%'}}
               flip='vertical'
               />
           </div>

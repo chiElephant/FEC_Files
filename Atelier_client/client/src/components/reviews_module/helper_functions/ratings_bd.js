@@ -1,7 +1,12 @@
 import axios from 'axios';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { solid, regular, light, thin } from '@fortawesome/fontawesome-svg-core/import.macro';
+import {
+  solid,
+  regular,
+  light,
+  thin,
+} from '@fortawesome/fontawesome-svg-core/import.macro';
 
 // ******************** Initial State Variables ******************** //
 
@@ -49,6 +54,9 @@ const ratings = metadata.ratings;
 const characteristics = metadata.Characteristics;
 
 // ******************** Helper Functions ******************** //
+function filterReviews(rating) {
+
+}
 
 function handleRatingsPercent(ratings) {
   let sum = 0;
@@ -59,7 +67,7 @@ function handleRatingsPercent(ratings) {
     3: 0,
     4: 0,
     5: 0,
-  }
+  };
 
   for (let rating in ratings) {
     sum += parseInt(ratings[rating]);
@@ -67,7 +75,7 @@ function handleRatingsPercent(ratings) {
 
   for (let rating in ratings) {
     const value = ratings[rating];
-    percentKey[rating] = Math.floor((value/sum) * 100);
+    percentKey[rating] = Math.floor((value / sum) * 100);
   }
   return percentKey;
 }
@@ -75,69 +83,51 @@ function handleRatingsPercent(ratings) {
 async function createRatingsGraphDiv(ratings, setRatingsGraphDiv) {
   const ratingsPercent = await handleRatingsPercent(ratings);
   setRatingsGraphDiv([
-    <div id="ratings-graph" key="0">
-
-      <div id="five-star" key="5">
-        <div className="graph-text">
+      <div id="five-star" key="5" >
+        <div className="graph-text" onClick={(e) => filterReviews(5)}>
           5 stars
         </div>
         <div className="graph-meter">
-          <span style={{width: ratingsPercent[5] + '%'}}></span>
+          <span style={{ width: ratingsPercent[5] + '%' }}></span>
         </div>
-        <div className="graph-rating">
-          {ratings[5]}
-        </div>
-      </div>
+        <div className="graph-rating">{ratings[5]}</div>
+      </div>,
 
       <div id="four-star" key="4">
-        <div className="graph-text">
+        <div className="graph-text" onClick={() => filterReviews(4)}>
           4 stars
         </div>
         <div className="graph-meter">
-          <span style={{width: ratingsPercent[4] + '%'}}></span>
+          <span style={{ width: ratingsPercent[4] + '%' }}></span>
         </div>
-        <div className="graph-rating">
-          {ratings[4]}
-        </div>
-      </div>
+        <div className="graph-rating">{ratings[4]}</div>
+      </div>,
 
       <div id="three-star" key="3">
-        <div className="graph-text">
+        <div className="graph-text" onClick={() => filterReviews(3)}>
           3 stars
         </div>
         <div className="graph-meter">
-          <span style={{width: ratingsPercent[3] + '%'}}></span>
+          <span style={{ width: ratingsPercent[3] + '%' }}></span>
         </div>
-        <div className="graph-rating">
-          {ratings[3]}
-        </div>
-      </div>
+        <div className="graph-rating">{ratings[3]}</div>
+      </div>,
 
       <div id="two-star" key="2">
-        <div className="graph-text">
-          2 stars
-        </div>
+        <div className="graph-text" onClick={() => filterReviews(2)}>2 stars</div>
         <div className="graph-meter">
-          <span style={{width: ratingsPercent[2] + '%'}}></span>
+          <span style={{ width: ratingsPercent[2] + '%' }}></span>
         </div>
-        <div className="graph-rating">
-          {ratings[2]}
-        </div>
-      </div>
+        <div className="graph-rating">{ratings[2]}</div>
+      </div>,
 
       <div id="one-star" key="1">
-        <div className="graph-text">
-          1 stars
-        </div>
+        <div className="graph-text" onClick={() => filterReviews(1)}>1 stars</div>
         <div className="graph-meter">
-         <span style={{width: ratingsPercent[1] + '%'}}></span>
+          <span style={{ width: ratingsPercent[1] + '%' }}></span>
         </div>
-        <div className="graph-rating">
-          {ratings[1]}
-        </div>
+        <div className="graph-rating">{ratings[1]}</div>
       </div>
-
-    </div>
   ]);
 }
 
@@ -165,10 +155,9 @@ function handleRatings(ratings, setAvgRating, setTotalReviews, setStarsDiv) {
 
   avg = (sum / reviewsCount).toFixed(1);
 
-  createStarsRating(avg, setStarsDiv)
+  createStarsRating(avg, setStarsDiv);
   setTotalReviews(reviewsCount);
   setAvgRating(avg);
-
 }
 
 function getMetadata(product_id, setState) {
@@ -192,36 +181,34 @@ function getMetadata(product_id, setState) {
         setState.setTotalReviews,
         setState.setStarsDiv
       );
-      handleRecommend(metadata.recommended, setState.setPercentRec)
+      handleRecommend(metadata.recommended, setState.setPercentRec);
     })
-    .catch((err) =>
-      console.log('Error fetching metadata: ', err)
-    );
+    .catch((err) => console.log('Error fetching metadata: ', err));
 }
 
 function createStarsRating(rating, setStarsDiv) {
-  let starRating = []
+  let starRating = [];
   if (rating !== 0) {
     for (let i = 1; i <= rating; i++) {
       starRating.push(
         <FontAwesomeIcon
           key={`${i}-solid`}
-          className='star'
+          className="star"
           icon={solid('star-sharp')}
         />
-      )
+      );
     }
     for (let i = rating; i < 5; i++) {
       starRating.push(
         <FontAwesomeIcon
           key={`${i}-regular`}
-          className='star'
+          className="star"
           icon={light('star-sharp')}
         />
-      )
+      );
     }
   }
-  setStarsDiv(starRating)
+  setStarsDiv(starRating);
 }
 
 export { metadata, ratings, characteristics, getMetadata, createStarsRating };
