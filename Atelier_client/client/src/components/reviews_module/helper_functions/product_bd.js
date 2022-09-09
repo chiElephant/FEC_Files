@@ -8,8 +8,6 @@ function createCharsDiv(metadata) {
     if (metadata[char] !== null) {
       const key = metadata[char].id;
       const value = Math.floor(metadata[char].value);
-      console.log(value);
-
 
       charDiv.push(
         <div className="characteristic" key={key}>

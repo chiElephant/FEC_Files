@@ -1,6 +1,6 @@
 /* Reviews Module */
 
-/* Modal */
+/* Review Modal */
 #review-window {
   position: fixed;
   top: 0;
@@ -325,6 +325,10 @@
 #char-icon {
   padding-top: 16px;
 }
+
+
+
+
 
 
 

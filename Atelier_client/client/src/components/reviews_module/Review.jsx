@@ -9,21 +9,21 @@ function Review ( props ) {
 
   const { helpfulness, review_id, date, username, summary, review, rating, body, response, recommend, photos } = props
 
-  const [currentHelpful, setCurrentHelpful] = useState(helpfulness);
+  const [currentHelpful, setCurrentHelpful] = useState(0);
   const [formatedDate, setFormatedDate] = useState('');
 
   const [reviewDivs, setReviewDivs] = useState({
-    helpfulnessDiv: [<div />],
-    recommendDiv: [<div />],
-    responseDiv: [<div />],
-    photosDiv: [<div />],
-    starsDiv: [<div />],
+    helpfulnessDiv: [<div key={'help'}/>],
+    recommendDiv: [<div key={'rec'}/>],
+    responseDiv: [<div key={'resp'}/>],
+    photosDiv: [<div key={'photos'}/>],
+    starsDiv: [<div key={'stars'}/>],
   });
 
   useEffect(() => {
       async function handleDate () {
         const convertedDate = await helpers.convertDate(date);
-        setFormatedDate(convertedDate);
+        setFormatedDate(formatedDate => convertedDate)
       }
       handleDate();
 
@@ -40,6 +40,10 @@ function Review ( props ) {
   }, []);
 
   useEffect(() => {
+    setCurrentHelpful(currentHelpful => helpfulness)
+  }, [helpfulness])
+
+  useEffect(() => {
     createStarDiv();
     createRecommendDiv();
     createResponseDiv();
@@ -52,7 +56,7 @@ function Review ( props ) {
       for (let i = 1; i <= rating; i++) {
         starRating.push(
           <FontAwesomeIcon
-            key={uniqid()}
+            key={`star-solid-${i}`}
             className='star'
             icon={solid('star-sharp')}
           />
@@ -61,7 +65,7 @@ function Review ( props ) {
       for (let i = rating; i < 5; i++) {
         starRating.push(
           <FontAwesomeIcon
-            key={uniqid()}
+            key={`star-${i}`}
             className='star'
             icon={light('star-sharp')}
           />
@@ -80,9 +84,8 @@ function Review ( props ) {
 
     if (recommend) {
       recDiv.push(
-        <div key={uniqid()} id='user-recommend'>
+        <div key={'recommend'} id='user-recommend'>
           <FontAwesomeIcon
-            key={uniqid()}
             icon={regular('check')}
           />
           <span id='user-rec'>
@@ -91,8 +94,8 @@ function Review ( props ) {
         </div>
       );
       const newRecDiv = { recommendDiv: recDiv};
-      setReviewDivs(recommendDiv => ({
-        ...recommendDiv,
+      setReviewDivs(reviewDivs => ({
+        ...reviewDivs,
         ...newRecDiv
       }));
     }
@@ -103,7 +106,7 @@ function Review ( props ) {
 
     if (response) {
       responseDiv.push(
-        <div key={uniqid()} id='user-response'>
+        <div key={'response'} id='user-response'>
          <div className='response'>
           {'Response:'}
          </div>
@@ -113,8 +116,8 @@ function Review ( props ) {
         </div>
       )
       const newResponseDiv = { responseDiv: responseDiv};
-      setReviewDivs(recommendDiv => ({
-        ...responseDiv,
+      setReviewDivs(reviewDivs => ({
+        ...reviewDiv,
         ...newResponseDiv,
       }));
     }
@@ -122,43 +125,45 @@ function Review ( props ) {
 
   function createHelpfulnessDiv () {
     let helpfulDiv = [];
-
-    helpfulDiv.push(
-      <div id='helpful-text' key={uniqid()}>
-        <div>
-          {'Helpful?'}
+    if(helpfulness) {
+      helpfulDiv.push(
+        <div id='helpful-text' key={'helpful'}>
+          <div>
+            {'Helpful?'}
+          </div>
+          <div
+          className='helpful-yes'
+          onClick={() => markHelpful()}
+          >
+            {'Yes '}
+          </div>
+          <div>
+            {`(${currentHelpful})`}
+          </div>
+          <div>
+            <FontAwesomeIcon
+              icon={thin('pipe')}
+            />
+          </div>
+          <div>
+            {'Report'}
+          </div>
         </div>
-        <div
-        className='helpful-yes'
-        onClick={() => markHelpful()}
-        >
-          {'Yes '}
-        </div>
-        <div>
-          {`(${currentHelpful})`}
-        </div>
-        <div>
-          <FontAwesomeIcon
-            icon={thin('pipe')}
-          />
-        </div>
-        <div>
-          {'Report'}
-        </div>
-      </div>
-    )
-    const newHelpfulDiv = { helpfulnessDiv: helpfulDiv};
-    setReviewDivs(reviewDivs => ({
-      ...reviewDivs,
-      ...newHelpfulDiv
-    }));
+      )
+      const newHelpfulDiv = { helpfulnessDiv: helpfulDiv};
+      setReviewDivs(reviewDivs => ({
+        ...reviewDivs,
+        ...newHelpfulDiv
+      }));
+    }
   }
+
 
   function markHelpful() {
     if (currentHelpful === helpfulness) {
       const newHelpful = currentHelpful + 1
-      console.log(newHelpful)
-      setCurrentHelpful(currentHelpful => currentHelpful + 1)
+
+      setCurrentHelpful(currentHelpful => newHelpful)
       createHelpfulnessDiv(newHelpful)
       helpers.markHelpful(review_id);
     }

@@ -38,7 +38,7 @@ function SubmitReview({
     if (rating > 0 && typeof recommend === 'boolean' && productCharsLength === charsLength) {
       handleSubmit()
     } else {
-      // throw new Error('You must enter the fallowing')
+      throw new Error('You must enter the fallowing')
     }
   }
 
@@ -48,24 +48,24 @@ function SubmitReview({
     setRating(0);
     console.log(productChars)
 
-    // axios
-    //   .post('/reviews', {
-    //     product_id,
-    //     rating,
-    //     summary,
-    //     body,
-    //     recommend,
-    //     name,
-    //     email,
-    //     photos,
-    //     characteristics: productChars,
-    //   })
-    //   .then((response) => {
-    //     console.log(response);
-    //   })
-    //   .catch((error) => {
-    //     console.log('post error: ', error);
-    //   });
+    axios
+      .post('/reviews', {
+        product_id,
+        rating,
+        summary,
+        body,
+        recommend,
+        name,
+        email,
+        photos,
+        characteristics: productChars,
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log('post error: ', error);
+      });
   };
 
   function setPC () {

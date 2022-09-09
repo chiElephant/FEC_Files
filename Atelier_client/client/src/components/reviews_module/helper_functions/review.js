@@ -27,7 +27,6 @@ const helpers = {
   },
 
   markHelpful: (review_id) => {
-    console.log(review_id)
     const url = `reviews/${review_id}/helpful`
 
     axios.put(url)
