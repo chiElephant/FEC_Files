@@ -298,6 +298,9 @@
   padding-left: 12px;
 }
 
+.characteristic {
+  margin-bottom: 16px;
+}
 #char-div {
   color:rgb(103, 103, 103);
 }
@@ -307,7 +310,7 @@
   box-sizing: content-box;
   height: 12px;
   position: relative;
-  margin: 12px 6px 12px 0;
+  margin: 10px 6px 10px 0;
   background: rgb(235, 235, 235);
 }
 
@@ -340,9 +343,6 @@
   margin-bottom: 10px;
 }
 
-/* #char-descrip-output {
-  margin-left: 16px;
-} */
 .rec-radio {
   margin-right: 8px;
 }
@@ -358,6 +358,12 @@
 
 .char-radios {
   margin: 8px 0 8px 8px;
+}
+
+#breakdown-descrip {
+  display: flex;
+  justify-content: space-between;
+  font-size: small;
 }
 
 
