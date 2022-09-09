@@ -37,18 +37,17 @@
 #ratings-breakdown,
 #reviews-list  {
   float: left;
-  width: 50%;
   height: 75%;
-  padding: 12px;
+  padding: 16px;
 
 }
 
 #ratings-breakdown {
-  width: 30%;
+  width: 35%;
 }
 
 #reviews-list {
-  width: 60%;
+  width: 55%;
 }
 
 #review-sort {
@@ -279,12 +278,12 @@
 
 .graph-text {
   border-bottom: solid 1px rgb(103, 103, 103);
-  width: fit-content;
+  /* width: fit-content; */
   height: fit-content
 }
 
 .graph-bar {
-  width: 224px;
+  width: 200px;
 }
 
 .graph-rating {
@@ -306,7 +305,7 @@
 }
 
 .char-meter {
-  width: 325px;
+  width: 100%;
   box-sizing: content-box;
   height: 12px;
   position: relative;

@@ -12,10 +12,10 @@ const helpers = {
 
     axios.put(url)
       .then(response => {
-        console.log(response.status);
+        console.log(response);
       })
       .catch(error => {
-        console.log('Error marking helpful')
+        console.log('Error marking helpful:', error)
       })
   }
 };
