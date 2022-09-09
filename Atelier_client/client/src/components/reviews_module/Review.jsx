@@ -9,7 +9,7 @@ function Review ( props ) {
 
   const { helpfulness, review_id, date, username, summary, review, rating, body, response, recommend, photos } = props
 
-  const [currentHelpful, setCurrentHelpful] = useState(0);
+  const [currentHelpful, setCurrentHelpful] = useState(helpfulness);
   const [formatedDate, setFormatedDate] = useState('');
 
   const [reviewDivs, setReviewDivs] = useState({
@@ -40,15 +40,15 @@ function Review ( props ) {
   }, []);
 
   useEffect(() => {
-    setCurrentHelpful(currentHelpful => helpfulness)
-  }, [helpfulness])
-
-  useEffect(() => {
     createStarDiv();
     createRecommendDiv();
     createResponseDiv();
     createHelpfulnessDiv();
   }, []);
+
+  useEffect(() => {
+    createHelpfulnessDiv();
+  }, [currentHelpful])
 
   function createStarDiv() {
     let starRating = []
@@ -164,7 +164,6 @@ function Review ( props ) {
       const newHelpful = currentHelpful + 1
 
       setCurrentHelpful(currentHelpful => newHelpful)
-      createHelpfulnessDiv(newHelpful)
       helpers.markHelpful(review_id);
     }
   }
