@@ -1,37 +1,5 @@
 /* Reviews Module */
 
-/* Bars and Meters */
-
-.char-meter {
-  width: 18%;
-  box-sizing: content-box;
-  height: 12px;
-  position: relative;
-  margin: 12px 6px 12px 0;
-  background: rgb(235, 235, 235);
-}
-
-.graph-meter {
-  width: 62%;
-  box-sizing: content-box;
-  height: 12px;
-  position: relative;
-  margin: 12px;
-  background: rgb(235, 235, 235);
-}
-
-.graph-meter > span {
-  display: block;
-  height: 100%;
-  background-color: rgb(82, 82, 82);
-  position: relative;
-  overflow: hidden;
-}
-
-#meters {
-  display: flex;
-}
-
 /* Modal */
 #review-window {
   position: fixed;
@@ -152,7 +120,7 @@
   object-fit: cover;
 }
 #recommend {
-  width: 100%;
+  max-width: fit-content;
   margin-bottom: 12px;
   color: rgb(125, 125, 125);
 }
@@ -323,6 +291,43 @@
 #char-div {
   color:rgb(103, 103, 103);
 }
+
+.char-meter {
+  width: 325px;
+  box-sizing: content-box;
+  height: 12px;
+  position: relative;
+  margin: 12px 6px 12px 0;
+  background: rgb(235, 235, 235);
+}
+
+.graph-meter {
+  width: 240px;
+  box-sizing: content-box;
+  height: 12px;
+  position: relative;
+  margin: 12px;
+  background: rgb(235, 235, 235);
+}
+
+.graph-meter > span {
+  display: block;
+  height: 100%;
+  background-color: rgb(82, 82, 82);
+  position: relative;
+  overflow: hidden;
+}
+
+#meters {
+  display: flex;
+}
+
+#char-icon {
+  padding-top: 16px;
+}
+
+
+
 
 
 

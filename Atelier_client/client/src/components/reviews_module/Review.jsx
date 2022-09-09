@@ -20,12 +20,6 @@ function Review ( props ) {
     starsDiv: [<div />],
   });
 
-  // const [helpfulnessDiv, setHelpfulnessDiv] = useState(<div />);
-  // const [recommendDiv, setRecommendDiv] = useState(<div />);
-  // const [responseDiv, setResponseDiv] = useState(<div />);
-  // const [photosDiv, setPhotosDiv] = useState(<div />);
-  // const [starsDiv, setStarsDiv] = useState(<div />);
-
   useEffect(() => {
       async function handleDate () {
         const convertedDate = await helpers.convertDate(date);
