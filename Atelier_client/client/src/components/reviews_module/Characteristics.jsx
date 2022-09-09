@@ -13,12 +13,13 @@ function Characteristics ( { characteristics, productChars, setProductChars} ) {
 
    // Handles user input on product characteristics when adding a review.
    const handleCharacteristics = (char, id, value) => {
-    console.log(char, id, value)
 
     //it wont work beacause it keeps trying to rest the info to the original empty productChar object
+    const charValue = {[id]: value}
+
     setProductChars({
       ...productChars,
-      [id]: value
+      ...charValue
     });
 
     handleCharText(char, id, value);
