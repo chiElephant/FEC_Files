@@ -29,7 +29,6 @@ const helpers = {
   },
 
   getReviews: (product_id, sort, count, setReviews, setReviewCount) => {
-
     const options = {
       params: { product_id, sort, count },
     };
