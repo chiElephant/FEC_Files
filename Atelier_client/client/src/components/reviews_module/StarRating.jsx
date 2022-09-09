@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid, regular } from '@fortawesome/fontawesome-svg-core/import.macro';
 
-function StarRating ( {rating, setRating} ) {
+function StarRating ( {rating, handleUserInputs} ) {
 
   const [starDiv, setStarDiv] = useState(<div />);
 
@@ -31,7 +31,9 @@ function StarRating ( {rating, setRating} ) {
           className="review-modal-stars"
           icon={rating >= i ? solid('star') : regular('star')}
           onClick={() => {
-            setRating(i);
+            // setRating(i);
+            handleUserInputs('rating', i);
+
           }}
         />
       )

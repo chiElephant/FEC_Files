@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 
-function Photos({ photos, setPhotos }) {
+function Photos({ photos, handleUserInputs }) {
 
   const [addPhotoDiv, setAddPhotoDiv] = useState(<div />);
 
   // Handles user uploaded photos in the add review form
   function handlePhotos (e) {
     let files = e.target.files;
-    let fileURLs = photos.slice();
+    let fileURLs = [];
 
-    if (files.length + fileURLs.length > 5) {
+    if (files.length + photos.length > 5) {
       throw new Error('Too Many Files Uploaded: Max(5)')
     }
 
@@ -27,7 +27,7 @@ function Photos({ photos, setPhotos }) {
       reader.onload = (e) => {
         img.src = e.target.result;
         fileURLs.push(e.target.result);
-        setPhotos(fileURLs);
+        handleUserInputs('photos', fileURLs);
       };
       reader.readAsDataURL(file);
     }

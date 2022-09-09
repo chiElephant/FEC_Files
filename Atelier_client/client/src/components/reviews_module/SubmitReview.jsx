@@ -16,41 +16,56 @@ function SubmitReview({
   product_id,
   chars,
 }) {
-  const [recommend, setRecommend] = useState('boolean');
-  const [productChars, setProductChars] = useState({});
 
-  const [summary, setSummary] = useState('');
-  const [photos, setPhotos] = useState([]);
-  const [rating, setRating] = useState(0);
-  const [email, setEmail] = useState('');
-  const [body, setBody] = useState('');
-  const [name, setName] = useState('');
+  const [userInputs, setUserInputs] = useState({
+    product_id: 0,
+    recommend: null,
+    characteristics: {},
+    summary: '',
+    photos: [],
+    rating: 0,
+    email: '',
+    body: '',
+    name: '',
+  });
 
-  const handleChange = (cb, value) => {
-    cb(() => `${value}`);
-  };
+  useEffect(() => {
+    setUserInputs(prevInput => ({
+      ...prevInput,
+      [product_id]: product_id
+    }))
+  }, [product_id])
 
-  const handleClick = (cb, value) => {
-    cb(() => value);
-  };
+  function handleUserInputs ( input, value, option ) {
+    let newValue;
 
-  const handleProductChars = (id, value) => {
-    console.log(id)
-    const charValue = {[id]: value};
+    if (option) {
+      newValue = {[value]: option};
 
-    setProductChars(prevChars => ({
-      ...prevChars,
-      ...charValue
-    }));
+      setUserInputs( prevInput => ({
+        ...prevInput,
+        [input]: {
+          ...prevInput[input],
+          ...newValue
+        }
+      }))
 
-  };
+    } else {
+      newValue = {[input]: value};
+
+      setUserInputs( prevInput => ({
+        ...prevInput,
+        ...newValue
+      }))
+    }
+  }
 
   const validateUserData = () => {
-    const productCharsLength = Object.keys(productChars).length;
+    const productCharsLength = Object.keys(userInputs.characteristics).length;
     const charsLength = Object.keys(chars).length;
-    console.log(productChars);
+    console.log(userInputs);
     if (
-      rating > 0 &&
+      userInputs.rating > 0 &&
       typeof recommend === 'boolean' &&
       productCharsLength === charsLength
     ) {
@@ -66,17 +81,7 @@ function SubmitReview({
     setRating(0);
 
     axios
-      .post('/reviews', {
-        product_id,
-        rating,
-        summary,
-        body,
-        recommend,
-        name,
-        email,
-        photos,
-        characteristics: productChars,
-      })
+      .post('/reviews', userInputs)
       .then((response) => {
         console.log(response);
       })
@@ -99,7 +104,7 @@ function SubmitReview({
         <h1>Write Your Review</h1>
         <h3>About the {productName}</h3>
 
-        <StarRating rating={rating} setRating={setRating} />
+        <StarRating rating={userInputs.rating} handleUserInputs={handleUserInputs} />
 
         {/* This div will ask the customer if they recommend the product*/}
         <fieldset id="recommend" required="required">
@@ -110,7 +115,7 @@ function SubmitReview({
               name="rec"
               value="yes"
               className="rec-radio"
-              onClick={() => handleClick(setRecommend, true)}
+              onClick={() => handleUserInputs('recommend', true)}
             />
             Yes
           </label>
@@ -120,7 +125,7 @@ function SubmitReview({
               name="rec"
               value="no"
               className="rec-radio"
-              onClick={() => handleClick(setRecommend, false)}
+              onClick={() => handleUserInputs('recommend', false)}
             />
             No
           </label>
@@ -128,7 +133,7 @@ function SubmitReview({
 
         <Characteristics
           characteristics={chars}
-          handleProductChars={handleProductChars}
+          handleUserInputs={handleUserInputs}
         />
 
         {/* This div will alllow the user to enter a summary */}
@@ -140,7 +145,7 @@ function SubmitReview({
             rows="2"
             cols="35"
             required="required"
-            onChange={(e) => handleChange(setSummary, e.target.value)}
+            onChange={(e) => handleUserInputs('summary', e.target.value)}
           ></textarea>
         </fieldset>
 
@@ -155,7 +160,7 @@ function SubmitReview({
             cols="70"
             wrap="hard"
             required="required"
-            onChange={(e) => handleChange(setBody, e.target.value)}
+            onChange={(e) => handleUserInputs('body', e.target.value)}
           ></textarea>
 
           <span>
@@ -165,7 +170,7 @@ function SubmitReview({
           </span>
         </fieldset>
 
-        <Photos photos={photos} setPhotos={setPhotos} />
+        <Photos photos={photos} handleUserInputs={handleUserInputs} />
 
         {/* This div will ask the user to enter their enter their name */}
         <fieldset id="name-input">
@@ -177,7 +182,7 @@ function SubmitReview({
             maxLength="60"
             size="35"
             required="required"
-            onChange={(e) => handleChange(setName, e.target.value)}
+            onChange={(e) => handleUserInputs('name', e.target.value)}
           ></input>
           <br />
           <span>
@@ -195,7 +200,7 @@ function SubmitReview({
             maxLength="60"
             size="35"
             required="required"
-            onChange={(e) => handleChange(setEmail, e.target.value)}
+            onChange={(e) => handleUserInputs('email', e.target.value)}
           ></input>
           <br />
           <span>For authentication reasons, you will not be emailed</span>
