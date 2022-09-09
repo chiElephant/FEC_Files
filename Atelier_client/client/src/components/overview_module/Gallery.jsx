@@ -44,6 +44,7 @@ function Gallery(props) {
     setView('default');
   };
 
+  // eslint-disable-next-line no-unused-vars
   let minRange = 0;
   let maxRange = 2;
 
@@ -56,6 +57,7 @@ function Gallery(props) {
       setSelectedPhoto(newPhoto);
       if (selectedIndex <= maxRange) {
         console.log('SCROLL UP');
+        // eslint-disable-next-line no-undef
         const container = document.getElementById('photo-container');
         container.scrollBy({ top: -40, left: 0, behaviour: 'smooth' });
         maxRange--;
@@ -72,6 +74,7 @@ function Gallery(props) {
       const newPhoto = selectedStyle.photos[newIndex].url;
       setSelectedPhoto(newPhoto);
       if (selectedIndex > maxRange) {
+        // eslint-disable-next-line no-undef
         const container = document.getElementById('photo-container');
         container.scrollBy({ top: 40, left: 0, behaviour: 'smooth' });
         maxRange++;
@@ -79,7 +82,6 @@ function Gallery(props) {
       }
     }
   };
-
 
   if (Object.keys(selectedStyle).length && Object.keys(selectedPhoto).length) {
     if (view === 'default' && Object.keys(selectedStyle.photos).length) {
@@ -92,7 +94,12 @@ function Gallery(props) {
           />
           <div className="sidebar">
             {/* <button className="arrow-up">UP</button> */}
-            <KeyboardArrowUpIcon className="arrow-up" onClick={previousPhoto} />
+            {selectedIndex !== 0 ? (
+              <KeyboardArrowUpIcon
+                className="arrow-up"
+                onClick={previousPhoto}
+              />
+            ) : null}
             <div className="photo-container" id="photo-container">
               {selectedStyle.photos.map((photo, index) => {
                 if (index === selectedIndex) {
@@ -121,7 +128,12 @@ function Gallery(props) {
                 );
               })}
             </div>
-            <KeyboardArrowDownIcon className="arrow-down" onClick={nextPhoto} />
+            {selectedIndex < selectedStyle.photos.length - 1 ? (
+              <KeyboardArrowDownIcon
+                className="arrow-down"
+                onClick={nextPhoto}
+              />
+            ) : null}
           </div>
         </div>
       );

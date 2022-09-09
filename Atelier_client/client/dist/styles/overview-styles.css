@@ -32,6 +32,9 @@
   width: 900px;
   height: 600px;
   object-fit: cover;
+  cursor: -moz-zoom-in;
+  cursor: -webkit-zoom-in;
+  cursor: zoom-in;
 }
 
 .photo-container {
