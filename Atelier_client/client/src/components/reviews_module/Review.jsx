@@ -151,37 +151,37 @@ function Review ( props ) {
 
   function createHelpfulnessDiv () {
     let helpfulDiv = [];
-    if(helpfulness) {
-      helpfulDiv.push(
-        <div id='helpful-text' key={'helpful'}>
-          <div>
-            {'Helpful?'}
-          </div>
-          <div
-          className='helpful-yes'
-          onClick={() => markHelpful()}
-          >
-            {'Yes '}
-          </div>
-          <div>
-            {`(${currentHelpful})`}
-          </div>
-          <div>
-            <FontAwesomeIcon
-              icon={thin('pipe')}
-            />
-          </div>
-          <div>
-            {'Report'}
-          </div>
+
+    helpfulDiv.push(
+      <div id='helpful-text' key={'helpful'}>
+        <div>
+          {'Helpful?'}
         </div>
-      )
-      const newHelpfulDiv = { helpfulnessDiv: helpfulDiv};
-      setReviewDivs(reviewDivs => ({
-        ...reviewDivs,
-        ...newHelpfulDiv
-      }));
-    }
+        <div
+        className='helpful-yes'
+        onClick={() => markHelpful()}
+        >
+          {'Yes '}
+        </div>
+        <div>
+          {`(${currentHelpful})`}
+        </div>
+        <div>
+          <FontAwesomeIcon
+            icon={thin('pipe')}
+          />
+        </div>
+        <div>
+          {'Report'}
+        </div>
+      </div>
+    )
+    const newHelpfulDiv = { helpfulnessDiv: helpfulDiv};
+    setReviewDivs(reviewDivs => ({
+      ...reviewDivs,
+      ...newHelpfulDiv
+    }));
+
   }
 
   function markHelpful() {

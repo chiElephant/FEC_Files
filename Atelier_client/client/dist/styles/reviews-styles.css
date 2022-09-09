@@ -29,12 +29,7 @@
   margin: 0;
 }
 
-#photo-window {
-  display: flex;
-  flex-direction: column;
-}
-
-#photo-window-icon {
+#photo-window-icon, #modal-photo {
   float: right;
 }
 
