@@ -336,6 +336,33 @@
   padding-top: 16px;
 }
 
+#add-characteristic {
+  margin-bottom: 10px;
+}
+
+/* #char-descrip-output {
+  margin-left: 16px;
+} */
+.rec-radio {
+  margin-right: 8px;
+}
+
+.rec-radio-text, .char-radios-text, .char-descrip {
+  margin-right: 16px;
+}
+
+#char-radios {
+  width: 25%;
+  display: inline-block
+}
+
+.char-radios {
+  margin: 8px 0 8px 8px;
+}
+
+
+
+
 
 
 

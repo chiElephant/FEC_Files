@@ -98,20 +98,22 @@ function SubmitReview({
         {/* This div will ask the customer if they recommend the product*/}
         <fieldset id="recommend" required="required">
           <legend>Do you recommend this product?</legend>
-          <label>
+          <label className="rec-radio-text">
             <input
               type="radio"
               name="rec"
               value="yes"
+              className="rec-radio"
               onClick={() => handleClick(setRecommend, true)}
             />
             Yes
           </label>
-          <label>
+          <label className="rec-radio-text">
             <input
               type="radio"
               name="rec"
               value="no"
+              className="rec-radio"
               onClick={() => handleClick(setRecommend, false)}
             />
             No
@@ -197,6 +199,7 @@ function SubmitReview({
         </fieldset>
         <br />
         <button
+          id="submit-review"
           type="submit"
           className="reviews-btn"
           onClick={() => validateUserData()}
