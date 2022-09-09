@@ -1,4 +1,7 @@
 /* Reviews Module */
+#main-buttons {
+  color:rgb(82, 82, 82);
+}
 
 /* Review Modal */
 #review-window, #photo-window {
@@ -39,7 +42,6 @@
   float: left;
   height: 75%;
   padding: 16px;
-
 }
 
 #ratings-breakdown {
@@ -186,15 +188,16 @@
 }
 
 .reviews-btn {
-  background-color: white; /* Green */
+  background-color: white;
   border: solid 1px;
-  color: black;
+  color:rgb(82, 82, 82);
   padding: 16px 32px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
   margin-left: 12px;
+
 }
 
 #review-sort {
@@ -336,10 +339,6 @@
 
 #char-icon {
   padding-top: 16px;
-}
-
-path {
-  padding: 10px;
 }
 
 

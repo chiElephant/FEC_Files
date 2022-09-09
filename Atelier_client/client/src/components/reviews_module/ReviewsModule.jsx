@@ -25,6 +25,14 @@ function ReviewsModule({ product_id, product_name }) {
     helpers.handleShown(reviews, countShown, setReviewsShown);
   }, [reviews, countShown]);
 
+  function handleCountShown () {
+    if (countShown >= reviewCount) {
+      const element = document.getElementById("more-reviews");
+      element.remove();
+    }
+    setCountShown(countShown => countShown + 2);
+  }
+
   return (
     <div id="reviews-module">
       <h2 id="ratings-reviews"> Ratings and Reviews </h2>
@@ -46,7 +54,7 @@ function ReviewsModule({ product_id, product_name }) {
       <div id="main-buttons">
         <button className='reviews-btn'
           onClick={() =>
-            helpers.handleClick(setShowReviewModal, !showReviewModal)
+            setShowReviewModal((showReviewModal) => !showReviewModal)
           }
         >
           ADD A REVIEW +
@@ -54,7 +62,7 @@ function ReviewsModule({ product_id, product_name }) {
         <button
           id="more-reviews"
           className='reviews-btn'
-          onClick={() => helpers.handleClick(setCountShown, countShown + 2)}
+          onClick={() => handleCountShown()}
         >
           MORE REVIEWS
         </button>
