@@ -38,14 +38,16 @@ function Characteristics ( { characteristics, productChars, setProductChars} ) {
 
     for (let char in characteristics) {
       const id = characteristics[char].id;
+
+
       div.push(
         <div id="add-characteristic" key={id}>
-          <span id={id} className="char-descrip-output">None Selected</span>
-          <br />
-          <label className="char-radios-text">
-            {`${char}`}
-            <div id="char-radios">
+          <div id="char-descrip-output">
+            <div id={id} className="char-descrip-output">None Selected</div>
+          </div>
+          <div className="char-radios-text"> {`${char}`} </div>
 
+            <div id="char-radios">
               <input
                 id={id}
                 className="char-radios"
@@ -93,10 +95,12 @@ function Characteristics ( { characteristics, productChars, setProductChars} ) {
                 }
               />
             </div>
-          </label>
-          <br />
-          <span className="char-descrip"> {`(1) ${charsKey[char][1]}`} </span>
-          <span className="char-descrip"> {`(5) ${charsKey[char][5]}`} </span>
+          {/* </label> */}
+          {/* <br /> */}
+          <div id="char-descrip">
+            <div className="char-descrip-1"> {`(1) ${charsKey[char][1]}`} </div>
+            <div className="char-descrip-5"> {`(5) ${charsKey[char][5]}`} </div>
+          </div>
         </div>
       );
     }

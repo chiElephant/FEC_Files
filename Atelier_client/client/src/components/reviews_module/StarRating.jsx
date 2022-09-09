@@ -28,6 +28,7 @@ function StarRating ( {rating, setRating} ) {
         <FontAwesomeIcon
           key={`${i}`}
           id={`star-${i}`}
+          className="review-modal-stars"
           icon={rating >= i ? solid('star') : regular('star')}
           onClick={() => {
             setRating(i);
