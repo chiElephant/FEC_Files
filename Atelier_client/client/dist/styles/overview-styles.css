@@ -36,13 +36,17 @@
 
 .photo-container {
 
-  background-color:rgb(223, 193, 157);
+  /* background-color:rgb(223, 193, 157); */
   display: flex;
   flex-direction: column;
   overflow:scroll;
   scroll-snap-type: y mandatory;
   object-fit: contain;
+  max-height: 470px;
 
+}
+.photo-container::-webkit-scrollbar {
+  display: none;  /* Safari and Chrome */
 }
 
 .gallery-container {
@@ -199,4 +203,11 @@
   max-width: fit-content;
   max-height: -webkit-fill-available;
   justify-content: space-around;
+}
+
+.arrow-up {
+  align-self: center;
+}
+.arrow-down {
+  align-self: center;
 }

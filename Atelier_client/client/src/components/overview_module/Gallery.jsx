@@ -4,6 +4,8 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/destructuring-assignment */
 import React, { useState, useEffect } from 'react';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import Expanded from './Expanded.jsx';
 
 function Gallery(props) {
@@ -72,7 +74,8 @@ function Gallery(props) {
             onClick={handleChangeViewExpanded}
           />
           <div className="sidebar">
-            <button className="arrow-up">UP</button>
+            {/* <button className="arrow-up">UP</button> */}
+            <KeyboardArrowUpIcon className="arrow-up" />
             <div className="photo-container">
               {selectedStyle.photos.map((photo, index) => {
                 if (index === selectedIndex) {
@@ -101,7 +104,7 @@ function Gallery(props) {
                 );
               })}
             </div>
-            <button className="arrow">DOWN</button>
+            <KeyboardArrowDownIcon className="arrow-down" />
           </div>
         </div>
       );
