@@ -1,32 +1,66 @@
 import React, { useState, useEffect } from 'react';
-import { Axios } from 'axios';
 import AnswerList from './AnswerList.jsx';
 import markQuestionAsHelpful from './helper_functions/markQuestionAsHelpful.js';
 import getAnswers from './helper_functions/getAnswers.js';
 import ModalAnswer from './ModalAnswer.jsx';
 
+const RESULTS_PER_PAGE = 100;
+
 function Question({ question_id, body, helpfulness, productName, productId }) {
   const [answerList, setAnswerList] = useState([]);
+  const [displayList, setDisplayList] = useState([]);
   const [page, setPage] = useState(1);
+  const [showMoreAnswers, setShowMoreAnswers] = useState(false);
   const [helpCount, setHelpCount] = useState(helpfulness);
   const [allowUserVote, setAllowUserVote] = useState(false);
-  const [isModel, setIsModel] = useState(false);
-  const [count, setCount] = useState(5);
+  const [isModal, setIsModal] = useState(false);
+  const [fetchAnswers, setFetchAnswers] = useState(false);
+  const [displayAfterFetchCount, setDisplayAfterFetchCount] = useState(0);
+  const answerListLength = answerList.length;
 
   useEffect(() => {
-    getAnswers(question_id, page, count, setAnswerList);
-  }, []);
+    getAnswers(
+      question_id,
+      page,
+      RESULTS_PER_PAGE,
+      setAnswerList,
+      setPage,
+      displayList,
+      setDisplayList,
+      setShowMoreAnswers,
+      displayAfterFetchCount,
+      setDisplayAfterFetchCount
+    );
+  }, [page, fetchAnswers]);
 
-  function showModal() {
-    setIsModel(!isModel);
-  }
+  const handleSeeMoreAnswers = () => {
+    setDisplayList(answerList);
+    setShowMoreAnswers(false);
+  };
 
-  function incrementHelpCount() {
+  const handleCollapseAnswers = () => {
+    const sliceDisplayList = displayList.slice(0, 2);
+
+    setDisplayList(sliceDisplayList);
+    setShowMoreAnswers(true);
+  };
+
+  const showModal = () => {
+    setIsModal(!isModal);
+  };
+
+  const incrementHelpCount = () => {
     markQuestionAsHelpful(question_id);
     setHelpCount((prevState) => prevState + 1);
     setAllowUserVote(true);
-  }
+  };
 
+  const handleFetchAnswers = () => {
+    setPage(1);
+    setDisplayAfterFetchCount((prevState) => prevState + 1);
+    setFetchAnswers((prevState) => !prevState);
+    console.log('FETCH ANSWERS FIRE: ', fetchAnswers);
+  };
   let userVote;
   if (allowUserVote) {
     userVote = <div className="question-yes">Yes({helpCount})</div>;
@@ -38,8 +72,9 @@ function Question({ question_id, body, helpfulness, productName, productId }) {
     );
   }
 
-  const model = isModel ? (
+  const modal = isModal ? (
     <ModalAnswer
+      handleFetchAnswers={handleFetchAnswers}
       productName={productName}
       productId={productId}
       question_id={question_id}
@@ -50,11 +85,9 @@ function Question({ question_id, body, helpfulness, productName, productId }) {
     />
   ) : null;
 
-  // console.log(answerList);
-
   return (
     <div>
-      {model}
+      {modal}
       <div className="question">
         <div>
           <h3>Q:</h3>
@@ -66,12 +99,22 @@ function Question({ question_id, body, helpfulness, productName, productId }) {
             <div>Helpful?</div>
             {userVote}
           </div>
-          <div className="question-add-answer" onClick={showModal}>
+          <div
+            data-testid="test-answer"
+            className="question-add-answer"
+            onClick={showModal}
+          >
             Add Answer
           </div>
         </div>
       </div>
-      <AnswerList answerList={answerList} />
+      <AnswerList
+        answerListLength={answerListLength}
+        displayList={displayList}
+        showMoreAnswers={showMoreAnswers}
+        handleSeeMoreAnswers={handleSeeMoreAnswers}
+        handleCollapseAnswers={handleCollapseAnswers}
+      />
     </div>
   );
 }

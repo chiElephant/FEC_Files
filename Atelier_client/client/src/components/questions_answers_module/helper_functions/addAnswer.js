@@ -1,6 +1,13 @@
 import axios from 'axios';
 
-export default function addAnswer(question_id, body, name, email, photos) {
+export default function addAnswer(
+  question_id,
+  body,
+  name,
+  email,
+  photos,
+  handleFetchAnswers
+) {
   const url = `answer/${question_id}`;
   const data = JSON.stringify({
     body,
@@ -22,6 +29,7 @@ export default function addAnswer(question_id, body, name, email, photos) {
   axios(options)
     .then((response) => {
       console.log(response.status);
+      handleFetchAnswers();
     })
     .catch((error) => {
       console.log(error);

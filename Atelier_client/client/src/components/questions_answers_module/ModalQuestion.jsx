@@ -1,9 +1,16 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { useState, useEffect } from 'react';
 import addQuestion from './helper_functions/addQuestion';
 import FormInput from './FormInput.jsx';
 import FormErrorList from './FormErrorList.jsx';
+import useClickOutside from './custom_hooks/useClickOutside.jsx';
 
-function ModalQuestion({ productName, productId, showModal }) {
+function ModalQuestion({
+  productName,
+  productId,
+  showModal,
+  handleFetchQuestions,
+}) {
   const [values, setValues] = useState({
     question: '',
     nickname: '',
@@ -67,7 +74,7 @@ function ModalQuestion({ productName, productId, showModal }) {
 
   const handleSubmit = (e) => {
     const { question, nickname, email } = values;
-    addQuestion(productId, question, nickname, email);
+    addQuestion(productId, question, nickname, email, handleFetchQuestions);
     showModal();
   };
 
@@ -94,6 +101,10 @@ function ModalQuestion({ productName, productId, showModal }) {
     });
   };
 
+  const domNode = useClickOutside(() => {
+    showModal();
+  });
+
   let displayError;
   if (formError === true) {
     displayError = (
@@ -102,11 +113,10 @@ function ModalQuestion({ productName, productId, showModal }) {
   } else {
     displayError = null;
   }
-  console.log('formError: ', formError);
-  console.log('validEntries: ', validEntries);
+
   return (
     <div id="new-question-window">
-      <form id="question-form" onSubmit={handleSubmit}>
+      <form ref={domNode} id="question-form" onSubmit={handleSubmit}>
         <h1>Ask Your Question</h1>
         <h2>About the {productName}</h2>
 

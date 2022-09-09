@@ -47,7 +47,7 @@ function Gallery(props) {
       const newPhoto = selectedStyle.photos[newIndex].url;
       setSelectedPhoto(newPhoto);
     }
-  };
+  };;
 
   const nextPhoto = (e) => {
     e.preventDefault();

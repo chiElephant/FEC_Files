@@ -1,22 +1,21 @@
 import React, { useState, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
-function SearchQ(props) {
-  const [text, setText] = useState('');
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setText(e.target[0].value);
-  };
-
+function SearchQ({ searchText, handleUpdateSearchText }) {
+  // console.log(searchText);
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className="search">
+      <div className="searchInputs">
         <input
+          value={searchText}
           type="text"
           placeholder="Have a question? Search for answers..."
+          onChange={handleUpdateSearchText}
         />
-        <button type="submit">Search</button>
-      </form>
+        <FontAwesomeIcon icon={faSearch} className="searchInputs" />
+      </div>
+      <div className="dataResult" />
     </div>
   );
 }

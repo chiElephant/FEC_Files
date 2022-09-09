@@ -57,14 +57,17 @@ div#questions-answers-form-error {
   color:red;
 }
 div#answer-img {
-  display: flex;
+  display: flex;;
 }
 
 div#answer-img > img {
   border: 1px solid #ddd;
   border-radius: 4px;
   margin: 10px;
-  width: 100px;
+  float: left;
+  width:  100px;
+  height: 100px;
+  object-fit: cover;
 }
 
 
@@ -79,9 +82,18 @@ textarea:invalid#formInput ~ span {
 
 /****************/
 
+/* #QandAtop {
+  display: flex;
+  flex-direction: column;
+  border: solid;
+  border-color: blueviolet;
+} */
+
  div.question {
   display: flex;
   justify-content: space-between;
+  padding-top: 10px;
+  align-items: baseline;
 }
 
 div.question>div {
@@ -89,28 +101,55 @@ div.question>div {
   justify-content: space-between;
 }
 
+div.question>div > h3{
+  padding-right: 10px;
+  font-size: 25px;
+}
+
+#answer-under {
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  padding-left: 20px;
+}
+
 div.answer {
   display: flex;
   flex-direction: column;
+  padding-top: 10px;
+}
+
+div.answer > div > p {
+  font-size: 18px;
+}
+
+div.answer>div > h3 {
+  padding-right: 10px;
+  font-size: 25px;
 }
 
 div.answer>div {
   display: flex;
-  align-items: flex-end;
+  align-items: baseline;
 }
 
 div.question-options {
   display: flex;
 }
 
-div.answer-options>p {
+div.answer-options > div:nth-child(1) {
   display: flex;
   border-right: solid;
   padding-right: 10px;
 }
 
+div.answer-options > div:nth-child(1) > label:nth-child(1) {
+  padding-right: 5px;
+}
+
 div.answer-options {
   display: flex;
+  padding-top: 10px;
 }
 
 div.question-helpful {
@@ -154,3 +193,90 @@ div.answer-report {
   padding-left: 10px;
 }
 
+/* Search Bar */
+
+div.search {
+  background-color: #ffffff;
+  border: 0;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+div.searchInputs  {
+  display:flex;
+  justify-content: flex-start;
+  border: solid 2px black;
+  align-items: center;
+}
+
+div.searchInputs >input {
+  font-size: 20px;
+  display:flex;
+  height: 60px;
+  width: 100%;
+  padding-left:10px;
+  border: none;
+}
+
+#QandAtop > div.search > div.searchInputs > svg {
+  font-size: 30px;
+  padding-right: 20px;
+}
+
+
+div.searchInputs > input:focus {
+  outline:none;
+}
+
+.searchIcon svg {
+  font-size: 35px;
+}
+
+/* Question List */
+
+div#questions-buttons {
+
+  display: flex;
+  margin-top:20px;
+  margin-bottom:20px;
+}
+
+div#questions-buttons > button {
+
+  background-color: white;
+  font-size: 20px;
+  width: 500px;
+  height:60px;
+  margin-right: 20px;
+}
+
+div.more-answers {
+  padding-top: 20px;
+  padding-bottom: 10px;
+  padding-left: 30px;
+  font-weight: bold;
+}
+
+img#answer-img {
+  float: left;
+  width:  200px;
+  height: 200px;
+  object-fit: cover;
+  margin-right:10px;
+  margin-top:10px;
+}
+
+div#answer-list {
+  max-height: 50vh;
+  overflow: auto;
+}
+
+div#question-list {
+  max-height: 100vh;
+  padding-right:20px;
+  overflow: auto;
+}
+
+#seller-name {
+  font-weight: bold;
+}

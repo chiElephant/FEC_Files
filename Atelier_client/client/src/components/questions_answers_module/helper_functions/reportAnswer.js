@@ -1,8 +1,6 @@
 import axios from 'axios';
 
 export default function reportAnswer(answer_id) {
-  // console.log(productId, page);
-
   const url = `answer/${answer_id}/report`;
 
   const options = {
