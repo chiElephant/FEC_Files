@@ -1,3 +1,6 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/destructuring-assignment */
 import React, { useState, useEffect } from 'react';
@@ -47,7 +50,7 @@ function Gallery(props) {
       const newPhoto = selectedStyle.photos[newIndex].url;
       setSelectedPhoto(newPhoto);
     }
-  };;
+  };
 
   const nextPhoto = (e) => {
     e.preventDefault();
@@ -68,34 +71,36 @@ function Gallery(props) {
             src={selectedPhoto}
             onClick={handleChangeViewExpanded}
           />
-          <div className="photo-container">
+          <div className="sidebar">
             <button className="arrow-up">UP</button>
-            {selectedStyle.photos.map((photo, index) => {
-              if (index === selectedIndex) {
+            <div className="photo-container">
+              {selectedStyle.photos.map((photo, index) => {
+                if (index === selectedIndex) {
+                  return (
+                    <img
+                      onClick={(e) => {
+                        handleChangePhoto(e);
+                      }}
+                      className="style-other-imgs-selected"
+                      src={photo.url}
+                      index={index}
+                      key={index}
+                    />
+                  );
+                }
                 return (
                   <img
                     onClick={(e) => {
                       handleChangePhoto(e);
                     }}
-                    className="style-other-imgs-selected"
+                    className="style-other-imgs"
                     src={photo.url}
                     index={index}
                     key={index}
                   />
                 );
-              }
-              return (
-                <img
-                  onClick={(e) => {
-                    handleChangePhoto(e);
-                  }}
-                  className="style-other-imgs"
-                  src={photo.url}
-                  index={index}
-                  key={index}
-                />
-              );
-            })}
+              })}
+            </div>
             <button className="arrow">DOWN</button>
           </div>
         </div>

@@ -18,6 +18,7 @@
   height: 100px;
   object-fit: cover;
   margin: 10px;
+  scroll-snap-align: end;
 }
 
 .style_thumbnail {
@@ -38,12 +39,9 @@
   background-color:rgb(223, 193, 157);
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  max-height: 80%;
-  align-items: center;
-  z-index: 2;
-  position: absolute;
-  overflow: auto;
+  overflow:scroll;
+  scroll-snap-type: y mandatory;
+  object-fit: contain;
 
 }
 
@@ -108,6 +106,7 @@
   height: 100px;
   object-fit: cover;
   border: 5px solid #555;
+  scroll-snap-align: end;
 }
 
 .price-container {
@@ -142,7 +141,7 @@
   margin-left: 5%;
   flex:0 0 auto;
   flex-wrap: wrap;
-  width:30%;
+  width:25%;
 }
 
 .gallery-container {
@@ -190,4 +189,14 @@
 
 .arrow {
   z-index: 2;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+  position: absolute;
+  max-width: fit-content;
+  max-height: -webkit-fill-available;
+  justify-content: space-around;
 }
