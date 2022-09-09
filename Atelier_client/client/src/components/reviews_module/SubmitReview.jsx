@@ -47,13 +47,13 @@ function SubmitReview({
       handleSubmit();
     } else {
       throw new Error('You must enter the fallowing');
+      setShowReviewModal((showReviewModal) => false)
     }
   };
 
   const handleSubmit = () => {
-    setShowReviewModal(false);
+    setShowReviewModal((showReviewModal) => false);
     setRating(0);
-    console.log(productChars);
 
     axios
       .post('/reviews', {
@@ -74,10 +74,6 @@ function SubmitReview({
         console.log('post error: ', error);
       });
   };
-
-  function setPC() {
-    console.log(productChars);
-  }
 
   return !showReviewModal ? (
     ''
@@ -121,7 +117,6 @@ function SubmitReview({
         </fieldset>
 
         <Characteristics
-          setPC={setPC}
           characteristics={chars}
           productChars={productChars}
           setProductChars={setProductChars}

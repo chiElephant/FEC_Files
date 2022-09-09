@@ -23,7 +23,6 @@ function Characteristics ( { characteristics, productChars, setProductChars} ) {
     });
 
     handleCharText(char, id, value);
-    setProductChars(charRatings);
   };
 
   // Handles the text output above each characteristic in the add review form.
