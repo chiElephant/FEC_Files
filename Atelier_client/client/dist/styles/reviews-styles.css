@@ -281,12 +281,7 @@
 
 .graph-text {
   border-bottom: solid 1px rgb(103, 103, 103);
-  /* width: fit-content; */
   height: fit-content
-}
-
-.graph-bar {
-  width: 200px;
 }
 
 .graph-rating {
@@ -317,7 +312,7 @@
 }
 
 .graph-meter {
-  width: 225px;
+  width: 70%;
   box-sizing: content-box;
   height: 12px;
   position: relative;
