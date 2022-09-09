@@ -44,6 +44,9 @@ function Gallery(props) {
     setView('default');
   };
 
+  let minRange = 0;
+  let maxRange = 2;
+
   const previousPhoto = (e) => {
     e.preventDefault();
     if (selectedIndex > 0) {
@@ -51,6 +54,13 @@ function Gallery(props) {
       setSelectedIndex(newIndex);
       const newPhoto = selectedStyle.photos[newIndex].url;
       setSelectedPhoto(newPhoto);
+      if (selectedIndex <= maxRange) {
+        console.log('SCROLL UP');
+        const container = document.getElementById('photo-container');
+        container.scrollBy({ top: -40, left: 0, behaviour: 'smooth' });
+        maxRange--;
+        minRange--;
+      }
     }
   };
 
@@ -61,8 +71,15 @@ function Gallery(props) {
       setSelectedIndex(newIndex);
       const newPhoto = selectedStyle.photos[newIndex].url;
       setSelectedPhoto(newPhoto);
+      if (selectedIndex > maxRange) {
+        const container = document.getElementById('photo-container');
+        container.scrollBy({ top: 40, left: 0, behaviour: 'smooth' });
+        maxRange++;
+        minRange++;
+      }
     }
   };
+
 
   if (Object.keys(selectedStyle).length && Object.keys(selectedPhoto).length) {
     if (view === 'default' && Object.keys(selectedStyle.photos).length) {
@@ -75,8 +92,8 @@ function Gallery(props) {
           />
           <div className="sidebar">
             {/* <button className="arrow-up">UP</button> */}
-            <KeyboardArrowUpIcon className="arrow-up" />
-            <div className="photo-container">
+            <KeyboardArrowUpIcon className="arrow-up" onClick={previousPhoto} />
+            <div className="photo-container" id="photo-container">
               {selectedStyle.photos.map((photo, index) => {
                 if (index === selectedIndex) {
                   return (
@@ -104,7 +121,7 @@ function Gallery(props) {
                 );
               })}
             </div>
-            <KeyboardArrowDownIcon className="arrow-down" />
+            <KeyboardArrowDownIcon className="arrow-down" onClick={nextPhoto} />
           </div>
         </div>
       );
