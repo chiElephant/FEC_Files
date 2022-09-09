@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import charsKey from './helper_functions/characteristics'
 
-function Characteristics ( { characteristics, productChars, setProductChars} ) {
+function Characteristics ( { characteristics, handleProductChars } ) {
 
   const [charsDiv, setCharsDiv] = useState(<div />);
   const [charRatings, setCharRatings] = useState({});
@@ -13,14 +13,10 @@ function Characteristics ( { characteristics, productChars, setProductChars} ) {
 
    // Handles user input on product characteristics when adding a review.
    const handleCharacteristics = (char, id, value) => {
-
     //it wont work beacause it keeps trying to rest the info to the original empty productChar object
-    const charValue = {[id]: value}
+    // const charValue = {[id]: value}
 
-    setProductChars({
-      ...productChars,
-      ...charValue
-    });
+    handleProductChars(id, value)
 
     handleCharText(char, id, value);
   };

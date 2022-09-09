@@ -6,9 +6,7 @@ import StarRating from './StarRating.jsx';
 import Photos from './Photos.jsx';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  solid,
-} from '@fortawesome/fontawesome-svg-core/import.macro';
+import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 
 function SubmitReview({
   showReviewModal,
@@ -20,6 +18,7 @@ function SubmitReview({
 }) {
   const [recommend, setRecommend] = useState('boolean');
   const [productChars, setProductChars] = useState({});
+
   const [summary, setSummary] = useState('');
   const [photos, setPhotos] = useState([]);
   const [rating, setRating] = useState(0);
@@ -28,17 +27,28 @@ function SubmitReview({
   const [name, setName] = useState('');
 
   const handleChange = (cb, value) => {
-    cb(`${value}`);
+    cb(() => `${value}`);
   };
 
   const handleClick = (cb, value) => {
-    cb(value);
+    cb(() => value);
+  };
+
+  const handleProductChars = (id, value) => {
+    console.log(id)
+    const charValue = {[id]: value};
+
+    setProductChars(prevChars => ({
+      ...prevChars,
+      ...charValue
+    }));
+
   };
 
   const validateUserData = () => {
     const productCharsLength = Object.keys(productChars).length;
     const charsLength = Object.keys(chars).length;
-    console.log(productChars, Object.keys(chars));
+    console.log(productChars);
     if (
       rating > 0 &&
       typeof recommend === 'boolean' &&
@@ -46,8 +56,8 @@ function SubmitReview({
     ) {
       handleSubmit();
     } else {
-      throw new Error('You must enter the fallowing');
-      setShowReviewModal((showReviewModal) => false)
+      // throw new Error('You must enter the fallowing');
+      setShowReviewModal((showReviewModal) => false);
     }
   };
 
@@ -79,12 +89,12 @@ function SubmitReview({
     ''
   ) : (
     <div id="review-window">
-      <form id="review-form" onSubmit={(e) => e.preventDefault()}>
+      <div id="review-form" onSubmit={(e) => e.preventDefault()}>
         <FontAwesomeIcon
           id="review-window-icon"
           icon={solid('square-xmark')}
           size="2x"
-          onClick={() => setShowReviewModal(false)}
+          onClick={() => setShowReviewModal(showReviewModal => false)}
         />
         <h1>Write Your Review</h1>
         <h3>About the {productName}</h3>
@@ -118,8 +128,7 @@ function SubmitReview({
 
         <Characteristics
           characteristics={chars}
-          productChars={productChars}
-          setProductChars={setProductChars}
+          handleProductChars={handleProductChars}
         />
 
         {/* This div will alllow the user to enter a summary */}
@@ -138,7 +147,6 @@ function SubmitReview({
         {/* This div will allow a user to enter a review body */}
         <fieldset id="review-body-input">
           <legend>Review</legend>
-
           <textarea
             minLength="50"
             maxLength="1000"
@@ -201,7 +209,7 @@ function SubmitReview({
         >
           Submit Review
         </button>
-      </form>
+      </div>
     </div>
   );
 }
