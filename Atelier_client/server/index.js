@@ -39,6 +39,7 @@ app.get('/questions/:product_id/', getQuestions, (req, res) => {
 
 // Answer List;
 app.get('/answers/:question_id/:page/:count', getAnswers, (req, res) => {
+  console.log('answeers: ', res.body);
   res.status(200).send(res.body);
 });
 

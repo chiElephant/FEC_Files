@@ -38,7 +38,7 @@ export default function getAnswers(
           'answerer_name',
           'Seller'
         );
-        console.log('displayAfterFetchCount after: ', displayAfterFetchCount);
+
         if (displayAfterFetchCount > 0) {
           setDisplayAfterFetchCount((preState) => preState - 1);
           setShowMoreAnswers(false);

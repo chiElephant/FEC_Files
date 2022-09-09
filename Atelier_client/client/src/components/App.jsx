@@ -4,7 +4,7 @@ import QandAModule from './questions_answers_module/QandAModule.jsx';
 import ReviewsModule from './reviews_module/ReviewsModule.jsx';
 
 function App(props) {
-  const [product_id, setProduct_id] = useState(71701);
+  const [product_id, setProduct_id] = useState(71697);
   const [productName, setProductName] = useState('Heir Force Ones');
 
   return (

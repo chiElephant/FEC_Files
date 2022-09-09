@@ -1,0 +1,29 @@
+/* eslint-disable import/prefer-default-export */
+// src/mocks/handlers.js
+import { rest } from 'msw';
+import { mockQuestions, answers_642599 } from './Q&A-mock-data.js';
+
+export const handlers = [
+  // Handles a GET /user request
+  rest.get('questions/:product_id', (req, res, ctx) =>
+    res(ctx.status(200), ctx.json(mockQuestions.questions))
+  ),
+  rest.get('/answers/:question_id/:page/:count', (req, res, ctx) => {
+    const { question_id, page } = req.params;
+
+    if (question_id === 642599 && page === 1) {
+      return res(ctx.status(200), ctx.json(answers_642599));
+    }
+    if (question_id === 642599 && page === 2) {
+      return res(
+        ctx.status(200),
+        ctx.json({ question: '642599', page: '2', count: '100', results: [] })
+      );
+    }
+
+    return res(
+      ctx.status(200),
+      ctx.json({ question: '642681', page: '1', count: '100', results: [] })
+    );
+  }),
+];

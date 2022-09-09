@@ -71,10 +71,6 @@ function Question({ question_id, body, helpfulness, productName, productId }) {
       </div>
     );
   }
-  console.log('showMoreAnswers: ', showMoreAnswers);
-  console.log('answerList: ', answerList);
-  console.log('displayList: ', displayList);
-  console.log('displayAfterFetchCount before: ', displayAfterFetchCount);
 
   const modal = isModal ? (
     <ModalAnswer
@@ -103,7 +99,11 @@ function Question({ question_id, body, helpfulness, productName, productId }) {
             <div>Helpful?</div>
             {userVote}
           </div>
-          <div className="question-add-answer" onClick={showModal}>
+          <div
+            data-testid="test-answer"
+            className="question-add-answer"
+            onClick={showModal}
+          >
             Add Answer
           </div>
         </div>

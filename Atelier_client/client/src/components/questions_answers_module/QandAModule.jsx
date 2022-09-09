@@ -119,11 +119,6 @@ function QandAModule({ product_id, product_name }) {
     setShowMoreQuestions(false);
   };
 
-  // console.log('filterCountShown: ', filterCountShown);
-  // console.log('filteredList: ', filteredList);
-  // console.log('showMoreQuestions: ', showMoreQuestions);
-  // console.log('fetchQuestions: ', fetchQuestions);
-
   const list = filterMode ? (
     <QuestionList
       handleFetchQuestions={handleFetchQuestions}

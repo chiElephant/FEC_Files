@@ -36,7 +36,7 @@ function QuestionList({
   return (
     <>
       {model}
-      <div ref={containerRef} id="question-list">
+      <div data-testid="test-questions" ref={containerRef} id="question-list">
         {displayList.map((q) => (
           <Question
             productName={productName}
