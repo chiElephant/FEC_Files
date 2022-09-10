@@ -105,7 +105,8 @@ function ProductInfo(props) {
           </Link>
         </div>
         <div>{props.product.category}</div>
-        <div>{props.product.name}</div>
+        <h2>{props.product.name}</h2>
+        <h4>{props.product.slogan}</h4>
         <div>{selectedStyle.name}</div>
         <div>
           {price.discounted ? (
@@ -121,8 +122,7 @@ function ProductInfo(props) {
             </div>
           )}
         </div>
-        <h4>{props.product.slogan}</h4>
-        <div>{props.product.description}</div>
+        {/* <div className="description">{props.product.description}</div> */}
         <ul>
           {props.product.features.map((feature, index) => (
             <li key={index}>{`${feature.value} ${feature.feature}`}</li>

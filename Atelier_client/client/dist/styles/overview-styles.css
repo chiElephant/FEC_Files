@@ -4,6 +4,8 @@
 .product-info-container {
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
+  margin-left: 7%;
 }
 
 .product_info_reviews {
@@ -178,10 +180,7 @@
   width:25%;
 }
 
-.gallery-container {
-  align-content: center;
-  justify-content: center;
-}
+
 
 .addto-outfit {
 
@@ -240,4 +239,21 @@
 }
 .arrow-down {
   align-self: center;
+}
+
+.overview {
+  display: flex;
+  flex-direction: row;
+}
+
+.new-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: baseline;
+}
+
+.description {
+  display: flex;
+  flex-wrap: wrap;
 }
