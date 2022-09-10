@@ -136,8 +136,7 @@ app.get('/reviews', reviewsHelper.getReviews, (req, res) => {
 });
 
 //POST reviews
-app.post('/reviews', reviewsHelper.postReview, (req, res) => {
-  console.log('Im Here');
+app.post('/reviews', uploadToCloudinary, reviewsHelper.postReview, (req, res) => {
   res.sendStatus(201);
 });
 
@@ -145,6 +144,21 @@ app.post('/reviews', reviewsHelper.postReview, (req, res) => {
 app.get('/reviews/meta', reviewsHelper.getMetaData, (req, res) => {
   res.status(200).send(res.body);
 });
+
+//PUT mark review helpful
+app.put('/reviews/:review_id/helpful', (req, res) => {
+  reviewsHelper.markHelpful(req.params, (error, success) => {
+    if (error) {
+      res.status(500).send(error);
+    } else {
+      res.sendStatus(204);
+    }
+  })
+})
+
+app.get('/reviews/*', (req, res) => {
+  res.render('/');
+})
 
 app.use((err, req, res, next) => {
   console.log('error in express error handler: ', err.message);

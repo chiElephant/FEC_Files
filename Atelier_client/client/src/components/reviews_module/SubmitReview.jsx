@@ -1,50 +1,113 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+
+import Characteristics from './Characteristics.jsx';
+import ErrorModal from './ErrorModal.jsx';
+import StarRating from './StarRating.jsx';
+import Photos from './Photos.jsx';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { solid, regular } from '@fortawesome/fontawesome-svg-core/import.macro';
+import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 
 function SubmitReview({
   showReviewModal,
   setShowReviewModal,
-  submitReviewForm,
   productName,
   product_id,
-  chars,
+  characteristics,
 }) {
-  const [productChars, setProductChars] = useState({});
-  const [addPhotoDiv, setAddPhotoDiv] = useState(<div />);
-  const [charsDiv, setCharsDiv] = useState(<div />);
-  const [recommend, setRecommend] = useState(false);
-  const [summary, setSummary] = useState('');
-  const [rating, setRating] = useState(0);
-  const [photos, setPhotos] = useState([]);
-  const [email, setEmail] = useState('');
-  const [body, setBody] = useState('');
-  const [name, setName] = useState('');
-
-  useEffect(() => {
-    createCharsDiv();
-  }, [chars]);
-
-  const handleChange = (cb, value) => {
-    cb(`${value}`);
+  const inputInitState = {
+    product_id: 0,
+    recommend: null,
+    characteristics: {},
+    summary: '',
+    photos: [],
+    rating: 0,
+    email: '',
+    body: '',
+    name: '',
   };
 
+  const [errorModal, setErrorModal] = useState('');
+  const [error, setError] = useState('');
+  const [userInputs, setUserInputs] = useState(inputInitState);
+
+  useEffect(() => {
+    const newValue = { product_id: product_id };
+    setUserInputs((prevInput) => ({
+      ...prevInput,
+      ...newValue,
+    }));
+  }, [product_id]);
+
+  function handleUserInputs(input, value, option) {
+    let newValue;
+
+    if (option) {
+      newValue = { [value]: option };
+
+      setUserInputs((prevInput) => ({
+        ...prevInput,
+        [input]: {
+          ...prevInput[input],
+          ...newValue,
+        },
+      }));
+    } else {
+      newValue = { [input]: value };
+
+      setUserInputs((prevInput) => ({
+        ...prevInput,
+        ...newValue,
+      }));
+    }
+  }
+
+  function validateUserData() {
+    const { rating, recommend, summary, body, photos, name, email } =
+      userInputs;
+    const characteristicsLength = Object.keys(
+      userInputs.characteristics
+    ).length;
+    const charsLength = Object.keys(characteristics).length;
+
+    const validationKey = {
+      rating: rating !== 0,
+      recommend: typeof recommend === 'boolean',
+      characteristics: charsLength === characteristicsLength,
+      summary: summary.length <= 60,
+      body: 50 <= body.length && body.length <= 100,
+      photos: photos.length <= 5,
+      name: 0 < name.length && name.length <= 60,
+      email: 0 < email.length && email.length <= 60,
+    };
+
+    function validateEmail() {
+      var validationExp = /\S+@\S+\.\S+/;
+      const valid = validationExp.test(userInputs.email);
+      validationKey.email = valid;
+    }
+    validateEmail();
+
+    for (let input in validationKey) {
+      if (!validationKey[input]) {
+        setError((error) => input);
+        setErrorModal((errorModal) => true);
+        return;
+      }
+    }
+    setShowReviewModal((prevState) => false);
+    handleSubmit();
+  }
+
   const handleSubmit = () => {
-    setShowReviewModal(false);
     axios
-      .post('/reviews', {
-        product_id,
-        rating,
-        summary,
-        body,
-        recommend,
-        name,
-        email,
-        photos,
-        characteristics: productChars,
-      })
+      .post('/reviews', userInputs)
       .then((response) => {
+        setUserInputs((prevState) => ({
+          ...prevState,
+          ...inputInitState,
+        }));
         console.log(response);
       })
       .catch((error) => {
@@ -52,385 +115,142 @@ function SubmitReview({
       });
   };
 
-  const charsKey = {
-    Size: {
-      1: 'A size too small',
-      2: '1/2 size too small',
-      3: 'Perfect',
-      4: '1/2 size too big',
-      5: 'A size too wide',
-    },
-    Width: {
-      1: 'Too narrow',
-      2: 'Slightly narrow',
-      3: 'Perfect',
-      4: 'Slightly wide',
-      5: 'Too wide',
-    },
-    Comfort: {
-      1: 'Uncomfortable',
-      2: 'Slightly uncomfortable',
-      3: 'Ok',
-      4: 'Comfortable',
-      5: 'Perfect',
-    },
-    Quality: {
-      1: 'Poor',
-      2: 'Below Average',
-      3: 'What I expected',
-      4: 'Pretty great',
-      5: 'Perfect',
-    },
-    Length: {
-      1: 'Runs short',
-      2: 'Runs slightly short',
-      3: 'Perfect',
-      4: 'Runs slightly long',
-      5: 'Runs long',
-    },
-    Fit: {
-      1: 'Runs tight',
-      2: 'Runs slightly tight',
-      3: 'Perfect',
-      4: 'Runs slightly long',
-      5: 'Runs long',
-    },
-  };
-
-  const handleClick = (cb, value) => {
-    cb(value);
-  };
-
-  const handlePhotos = () => {
-    let files = document.querySelector('#photo-input').files;
-    let fileURLs = photos;
-
-    if (files.length <= 5) {
-      for (let i = 0; i < files.length; i++) {
-        const file = files[i];
-
-        // if (!file.type.startsWith('image/')) {
-        //   continue;
-        // }
-
-        const img = document.createElement('img');
-        img.file = file;
-        img.width = 80;
-
-        images.appendChild(img);
-
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          img.src = e.target.result;
-          fileURLs.push(e.target.result);
-          setPhotos(fileURLs);
-        };
-        reader.readAsDataURL(file);
-      }
-    }
-  };
-
-  const handleCharacteristics = (char, id, value) => {
-    let chars = productChars;
-    chars[`${id}`] = value;
-    setProductChars(chars);
-    handleCharSelection(char, id, value);
-  };
-
-  const handleCharSelection = (char, id, value) => {
-    const currentDisplay = document.getElementById(id);
-    const newDisplay = charsKey[char][value];
-    currentDisplay.textContent = newDisplay;
-  };
-
-  const createCharsDiv = () => {
-    let div = [];
-
-    for (let char in chars) {
-      div.push(
-        <div key={chars[char].id}>
-          <span id={chars[char].id}>None Selected</span>
-          <br />
-          <label>
-            {`${char}`}
-            <input
-              className={chars[char].id}
-              type="radio"
-              name={`${char}`}
-              value="1"
-              onClick={() => handleCharacteristics(char, chars[char].id, 1)}
-            />
-            <input
-              className={chars[char].id}
-              type="radio"
-              name={`${char}`}
-              value="2"
-              onClick={() => handleCharacteristics(char, chars[char].id, 2)}
-            />
-            <input
-              className={chars[char].id}
-              type="radio"
-              name={`${char}`}
-              value="3"
-              onClick={() => handleCharacteristics(char, char[char].id, 3)}
-            />
-            <input
-              className={chars[char].id}
-              type="radio"
-              name={`${char}`}
-              value="4"
-              onClick={() => handleCharacteristics(char, chars[char].id, 4)}
-            />
-            <input
-              className={chars[char].id}
-              type="radio"
-              name={`${char}`}
-              value="5"
-              onClick={() =>
-                handleCharacteristics(char, `${chars[char].id}`, 5)
-              }
-            />
-          </label>
-          <br />
-        </div>
-      );
-    }
-    setCharsDiv(div);
-  };
-
   return !showReviewModal ? (
     ''
   ) : (
     <div id="review-window">
-      <div id="review-form">
+      <div id="review-form" onSubmit={(e) => e.preventDefault()}>
+        <FontAwesomeIcon
+          id="review-window-icon"
+          icon={solid('square-xmark')}
+          size="2x"
+          onClick={() => setShowReviewModal((showReviewModal) => false)}
+        />
         <h1>Write Your Review</h1>
         <h3>About the {productName}</h3>
 
-        {/* This div will ask the customer to fill in a star rating */}
-        <div id="rate-by-star">
-          <fieldset>
-            <legend>Overall Rating</legend>
-            {rating >= 1 ? (
-              <FontAwesomeIcon
-                id="star-1"
-                icon={solid('star')}
-                onClick={() => {
-                  handleClick(setRating, 1);
-                }}
-              />
-            ) : (
-              <FontAwesomeIcon
-                id="star-1"
-                icon={regular('star')}
-                onClick={() => {
-                  handleClick(setRating, 1);
-                }}
-              />
-            )}
-            {rating >= 2 ? (
-              <FontAwesomeIcon
-                id="star-2"
-                icon={solid('star')}
-                onClick={() => {
-                  handleClick(setRating, 2);
-                }}
-              />
-            ) : (
-              <FontAwesomeIcon
-                id="star-2"
-                icon={regular('star')}
-                onClick={() => {
-                  handleClick(setRating, 2);
-                }}
-              />
-            )}
-            {rating >= 3 ? (
-              <FontAwesomeIcon
-                id="star-3"
-                icon={solid('star')}
-                onClick={() => {
-                  handleClick(setRating, 3);
-                }}
-              />
-            ) : (
-              <FontAwesomeIcon
-                id="star-3"
-                icon={regular('star')}
-                onClick={() => {
-                  handleClick(setRating, 3);
-                }}
-              />
-            )}
-            {rating >= 4 ? (
-              <FontAwesomeIcon
-                id="star-4"
-                icon={solid('star')}
-                onClick={() => {
-                  handleClick(setRating, 4);
-                }}
-              />
-            ) : (
-              <FontAwesomeIcon
-                id="star-4"
-                icon={regular('star')}
-                onClick={() => {
-                  handleClick(setRating, 4);
-                }}
-              />
-            )}
-            {rating === 5 ? (
-              <FontAwesomeIcon
-                id="star-5"
-                icon={solid('star')}
-                onClick={() => {
-                  handleClick(setRating, 5);
-                }}
-              />
-            ) : (
-              <FontAwesomeIcon
-                id="star-5"
-                icon={regular('star')}
-                onClick={() => {
-                  handleClick(setRating, 5);
-                }}
-              />
-            )}
-          </fieldset>
-        </div>
+        <StarRating
+          rating={userInputs.rating}
+          handleUserInputs={handleUserInputs}
+        />
 
         {/* This div will ask the customer if they recommend the product*/}
-        <div id="recommend">
-          <fieldset>
-            <legend>Do you recommend this product?</legend>
-            <div>
-              <label>
-                <input
-                  type="radio"
-                  name="rec"
-                  value="yes"
-                  onClick={() => handleClick(setRecommend, true)}
-                />{' '}
-                Yes
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="rec"
-                  value="no"
-                  onClick={() => handleClick(setRecommend, false)}
-                />{' '}
-                No
-              </label>
-            </div>
-          </fieldset>
-        </div>
-        {/* // This div asks the customer about different product characteristics */}
-        <div id="characteristics-radios">
-          <fieldset>
-            <legend>Characteristics</legend>
-            {charsDiv}
-            <p> {`lowest(1)...........highest(5)`} </p>
-          </fieldset>
-        </div>
+        <fieldset id="recommend" required="required">
+          <legend>Do you recommend this product?*</legend>
+          <label className="rec-radio-text">
+            <input
+              type="radio"
+              name="rec"
+              value="yes"
+              className="rec-radio"
+              onClick={() => handleUserInputs('recommend', true)}
+            />
+            Yes
+          </label>
+          <label className="rec-radio-text">
+            <input
+              type="radio"
+              name="rec"
+              value="no"
+              className="rec-radio"
+              onClick={() => handleUserInputs('recommend', false)}
+            />
+            No
+          </label>
+        </fieldset>
+
+        <Characteristics
+          characteristics={characteristics}
+          handleUserInputs={handleUserInputs}
+        />
 
         {/* This div will alllow the user to enter a summary */}
-        <div id="review-summary-input">
-          <fieldset>
-            <legend>Summary</legend>
-            <div>
-              <textarea
-                maxLength="60"
-                placeholder={'Example: Best purchse ever!'}
-                rows="2"
-                cols="35"
-                onChange={(e) => handleChange(setSummary, e.target.value)}
-              ></textarea>
-            </div>
-          </fieldset>
-        </div>
+        <fieldset id="review-summary-input">
+          <legend>Summary</legend>
+          <textarea
+            maxLength="60"
+            placeholder={'Example: Best purchse ever!'}
+            rows="2"
+            cols="35"
+            required="required"
+            onChange={(e) => handleUserInputs('summary', e.target.value)}
+          ></textarea>
+        </fieldset>
 
         {/* This div will allow a user to enter a review body */}
+        <fieldset id="review-body-input">
+          <legend>Review*</legend>
+          <textarea
+            minLength="50"
+            maxLength="1000"
+            placeholder={'Why did you like this product or not?'}
+            rows="3"
+            cols="70"
+            wrap="hard"
+            required="required"
+            onChange={(e) => handleUserInputs('body', e.target.value)}
+          ></textarea>
 
-        <div id="review-body-input">
-          <fieldset>
-            <legend>Review</legend>
-            <div>
-              <textarea
-                minLength="50"
-                maxLength="1000"
-                placeholder={'Why did you like this product or not?'}
-                rows="3"
-                cols="70"
-                required="required"
-                wrap="hard"
-                onChange={(e) => handleChange(setBody, e.target.value)}
-              ></textarea>
-            </div>
-            <span>
-              {body.length < 50
-                ? `Minimum required characters left: ${50 - body.length}`
-                : 'Minimum Reached'}
-            </span>
-          </fieldset>
-        </div>
+          <span>
+            {userInputs.body.length < 50
+              ? `Minimum required characters left: ${
+                  50 - userInputs.body.length
+                }`
+              : 'Minimum Reached'}
+          </span>
+        </fieldset>
 
-        {/* This div will allow the user to upload photos to the review */}
-
-        <div>
-          <fieldset>
-            <legend>Upload your photos</legend>
-            <input
-              id="photo-input"
-              type="file"
-              accept="image/png, image/jpeg"
-              multiple
-              onChange={() => handlePhotos()}
-            ></input>
-            <div id="images"></div>
-            {addPhotoDiv}
-          </fieldset>
-        </div>
+        <Photos photos={photos} handleUserInputs={handleUserInputs} />
 
         {/* This div will ask the user to enter their enter their name */}
-
-        <div id="name-input">
-          <fieldset>
-            <legend>What is your Name?</legend>
-            <input
-              type="text"
-              className="name-input"
-              placeholder="Example: jackson11!"
-              maxLength="60"
-              size="35"
-              onChange={(e) => handleChange(setName, e.target.value)}
-            ></input>
-            <br />
-            <span>
-              For privacy reasons, do not use your full name or email address
-            </span>
-          </fieldset>
-        </div>
+        <fieldset id="name-input">
+          <legend>What is your Name?*</legend>
+          <input
+            type="text"
+            className="name-input"
+            placeholder="Example: jackson11!"
+            maxLength="60"
+            size="35"
+            required="required"
+            onChange={(e) => handleUserInputs('name', e.target.value)}
+          ></input>
+          <br />
+          <span>
+            For privacy reasons, do not use your full name or email address
+          </span>
+        </fieldset>
 
         {/* This div will ask the user to enter their email */}
-
-        <div id="email-input">
-          <fieldset>
-            <legend>Your email</legend>
-            <input
-              type="email"
-              className="email-input"
-              placeholder="Example: jackson11@email.com"
-              maxLength="60"
-              size="35"
-              onChange={(e) => handleChange(setEmail, e.target.value)}
-            ></input>
-            <br />
-            <span>For authentication reasons, you will not be emailed</span>
-          </fieldset>
+        <fieldset id="email-input">
+          <legend>Your email*</legend>
+          <input
+            type="email"
+            className="email-input"
+            placeholder="Example: jackson11@email.com"
+            maxLength="60"
+            size="35"
+            required="required"
+            onChange={(e) => handleUserInputs('email', e.target.value)}
+          ></input>
           <br />
-          <input type="submit" onClick={(e) => handleSubmit()}></input>
-        </div>
+          <span>For authentication reasons, you will not be emailed</span>
+        </fieldset>
+        <br />
+        <button
+          id="submit-review"
+          type="submit"
+          className="reviews-btn"
+          onClick={() => validateUserData(userInputs, handleSubmit)}
+        >
+          Submit Review
+        </button>
+        <span>*required</span>
       </div>
+      <ErrorModal
+        error={error}
+        errorModal={errorModal}
+        setErrorModal={setErrorModal}
+      />
     </div>
   );
 }
