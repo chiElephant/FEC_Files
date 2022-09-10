@@ -120,12 +120,12 @@ function SubmitReview({
   ) : (
     <div id="review-window">
       <div id="review-form" onSubmit={(e) => e.preventDefault()}>
-        <FontAwesomeIcon
+        {/* <FontAwesomeIcon
           id="review-window-icon"
           icon={solid('square-xmark')}
           size="2x"
           onClick={() => setShowReviewModal((showReviewModal) => false)}
-        />
+        /> */}
         <h1>Write Your Review</h1>
         <h3>About the {productName}</h3>
 
