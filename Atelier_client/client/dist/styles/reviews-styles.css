@@ -417,3 +417,12 @@
   justify-content: space-between;
   font-size: small;
 }
+
+#error {
+  font-size: large;
+}
+
+#error-msg {
+  font-size: small;
+  text-align: center;
+}

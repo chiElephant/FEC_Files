@@ -149,9 +149,9 @@ app.get('/reviews/meta', reviewsHelper.getMetaData, (req, res) => {
 app.put('/reviews/:review_id/helpful', (req, res) => {
   reviewsHelper.markHelpful(req.params, (error, success) => {
     if (error) {
-      res.status(500).send(error)
+      res.status(500).send(error);
     } else {
-      res.sendStatus(204)
+      res.sendStatus(204);
     }
   })
 })

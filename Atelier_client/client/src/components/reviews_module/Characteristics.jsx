@@ -102,7 +102,7 @@ function Characteristics ( { characteristics, handleProductChars, handleUserInpu
 
   return (
     <fieldset id="characteristics-radios">
-      <legend>Characteristics</legend>
+      <legend>Characteristics*</legend>
       {charsDiv}
     </fieldset>
   )

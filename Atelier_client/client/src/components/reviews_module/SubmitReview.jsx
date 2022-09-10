@@ -12,14 +12,12 @@ import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 function SubmitReview({
   showReviewModal,
   setShowReviewModal,
-  submitReviewForm,
   productName,
   product_id,
   characteristics,
 }) {
-  const [errorModal, setErrorModal] = useState('');
-  const [error, setError] = useState('');
-  const [userInputs, setUserInputs] = useState({
+
+  const inputInitState = {
     product_id: 0,
     recommend: null,
     characteristics: {},
@@ -29,7 +27,11 @@ function SubmitReview({
     email: '',
     body: '',
     name: '',
-  });
+  }
+
+  const [errorModal, setErrorModal] = useState('');
+  const [error, setError] = useState('');
+  const [userInputs, setUserInputs] = useState(inputInitState);
 
   useEffect(() => {
     const newValue = { product_id: product_id };
@@ -82,26 +84,29 @@ function SubmitReview({
     };
 
     function validateEmail() {
-      const symbolCheck = userInputs.email.slice('@');
-      if (symbolCheck) {
-        const dotCheck = symbolCheck[1].slice('.');
-        if (!dotCheck) {
-          validationKey.email = false;
-        }
-      }
+
+      var validationExp = /\S+@\S+\.\S+/;
+      const valid = validationExp.test(userInputs.email);
+      validationKey.email = valid;
     }
+    validateEmail();
 
     for (let input in validationKey) {
       if (!validationKey[input]) {
         setError((error) => input);
         setErrorModal((errorModal) => true);
+        return;
       }
     }
+    setShowReviewModal(prevState => false);
+    handleSubmit()
   };
 
   const handleSubmit = () => {
-    setShowReviewModal((showReviewModal) => false);
-    setRating(0);
+    setUserInputs((prevState) => ({
+      ...prevState,
+      ...inputInitState,
+    }));
 
     axios
       .post('/reviews', userInputs)
@@ -134,7 +139,7 @@ function SubmitReview({
 
         {/* This div will ask the customer if they recommend the product*/}
         <fieldset id="recommend" required="required">
-          <legend>Do you recommend this product?</legend>
+          <legend>Do you recommend this product?*</legend>
           <label className="rec-radio-text">
             <input
               type="radio"
@@ -177,7 +182,7 @@ function SubmitReview({
 
         {/* This div will allow a user to enter a review body */}
         <fieldset id="review-body-input">
-          <legend>Review</legend>
+          <legend>Review*</legend>
           <textarea
             minLength="50"
             maxLength="1000"
@@ -191,7 +196,7 @@ function SubmitReview({
 
           <span>
             {body.length < 50
-              ? `Minimum required characters left: ${50 - body.length}`
+              ? `Minimum required characters left: ${50 - userInputs.body.length}`
               : 'Minimum Reached'}
           </span>
         </fieldset>
@@ -200,7 +205,7 @@ function SubmitReview({
 
         {/* This div will ask the user to enter their enter their name */}
         <fieldset id="name-input">
-          <legend>What is your Name?</legend>
+          <legend>What is your Name?*</legend>
           <input
             type="text"
             className="name-input"
@@ -218,7 +223,7 @@ function SubmitReview({
 
         {/* This div will ask the user to enter their email */}
         <fieldset id="email-input">
-          <legend>Your email</legend>
+          <legend>Your email*</legend>
           <input
             type="email"
             className="email-input"
@@ -240,6 +245,7 @@ function SubmitReview({
         >
           Submit Review
         </button>
+        <span>*required</span>
       </div>
       <ErrorModal
         error={error}

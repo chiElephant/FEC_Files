@@ -63,8 +63,6 @@ const postReview = (req, res, next) => {
     characteristics,
   });
 
-  console.log(data);
-
   const options = {
     method: 'post',
     url: `${URL}/reviews`,
@@ -75,11 +73,11 @@ const postReview = (req, res, next) => {
     data,
   };
 
-  // axios(options)
-  //   .then((res) => {
-  //     next();
-  //   })
-  //   .catch(next);
+  axios(options)
+    .then((res) => {
+      next();
+    })
+    .catch(next);
 };
 
 const markHelpful = (params, cb) => {

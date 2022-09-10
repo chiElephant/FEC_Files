@@ -44,7 +44,7 @@ function StarRating ( {rating, handleUserInputs} ) {
 
   return (
     <fieldset id="rate-by-star" >
-      <legend>Overall Rating</legend>
+      <legend>Overall Rating*</legend>
       {starDiv}
       {keyText}
     </fieldset>
