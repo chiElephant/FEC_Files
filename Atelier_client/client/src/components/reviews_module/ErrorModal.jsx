@@ -8,12 +8,12 @@ function ErrorModal({ error, errorModal, setErrorModal }) {
     <div id="error-window">
       <div id="error-modal">
         <div>
-          <FontAwesomeIcon
+          {/* <FontAwesomeIcon
             id="error-modal-icon"
             icon={solid('square-xmark')}
             size="lg"
             onClick={() => setErrorModal((errorModal) => false)}
-          />
+          /> */}
         </div>
         <div id="error">{`You must enter the following: ${error.toUpperCase()}`}</div>
         <div id="error-msg">{'missing field or incorrect format'}</div>

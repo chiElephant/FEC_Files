@@ -8,12 +8,12 @@ function PhotoModal({ photoURL, viewPhoto, closeModal }) {
   ) : (
     <div id="photo-window">
       <div id="modal-photo">
-        <FontAwesomeIcon
+        {/* <FontAwesomeIcon
           id="photo-window-icon"
           icon={solid('square-xmark')}
           size="3x"
           onClick={() => closeModal()}
-        />
+        /> */}
         <img src={photoURL} alt="Photo Not Available"></img>
       </div>
     </div>
