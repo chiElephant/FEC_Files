@@ -298,11 +298,7 @@
   margin-bottom: 16px;
 }
 
-#five-star,
-#four-star,
-#three-star,
-#two-star,
-#one-star {
+#filter-star {
   display: flex;
 }
 

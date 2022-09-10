@@ -4,8 +4,10 @@ import axios from 'axios';
 
 const helpers = {
 
-  filterReviews: function (rating) {
-    console.log('filtering');
+  filterReviews: function (rating, setCurrentFilters) {
+    console.log('filtering', rating );
+    const newFilter = {[rating]: true};
+
   },
 
   handleRatingsPercent: function (ratings) {

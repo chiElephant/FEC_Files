@@ -6,7 +6,12 @@ import { solid, light } from '@fortawesome/fontawesome-svg-core/import.macro';
 
 import helpers from './helper_functions/ratings_bd.js';
 
-function RatingsBreakdown({ productId, setCharacteristics, characteristics }) {
+function RatingsBreakdown({
+  productId,
+  setCharacteristics,
+  characteristics,
+  setCurrentFilters,
+}) {
   const [ratingsGraphDiv, setRatingsGraphDiv] = useState(<div />);
   const [starsDiv, setStarsDiv] = useState(<div />);
 
@@ -25,6 +30,13 @@ function RatingsBreakdown({ productId, setCharacteristics, characteristics }) {
     createRatingsGraphDiv(metadata.ratings);
   }
 
+  function handleFilters(rating) {
+    setCurrentFilters((currentFilters) => ({
+      ...currentFilters,
+      [rating]: !currentFilters[rating],
+    }));
+  }
+
   async function createRatingsGraphDiv(ratings) {
     const ratingsPercent = await helpers.handleRatingsPercent(ratings);
     const ratingsGraphDiv = [];
@@ -33,8 +45,14 @@ function RatingsBreakdown({ productId, setCharacteristics, characteristics }) {
 
     for (var i = NUM_BARS; i > 0; i--) {
       ratingsGraphDiv.push(
-        <div id="five-star" key={i}>
-          <div className="graph-text" onClick={() => helpers.filterReviews(i)}>
+        <div id="filter-star" key={i}>
+          <div
+            className="graph-text"
+            data-id={`${i}`}
+            onClick={(e) =>
+              handleFilters(e.target.dataset.id, setCurrentFilters)
+            }
+          >
             {`${i} stars`}
           </div>
           <div className="graph-meter">
@@ -48,9 +66,9 @@ function RatingsBreakdown({ productId, setCharacteristics, characteristics }) {
   }
 
   function createStarsRatingDiv(avg) {
-    let starRatingDiv = []
+    let starRatingDiv = [];
 
-    const NUM_STARS = 5
+    const NUM_STARS = 5;
 
     if (avg !== 0) {
       for (let i = 1; i <= avg; i++) {
