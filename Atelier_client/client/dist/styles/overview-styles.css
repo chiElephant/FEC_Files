@@ -246,6 +246,7 @@
   display: flex;
   flex-direction: row;
   margin-top: 5%;
+  width: 100vw;
 }
 
 .new-right {
