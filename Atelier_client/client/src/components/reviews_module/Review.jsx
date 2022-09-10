@@ -6,8 +6,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   solid,
   regular,
-  light,
-  thin,
 } from '@fortawesome/fontawesome-svg-core/import.macro';
 
 function Review(props) {
@@ -99,7 +97,7 @@ function Review(props) {
           <FontAwesomeIcon
             key={`star-solid-${i}`}
             className="star"
-            icon={solid('star-sharp')}
+            icon={solid('star')}
           />
         );
       }
@@ -108,7 +106,7 @@ function Review(props) {
           <FontAwesomeIcon
             key={`star-${i}`}
             className="star"
-            icon={light('star-sharp')}
+            icon={regular('star')}
           />
         );
       }
@@ -167,7 +165,8 @@ function Review(props) {
         </div>
         <div>{`(${currentHelpful})`}</div>
         <div>
-          <FontAwesomeIcon icon={thin('pipe')} />
+          |
+          {/* <FontAwesomeIcon icon={thin('pipe')} /> */}
         </div>
         <div>{'Report'}</div>
       </div>

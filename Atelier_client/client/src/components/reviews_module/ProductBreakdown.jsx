@@ -54,12 +54,12 @@ function ProductBreakdown({ characteristics }) {
           <div className="characteristic" key={key}>
             <div className="char-name">{`${char}`}</div>
             <div className="char-meter">
-              <FontAwesomeIcon
+              {/* <FontAwesomeIcon
                 id="char-icon"
                 icon={solid('triangle')}
                 style={{ width: value * 20 + '%' }}
                 flip="vertical"
-              />
+              /> */}
             </div>
             <div id="breakdown-descrip">{element}</div>
           </div>
