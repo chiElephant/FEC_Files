@@ -31,8 +31,23 @@ function RatingsBreakdown({
     createRatingsGraphDiv(metadata.ratings);
   }
 
-  async function handleFilters(rating) {
-    await setCurrentFilters((currentFilters) => ({
+  function handleFilters(target) {
+
+    const className = target.className;
+    const rating = target.dataset.id;
+    const id = target.id;
+
+    if (className === 'graph-text') {
+      const element = document.getElementById(id);
+      element.classList.add('graph-text-filter');
+      // element.classList.remove('graph-text');
+    } else {
+      const element = document.getElementById(id);
+      // element.classList.add('graph-text');
+      element.classList.remove('graph-text-filter');
+    }
+
+    setCurrentFilters((currentFilters) => ({
       ...currentFilters,
       [rating]: !currentFilters[rating],
     }));
@@ -48,10 +63,11 @@ function RatingsBreakdown({
       ratingsGraphDiv.push(
         <div id="filter-star" key={i}>
           <div
+            id={`filter-star-${i}`}
             className="graph-text"
             data-id={`${i}`}
             onClick={(e) =>
-              handleFilters(e.target.dataset.id, setCurrentFilters)
+              handleFilters(e.target, setCurrentFilters)
             }
           >
             {`${i} stars`}

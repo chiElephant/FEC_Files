@@ -3,7 +3,7 @@
   color: rgb(82, 82, 82);
 }
 
-/* Review Modal */
+/* Modals */
 #review-window,
 #photo-window,
 #error-window {
@@ -309,7 +309,13 @@
 }
 
 .graph-text:hover {
-  color :rgb(35, 35, 35)
+  color :rgb(35, 35, 35);
+  background-color: rgb(235, 235, 235);
+}
+
+.graph-text-filter {
+  color: cadetblue;
+  border-color: cadetblue;
 }
 
 .graph-rating {
