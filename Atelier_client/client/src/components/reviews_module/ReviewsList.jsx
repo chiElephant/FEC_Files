@@ -1,7 +1,7 @@
 import React, { useState, onEffect } from 'react';
 import Review from './Review.jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { light } from '@fortawesome/fontawesome-svg-core/import.macro';
+import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 
 function ReviewsList({ reviews, setSortType, reviewCount }) {
   const [currentSort, setCurrentSort] = useState('relevance');
@@ -32,7 +32,7 @@ function ReviewsList({ reviews, setSortType, reviewCount }) {
             </ul>
           </div>
           <div id="sort-icon">
-            <FontAwesomeIcon icon={light('angle-down')} size="lg" />
+            <FontAwesomeIcon icon={solid('angle-down')} size="lg" />
           </div>
         </div>
       </div>

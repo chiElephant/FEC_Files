@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ProductBreakdown from './ProductBreakdown.jsx';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { solid, light } from '@fortawesome/fontawesome-svg-core/import.macro';
+import { solid, regular } from '@fortawesome/fontawesome-svg-core/import.macro';
 
 import helpers from './helper_functions/ratings_bd.js';
 
@@ -109,7 +109,7 @@ function RatingsBreakdown({
           <FontAwesomeIcon
             key={`${i}-solid`}
             className="star"
-            icon={solid('star-sharp')}
+            icon={solid('star')}
           />
         );
       }
@@ -125,7 +125,7 @@ function RatingsBreakdown({
           <FontAwesomeIcon
             key={`${i}-regular`}
             className="star"
-            icon={light('star-sharp')}
+            icon={regular('star')}
           />
         );
       }
