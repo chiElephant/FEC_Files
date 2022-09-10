@@ -54,7 +54,8 @@
  main {
    max-width: 1000px;
    padding: 20px;
-   margin: 1000;
+   margin: auto;
+
  }
 
  button {
