@@ -4,7 +4,7 @@ import { solid, regular } from '@fortawesome/fontawesome-svg-core/import.macro';
 
 function StarRating ( {rating, handleUserInputs} ) {
 
-  const [starDiv, setStarDiv] = useState(<div />);
+  const [starDiv, setStarDiv] = useState([< div key="init" />]);
 
   useEffect(() => {
     createStarDiv();
@@ -23,7 +23,9 @@ function StarRating ( {rating, handleUserInputs} ) {
   function createStarDiv () {
     let div = [];
 
-    for (let i = 1; i <= 5; i++ ) {
+    const NUM_STARS = 5
+
+    for (let i = 1; i <= NUM_STARS; i++ ) {
       div.push(
         <FontAwesomeIcon
           key={`${i}`}
@@ -31,14 +33,13 @@ function StarRating ( {rating, handleUserInputs} ) {
           className="review-modal-stars"
           icon={rating >= i ? solid('star') : regular('star')}
           onClick={() => {
-            // setRating(i);
             handleUserInputs('rating', i);
 
           }}
         />
       )
     }
-    setStarDiv(div);
+    setStarDiv(prevState => div);
   }
 
   return (

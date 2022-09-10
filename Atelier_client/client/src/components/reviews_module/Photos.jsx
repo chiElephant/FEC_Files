@@ -4,7 +4,6 @@ function Photos({ photos, handleUserInputs }) {
 
   const [addPhotoDiv, setAddPhotoDiv] = useState(<div />);
 
-  // Handles user uploaded photos in the add review form
   function handlePhotos (e) {
     let files = e.target.files;
     let fileURLs = [];

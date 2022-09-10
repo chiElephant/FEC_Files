@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ErrorModal from './ErrorModal.jsx';
 import axios from 'axios';
 
 import Characteristics from './Characteristics.jsx';
@@ -14,9 +15,10 @@ function SubmitReview({
   submitReviewForm,
   productName,
   product_id,
-  chars,
+  characteristics,
 }) {
-
+  const [errorModal, setErrorModal] = useState('');
+  const [error, setError] = useState('');
   const [userInputs, setUserInputs] = useState({
     product_id: 0,
     recommend: null,
@@ -30,49 +32,70 @@ function SubmitReview({
   });
 
   useEffect(() => {
-    setUserInputs(prevInput => ({
+    const newValue = { product_id: product_id };
+    setUserInputs((prevInput) => ({
       ...prevInput,
-      [product_id]: product_id
-    }))
-  }, [product_id])
+      ...newValue,
+    }));
+  }, [product_id]);
 
-  function handleUserInputs ( input, value, option ) {
+  function handleUserInputs(input, value, option) {
     let newValue;
 
     if (option) {
-      newValue = {[value]: option};
+      newValue = { [value]: option };
 
-      setUserInputs( prevInput => ({
+      setUserInputs((prevInput) => ({
         ...prevInput,
         [input]: {
           ...prevInput[input],
-          ...newValue
-        }
-      }))
-
+          ...newValue,
+        },
+      }));
     } else {
-      newValue = {[input]: value};
+      newValue = { [input]: value };
 
-      setUserInputs( prevInput => ({
+      setUserInputs((prevInput) => ({
         ...prevInput,
-        ...newValue
-      }))
+        ...newValue,
+      }));
     }
   }
 
   const validateUserData = () => {
-    const productCharsLength = Object.keys(userInputs.characteristics).length;
-    const charsLength = Object.keys(chars).length;
-    console.log(userInputs);
-    if (
-      userInputs.rating > 0 &&
-      typeof recommend === 'boolean' &&
-      productCharsLength === charsLength
-    ) {
-      handleSubmit();
-    } else {
-      // throw new Error('You must enter the fallowing');
-      setShowReviewModal((showReviewModal) => false);
+    const { rating, recommend, summary, body, photos, name, email } =
+      userInputs;
+    const characteristicsLength = Object.keys(
+      userInputs.characteristics
+    ).length;
+    const charsLength = Object.keys(characteristics).length;
+
+    const validationKey = {
+      rating: rating !== 0,
+      recommend: typeof recommend === 'boolean',
+      characteristics: charsLength === characteristicsLength,
+      summary: summary.length <= 60,
+      body: 50 <= body.length && body.length <= 100,
+      photos: photos.length <= 5,
+      name: 0 < name.length && name.length <= 60,
+      email: 0 < email.length && email.length <= 60,
+    };
+
+    function validateEmail() {
+      const symbolCheck = userInputs.email.slice('@');
+      if (symbolCheck) {
+        const dotCheck = symbolCheck[1].slice('.');
+        if (!dotCheck) {
+          validationKey.email = false;
+        }
+      }
+    }
+
+    for (let input in validationKey) {
+      if (!validationKey[input]) {
+        setError((error) => input);
+        setErrorModal((errorModal) => true);
+      }
     }
   };
 
@@ -99,12 +122,15 @@ function SubmitReview({
           id="review-window-icon"
           icon={solid('square-xmark')}
           size="2x"
-          onClick={() => setShowReviewModal(showReviewModal => false)}
+          onClick={() => setShowReviewModal((showReviewModal) => false)}
         />
         <h1>Write Your Review</h1>
         <h3>About the {productName}</h3>
 
-        <StarRating rating={userInputs.rating} handleUserInputs={handleUserInputs} />
+        <StarRating
+          rating={userInputs.rating}
+          handleUserInputs={handleUserInputs}
+        />
 
         {/* This div will ask the customer if they recommend the product*/}
         <fieldset id="recommend" required="required">
@@ -132,7 +158,7 @@ function SubmitReview({
         </fieldset>
 
         <Characteristics
-          characteristics={chars}
+          characteristics={characteristics}
           handleUserInputs={handleUserInputs}
         />
 
@@ -215,6 +241,11 @@ function SubmitReview({
           Submit Review
         </button>
       </div>
+      <ErrorModal
+        error={error}
+        errorModal={errorModal}
+        setErrorModal={setErrorModal}
+      />
     </div>
   );
 }

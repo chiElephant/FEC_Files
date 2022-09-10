@@ -29,7 +29,9 @@ function RatingsBreakdown({ productId, setCharacteristics, characteristics }) {
     const ratingsPercent = await helpers.handleRatingsPercent(ratings);
     const ratingsGraphDiv = [];
 
-    for (var i = 5; i > 0; i--) {
+    const NUM_BARS = 5;
+
+    for (var i = NUM_BARS; i > 0; i--) {
       ratingsGraphDiv.push(
         <div id="five-star" key={i}>
           <div className="graph-text" onClick={() => helpers.filterReviews(i)}>
@@ -46,7 +48,9 @@ function RatingsBreakdown({ productId, setCharacteristics, characteristics }) {
   }
 
   function createStarsRatingDiv(avg) {
-    let starRatingDiv = [];
+    let starRatingDiv = []
+
+    const NUM_STARS = 5
 
     if (avg !== 0) {
       for (let i = 1; i <= avg; i++) {
@@ -59,7 +63,7 @@ function RatingsBreakdown({ productId, setCharacteristics, characteristics }) {
         );
       }
 
-      for (let i = avg; i < 5; i++) {
+      for (let i = avg; i < NUM_STARS; i++) {
         starRatingDiv.push(
           <FontAwesomeIcon
             key={`${i}-regular`}

@@ -5,7 +5,8 @@
 
 /* Review Modal */
 #review-window,
-#photo-window {
+#photo-window,
+#error-window {
   position: fixed;
   top: 0;
   left: 0;
@@ -20,13 +21,24 @@
 }
 
 #review-form,
-#modal-photo {
+#modal-photo, #error-modal {
   padding: 32px;
   max-width: 640px;
   margin-top: 35%;
   right: 16px;
   background-color: rgb(35, 35, 35);
   color: rgb(162, 162, 162);
+}
+
+#error-modal {
+  margin-top: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+#error-modal-icon {
+  padding-bottom: 12px;
+  float: right;
 }
 
 #modal-photo {
@@ -43,7 +55,7 @@
 #ratings-breakdown,
 #reviews-list {
   float: left;
-  height: 75%;
+  height: 80vh;
   padding: 16px;
 }
 
@@ -367,7 +379,7 @@
 }
 
 .char-radios-text {
-  width: 75px;
+  width: 100px;
   display: inline-block;
   font-weight: bold;
 }
@@ -386,11 +398,14 @@
 }
 
 #char-descrip-output {
+  width: 165px;
   padding-left: 100px;
+  text-align: center;
 }
 
 #char-radios {
   display: inline-block;
+  justify-content: space-between;
 }
 
 .char-radios {
