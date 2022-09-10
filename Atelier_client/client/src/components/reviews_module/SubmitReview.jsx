@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import ErrorModal from './ErrorModal.jsx';
 import axios from 'axios';
 
 import Characteristics from './Characteristics.jsx';
+import ErrorModal from './ErrorModal.jsx';
 import StarRating from './StarRating.jsx';
 import Photos from './Photos.jsx';
 
@@ -103,14 +103,14 @@ function SubmitReview({
   };
 
   const handleSubmit = () => {
-    setUserInputs((prevState) => ({
-      ...prevState,
-      ...inputInitState,
-    }));
 
     axios
       .post('/reviews', userInputs)
       .then((response) => {
+        setUserInputs((prevState) => ({
+          ...prevState,
+          ...inputInitState,
+        }));
         console.log(response);
       })
       .catch((error) => {
@@ -241,7 +241,7 @@ function SubmitReview({
           id="submit-review"
           type="submit"
           className="reviews-btn"
-          onClick={() => validateUserData()}
+          onClick={() => validateUserData(userInputs, handleSubmit)}
         >
           Submit Review
         </button>
