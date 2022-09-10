@@ -114,9 +114,9 @@ function RatingsBreakdown({
         );
       }
 
-      starRatingDiv.push (
-        <FontAwesomeIcon key="star-fraction" icon={solid("star-sharp-half-stroke")} />
-      )
+      // starRatingDiv.push (
+      //   <FontAwesomeIcon key="star-fraction" icon={solid("star-sharp-half-stroke")} />
+      // )
 
       const start = base + 1;
 
