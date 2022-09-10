@@ -124,7 +124,7 @@ function Review(props) {
     if (recommend) {
       recDiv.push(
         <div key={'recommend'} id="user-recommend">
-          <FontAwesomeIcon icon={regular('check')} />
+          <FontAwesomeIcon icon={solid('check')} />
           <span id="user-rec">{'I recommend this product'}</span>
         </div>
       );
