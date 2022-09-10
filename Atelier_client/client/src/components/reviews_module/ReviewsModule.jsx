@@ -1,28 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import { helpers, initial } from './helper_functions/reviews_module.js';
+import { initialReviewState, getReviews } from './helper_functions/reviews_module';
 import RatingsBreakdown from './RatingsBreakdown.jsx';
 import SubmitReview from './SubmitReview.jsx';
 import ReviewsList from './ReviewsList.jsx';
 
 function ReviewsModule({ product_id, product_name }) {
-  const [reviewsShown, setReviewsShown] = useState(initial.reviewModel);
+  const [reviewsShown, setReviewsShown] = useState(initialReviewState);
   const [characteristics, setCharacteristics] = useState({});
   const [showReviewModal, setShowReviewModal] = useState(false);
   const [productName, setProductName] = useState(product_name);
   const [productId, setProductId] = useState(product_id);
   const [sortType, setSortType] = useState('relevance');
   const [countShown, setCountShown] = useState(2);
-  const [reviews, setReviews] = useState(initial.reviewModel);
+  const [reviews, setReviews] = useState(initialReviewState);
   const [reviewCount, setReviewCount] = useState(0);
 
   useEffect(() => {
     const MAX_COUNT = 500;
 
-    helpers.getReviews(productId, sortType, MAX_COUNT, setReviews, setReviewCount);
+    getReviews(productId, sortType, MAX_COUNT, setReviews, setReviewCount);
   }, [productId, countShown, sortType]);
 
   useEffect(() => {
-    helpers.handleShown(reviews, countShown, setReviewsShown);
+    const show = reviews.slice(0, countShown);
+    setReviewsShown(preReviewsShown => show);
   }, [reviews, countShown]);
 
   function handleCountShown () {

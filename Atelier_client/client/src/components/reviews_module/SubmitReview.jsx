@@ -64,7 +64,7 @@ function SubmitReview({
     }
   }
 
-  const validateUserData = () => {
+  function validateUserData () {
     const { rating, recommend, summary, body, photos, name, email } =
       userInputs;
     const characteristicsLength = Object.keys(
@@ -195,7 +195,7 @@ function SubmitReview({
           ></textarea>
 
           <span>
-            {body.length < 50
+            {userInputs.body.length < 50
               ? `Minimum required characters left: ${50 - userInputs.body.length}`
               : 'Minimum Reached'}
           </span>

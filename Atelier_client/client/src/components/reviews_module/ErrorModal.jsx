@@ -15,8 +15,8 @@ function ErrorModal({ error, errorModal, setErrorModal }) {
             onClick={() => setErrorModal(errorModal => false)}
           />
         </div>
-        <div id="error">{`You Must Enter Ehe Following: ${error.toUpperCase()}`}</div>
-        <div id="error-msg">{'Missing or Incorrect Format'}</div>
+        <div id="error">{`You must enter the following: ${error.toUpperCase()}`}</div>
+        <div id="error-msg">{'missing field or incorrect format'}</div>
       </div>
     </div>
   ) : (
