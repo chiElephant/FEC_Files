@@ -49,13 +49,15 @@ function ReviewsModule({ product_id, product_name }) {
         setCurrentFilters={setCurrentFilters}
         currentFilters={currentFilters}
       />
-      {reviewsShown.length === 0 ? '' :
+      {reviewsShown.length === 0 ? (
+        ''
+      ) : (
         <ReviewsList
           reviews={reviewsShown}
           setSortType={setSortType}
           reviewCount={reviewCount}
         />
-      }
+      )}
       <SubmitReview
         showReviewModal={showReviewModal}
         setShowReviewModal={setShowReviewModal}

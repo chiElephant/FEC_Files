@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import charsKey from './helper_functions/characteristics'
+import charsKey from './helper_functions/characteristics';
 
-function Characteristics ( { characteristics, handleProductChars, handleUserInputs } ) {
-
+function Characteristics({
+  characteristics,
+  handleProductChars,
+  handleUserInputs,
+}) {
   const [charsDiv, setCharsDiv] = useState(<div />);
   const [charRatings, setCharRatings] = useState({});
 
   useEffect(() => {
     createCharsDiv();
-  }, [])
+  }, []);
 
-
-   // Handles user input on product characteristics when adding a review.
-   const handleCharacteristics = (char, id, value) => {
-
-    handleUserInputs('characteristics', id, value)
+  // Handles user input on product characteristics when adding a review.
+  const handleCharacteristics = (char, id, value) => {
+    handleUserInputs('characteristics', id, value);
     handleCharText(char, id, value);
   };
 
@@ -32,62 +33,57 @@ function Characteristics ( { characteristics, handleProductChars, handleUserInpu
     for (let char in characteristics) {
       const id = characteristics[char].id;
 
-
       div.push(
         <div id="add-characteristic" key={id}>
           <div id="char-descrip-output">
-            <div id={id} className="char-descrip-output">None Selected</div>
+            <div id={id} className="char-descrip-output">
+              None Selected
+            </div>
           </div>
           <div className="char-radios-text"> {`${char}`} </div>
 
-            <div id="char-radios">
-              <input
-                id={id}
-                className="char-radios"
-                type="radio"
-                name={`${char}`}
-                value="1"
-                onClick={() =>
-                  handleCharacteristics(char, id, 1)}
-              />
-              <input
-                id={id}
-                className="char-radios"
-                type="radio"
-                name={`${char}`}
-                value="2"
-                onClick={() =>
-                  handleCharacteristics(char, id, 2)}
-              />
-              <input
-                id={id}
-                className="char-radios"
-                type="radio"
-                name={`${char}`}
-                value="3"
-                onClick={() =>
-                  handleCharacteristics(char, id, 3)}
-              />
-              <input
-                id={id}
-                className="char-radios"
-                type="radio"
-                name={`${char}`}
-                value="4"
-                onClick={() =>
-                  handleCharacteristics(char, id, 4)}
-              />
-              <input
-                id={id}
-                className="char-radios"
-                type="radio"
-                name={`${char}`}
-                value="5"
-                onClick={() =>
-                  handleCharacteristics(char, id, 5)
-                }
-              />
-            </div>
+          <div id="char-radios">
+            <input
+              id={id}
+              className="char-radios"
+              type="radio"
+              name={`${char}`}
+              value="1"
+              onClick={() => handleCharacteristics(char, id, 1)}
+            />
+            <input
+              id={id}
+              className="char-radios"
+              type="radio"
+              name={`${char}`}
+              value="2"
+              onClick={() => handleCharacteristics(char, id, 2)}
+            />
+            <input
+              id={id}
+              className="char-radios"
+              type="radio"
+              name={`${char}`}
+              value="3"
+              onClick={() => handleCharacteristics(char, id, 3)}
+            />
+            <input
+              id={id}
+              className="char-radios"
+              type="radio"
+              name={`${char}`}
+              value="4"
+              onClick={() => handleCharacteristics(char, id, 4)}
+            />
+            <input
+              id={id}
+              className="char-radios"
+              type="radio"
+              name={`${char}`}
+              value="5"
+              onClick={() => handleCharacteristics(char, id, 5)}
+            />
+          </div>
           {/* </label> */}
           {/* <br /> */}
           <div id="char-descrip">
@@ -105,7 +101,7 @@ function Characteristics ( { characteristics, handleProductChars, handleUserInpu
       <legend>Characteristics*</legend>
       {charsDiv}
     </fieldset>
-  )
+  );
 }
 
 export default Characteristics;

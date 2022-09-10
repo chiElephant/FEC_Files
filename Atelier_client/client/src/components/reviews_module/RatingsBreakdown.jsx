@@ -32,7 +32,6 @@ function RatingsBreakdown({
   }
 
   function handleFilters(target) {
-
     const className = target.className;
     const rating = target.dataset.id;
     const id = target.id;
@@ -40,10 +39,8 @@ function RatingsBreakdown({
     if (className === 'graph-text') {
       const element = document.getElementById(id);
       element.classList.add('graph-text-filter');
-      // element.classList.remove('graph-text');
     } else {
       const element = document.getElementById(id);
-      // element.classList.add('graph-text');
       element.classList.remove('graph-text-filter');
     }
 
@@ -66,9 +63,7 @@ function RatingsBreakdown({
             id={`filter-star-${i}`}
             className="graph-text"
             data-id={`${i}`}
-            onClick={(e) =>
-              handleFilters(e.target, setCurrentFilters)
-            }
+            onClick={(e) => handleFilters(e.target, setCurrentFilters)}
           >
             {`${i} stars`}
           </div>

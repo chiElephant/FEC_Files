@@ -3,7 +3,6 @@ import axios from 'axios';
 // ******************** Helper Functions ******************** //
 
 const helpers = {
-
   handleRatingsPercent: function (ratings) {
     let sum = 0;
 
@@ -37,7 +36,7 @@ const helpers = {
         handleMetadata(meta.data);
       })
       .catch((err) => console.log('Error fetching metadata: ', err));
-  }
-}
+  },
+};
 
 export default helpers;

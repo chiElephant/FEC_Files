@@ -12,7 +12,7 @@ function ErrorModal({ error, errorModal, setErrorModal }) {
             id="error-modal-icon"
             icon={solid('square-xmark')}
             size="lg"
-            onClick={() => setErrorModal(errorModal => false)}
+            onClick={() => setErrorModal((errorModal) => false)}
           />
         </div>
         <div id="error">{`You must enter the following: ${error.toUpperCase()}`}</div>

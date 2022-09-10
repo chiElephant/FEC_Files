@@ -2,13 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid, regular } from '@fortawesome/fontawesome-svg-core/import.macro';
 
-function StarRating ( {rating, handleUserInputs} ) {
-
-  const [starDiv, setStarDiv] = useState([< div key="init" />]);
+function StarRating({ rating, handleUserInputs }) {
+  const [starDiv, setStarDiv] = useState([<div key="init" />]);
 
   useEffect(() => {
     createStarDiv();
-  }, [rating])
+  }, [rating]);
 
   const starKey = {
     1: 'Poor',
@@ -16,16 +15,16 @@ function StarRating ( {rating, handleUserInputs} ) {
     3: 'Average',
     4: 'Good',
     5: 'Great',
-  }
+  };
 
   const keyText = starKey[rating];
 
-  function createStarDiv () {
+  function createStarDiv() {
     let div = [];
 
-    const NUM_STARS = 5
+    const NUM_STARS = 5;
 
-    for (let i = 1; i <= NUM_STARS; i++ ) {
+    for (let i = 1; i <= NUM_STARS; i++) {
       div.push(
         <FontAwesomeIcon
           key={`${i}`}
@@ -34,21 +33,20 @@ function StarRating ( {rating, handleUserInputs} ) {
           icon={rating >= i ? solid('star') : regular('star')}
           onClick={() => {
             handleUserInputs('rating', i);
-
           }}
         />
-      )
+      );
     }
-    setStarDiv(prevState => div);
+    setStarDiv((prevState) => div);
   }
 
   return (
-    <fieldset id="rate-by-star" >
+    <fieldset id="rate-by-star">
       <legend>Overall Rating*</legend>
       {starDiv}
       {keyText}
     </fieldset>
-  )
+  );
 }
 
 export default StarRating;

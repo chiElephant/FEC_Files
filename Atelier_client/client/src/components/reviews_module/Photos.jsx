@@ -1,22 +1,21 @@
 import React, { useState, useEffect } from 'react';
 
 function Photos({ photos, handleUserInputs }) {
-
   const [addPhotoDiv, setAddPhotoDiv] = useState(<div />);
 
-  function handlePhotos (e) {
+  function handlePhotos(e) {
     let files = e.target.files;
     let fileURLs = [];
 
     if (files.length + photos.length > 5) {
-      throw new Error('Too Many Files Uploaded: Max(5)')
+      throw new Error('Too Many Files Uploaded: Max(5)');
     }
 
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
 
       const img = document.createElement('img');
-      img.className = 'review-image'
+      img.className = 'review-image';
       img.file = file;
       img.width = 80;
 
@@ -30,7 +29,7 @@ function Photos({ photos, handleUserInputs }) {
       };
       reader.readAsDataURL(file);
     }
-  };
+  }
 
   return (
     <fieldset id="review-photos">
@@ -44,7 +43,7 @@ function Photos({ photos, handleUserInputs }) {
       ></input>
       <div id="images"></div>
     </fieldset>
-  )
+  );
 }
 
 export default Photos;

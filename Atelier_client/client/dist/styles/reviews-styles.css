@@ -22,7 +22,8 @@
 }
 
 #review-form,
-#modal-photo, #error-modal {
+#modal-photo,
+#error-modal {
   padding: 32px;
   max-width: 640px;
   margin-top: auto;
@@ -309,7 +310,7 @@
 }
 
 .graph-text:hover {
-  color :rgb(35, 35, 35);
+  color: rgb(35, 35, 35);
   background-color: rgb(235, 235, 235);
 }
 

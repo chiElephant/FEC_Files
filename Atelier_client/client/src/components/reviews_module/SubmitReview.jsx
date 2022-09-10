@@ -16,7 +16,6 @@ function SubmitReview({
   product_id,
   characteristics,
 }) {
-
   const inputInitState = {
     product_id: 0,
     recommend: null,
@@ -27,7 +26,7 @@ function SubmitReview({
     email: '',
     body: '',
     name: '',
-  }
+  };
 
   const [errorModal, setErrorModal] = useState('');
   const [error, setError] = useState('');
@@ -64,7 +63,7 @@ function SubmitReview({
     }
   }
 
-  function validateUserData () {
+  function validateUserData() {
     const { rating, recommend, summary, body, photos, name, email } =
       userInputs;
     const characteristicsLength = Object.keys(
@@ -84,7 +83,6 @@ function SubmitReview({
     };
 
     function validateEmail() {
-
       var validationExp = /\S+@\S+\.\S+/;
       const valid = validationExp.test(userInputs.email);
       validationKey.email = valid;
@@ -98,12 +96,11 @@ function SubmitReview({
         return;
       }
     }
-    setShowReviewModal(prevState => false);
-    handleSubmit()
-  };
+    setShowReviewModal((prevState) => false);
+    handleSubmit();
+  }
 
   const handleSubmit = () => {
-
     axios
       .post('/reviews', userInputs)
       .then((response) => {
@@ -196,7 +193,9 @@ function SubmitReview({
 
           <span>
             {userInputs.body.length < 50
-              ? `Minimum required characters left: ${50 - userInputs.body.length}`
+              ? `Minimum required characters left: ${
+                  50 - userInputs.body.length
+                }`
               : 'Minimum Reached'}
           </span>
         </fieldset>
