@@ -101,6 +101,7 @@ function AddToCart(props) {
     return (
       <div className="add-to-cart">
         <select
+          className="size-dropdown"
           id="size-dropdown"
           selected="Select Size"
           onChange={(e) => {
