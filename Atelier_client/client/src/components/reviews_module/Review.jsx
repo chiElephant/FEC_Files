@@ -2,12 +2,6 @@ import React, { useState, useEffect } from 'react';
 import PhotoModal from './PhotoModal.jsx';
 import { helpers } from './helper_functions/review.js';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  solid,
-  regular,
-} from '@fortawesome/fontawesome-svg-core/import.macro';
-
 function Review(props) {
   const {
     helpfulness,
@@ -94,20 +88,12 @@ function Review(props) {
     if (rating !== 0) {
       for (let i = 1; i <= rating; i++) {
         starRating.push(
-          <FontAwesomeIcon
-            key={`star-solid-${i}`}
-            className="star"
-            icon={solid('star')}
-          />
+          <i className="fak fa-star-solid star" key={`star-solid-${i}`}></i>
         );
       }
       for (let i = rating; i < 5; i++) {
         starRating.push(
-          <FontAwesomeIcon
-            key={`star-${i}`}
-            className="star"
-            icon={regular('star')}
-          />
+          <i className="fak fa-star-thin star" key={`star-${i}`}></i>
         );
       }
     }
@@ -124,7 +110,7 @@ function Review(props) {
     if (recommend) {
       recDiv.push(
         <div key={'recommend'} id="user-recommend">
-          <FontAwesomeIcon icon={solid('check')} />
+          <i className="fa-light fa-check"></i>
           <span id="user-rec">{'I recommend this product'}</span>
         </div>
       );
@@ -164,10 +150,7 @@ function Review(props) {
           {'Yes '}
         </div>
         <div>{`(${currentHelpful})`}</div>
-        <div>
-          |
-          {/* <FontAwesomeIcon icon={thin('pipe')} /> */}
-        </div>
+        <div>{'|'}</div>
         <div>{'Report'}</div>
       </div>
     );

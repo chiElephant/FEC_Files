@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ProductBreakdown from './ProductBreakdown.jsx';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { solid, regular } from '@fortawesome/fontawesome-svg-core/import.macro';
-
 import helpers from './helper_functions/ratings_bd.js';
 
 function RatingsBreakdown({
@@ -90,43 +87,35 @@ function RatingsBreakdown({
       starFraction = 'none';
       console.log('none');
     }
-    if ( 0.25 <= remainder && remainder < 0.5) {
+    if (0.25 <= remainder && remainder < 0.5) {
       starFraction = 'quarter';
       console.log('quarter');
     }
-    if ( 0.5 <= remainder && remainder < 0.75) {
+    if (0.5 <= remainder && remainder < 0.75) {
       starFraction = 'half';
-      console.log('half')
+      console.log('half');
     }
-    if ( 0.75 <= remainder) {
+    if (0.75 <= remainder) {
       starFraction = 'three-quarter';
-      console.log('three-quarter')
+      console.log('three-quarter');
     }
 
     if (avg !== 0) {
       for (let i = 1; i <= base; i++) {
         starRatingDiv.push(
-          <FontAwesomeIcon
-            key={`${i}-solid`}
-            className="star"
-            icon={solid('star')}
-          />
+          <i className="fak fa-star-solid star" key={`${i}-solid`}></i>
         );
       }
 
-      // starRatingDiv.push (
-      //   <FontAwesomeIcon key="star-fraction" icon={solid("star-sharp-half-stroke")} />
-      // )
+      starRatingDiv.push(
+        <i className="fak fa-star-half-stroke-solid" key="star-fraction"></i>
+      );
 
       const start = base + 1;
 
       for (let i = start; i < NUM_STARS; i++) {
         starRatingDiv.push(
-          <FontAwesomeIcon
-            key={`${i}-regular`}
-            className="star"
-            icon={regular('star')}
-          />
+          <i className="fak fa-star-thin star" key={`${i}-regular`}></i>
         );
       }
     }

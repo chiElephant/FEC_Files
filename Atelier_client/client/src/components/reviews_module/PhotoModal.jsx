@@ -1,6 +1,4 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 
 function PhotoModal({ photoURL, viewPhoto, closeModal }) {
   return !viewPhoto ? (
@@ -8,13 +6,13 @@ function PhotoModal({ photoURL, viewPhoto, closeModal }) {
   ) : (
     <div id="photo-window">
       <div id="modal-photo">
-        {/* <FontAwesomeIcon
-          id="photo-window-icon"
-          icon={solid('square-xmark')}
-          size="3x"
-          onClick={() => closeModal()}
-        /> */}
-        <img src={photoURL} alt="Photo Not Available"></img>
+        <div onClick={() => closeModal()}>
+          <i
+            className="fak fa-square-xmark-light fa-2xl"
+            id="photo-window-icon"
+          ></i>
+        </div>
+        <img className="modal-photo" src={photoURL} alt="Photo Not Available" ></img>
       </div>
     </div>
   );
