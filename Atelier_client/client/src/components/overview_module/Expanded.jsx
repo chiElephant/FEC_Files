@@ -4,10 +4,14 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useState } from 'react';
 import Button from '@mui/material/Button';
+import ReactImageZoom from 'react-image-zoom';
 
 function Expanded(props) {
-  const [openModal, setOpenModal] = useState(false);
-
+  const imageProps = {
+    img: props.selectedPhoto,
+    zoomPosition: 'original',
+  };
+  // new ImageZoom(document.getElementById('expanded-img'), options);
   return (
     <div className="modalBackground">
       <div className="modalContainer">
@@ -38,7 +42,8 @@ function Expanded(props) {
             >
               &lt;
             </Button>
-            <img src={props.selectedPhoto} className="expanded-img" />
+            {/* <img src={props.selectedPhoto} className="expanded-img" /> */}
+            <ReactImageZoom {...imageProps} />
             <Button
               onClick={(e) => {
                 props.nextPhoto(e);
