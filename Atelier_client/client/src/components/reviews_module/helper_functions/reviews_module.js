@@ -33,15 +33,23 @@ function getReviews(product_id, sort, count, setReviews, setReviewCount) {
     });
 }
 
-function filterReviews(reviews, currentFilters, setReviewsShown) {
-  console.log(`I'm  Filtering`, reviews, currentFilters);
+function filterReviews(reviews, currentFilters, setReviewsShown, countShown) {
   let filteredReviews = [];
+  let reviewsToShow;
 
-  for(let review of reviews) {
-    if(currentFilters[review.rating]) {
-      filteredReviews.push(review)
+  for (let review of reviews) {
+    if (currentFilters[review.rating]) {
+      filteredReviews.push(review);
     }
   }
+
+  if (filteredReviews.length === 0) {
+    reviewsToShow = reviews.slice(0, countShown);
+    setReviewsShown((reviewsShown) => reviewsToShow);
+    return;
+  }
+
+  reviewsToShow = filteredReviews.slice(0, countShown);
   setReviewsShown((reviewsShown) => filteredReviews);
 }
 

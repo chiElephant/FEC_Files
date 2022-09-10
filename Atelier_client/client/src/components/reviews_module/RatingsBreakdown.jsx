@@ -11,6 +11,7 @@ function RatingsBreakdown({
   setCharacteristics,
   characteristics,
   setCurrentFilters,
+  currentFilters,
 }) {
   const [ratingsGraphDiv, setRatingsGraphDiv] = useState(<div />);
   const [starsDiv, setStarsDiv] = useState(<div />);
@@ -20,7 +21,7 @@ function RatingsBreakdown({
   const [avgRating, setAvgRating] = useState('');
 
   useEffect(() => {
-    helpers.getMetadata(productId, handleMetadata);
+    helpers.getMetadata(productId, handleMetadata, currentFilters);
   }, [productId]);
 
   function handleMetadata(metadata) {
@@ -30,8 +31,8 @@ function RatingsBreakdown({
     createRatingsGraphDiv(metadata.ratings);
   }
 
-  function handleFilters(rating) {
-    setCurrentFilters((currentFilters) => ({
+  async function handleFilters(rating) {
+    await setCurrentFilters((currentFilters) => ({
       ...currentFilters,
       [rating]: !currentFilters[rating],
     }));

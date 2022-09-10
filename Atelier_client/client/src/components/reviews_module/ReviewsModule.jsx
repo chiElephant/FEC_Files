@@ -25,16 +25,11 @@ function ReviewsModule({ product_id, product_name }) {
     const MAX_COUNT = 500;
 
     getReviews(productId, sortType, MAX_COUNT, setReviews, setReviewCount);
-  }, [productId, countShown, sortType]);
+  }, [productId, sortType]);
 
   useEffect(() => {
-    const show = reviews.slice(0, countShown);
-    setReviewsShown((preReviewsShown) => show);
-  }, [reviews, countShown]);
-
-  useEffect(() => {
-    filterReviews(reviews, currentFilters, setReviewsShown);
-  }, [currentFilters])
+    filterReviews(reviews, currentFilters, setReviewsShown, countShown);
+  }, [reviews, countShown, currentFilters]);
 
   function handleCountShown() {
     if (countShown >= reviewCount) {
@@ -51,14 +46,16 @@ function ReviewsModule({ product_id, product_name }) {
         productId={productId}
         setCharacteristics={setCharacteristics}
         characteristics={characteristics}
-        // currentFilters={currentFilters}
         setCurrentFilters={setCurrentFilters}
+        currentFilters={currentFilters}
       />
-      <ReviewsList
-        reviews={reviewsShown}
-        setSortType={setSortType}
-        reviewCount={reviewCount}
-      />
+      {reviewsShown.length === 0 ? '' :
+        <ReviewsList
+          reviews={reviewsShown}
+          setSortType={setSortType}
+          reviewCount={reviewCount}
+        />
+      }
       <SubmitReview
         showReviewModal={showReviewModal}
         setShowReviewModal={setShowReviewModal}
