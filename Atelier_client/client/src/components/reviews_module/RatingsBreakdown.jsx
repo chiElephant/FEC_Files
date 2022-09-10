@@ -82,8 +82,29 @@ function RatingsBreakdown({
 
     const NUM_STARS = 5;
 
+    const base = Math.floor(avg);
+    const remainder = avg - base;
+    let starFraction;
+
+    if (remainder < 0.25) {
+      starFraction = 'none';
+      console.log('none');
+    }
+    if ( 0.25 <= remainder && remainder < 0.5) {
+      starFraction = 'quarter';
+      console.log('quarter');
+    }
+    if ( 0.5 <= remainder && remainder < 0.75) {
+      starFraction = 'half';
+      console.log('half')
+    }
+    if ( 0.75 <= remainder) {
+      starFraction = 'three-quarter';
+      console.log('three-quarter')
+    }
+
     if (avg !== 0) {
-      for (let i = 1; i <= avg; i++) {
+      for (let i = 1; i <= base; i++) {
         starRatingDiv.push(
           <FontAwesomeIcon
             key={`${i}-solid`}
@@ -93,7 +114,13 @@ function RatingsBreakdown({
         );
       }
 
-      for (let i = avg; i < NUM_STARS; i++) {
+      starRatingDiv.push (
+        <FontAwesomeIcon key="star-fraction" icon={solid("star-sharp-half-stroke")} />
+      )
+
+      const start = base + 1;
+
+      for (let i = start; i < NUM_STARS; i++) {
         starRatingDiv.push(
           <FontAwesomeIcon
             key={`${i}-regular`}
