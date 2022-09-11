@@ -9,7 +9,7 @@ import Photos from './Photos.jsx';
 function SubmitReview({
   showReviewModal,
   setShowReviewModal,
-  productName,
+  product_name,
   product_id,
   characteristics,
 }) {
@@ -125,7 +125,7 @@ function SubmitReview({
         </div>
 
         <h1>Write Your Review</h1>
-        <h3>About the {productName}</h3>
+        <h3>About the {product_name}</h3>
 
         <StarRating
           rating={userInputs.rating}

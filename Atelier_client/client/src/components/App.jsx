@@ -12,7 +12,7 @@ function App(props) {
       <h1 hidden> The RedBean Atelier App </h1>
       {/* <Overview product_id={product_id} /> */}
       <ReviewsModule product_id={product_id} product_name={productName} />
-      <QandAModule product_id={product_id} product_name={productName} />
+      {/* <QandAModule product_id={product_id} product_name={productName} /> */}
     </div>
   );
 }

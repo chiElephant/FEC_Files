@@ -4,7 +4,7 @@ import ProductBreakdown from './ProductBreakdown.jsx';
 import helpers from './helper_functions/ratings_bd.js';
 
 function RatingsBreakdown({
-  productId,
+  product_id,
   setCharacteristics,
   characteristics,
   setCurrentFilters,
@@ -18,8 +18,8 @@ function RatingsBreakdown({
   const [avgRating, setAvgRating] = useState('');
 
   useEffect(() => {
-    helpers.getMetadata(productId, handleMetadata, currentFilters);
-  }, [productId]);
+    helpers.getMetadata(product_id, handleMetadata, currentFilters);
+  }, [product_id]);
 
   function handleMetadata(metadata) {
     setCharacteristics(() => metadata.characteristics);

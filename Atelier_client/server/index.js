@@ -131,6 +131,10 @@ app.get('/products/:id/styles', (req, res) => {
 //*** RATINGS and REVIEWS ***//
 
 //GET reviews
+app.get('/reviews/count', reviewsHelper.getReviews, (req, res) => {
+  res.status(200).json(res.body.length);
+});
+
 app.get('/reviews', reviewsHelper.getReviews, (req, res) => {
   res.status(200).send(res.body);
 });
@@ -156,8 +160,8 @@ app.put('/reviews/:review_id/helpful', (req, res) => {
   })
 })
 
-app.get('/reviews/*', (req, res) => {
-  res.render('/');
+app.use('/reviews/*', (req, res) => {
+  res.send('404: This page does not exist');
 })
 
 app.use((err, req, res, next) => {

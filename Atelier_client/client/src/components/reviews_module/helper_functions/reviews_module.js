@@ -15,9 +15,24 @@ const initialReviewState = [
   },
 ];
 
-const initialFilters = { 5: false, 4: false, 3: false, 2: false, 1: false };
+const initialFilters = { 5: true, 4: true, 3: true, 2: true, 1: true };
 
-function getReviews(product_id, sort, count, setReviews, setReviewCount) {
+function getReviewsCount(product_id, sort, count, setReviewCount) {
+  const options = {
+    params: { product_id, sort, count },
+  };
+
+  axios
+    .get('/reviews/count', options)
+    .then((response) => {
+      setReviewCount((prevState) => response.data);
+    })
+    .catch((error) => {
+      console.log('Error fetching reviews count: ', error);
+    });
+}
+
+function getReviews(product_id, sort, count, currentFilters, setReviewsShown) {
   const options = {
     params: { product_id, sort, count },
   };
@@ -25,32 +40,32 @@ function getReviews(product_id, sort, count, setReviews, setReviewCount) {
   axios
     .get('/reviews', options)
     .then((response) => {
-      setReviews((prevReviews) => response.data);
-      setReviewCount((prevReviewCount) => response.data.length);
+      filterReviews(response.data, currentFilters, setReviewsShown);
     })
     .catch((error) => {
       console.log('Error fetching reviews: ', error);
     });
 }
 
-function filterReviews(reviews, currentFilters, setReviewsShown, countShown) {
+function filterReviews(reviews, currentFilters, setReviewsShown) {
   let filteredReviews = [];
+  let filterCount = 0;
   let reviewsToShow;
 
+  const filtersIndx = Object.values(currentFilters).indexOf(false);
+  console.log(filtersIndx)
+
   for (let review of reviews) {
-    if (currentFilters[review.rating]) {
+    if (!currentFilters[review.rating]) {
       filteredReviews.push(review);
     }
   }
 
-  if (filteredReviews.length === 0) {
-    reviewsToShow = reviews.slice(0, countShown);
-    setReviewsShown((reviewsShown) => reviewsToShow);
+  if (filteredReviews.length === 0 && filtersIndx < 0) {
+    setReviewsShown(reviews);
     return;
   }
-
-  reviewsToShow = filteredReviews.slice(0, countShown);
   setReviewsShown((reviewsShown) => filteredReviews);
 }
 
-export { getReviews, initialReviewState, initialFilters, filterReviews };
+export { getReviewsCount, getReviews, initialReviewState, initialFilters, filterReviews };

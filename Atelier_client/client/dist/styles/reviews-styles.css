@@ -81,7 +81,7 @@
 }
 
 #ratings-breakdown {
-  width: 35%;
+  width: 38%;
 }
 
 #reviews-list {
@@ -104,6 +104,7 @@
   padding: 16px;
   border-bottom: 2px solid rgb(162, 162, 162);
   display: flex;
+  word-break: break-all;
   flex-wrap: wrap;
   margin-bottom: 12px;
 }
@@ -203,7 +204,7 @@
   font-size: small;
   color: rgb(125, 125, 125);
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 
 .helpful-yes {
