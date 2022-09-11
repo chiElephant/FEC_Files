@@ -22,7 +22,7 @@ function ReviewsModule({ product_id, product_name }) {
   const [countShown, setCountShown] = useState(2);
 
   useEffect(() => {
-    const MAX_COUNT = 500;
+    const MAX_COUNT = 300;
 
     getReviews(productId, sortType, MAX_COUNT, setReviews, setReviewCount);
   }, [productId, sortType]);
@@ -36,7 +36,11 @@ function ReviewsModule({ product_id, product_name }) {
       const element = document.getElementById('more-reviews');
       element.remove();
     }
+
     setCountShown((countShown) => countShown + 2);
+
+    const div = document.getElementById('reviews');
+    div.scorllTop = div.scrollHeight;
   }
 
   return (

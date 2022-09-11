@@ -1,13 +1,5 @@
 import React, { useState, useEffect } from 'react';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  solid,
-  regular,
-  light,
-  thin,
-} from '@fortawesome/fontawesome-svg-core/import.macro';
-
 function ProductBreakdown({ characteristics }) {
   const [charsDiv, setCharsDiv] = useState(<div />);
 
@@ -54,12 +46,11 @@ function ProductBreakdown({ characteristics }) {
           <div className="characteristic" key={key}>
             <div className="char-name">{`${char}`}</div>
             <div className="char-meter">
-              {/* <FontAwesomeIcon
+              <i
                 id="char-icon"
-                icon={solid('triangle')}
-                style={{ width: value * 20 + '%' }}
-                flip="vertical"
-              /> */}
+                className="fak fa-triangle-solid fa-flip-vertical"
+                style={{ marginLeft: value * 20 + '%' }}
+              ></i>
             </div>
             <div id="breakdown-descrip">{element}</div>
           </div>
