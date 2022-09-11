@@ -50,7 +50,7 @@ function App() {
     <div>
       <h1> The RedBean Atelier App </h1>
       <ProductLinks products={products} />
-      {/* {widgets} */}
+      {widgets}
     </div>
   );
 }
