@@ -35,41 +35,24 @@ function Overview(props) {
   });
 
   useEffect(() => {
-    axios.get(`/products/${props.product_id}`)
-      .then((data) => {
-        // console.log(data.data);
-        setProduct(data.data);
-      });
-  }, []);
-
-  useEffect(() => {
-    axios.get(`/products/${props.product_id}/styles`)
-      .then((data) => {
-        // console.log(data.data);
-        setStyles(data.data);
-      });
+    axios.get(`/products/${props.product_id}/styles`).then((data) => {
+      // console.log(data.data);
+      setStyles(data.data);
+    });
     axios.get(`/products/${props.product_id}`).then((data) => {
       console.log(data.data);
       setProduct(data.data);
     });
-  }, []);
-
-  useEffect(() => {
-    axios.get(`/products/${props.product_id}/styles`).then((data) => {
-      console.log(data.data);
-      setStyles(data.data);
-    });
-
-  }, []);
-
-  // useEffect(() = > {
-  //   axios.get(`/reviews`)
-  // }, [])
+  }, [props.product_id]);
 
   if (Object.keys(product).length) {
     return (
       <div>
-        <ProductInfo product_id={props.product_id} product={product} features={product.features} />
+        <ProductInfo
+          product_id={props.product_id}
+          product={product}
+          features={product.features}
+        />
         <Styles product={product} styles={styles.results} />
       </div>
     );

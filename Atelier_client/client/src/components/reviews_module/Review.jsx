@@ -28,7 +28,7 @@ function Review({ review }) {
       setRating(review.rating);
       setPhotos(review.photos);
       setId(review.review_id);
-      setBody(review.body)
+      setBody(review.body);
     }
   }, []);
 

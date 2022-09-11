@@ -2,6 +2,8 @@ require('dotenv').config();
 const path = require('path');
 const express = require('express');
 const axios = require('axios');
+const history = require('connect-history-api-fallback');
+
 const {
   getQuestions,
   getAnswers,
@@ -12,28 +14,26 @@ const {
   reportAnswer,
 } = require('./utils/questionsAnswersHelper.js');
 const { uploadToCloudinary } = require('./utils/uploadToCloudinary');
-
-const { URL, TOKEN } = process.env;
-const app = express();
-const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
+const { getProduct } = require('./utils/productDetails.js');
 const reviewsHelper = require('./utils/reviewsHelper.js');
+
+const app = express();
+const { URL, TOKEN } = process.env;
+const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
+
+app.use(history());
+app.use(express.static(path.join(__dirname, '/../client/dist')));
+app.use(express.json({ limit: '50mb' }));
 
 app.use('/', (req, res, next) => {
   console.log(`${req.method} REQUEST ON ${req.url}`);
   next();
 });
-
-app.use(express.static(path.join(__dirname, '/../client/dist')));
-app.use(express.json({ limit: '50mb' }));
-
-app.get('/', (req, res) => {
-  res.send('This is our express server for FEC');
-});
-
 // *** Q & A *** //
 
 // Question List;
 app.get('/questions/:product_id/', getQuestions, (req, res) => {
+  console.log('test');
   res.status(200).send(res.body);
 });
 
@@ -68,9 +68,27 @@ app.put('/answer/:answer_id/report', reportAnswer, (req, res) => {
   res.sendStatus(204);
 });
 
+/////////////// Products //////////////////
+
+app.get('/products', (req, res, next) => {
+  // console.log(`Received a get request to get the prodcut information for product: ${req.params.id} and  url: ${req.url}`);
+
+  axios
+    .get(URL + req.url, {
+      headers: {
+        Authorization: process.env.GIT,
+      },
+    })
+    .then((products) => {
+      console.log('products: ', products.data);
+      res.status(200).send(products.data);
+    })
+    .catch(next);
+});
+
 /////////////// OVERVIEW COMPONENT //////////////////////
 
-app.get('/products/:id', (req, res) => {
+app.get('/products/:id', (req, res, next) => {
   // console.log(`Received a get request to get the prodcut information for product: ${req.params.id} and  url: ${req.url}`);
   axios
     .get(url + req.url, {
@@ -81,10 +99,11 @@ app.get('/products/:id', (req, res) => {
     .then((product_info) => {
       // console.log('This is the product info: ', product_info.data);
       res.send(product_info.data);
-    });
+    })
+    .catch(next);
 });
 
-app.get('/products/:id/styles', (req, res) => {
+app.get('/products/:id/styles', (req, res, next) => {
   axios
     .get(url + req.url, {
       headers: {
@@ -94,38 +113,8 @@ app.get('/products/:id/styles', (req, res) => {
     .then((product_styles) => {
       // console.log('These are the product styles: ', product_styles.data);
       res.send(product_styles.data);
-    });
-});
-
-/////////////// OVERVIEW COMPONENT //////////////////////
-
-app.get('/products/:id', (req, res) => {
-  console.log(
-    `Received a get request to get the prodcut information for product: ${req.params.id} and  url: ${req.url}`
-  );
-  axios
-    .get(url + req.url, {
-      headers: {
-        Authorization: TOKEN,
-      },
     })
-    .then((product_info) => {
-      console.log('This is the product info: ', product_info.data);
-      res.send(product_info.data);
-    });
-});
-
-app.get('/products/:id/styles', (req, res) => {
-  axios
-    .get(url + req.url, {
-      headers: {
-        Authorization: TOKEN,
-      },
-    })
-    .then((product_styles) => {
-      console.log('These are the product styles: ', product_styles.data);
-      res.send(product_styles.data);
-    });
+    .catch(next);
 });
 
 //*** RATINGS and REVIEWS ***//
@@ -136,14 +125,33 @@ app.get('/reviews', reviewsHelper.getReviews, (req, res) => {
 });
 
 //POST reviews
-app.post('/reviews', reviewsHelper.postReview, (req, res) => {
-  console.log('Im Here');
-  res.sendStatus(201);
-});
+app.post(
+  '/reviews',
+  uploadToCloudinary,
+  reviewsHelper.postReview,
+  (req, res) => {
+    res.sendStatus(201);
+  }
+);
 
 //GET review metadata
 app.get('/reviews/meta', reviewsHelper.getMetaData, (req, res) => {
   res.status(200).send(res.body);
+});
+
+//PUT mark review helpful
+app.put('/reviews/:review_id/helpful', (req, res) => {
+  reviewsHelper.markHelpful(req.params, (error, success) => {
+    if (error) {
+      res.status(500).send(error);
+    } else {
+      res.sendStatus(204);
+    }
+  });
+});
+
+app.get('/reviews/*', (req, res) => {
+  res.render('/');
 });
 
 app.use((err, req, res, next) => {

@@ -112,18 +112,16 @@ function getMetadata(product_id, setState) {
       return meta.data;
     })
     .then((metadata) => {
-      console.log(metadata, 'meta')
+      console.log(metadata, 'meta');
       createRatingsGraphDiv(metadata.ratings, setState.setRatingsGraphDiv);
       handleRatings(
         metadata.ratings,
         setState.setAvgRating,
         setState.setTotalReviews
       );
-      handleRecommend(metadata.recommended, setState.setPercentRec)
+      handleRecommend(metadata.recommended, setState.setPercentRec);
     })
-    .catch((err) =>
-      console.log('Error fetching metadata: ', err)
-    );
+    .catch((err) => console.log('Error fetching metadata: ', err));
 }
 
 export { metadata, ratings, characteristics, getMetadata };

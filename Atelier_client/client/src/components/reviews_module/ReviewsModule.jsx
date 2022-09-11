@@ -8,15 +8,16 @@ function ReviewsModule({ product_id, product_name }) {
   const [reviewsShown, setReviewsShown] = useState(initial.reviewModel);
   const [characteristics, setCharacteristics] = useState({});
   const [showReviewModal, setShowReviewModal] = useState(false);
-  const [productName, setProductName] = useState(product_name);
-  const [productId, setProductId] = useState(product_id);
+  // const [productName, setProductName] = useState(product_name);
+  // const [productId, setProductId] = useState(product_id);
   const [sortType, setSortType] = useState('relevance');
   const [countShown, setCountShown] = useState(2);
   const [reviews, setReviews] = useState(initial.reviewModel);
 
   useEffect(() => {
-    helpers.getReviews(productId, sortType, setReviews);
-  }, [productId, countShown, sortType]);
+    console.log('fire reviews: ', product_id);
+    helpers.getReviews(product_id, sortType, setReviews);
+  }, [product_id, countShown, sortType]);
 
   useEffect(() => {
     helpers.handleShown(reviews, countShown, setReviewsShown);
@@ -26,7 +27,7 @@ function ReviewsModule({ product_id, product_name }) {
     <div id="reviews-module">
       <h2> Ratings and Reviews </h2>
       <RatingsBreakdown
-        productId={productId}
+        productId={product_id}
         setCharacteristics={setCharacteristics}
         characteristics={characteristics}
       />
@@ -38,8 +39,8 @@ function ReviewsModule({ product_id, product_name }) {
       <SubmitReview
         showReviewModal={showReviewModal}
         setShowReviewModal={setShowReviewModal}
-        productName={productName}
-        product_id={productId}
+        productName={product_name}
+        product_id={product_id}
         chars={characteristics}
       />
       <div id="main-buttons">

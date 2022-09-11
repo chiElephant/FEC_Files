@@ -15,8 +15,7 @@ function ProductBreakdown({ characteristics }) {
     setDivElement(div);
   }, [characteristics]);
 
-  useEffect(() => {
-  },[])
+  useEffect(() => {}, []);
 
   return (
     <div>
