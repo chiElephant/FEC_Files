@@ -281,4 +281,41 @@
   width: 100vw;
   margin-left: 0;
   color: aliceblue;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  transition: top 0.9s;
+}
+
+.topbar:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.main-container {
+  padding-top: 20px;
+
+}
+
+.atelier {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 30px;
+}
+
+.search-cart {
+  margin-right: 3%;
+}
+
+.search-icon {
+  margin-right: 10px;
+}
+
+.menu-icon {
+  margin-left: 3%;
+  scale: 120%;
 }
