@@ -9,10 +9,17 @@ import ProductLinks from './ProductLinks.jsx';
 function App() {
   const { id } = useParams();
   const [products, setProducts] = useState([]);
-  const [productId, setProductId] = useState(71697);
-  const [productName, setProductName] = useState('Camo Onesie');
+  const [productId, setProductId] = useState(0);
+  const [productName, setProductName] = useState('');
 
   console.log('id ', id);
+
+  useEffect(() => {
+    axios.get(`/products/${id}`).then((res) => {
+      setProductName(res.data.name);
+      setProductId(res.data.id);
+    });
+  }, [id]);
 
   useEffect(() => {
     const options = {
@@ -30,22 +37,20 @@ function App() {
       });
   }, []);
 
-  useEffect(() => {
-    axios.get(`/products/${id}`).then((res) => {
-      // console.log('res: ', res);
-
-      setProductName(res.data.name);
-      setProductId(res.data.id);
-    });
-  }, [id]);
+  const widgets =
+    productId !== 0 ? (
+      <>
+        <Overview product_id={productId} />
+        <ReviewsModule product_id={productId} product_name={productName} />
+        <QandAModule product_id={productId} product_name={productName} />
+      </>
+    ) : null;
 
   return (
     <div>
       <h1> The RedBean Atelier App </h1>
       <ProductLinks products={products} />
-      <Overview product_id={productId} />
-      <ReviewsModule product_id={productId} product_name={productName} />
-      <QandAModule product_id={productId} product_name={productName} />
+      {/* {widgets} */}
     </div>
   );
 }

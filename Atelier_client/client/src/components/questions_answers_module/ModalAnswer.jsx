@@ -83,6 +83,7 @@ function ModalAnswer({
 
     convertToBase64url(e, errorMessage)
       .then((res) => {
+        console.log('his:', res)
         const copyArray = values.photos.slice();
         res.forEach((item) => {
           if (

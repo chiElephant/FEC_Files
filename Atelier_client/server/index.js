@@ -33,13 +33,12 @@ app.use('/', (req, res, next) => {
 
 // Question List;
 app.get('/questions/:product_id/', getQuestions, (req, res) => {
-  console.log('test');
+  console.log('questions: ', res.body);
   res.status(200).send(res.body);
 });
 
 // Answer List;
 app.get('/answers/:question_id/:page/:count', getAnswers, (req, res) => {
-  console.log('answeers: ', res.body);
   res.status(200).send(res.body);
 });
 
@@ -80,7 +79,6 @@ app.get('/products', (req, res, next) => {
       },
     })
     .then((products) => {
-      console.log('products: ', products.data);
       res.status(200).send(products.data);
     })
     .catch(next);

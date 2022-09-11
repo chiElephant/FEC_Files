@@ -1,61 +1,88 @@
 import React, { useState, useEffect } from 'react';
-import { helpers, initial } from './helper_functions/reviews_module.jsx';
+import {
+  initialReviewState,
+  initialFilters,
+  filterReviews,
+  getReviews,
+} from './helper_functions/reviews_module';
 import RatingsBreakdown from './RatingsBreakdown.jsx';
 import SubmitReview from './SubmitReview.jsx';
 import ReviewsList from './ReviewsList.jsx';
 
 function ReviewsModule({ product_id, product_name }) {
-  const [reviewsShown, setReviewsShown] = useState(initial.reviewModel);
-  const [characteristics, setCharacteristics] = useState({});
+  const [reviewsShown, setReviewsShown] = useState(initialReviewState);
+  const [currentFilters, setCurrentFilters] = useState(initialFilters);
   const [showReviewModal, setShowReviewModal] = useState(false);
-  // const [productName, setProductName] = useState(product_name);
-  // const [productId, setProductId] = useState(product_id);
+
+  const [reviews, setReviews] = useState(initialReviewState);
+  const [characteristics, setCharacteristics] = useState({});
   const [sortType, setSortType] = useState('relevance');
+  const [reviewCount, setReviewCount] = useState(0);
   const [countShown, setCountShown] = useState(2);
-  const [reviews, setReviews] = useState(initial.reviewModel);
 
   useEffect(() => {
-    console.log('fire reviews: ', product_id);
-    helpers.getReviews(product_id, sortType, setReviews);
-  }, [product_id, countShown, sortType]);
+    const MAX_COUNT = 300;
+
+    getReviews(product_id, sortType, MAX_COUNT, setReviews, setReviewCount);
+  }, [product_id, sortType]);
 
   useEffect(() => {
-    helpers.handleShown(reviews, countShown, setReviewsShown);
-  }, [reviews, countShown]);
+    filterReviews(reviews, currentFilters, setReviewsShown, countShown);
+  }, [reviews, countShown, currentFilters]);
+
+  function handleCountShown() {
+    if (countShown >= reviewCount) {
+      const element = document.getElementById('more-reviews');
+      element.remove();
+    }
+
+    setCountShown((countShown) => countShown + 2);
+
+    const div = document.getElementById('reviews');
+    div.scorllTop = div.scrollHeight;
+  }
 
   return (
     <div id="reviews-module">
-      <h2> Ratings and Reviews </h2>
+      <h2 id="ratings-reviews"> Ratings and Reviews </h2>
       <RatingsBreakdown
         productId={product_id}
         setCharacteristics={setCharacteristics}
         characteristics={characteristics}
+        setCurrentFilters={setCurrentFilters}
+        currentFilters={currentFilters}
       />
-      <ReviewsList
-        reviews={reviewsShown}
-        setSort={helpers.setSort}
-        setType={setSortType}
-      />
+      {reviewsShown.length === 0 ? (
+        ''
+      ) : (
+        <ReviewsList
+          reviews={reviewsShown}
+          setSortType={setSortType}
+          reviewCount={reviewCount}
+        />
+      )}
       <SubmitReview
         showReviewModal={showReviewModal}
         setShowReviewModal={setShowReviewModal}
         productName={product_name}
         product_id={product_id}
-        chars={characteristics}
+        characteristics={characteristics}
       />
       <div id="main-buttons">
         <button
+          className="reviews-btn"
           onClick={() =>
-            helpers.handleClick(setShowReviewModal, !showReviewModal)
+            setShowReviewModal((showReviewModal) => !showReviewModal)
           }
         >
-          Add Review
+          ADD A REVIEW +
         </button>
         <button
-          onClick={() => helpers.handleClick(setCountShown, countShown + 2)}
-          disabled={countShown >= reviews.length}
+          id="more-reviews"
+          className="reviews-btn"
+          onClick={() => handleCountShown()}
         >
-          More Reviews
+          MORE REVIEWS
         </button>
       </div>
     </div>

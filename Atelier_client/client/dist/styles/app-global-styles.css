@@ -1,3 +1,5 @@
+62 sloc)  883 Bytes
+
 /**
  *
  * Based on Josh Comeau's CSS Reset: https://www.joshwcomeau.com/css/custom-css-reset/.
@@ -54,7 +56,8 @@
  main {
    max-width: 840px;
    padding: 20px;
-   margin: 1000;
+   margin: auto;
+
  }
 
  button {
@@ -70,6 +73,3 @@
  /* input {
   width: 300px;
  } */
-
-
-

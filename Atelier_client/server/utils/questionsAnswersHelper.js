@@ -25,12 +25,9 @@ const getQuestions = (req, res, next) => {
         const questionList = response.data.results;
 
         if (questionList.length > 0) {
-          console.log('recurse');
-
           store = [...store, ...questionList];
           get(page + 1);
         } else {
-          console.log('fire!');
           res.body = store;
           next();
         }
