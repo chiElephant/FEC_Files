@@ -1,6 +1,15 @@
 /* Reviews Module */
 #main-buttons {
   color: rgb(82, 82, 82);
+  padding-right: 16px;
+  display: inline-block;
+  padding-left: 50%;
+}
+
+#reviews-module {
+  margin-bottom: 50px;
+  max-height: 100vh;
+  width: 100%;
 }
 
 /* Modals */
@@ -67,8 +76,8 @@
 #ratings-breakdown,
 #reviews-list {
   float: left;
-  height: 80vh;
-  padding: 16px;
+  height: 85vh;
+  padding: 12px;
 }
 
 #ratings-breakdown {
@@ -85,7 +94,7 @@
 }
 
 #reviews {
-  height: 70vh;
+  height: 75vh;
   width: 100%;
   padding-right: 10px;
   overflow-y: scroll;
@@ -140,7 +149,6 @@
 #body {
   font-size: medium;
   color: rgb(103, 103, 103);
-  word-break: break-all;
   overflow-wrap: break-word;
 }
 
@@ -360,7 +368,7 @@
 }
 
 .graph-meter {
-  width: 70%;
+  width: 65%;
   box-sizing: content-box;
   height: 12px;
   position: relative;
@@ -379,7 +387,6 @@
 #meters {
   display: flex;
 }
-
 
 #add-characteristic {
   margin-bottom: 32px;

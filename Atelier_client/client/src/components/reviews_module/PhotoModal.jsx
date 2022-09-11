@@ -12,7 +12,11 @@ function PhotoModal({ photoURL, viewPhoto, closeModal }) {
             id="photo-window-icon"
           ></i>
         </div>
-        <img className="modal-photo" src={photoURL} alt="Photo Not Available" ></img>
+        <img
+          className="modal-photo"
+          src={photoURL}
+          alt="Photo Not Available"
+        ></img>
       </div>
     </div>
   );

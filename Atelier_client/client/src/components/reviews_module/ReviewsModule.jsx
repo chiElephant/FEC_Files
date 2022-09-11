@@ -36,7 +36,11 @@ function ReviewsModule({ product_id, product_name }) {
       const element = document.getElementById('more-reviews');
       element.remove();
     }
+
     setCountShown((countShown) => countShown + 2);
+
+    const div = document.getElementById('reviews');
+    div.scorllTop = div.scrollHeight;
   }
 
   return (

@@ -85,19 +85,19 @@ function RatingsBreakdown({
 
     if (remainder < 0.25) {
       starFraction = 'none';
-      console.log('none');
+      // console.log('none');
     }
     if (0.25 <= remainder && remainder < 0.5) {
       starFraction = 'quarter';
-      console.log('quarter');
+      // console.log('quarter');
     }
     if (0.5 <= remainder && remainder < 0.75) {
       starFraction = 'half';
-      console.log('half');
+      // console.log('half');
     }
     if (0.75 <= remainder) {
       starFraction = 'three-quarter';
-      console.log('three-quarter');
+      // console.log('three-quarter');
     }
 
     if (avg !== 0) {

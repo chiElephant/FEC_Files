@@ -30,7 +30,7 @@ function ReviewsList({ reviews, setSortType, reviewCount }) {
             </ul>
           </div>
           <div id="sort-icon">
-            <i className="fak fa-angle-down-solid fa-lg"></i>
+            <i className="fa-regular fa-angle-down fa-lg"></i>
           </div>
         </div>
       </div>
