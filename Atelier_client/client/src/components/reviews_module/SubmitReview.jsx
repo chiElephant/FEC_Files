@@ -6,9 +6,6 @@ import ErrorModal from './ErrorModal.jsx';
 import StarRating from './StarRating.jsx';
 import Photos from './Photos.jsx';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
-
 function SubmitReview({
   showReviewModal,
   setShowReviewModal,
@@ -120,12 +117,13 @@ function SubmitReview({
   ) : (
     <div id="review-window">
       <div id="review-form" onSubmit={(e) => e.preventDefault()}>
-        {/* <FontAwesomeIcon
-          id="review-window-icon"
-          icon={solid('square-xmark')}
-          size="2x"
-          onClick={() => setShowReviewModal((showReviewModal) => false)}
-        /> */}
+        <div onClick={() => setShowReviewModal((showReviewModal) => false)}>
+          <i
+            className="fak fa-square-xmark-light fa-2xl"
+            id="review-window-icon"
+          ></i>
+        </div>
+
         <h1>Write Your Review</h1>
         <h3>About the {productName}</h3>
 
