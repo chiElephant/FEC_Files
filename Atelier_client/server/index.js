@@ -2,6 +2,9 @@ require('dotenv').config();
 const path = require('path');
 const express = require('express');
 const axios = require('axios');
+const app = express();
+const compression = require('compression');
+
 const {
   getQuestions,
   getAnswers,
@@ -14,9 +17,10 @@ const {
 const { uploadToCloudinary } = require('./utils/uploadToCloudinary');
 
 const { URL, TOKEN } = process.env;
-const app = express();
 const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
 const reviewsHelper = require('./utils/reviewsHelper.js');
+
+app.use(compression());
 
 app.use('/', (req, res, next) => {
   console.log(`${req.method} REQUEST ON ${req.url}`);
@@ -140,9 +144,14 @@ app.get('/reviews', reviewsHelper.getReviews, (req, res) => {
 });
 
 //POST reviews
-app.post('/reviews', uploadToCloudinary, reviewsHelper.postReview, (req, res) => {
-  res.sendStatus(201);
-});
+app.post(
+  '/reviews',
+  uploadToCloudinary,
+  reviewsHelper.postReview,
+  (req, res) => {
+    res.sendStatus(201);
+  }
+);
 
 //GET review metadata
 app.get('/reviews/meta', reviewsHelper.getMetaData, (req, res) => {
@@ -157,12 +166,12 @@ app.put('/reviews/:review_id/helpful', (req, res) => {
     } else {
       res.sendStatus(204);
     }
-  })
-})
+  });
+});
 
 app.use('/reviews/*', (req, res) => {
   res.send('404: This page does not exist');
-})
+});
 
 app.use((err, req, res, next) => {
   console.log('error in express error handler: ', err.message);
