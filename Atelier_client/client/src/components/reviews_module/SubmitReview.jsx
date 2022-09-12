@@ -198,7 +198,7 @@ function SubmitReview({
           </span>
         </fieldset>
 
-        <Photos photos={photos} handleUserInputs={handleUserInputs} />
+        <Photos photos={userInputs.photos} handleUserInputs={handleUserInputs} />
 
         {/* This div will ask the user to enter their enter their name */}
         <fieldset id="name-input">

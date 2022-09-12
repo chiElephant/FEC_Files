@@ -2,7 +2,7 @@ import moment from 'moment';
 import axios from 'axios';
 
 const helpers = {
-  convertDate: (date) => {
+  formatDate: (date) => {
     if (date !== '') {
       return moment(date).format('MMMM DD YYYY');
     }

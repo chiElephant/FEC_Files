@@ -47,12 +47,12 @@ function ProductBreakdown({ characteristics }) {
             <div className="char-name">{`${char}`}</div>
             <div className="char-meter">
               <i
-                id="char-icon"
+                className="char-icon"
                 className="fak fa-triangle-solid fa-flip-vertical"
                 style={{ marginLeft: value * 20 + '%' }}
               ></i>
             </div>
-            <div id="breakdown-descrip">{element}</div>
+            <div className="breakdown-descrip">{element}</div>
           </div>
         );
       }
@@ -64,7 +64,7 @@ function ProductBreakdown({ characteristics }) {
   return (
     <div>
       <h3 hidden>Product Breakdown</h3>
-      <div id="char-div">{charsDiv}</div>
+      {charsDiv}
     </div>
   );
 }

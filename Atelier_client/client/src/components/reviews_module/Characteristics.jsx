@@ -84,8 +84,6 @@ function Characteristics({
               onClick={() => handleCharacteristics(char, id, 5)}
             />
           </div>
-          {/* </label> */}
-          {/* <br /> */}
           <div id="char-descrip">
             <div className="char-descrip-1"> {`(1) ${charsKey[char][1]}`} </div>
             <div className="char-descrip-5"> {`(5) ${charsKey[char][5]}`} </div>

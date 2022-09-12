@@ -53,7 +53,6 @@ function filterReviews(reviews, currentFilters, setReviewsShown) {
   let reviewsToShow;
 
   const filtersIndx = Object.values(currentFilters).indexOf(false);
-  console.log(filtersIndx)
 
   for (let review of reviews) {
     if (!currentFilters[review.rating]) {
