@@ -104,14 +104,6 @@ const helpers = {
     setViewPhoto((prevState) => true);
   },
 
-  // markHelpful: (review_id, helpfulness, helpfulCount) => {
-  //   if (helpfulCount.current === helpfulness) {
-  //     helpfulCount.current = helpfulCount.current + 1;
-  //     helpers.putHelpful(review_id);
-  //     console.log(helpfulCount.current)
-  //   }
-  // },
-
   markHelpful: (helpfulCount, setHelpfulCount, helpfulness, review_id) => {
     if (helpfulCount === helpfulness) {
       setHelpfulCount((prevState) => prevState + 1);

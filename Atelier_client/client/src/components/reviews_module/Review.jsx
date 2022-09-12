@@ -52,34 +52,6 @@ function Review(props) {
     helpers.createResponseDiv(response, reviewResponse);
   }, [review_id]);
 
-  // function createHelpfulnessDiv () {
-  //   let helpfulDiv = [];
-
-  //   helpfulDiv.push(
-  //     <div id="helpful-text" key={'helpful'}>
-  //       <span className="review-helpfulness">{'Helpful?'}</span>
-  //       <span
-  //         className="helpful-yes"
-  //         onClick={() => markHelpful()}
-  //       >
-  //         {'Yes '}
-  //       </span>
-  //       <span className="review-helpfulness">{`(${helpfulCount})`}</span>
-  //       <span className="review-helpfulness">{'|'}</span>
-  //       <span className="review-helpfulness">{'Report'}</span>
-  //     </div>
-  //   );
-  //   return helpfulDiv;
-  // }
-
-  // function markHelpful () {
-  //   if (helpfulCount === helpfulness) {
-  //     setHelpfulCount((prevState) => prevState + 1);
-  //     createHelpfulnessDiv();
-  //     helpers.putHelpful(review_id);
-  //   }
-  // }
-
   return (
     <div className="review">
       <div className="review-tile-top-bar">
