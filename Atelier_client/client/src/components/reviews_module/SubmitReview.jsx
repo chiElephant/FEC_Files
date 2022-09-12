@@ -73,7 +73,7 @@ function SubmitReview({
       recommend: typeof recommend === 'boolean',
       characteristics: charsLength === characteristicsLength,
       summary: summary.length <= 60,
-      body: 50 <= body.length && body.length <= 100,
+      body: body.length >= 50 && body.length <= 1000,
       photos: photos.length <= 5,
       name: 0 < name.length && name.length <= 60,
       email: 0 < email.length && email.length <= 60,

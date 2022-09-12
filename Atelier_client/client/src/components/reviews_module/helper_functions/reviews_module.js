@@ -36,7 +36,7 @@ function filterReviews(reviews, currentFilters, countShown, setReviewsShown) {
   const filtersIndx = Object.values(currentFilters).indexOf(true);
 
   if (filtersIndx > 0) {
-    for (let review of reviews) {
+    for (let review of reviews.current) {
       if (currentFilters[review.rating]) {
         filteredReviews.push(review);
       }
@@ -45,7 +45,7 @@ function filterReviews(reviews, currentFilters, countShown, setReviewsShown) {
     return;
   }
 
-  const reviewsToDisplay = reviews.slice(0, countShown);
+  const reviewsToDisplay = reviews.current.slice(0, countShown);
   setReviewsShown(reviewsToDisplay);
 }
 
