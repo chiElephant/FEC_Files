@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import {
   initialReviewState,
   initialFilters,
@@ -16,30 +16,26 @@ function ReviewsModule({ product_id, product_name }) {
   const [showReviewModal, setShowReviewModal] = useState(false);
   const [reviews, setReviews] = useState(initialReviewState);
   const [characteristics, setCharacteristics] = useState({});
-  const [sortType, setSortType] = useState('relevance');
+  const [sort, setSort] = useState('relevance');
   const [reviewCount, setReviewCount] = useState(0);
   const [countShown, setCountShown] = useState(2);
 
   useEffect(() => {
-    const MAX_REVIEWS = 300;
-    getReviewsCount(product_id, sortType, MAX_REVIEWS, setReviewCount);
-  }, [product_id]);
-
-  useEffect(() => {
-    getReviews(
+    const count = 300;
+    const params = {
       product_id,
-      sortType,
-      countShown,
-      currentFilters,
-      setReviewsShown
-    );
-  }, [sortType, reviewCount, countShown, currentFilters]);
+      sort,
+      count,
+    };
+    getReviews(params, currentFilters, (reviewData) => {
+      filterReviews(reviewData, currentFilters, countShown, setReviewsShown);
+      setReviewCount((prevState) => reviewData.length);
+    });
+  }, [product_id, sort]);
 
-  // useEffect(() => {
-  //   filterReviews(reviews, currentFilters, setReviewsShown, countShown);
-  // }, [countShown, currentFilters]);
-
-  function filterReviews(reviews) {}
+  const filteredReviews = useMemo(() => {
+    return filterReviews(reviews, currentFilters, countShown, setReviewsShown);
+  }, [countShown, currentFilters])
 
   function handleCountShown() {
     if (countShown >= reviewCount) {
@@ -65,7 +61,7 @@ function ReviewsModule({ product_id, product_name }) {
       ) : (
         <ReviewsList
           reviews={reviewsShown}
-          setSortType={setSortType}
+          setSortType={setSort}
           reviewCount={reviewCount}
         />
       )}

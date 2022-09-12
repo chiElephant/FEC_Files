@@ -15,62 +15,38 @@ const initialReviewState = [
   },
 ];
 
-const initialFilters = { 5: true, 4: true, 3: true, 2: true, 1: true };
+const initialFilters = { 5: false, 4: false, 3: false, 2: false, 1: false };
 
-function getReviewsCount(product_id, sort, count, setReviewCount) {
-  const options = {
-    params: { product_id, sort, count },
-  };
-
-  axios
-    .get('/reviews/count', options)
-    .then((response) => {
-      setReviewCount((prevState) => response.data);
-    })
-    .catch((error) => {
-      console.log('Error fetching reviews count: ', error);
-    });
-}
-
-function getReviews(product_id, sort, count, currentFilters, setReviewsShown) {
-  const options = {
-    params: { product_id, sort, count },
-  };
+function getReviews(params, currentFilters, handleReviewData) {
+  const options = { params };
 
   axios
     .get('/reviews', options)
     .then((response) => {
-      filterReviews(response.data, currentFilters, setReviewsShown);
+      handleReviewData(response.data);
     })
     .catch((error) => {
       console.log('Error fetching reviews: ', error);
     });
 }
 
-function filterReviews(reviews, currentFilters, setReviewsShown) {
+function filterReviews(reviews, currentFilters, countShown, setReviewsShown) {
   let filteredReviews = [];
-  let filterCount = 0;
-  let reviewsToShow;
 
-  const filtersIndx = Object.values(currentFilters).indexOf(false);
+  const filtersIndx = Object.values(currentFilters).indexOf(true);
 
-  for (let review of reviews) {
-    if (!currentFilters[review.rating]) {
-      filteredReviews.push(review);
+  if (filtersIndx > 0) {
+    for (let review of reviews) {
+      if (currentFilters[review.rating]) {
+        filteredReviews.push(review);
+      }
     }
-  }
-
-  if (filteredReviews.length === 0 && filtersIndx < 0) {
-    setReviewsShown(reviews);
+    setReviewsShown(filteredReviews);
     return;
   }
-  setReviewsShown((reviewsShown) => filteredReviews);
+
+  const reviewsToDisplay = reviews.slice(0, countShown);
+  setReviewsShown(reviewsToDisplay);
 }
 
-export {
-  getReviewsCount,
-  getReviews,
-  initialReviewState,
-  initialFilters,
-  filterReviews,
-};
+export { getReviews, initialReviewState, initialFilters, filterReviews };
