@@ -64,13 +64,8 @@
   margin: 2px 0 0 12px;
 }
 
-#sort-dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: rgb(235, 235, 235);
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-  padding: 12px 8px 12px 0;
+#ratings-breakdown {
+  width: 38%;
 }
 
 #sort-dropdown:hover #sort-dropdown-content {
