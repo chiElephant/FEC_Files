@@ -12,7 +12,6 @@ function ReviewsList({ reviews, setSortType, reviewCount }) {
 
   return (
     <div id="reviews-list">
-
       <div id="review-sort">
         <div id="sort-text">{`${reviewCount} reviews, sorted by`}</div>
         <div id="sort-dropdown">

@@ -26,16 +26,20 @@ function ReviewsModule({ product_id, product_name }) {
   }, [product_id]);
 
   useEffect(() => {
-    getReviews(product_id, sortType, countShown, currentFilters, setReviewsShown);
+    getReviews(
+      product_id,
+      sortType,
+      countShown,
+      currentFilters,
+      setReviewsShown
+    );
   }, [sortType, reviewCount, countShown, currentFilters]);
 
   // useEffect(() => {
   //   filterReviews(reviews, currentFilters, setReviewsShown, countShown);
   // }, [countShown, currentFilters]);
 
-  function filterReviews (reviews) {
-
-  }
+  function filterReviews(reviews) {}
 
   function handleCountShown() {
     if (countShown >= reviewCount) {

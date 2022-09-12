@@ -1,12 +1,12 @@
 import React from 'react';
 
-function PhotoModal({ photoURL, viewPhoto, closeModal }) {
+function PhotoModal({ photoURL, viewPhoto, closePhotoModal, setViewPhoto }) {
   return !viewPhoto ? (
     ''
   ) : (
     <div id="photo-window">
       <div id="modal-photo">
-        <div onClick={() => closeModal()}>
+        <div onClick={() => closePhotoModal(setViewPhoto)}>
           <i
             className="fak fa-square-xmark-light fa-2xl"
             id="photo-window-icon"

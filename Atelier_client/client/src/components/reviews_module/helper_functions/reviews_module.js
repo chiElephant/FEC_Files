@@ -6,7 +6,7 @@ const initialReviewState = [
     rating: '',
     summary: '',
     recommend: '',
-    response: '',
+    response: null,
     body: '',
     date: '',
     reviewer_name: '',
@@ -67,4 +67,10 @@ function filterReviews(reviews, currentFilters, setReviewsShown) {
   setReviewsShown((reviewsShown) => filteredReviews);
 }
 
-export { getReviewsCount, getReviews, initialReviewState, initialFilters, filterReviews };
+export {
+  getReviewsCount,
+  getReviews,
+  initialReviewState,
+  initialFilters,
+  filterReviews,
+};

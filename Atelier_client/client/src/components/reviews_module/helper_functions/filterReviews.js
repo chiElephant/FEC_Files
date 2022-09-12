@@ -9,7 +9,7 @@ export default function filter(currentFilters, countDisplayed, reviews) {
         filteredReviews.push(review);
       }
     }
-    return  filteredReviews;
+    return filteredReviews;
   }
 
   const reviewsPerCount = reviews.current.slice(0, countDisplayed.current);
