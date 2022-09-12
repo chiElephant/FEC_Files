@@ -21,8 +21,6 @@ function Review(props) {
   const [viewPhoto, setViewPhoto] = useState(false);
 
   const reviewResponse = useRef([<div key="response" />]);
-  const recommended = useRef([<div key="recommend" />]);
-
   const photoURL = useRef('');
 
   const formatedDate = useMemo(() => {
@@ -38,42 +36,49 @@ function Review(props) {
   }, [rating]);
 
   const helpful = useMemo(() => {
-    return createHelpfulnessDiv();
+    return helpers.createHelpfulnessDiv(
+      helpfulCount,
+      setHelpfulCount,
+      helpfulness,
+      review_id
+    );
   }, [helpfulCount]);
 
+  const recommended = useMemo(() => {
+    return helpers.createRecommendDiv(recommend, recommended);
+  }, [recommend]);
+
   useEffect(() => {
-    helpers.createRecommendDiv(recommend, recommended);
     helpers.createResponseDiv(response, reviewResponse);
   }, [review_id]);
 
-  function createHelpfulnessDiv () {
-    let helpfulDiv = [];
+  // function createHelpfulnessDiv () {
+  //   let helpfulDiv = [];
 
-    helpfulDiv.push(
-      <div id="helpful-text" key={'helpful'}>
-        <span className="review-helpfulness">{'Helpful?'}</span>
-        <span
-          className="helpful-yes"
-          onClick={() => markHelpful()}
-        >
-          {'Yes '}
-        </span>
-        <span className="review-helpfulness">{`(${helpfulCount})`}</span>
-        <span className="review-helpfulness">{'|'}</span>
-        <span className="review-helpfulness">{'Report'}</span>
-      </div>
-    );
-    return helpfulDiv;
-  }
+  //   helpfulDiv.push(
+  //     <div id="helpful-text" key={'helpful'}>
+  //       <span className="review-helpfulness">{'Helpful?'}</span>
+  //       <span
+  //         className="helpful-yes"
+  //         onClick={() => markHelpful()}
+  //       >
+  //         {'Yes '}
+  //       </span>
+  //       <span className="review-helpfulness">{`(${helpfulCount})`}</span>
+  //       <span className="review-helpfulness">{'|'}</span>
+  //       <span className="review-helpfulness">{'Report'}</span>
+  //     </div>
+  //   );
+  //   return helpfulDiv;
+  // }
 
-  function markHelpful () {
-    console.log(helpfulCount)
-    if (helpfulCount === helpfulness) {
-      setHelpfulCount((prevState) => prevState + 1);
-      createHelpfulnessDiv();
-      helpers.putHelpful(review_id, createHelpfulnessDiv);
-    }
-  }
+  // function markHelpful () {
+  //   if (helpfulCount === helpfulness) {
+  //     setHelpfulCount((prevState) => prevState + 1);
+  //     createHelpfulnessDiv();
+  //     helpers.putHelpful(review_id);
+  //   }
+  // }
 
   return (
     <div className="review">
@@ -91,7 +96,7 @@ function Review(props) {
         closePhotoModal={helpers.closePhotoModal}
         setViewPhoto={setViewPhoto}
       />
-      {recommended.current}
+      {recommended}
       {reviewResponse.current}
       <div className="helpfulness">{helpful}</div>
     </div>

@@ -2,7 +2,12 @@ import moment from 'moment';
 import axios from 'axios';
 
 const helpers = {
-  createHelpfulnessDiv: (helpful, helpfulCount) => {
+  createHelpfulnessDiv: (
+    helpfulCount,
+    setHelpfulCount,
+    helpfulness,
+    review_id
+  ) => {
     let helpfulDiv = [];
 
     helpfulDiv.push(
@@ -10,7 +15,14 @@ const helpers = {
         <span className="review-helpfulness">{'Helpful?'}</span>
         <span
           className="helpful-yes"
-          onClick={() => markHelpful(review_id, helpfulness, helpfulCount)}
+          onClick={() =>
+            helpers.markHelpful(
+              helpfulCount,
+              setHelpfulCount,
+              helpfulness,
+              review_id
+            )
+          }
         >
           {'Yes '}
         </span>
@@ -19,8 +31,7 @@ const helpers = {
         <span className="review-helpfulness">{'Report'}</span>
       </div>
     );
-    helpful.current = helpfulDiv;
-    // return helpfulDiv;
+    return helpfulDiv;
   },
 
   createRecommendDiv: (recommend, recommended) => {
@@ -32,7 +43,7 @@ const helpers = {
         <span className="review-rec-text">{'I recommend this product'}</span>
       </div>
     );
-    recommended.current = recDiv;
+    return recDiv;
   },
 
   createResponseDiv: (response, reviewResponse) => {
@@ -48,7 +59,7 @@ const helpers = {
       reviewResponse.current = responseDiv;
       return;
     }
-    reviewResponse.current = [<div key="review"/>];
+    reviewResponse.current = [<div key="review" />];
   },
 
   createStarDiv: (rating) => {
@@ -100,6 +111,13 @@ const helpers = {
   //     console.log(helpfulCount.current)
   //   }
   // },
+
+  markHelpful: (helpfulCount, setHelpfulCount, helpfulness, review_id) => {
+    if (helpfulCount === helpfulness) {
+      setHelpfulCount((prevState) => prevState + 1);
+      helpers.putHelpful(review_id);
+    }
+  },
 
   formatDate: (date) => {
     if (date !== '') {
