@@ -111,7 +111,7 @@
 
 /* Reviews Holder */
 #reviews {
-  height: 80vh;
+  height: 72vh;
   overflow-y: scroll;
   width: 550px;
 }
