@@ -1,5 +1,5 @@
-
-
+/* eslint-disable guard-for-in */
+/* eslint-disable no-restricted-syntax */
 function avgRating(ratings) {
   let reviewsCount = 0;
   let sum = 0;
@@ -15,10 +15,10 @@ function avgRating(ratings) {
 
   avg = (sum / reviewsCount).toFixed(1);
 
-  var result = {
-    avg: avg,
-    reviewsCount: reviewsCount
-  }
+  const result = {
+    avg,
+    reviewsCount,
+  };
   return result;
 }
 

@@ -1,17 +1,12 @@
+/* eslint-disable react/destructuring-assignment */
 import React, { useState, useEffect } from 'react';
-// import {
-//   list_product,
-//   product_information,
-//   product_styles,
-//   related_products,
-//   product_reviews,
-// } from '../../../example_data/example.js';
+import axios from 'axios';
 import ProductInfo from './ProductInfo.jsx';
 import Styles from './Styles.jsx';
-import AddToCart from './AddToCart.jsx';
 import Gallery from './Gallery.jsx';
-import axios from 'axios';
+import Slogan from './Slogan.jsx';
 
+// 71697
 function Overview(props) {
   const [product, setProduct] = useState({});
   const [styles, setStyles] = useState({
@@ -33,44 +28,81 @@ function Overview(props) {
       },
     ],
   });
+  const [selectedStyle, setSelectedStyle] = useState({
+    style_id: 1,
+    name: '',
+    original_price: '',
+    sale_price: 0,
+    default: true,
+    photos: [
+      {
+        thumbnail_url: '',
+        url: '',
+      },
+    ],
+    skus: {},
+  });
 
   useEffect(() => {
-    axios.get(`/products/${props.product_id}`)
-      .then((data) => {
-        // console.log(data.data);
-        setProduct(data.data);
-      });
-  }, []);
-
-  useEffect(() => {
-    axios.get(`/products/${props.product_id}/styles`)
-      .then((data) => {
-        // console.log(data.data);
-        setStyles(data.data);
-      });
     axios.get(`/products/${props.product_id}`).then((data) => {
-      console.log(data.data);
+      // console.log(data.data);
       setProduct(data.data);
     });
-  }, []);
-
-  useEffect(() => {
+    axios.get(`/products/${props.product_id}/styles`).then((data) => {
+      // console.log(data.data);
+      setStyles(data.data);
+    });
     axios.get(`/products/${props.product_id}/styles`).then((data) => {
       console.log(data.data);
       setStyles(data.data);
     });
-
   }, []);
 
-  // useEffect(() = > {
-  //   axios.get(`/reviews`)
-  // }, [])
+  useEffect(() => {
+    let def = {};
+    for (let i = 0; i < styles.results.length; i++) {
+      if (styles.results[i]['default?']) {
+        def = styles.results[i];
+        styles.results.splice(i, 1);
+        styles.results.unshift(def);
+      }
+    }
+    setSelectedStyle(def);
+  }, [styles]);
+
+  const changeStyleSelected = (style) => {
+    console.log(`The selected style is: ${style}`);
+    setSelectedStyle(style);
+  };
 
   if (Object.keys(product).length) {
     return (
-      <div>
-        <ProductInfo product_id={props.product_id} product={product} features={product.features} />
-        <Styles product={product} styles={styles.results} />
+      <div className="main-container">
+        <div data-testid="overview" className="overview">
+          {/* <Styles
+            // product={product}
+            // styles={styles.results}
+            // changeStyleSelected={changeStyleSelected}
+            // style={selectedStyle}
+          /> */}
+          <Gallery style={selectedStyle} />
+          <div className="new-right">
+            <ProductInfo
+              product_id={props.product_id}
+              product={product}
+              features={product.features}
+              style={selectedStyle}
+              styles={styles}
+            />
+            <Styles
+              product={product}
+              styles={styles.results}
+              changeStyleSelected={changeStyleSelected}
+              style={selectedStyle}
+            />
+          </div>
+        </div>
+        {/* <Slogan product={product} /> */}
       </div>
     );
   }

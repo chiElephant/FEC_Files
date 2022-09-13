@@ -2,6 +2,7 @@
 // src/mocks/handlers.js
 import { rest } from 'msw';
 import { mockQuestions, answers_642599 } from './Q&A-mock-data.js';
+import { mockProduct, mockStyles } from './Overview-mock-data.js';
 
 export const handlers = [
   // Handles a GET /user request
@@ -26,4 +27,14 @@ export const handlers = [
       ctx.json({ question: '642681', page: '1', count: '100', results: [] })
     );
   }),
+
+  // Overview mock server responses
+
+  rest.get('products/:product_id', (req, res, ctx) =>
+    res(ctx.status(200), ctx.json(mockProduct))
+  ),
+
+  rest.get('products/:product_id/styles', (req, res, ctx) =>
+    res(ctx.status(200), ctx.json(mockStyles))
+  ),
 ];
