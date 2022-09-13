@@ -20,12 +20,12 @@ const initialState = {
 };
 
 const helpers = {
-  handleCountShown: (countShown, reviewCount, setCountShown) => {
-    if (countShown >= reviewCount.current) {
+  handleCountShown: (displayedCount, reviewCount, setDisplayedCount) => {
+    if (displayedCount >= reviewCount.current) {
       const element = document.getElementById('more-reviews');
       element.remove();
     }
-    setCountShown((countShown) => countShown + 2);
+    setDisplayedCount((displayedCount) => displayedCount + 2);
   },
 
   getReviews: (params, currentFilters, handleReviewData) => {
@@ -41,12 +41,12 @@ const helpers = {
       });
   },
 
-  filterReviews: (reviews, currentFilters, countShown, setReviewsShown) => {
+  filterReviews: (reviews, currentFilters, displayedCount, setReviewsShown) => {
     let filteredReviews = [];
 
     const filtersIndx = Object.values(currentFilters).indexOf(true);
-
-    if (filtersIndx > 0) {
+    console.log(filtersIndx)
+    if (filtersIndx >= 0) {
       for (let review of reviews.current) {
         if (currentFilters[review.rating]) {
           filteredReviews.push(review);
@@ -56,7 +56,7 @@ const helpers = {
       return;
     }
 
-    const reviewsToDisplay = reviews.current.slice(0, countShown);
+    const reviewsToDisplay = reviews.current.slice(0, displayedCount);
     setReviewsShown(reviewsToDisplay);
   },
 };

@@ -5,11 +5,11 @@ import SubmitReview from './SubmitReview.jsx';
 import ReviewsList from './ReviewsList.jsx';
 
 function ReviewsModule({ product_id, product_name }) {
-  const [reviewsShown, setReviewsShown] = useState(initialState.review);
+  const [reviewsDisplayed, setReviewsDisplayed] = useState(initialState.review);
   const [currentFilters, setCurrentFilters] = useState(initialState.filters);
   const [showReviewModal, setShowReviewModal] = useState(false);
   const [characteristics, setCharacteristics] = useState({});
-  const [countShown, setCountShown] = useState(2);
+  const [displayedCount, setDisplayedCount] = useState(2);
   const [sort, setSort] = useState('relevance');
 
   const reviews = useRef(initialState.review);
@@ -28,8 +28,8 @@ function ReviewsModule({ product_id, product_name }) {
       helpers.filterReviews(
         reviews,
         currentFilters,
-        countShown,
-        setReviewsShown
+        displayedCount,
+        setReviewsDisplayed
       );
     });
   }, [product_id, sort]);
@@ -38,10 +38,10 @@ function ReviewsModule({ product_id, product_name }) {
     return helpers.filterReviews(
       reviews,
       currentFilters,
-      countShown,
-      setReviewsShown
+      displayedCount,
+      setReviewsDisplayed
     );
-  }, [countShown, currentFilters]);
+  }, [currentFilters]);
 
   return (
     <div id="reviews-module">
@@ -53,11 +53,11 @@ function ReviewsModule({ product_id, product_name }) {
         setCurrentFilters={setCurrentFilters}
         currentFilters={currentFilters}
       />
-      {reviewsShown.length === 0 ? (
+      {reviewsDisplayed.length === 0 ? (
         ''
       ) : (
         <ReviewsList
-          reviews={reviewsShown}
+          reviews={reviewsDisplayed}
           setSortType={setSort}
           reviewCount={reviewCount.current}
         />
@@ -82,7 +82,11 @@ function ReviewsModule({ product_id, product_name }) {
           id="more-reviews"
           className="reviews-btn"
           onClick={() =>
-            helpers.handleCountShown(countShown, reviewCount, setCountShown)
+            helpers.handleCountShown(
+              displayedCount,
+              reviewCount,
+              setDisplayedCount
+            )
           }
         >
           MORE REVIEWS

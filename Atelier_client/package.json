@@ -4,6 +4,7 @@
   "description": "fec redbean project",
   "main": "webpack.config.js",
   "scripts": {
+    "start": "node server/index.js",
     "test": "jest",
     "test Q&A": "jest ./client/src/_tests_/questions-answers.test.jsx",
     "test Overview": "jest ./client/src/_tests_/Overview.test.js",
