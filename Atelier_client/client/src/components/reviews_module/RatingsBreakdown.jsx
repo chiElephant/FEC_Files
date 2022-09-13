@@ -46,7 +46,7 @@ function RatingsBreakdown({
         <div id="average">{`${avgRating.current}`}</div>
         <div id="breakdown-stars">{starsRatings}</div>
       </div>
-      <div id="review-count">{`out of ${totalReviews.current} reviews`}</div>
+      <div id="review-count">{`out of ${totalReviews.current} ratings`}</div>
       <div id="recommend-percent">
         {`${percentRecommended.current}% of reviewers recommend this product`}
       </div>

@@ -28,7 +28,12 @@ const helpers = {
         </span>
         <span className="review-helpfulness">{`(${helpfulCount})`}</span>
         <span className="review-helpfulness">{'|'}</span>
-        <span className="review-helpfulness">{'Report'}</span>
+        <span
+          className="review-report"
+          onClick={() => helpers.reportReview(review_id)}
+        >
+          {'Report'}
+        </span>
       </div>
     );
     return helpfulDiv;
@@ -111,13 +116,24 @@ const helpers = {
     }
   },
 
+  reportReview: (review_id) => {
+    const url = `reviews/${review_id}/report`;
+
+    axios
+      .put(url)
+      .then((response) => response)
+      .catch((error) => {
+        console.log('Error reporting review:', error);
+      });
+  },
+
   formatDate: (date) => {
     if (date !== '') {
       return moment(date).format('MMMM DD YYYY');
     }
   },
 
-  putHelpful: (review_id, createHelpfulnessDiv) => {
+  putHelpful: (review_id) => {
     const url = `reviews/${review_id}/helpful`;
 
     axios

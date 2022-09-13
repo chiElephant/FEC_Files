@@ -18,7 +18,7 @@ const { uploadToCloudinary } = require('./utils/uploadToCloudinary');
 
 const { URL, TOKEN } = process.env;
 const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
-const reviewsHelper = require('./utils/reviewsHelper.js');
+const reviewsHelpers = require('./utils/reviewsHelpers.js');
 
 app.use(compression());
 
@@ -131,41 +131,55 @@ app.post('/cart/:sku/:qty', (req, res) => {
 });
 
 //*** RATINGS and REVIEWS ***//
+app.get('/reviews', (req, res) => {
+  reviewsHelpers.getReviews(req.query, (error, reviews) => {
+    if(error) {
+      res.status(500).send(error);
+    }
+    res.status(200).send(reviews)
+  })
+})
 
-//GET reviews
-app.get('/reviews/count', reviewsHelper.getReviews, (req, res) => {
-  res.status(200).json(res.body.length);
-});
 
-app.get('/reviews', reviewsHelper.getReviews, (req, res) => {
-  res.status(200).send(res.body);
-});
-
-//POST reviews
-app.post(
-  '/reviews',
-  uploadToCloudinary,
-  reviewsHelper.postReview,
-  (req, res) => {
+// POST new review
+app.post('/reviews', uploadToCloudinary, (req, res) => {
+  reviewsHelpers.postReview(req.body, (error, success) => {
+    if(error) {
+      res.status(500).send(error);
+    }
     res.sendStatus(201);
-  }
-);
+  })
+})
 
 //GET review metadata
-app.get('/reviews/meta', reviewsHelper.getMetaData, (req, res) => {
-  res.status(200).send(res.body);
-});
+app.get('/reviews/meta', (req, res) => {
+  reviewsHelpers.getMetaData(req.query, (error, metadata) => {
+    if(error) {
+      res.status(500).send(error);
+    }
+    res.status(200).send(metadata)
+  })
+})
 
 //PUT mark review helpful
 app.put('/reviews/:review_id/helpful', (req, res) => {
-  reviewsHelper.markHelpful(req.params, (error, success) => {
+  reviewsHelpers.markHelpful(req.params, (error, success) => {
     if (error) {
       res.status(500).send(error);
-    } else {
-      res.sendStatus(204);
     }
+    res.sendStatus(204);
   });
 });
+
+//PUT report review
+app.put('/reviews/:review_id/report', (req, res) => {
+  reviewsHelpers.reportReview(req.params, (error, success) => {
+    if(error) {
+      res.status(500).send(error);
+    }
+    res.sendStatus(204);
+  })
+})
 
 app.use('/reviews/*', (req, res) => {
   res.send('404: This page does not exist');

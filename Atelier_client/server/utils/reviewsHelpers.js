@@ -1,44 +1,40 @@
 require('dotenv').config();
 const axios = require('axios');
 
-const { URL, TOKEN } = process.env
+const { URL, TOKEN } = process.env;
 
 const helpfulEndpoint = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/:review_id/helpful`;
 
-const getReviews = (req, res, next) => {
-  const url = `${URL}/reviews`
+const getReviews = (query, cb) => {
+  const url = `${URL}/reviews`;
 
   const options = {
+    method: 'get',
+    url,
     headers: { Authorization: TOKEN },
-    params: req.query,
+    params: query,
   };
 
-  axios
-    .get(url, options)
-    .then((response) => {
-      res.body = response.data.results;
-      next();
-    })
-    .catch(next);
+  axios(options)
+    .then((response) => cb(null, response.data.results))
+    .catch((error) => cb(error, null));
 };
 
-const getMetaData = (req, res, next) => {
-  const url = `${URL}/reviews/meta`
+const getMetaData = (params, cb) => {
+  const url = `${URL}/reviews/meta`;
   const options = {
+    method: 'get',
+    url,
     headers: { Authorization: TOKEN },
-    params: req.query,
+    params,
   };
 
-  axios
-    .get(url, options)
-    .then((response) => {
-      res.body = response.data;
-      next();
-    })
-    .catch(next);
+  axios(options)
+    .then((response) => cb(null, response.data))
+    .catch((error) => cb(error, null));
 };
 
-const postReview = (req, res, next) => {
+const postReview = (reviewData, cb) => {
   const {
     body,
     name,
@@ -49,7 +45,7 @@ const postReview = (req, res, next) => {
     recommend,
     photoUrls,
     characteristics,
-  } = req.body;
+  } = reviewData;
 
   const data = JSON.stringify({
     product_id,
@@ -74,14 +70,11 @@ const postReview = (req, res, next) => {
   };
 
   axios(options)
-    .then((res) => {
-      next();
-    })
-    .catch(next);
+    .then((response) => cb(null, response.status))
+    .catch((error) => cb(error, null));
 };
 
 const markHelpful = (params, cb) => {
-
   const url = `${URL}/reviews/${params.review_id}/helpful`;
 
   const options = {
@@ -93,8 +86,24 @@ const markHelpful = (params, cb) => {
   };
 
   axios(options)
-    .then(res => cb(res.status))
-    .catch(err => console.log('Axios express helper error'))
+    .then((response) => cb(null, response.status))
+    .catch((error) => cb(error, null));
+};
+
+const reportReview = (params, cb) => {
+  const url = `${URL}/reviews/${params.review_id}/report`;
+
+  const options = {
+    method: 'put',
+    url,
+    headers: {
+      Authorization: TOKEN,
+    },
+  };
+
+  axios(options)
+    .then((response) => cb(null, response.status))
+    .catch((error) => cb(error, null));
 };
 
 module.exports = {
@@ -102,4 +111,5 @@ module.exports = {
   getMetaData,
   postReview,
   markHelpful,
+  reportReview,
 };
