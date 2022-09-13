@@ -1,8 +1,9 @@
 /* Reviews Module */
 #reviews-module {
-  margin-bottom: 50px;
   max-height: 100vh;
   width: 100%;
+  justify-items: center;
+  padding-left: 25%;
 }
 
 #ratings-reviews {
@@ -10,10 +11,13 @@
   color: rgb(82, 82, 82);
   font-weight: 300;
   padding-left: 12px;
+  margin-top: 80px;
 }
 
 #main-buttons {
   color: rgb(82, 82, 82);
+  display: inline-block;
+  width: 100%;
 }
 
 .reviews-btn {
@@ -22,6 +26,7 @@
   color: rgb(82, 82, 82);
   padding: 16px 32px;
   margin-left: 12px;
+  float: right;
 }
 
 /* Reviews List & Ratings Breakdown */

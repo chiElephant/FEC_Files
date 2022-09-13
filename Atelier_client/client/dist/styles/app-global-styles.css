@@ -54,7 +54,6 @@
  main {
    max-width: 840px;
    padding: 20px;
-   /* margin: auto; */
 
  }
 
@@ -62,15 +61,6 @@
   float: right;
 }
 
- /* textarea {
-  resize: none;
-  width: 500px;
-  height: 100px
- } */
-
- /* input {
-  width: 300px;
- } */
 
 
 
