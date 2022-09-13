@@ -1,12 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { solid, regular } from '@fortawesome/fontawesome-svg-core/import.macro';
 
 function StarRating({ rating, handleUserInputs }) {
-  const [starDiv, setStarDiv] = useState([<div key="init" />]);
-
-  useEffect(() => {
-    createStarDiv();
+  const formStarRating = useMemo(() => {
+    return createFormStarRating();
   }, [rating]);
 
   const starKey = {
@@ -19,31 +16,31 @@ function StarRating({ rating, handleUserInputs }) {
 
   const keyText = starKey[rating];
 
-  function createStarDiv() {
-    let div = [];
+  function createFormStarRating() {
+    let formStarRatingDiv = [];
 
     const NUM_STARS = 5;
 
     for (let i = 1; i <= NUM_STARS; i++) {
-      div.push(
+      formStarRatingDiv.push(
         <FontAwesomeIcon
           key={`${i}`}
           id={`star-${i}`}
           className="review-modal-stars"
-          icon={rating >= i ? solid('star') : regular('star')}
+          icon={rating >= i ? 'fak fa-star-solid' : 'fak fa-star-thin'}
           onClick={() => {
             handleUserInputs('rating', i);
           }}
         />
       );
     }
-    setStarDiv((prevState) => div);
+    return formStarRatingDiv;
   }
 
   return (
     <fieldset id="rate-by-star">
       <legend>Overall Rating*</legend>
-      {starDiv}
+      {formStarRating}
       {keyText}
     </fieldset>
   );

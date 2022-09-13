@@ -1,6 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-import { initialState, helpers, reviewForm } from './helper_functions/submitReview';
+import {
+  initialState,
+  helpers,
+  reviewForm,
+} from './helper_functions/submitReview';
 import Characteristics from './Characteristics.jsx';
 import ErrorModal from './ErrorModal.jsx';
 import StarRating from './StarRating.jsx';
@@ -95,7 +99,7 @@ function SubmitReview({
           </label>
         </fieldset>
 
-        {/* This will allow the user to rate the product characteristics */ }
+        {/* This will allow the user to rate the product characteristics */}
         <Characteristics
           characteristics={characteristics}
           handleUserInputs={handleUserInputs}
@@ -183,8 +187,10 @@ function SubmitReview({
           className="reviews-btn"
           onClick={() =>
             helpers.validateUserData(
+              error,
               userInputs,
               setUserInputs,
+              setErrorModal,
               characteristics,
               setShowReviewModal
             )

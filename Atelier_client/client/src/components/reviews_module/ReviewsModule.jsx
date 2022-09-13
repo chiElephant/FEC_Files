@@ -1,25 +1,18 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
-import {
-  initialReviewState,
-  initialFilters,
-  filterReviews,
-  getReviews,
-  getReviewsCount,
-} from './helper_functions/reviews_module';
+import { initialState, helpers} from './helper_functions/reviews_module';
 import RatingsBreakdown from './RatingsBreakdown.jsx';
 import SubmitReview from './SubmitReview.jsx';
 import ReviewsList from './ReviewsList.jsx';
 
 function ReviewsModule({ product_id, product_name }) {
-
-  const [reviewsShown, setReviewsShown] = useState(initialReviewState);
-  const [currentFilters, setCurrentFilters] = useState(initialFilters);
+  const [reviewsShown, setReviewsShown] = useState(initialState.review);
+  const [currentFilters, setCurrentFilters] = useState(initialState.filters);
   const [showReviewModal, setShowReviewModal] = useState(false);
   const [characteristics, setCharacteristics] = useState({});
   const [countShown, setCountShown] = useState(2);
   const [sort, setSort] = useState('relevance');
 
-  const reviews = useRef(initialReviewState);
+  const reviews = useRef(initialState.review);
   const reviewCount = useRef(0);
 
   useEffect(() => {
@@ -29,25 +22,16 @@ function ReviewsModule({ product_id, product_name }) {
       sort,
       count,
     };
-    getReviews(params, currentFilters, (reviewData) => {
+    helpers.getReviews(params, currentFilters, (reviewData) => {
       reviews.current = reviewData;
       reviewCount.current = reviewData.length;
-      filterReviews(reviews, currentFilters, countShown, setReviewsShown);
+      helpers.filterReviews(reviews, currentFilters, countShown, setReviewsShown);
     });
   }, [product_id, sort]);
 
   const filteredReviews = useMemo(() => {
-    return filterReviews(reviews, currentFilters, countShown, setReviewsShown);
-  }, [countShown, currentFilters])
-
-  function handleCountShown() {
-    if (countShown >= reviewCount.current) {
-      const element = document.getElementById('more-reviews');
-      element.remove();
-    }
-
-    setCountShown((countShown) => countShown + 2);
-  }
+    return helpers.filterReviews(reviews, currentFilters, countShown, setReviewsShown);
+  }, [countShown, currentFilters]);
 
   return (
     <div id="reviews-module">
@@ -87,7 +71,7 @@ function ReviewsModule({ product_id, product_name }) {
         <button
           id="more-reviews"
           className="reviews-btn"
-          onClick={() => handleCountShown()}
+          onClick={() => helpers.handleCountShown(countShown, reviewCount, setCountShown)}
         >
           MORE REVIEWS
         </button>

@@ -3,7 +3,7 @@ import axios from 'axios';
 // ******************** Helper Functions ******************** //
 
 const helpers = {
-  handleFilters: function (target, setCurrentFilters) {
+  handleFilters: (target, setCurrentFilters) => {
     const className = target.className;
     const rating = target.dataset.id;
     const id = target.id;
@@ -22,7 +22,7 @@ const helpers = {
     }));
   },
 
-  handleRatings: function (ratings, cb) {
+  handleRatings: (ratings, cb) => {
     const currentRatings = ratings;
 
     let reviewsCount = 0;
@@ -42,7 +42,7 @@ const helpers = {
     cb(avg, reviewsCount);
   },
 
-  handleRatingsPercent: function (ratings) {
+  handleRatingsPercent: (ratings) => {
     const currentRatings = ratings.current.ratings;
 
     let sum = 0;
@@ -66,7 +66,7 @@ const helpers = {
     return percentKey;
   },
 
-  handleRecommended: function (recommended, setPercentRecommended) {
+  handleRecommended: (recommended, setPercentRecommended) => {
     const noCount = recommended.false;
     const yesCount = recommended.true;
     const totalCount = noCount + yesCount;
@@ -75,7 +75,7 @@ const helpers = {
     setPercentRecommended(avg);
   },
 
-  createStarsRating: function (avg) {
+  createStarsRating: (avg) => {
     const currentAverage = avg.current;
     let starRatingDiv = [<div key="star-rating" />];
 
@@ -128,7 +128,7 @@ const helpers = {
     }
   },
 
-  createRatingsBD: function (ratings, setCurrentFilters) {
+  createRatingsBD: (ratings, setCurrentFilters) => {
     const ratingsPercent = helpers.handleRatingsPercent(ratings);
     const currentRatings = ratings.current.ratings;
     let ratingsGraphDiv = [<div key="ratingsBD" />];
@@ -163,7 +163,7 @@ const helpers = {
     return ratingsGraphDiv;
   },
 
-  getMetadata: function (product_id, cb) {
+  getMetadata: (product_id, cb) => {
     const options = {
       params: { product_id },
     };

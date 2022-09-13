@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const initialReviewState = [
-  {
+const initialState = {
+  review: [{
     review_id: 12345,
     rating: '',
     summary: '',
@@ -12,41 +12,54 @@ const initialReviewState = [
     reviewer_name: '',
     helpfulness: '',
     photos: [],
-  },
-];
+  }],
 
-const initialFilters = { 5: false, 4: false, 3: false, 2: false, 1: false };
-
-function getReviews(params, currentFilters, handleReviewData) {
-  const options = { params };
-
-  axios
-    .get('/reviews', options)
-    .then((response) => {
-      handleReviewData(response.data);
-    })
-    .catch((error) => {
-      console.log('Error fetching reviews: ', error);
-    });
+  filters: { 5: false, 4: false, 3: false, 2: false, 1: false }
 }
 
-function filterReviews(reviews, currentFilters, countShown, setReviewsShown) {
-  let filteredReviews = [];
+const helpers = {
 
-  const filtersIndx = Object.values(currentFilters).indexOf(true);
-
-  if (filtersIndx > 0) {
-    for (let review of reviews.current) {
-      if (currentFilters[review.rating]) {
-        filteredReviews.push(review);
-      }
+  handleCountShown: (countShown, reviewCount, setCountShown) => {
+    if (countShown >= reviewCount.current) {
+      const element = document.getElementById('more-reviews');
+      element.remove();
     }
-    setReviewsShown(filteredReviews);
-    return;
-  }
+    setCountShown((countShown) => countShown + 2);
+  },
 
-  const reviewsToDisplay = reviews.current.slice(0, countShown);
-  setReviewsShown(reviewsToDisplay);
+  getReviews: (params, currentFilters, handleReviewData) => {
+    const options = { params };
+
+    axios
+      .get('/reviews', options)
+      .then((response) => {
+        handleReviewData(response.data);
+      })
+      .catch((error) => {
+        console.log('Error fetching reviews: ', error);
+      });
+  },
+
+  filterReviews: (reviews, currentFilters, countShown, setReviewsShown) => {
+    let filteredReviews = [];
+
+    const filtersIndx = Object.values(currentFilters).indexOf(true);
+
+    if (filtersIndx > 0) {
+      for (let review of reviews.current) {
+        if (currentFilters[review.rating]) {
+          filteredReviews.push(review);
+        }
+      }
+      setReviewsShown(filteredReviews);
+      return;
+    }
+
+    const reviewsToDisplay = reviews.current.slice(0, countShown);
+    setReviewsShown(reviewsToDisplay);
+  }
 }
 
-export { getReviews, initialReviewState, initialFilters, filterReviews };
+
+
+export { initialState, helpers };

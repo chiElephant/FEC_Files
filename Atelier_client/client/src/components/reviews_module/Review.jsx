@@ -45,7 +45,7 @@ function Review(props) {
   }, [helpfulCount]);
 
   const recommended = useMemo(() => {
-    return helpers.createRecommendDiv(recommend, recommended);
+    return helpers.createRecommendDiv(recommend);
   }, [recommend]);
 
   useEffect(() => {

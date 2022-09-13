@@ -40,14 +40,17 @@ const helpers = {
   },
 
   createRecommendDiv: (recommend, recommended) => {
-    let recDiv = [];
+    let recDiv = [''];
 
-    recDiv.push(
-      <div key={'recommend'} className="review-recommend">
-        <i className="fa-light fa-check"></i>
-        <span className="review-rec-text">{'I recommend this product'}</span>
-      </div>
-    );
+    if (recommend) {
+      recDiv = [];
+      recDiv.push(
+        <div key={'recommend'} className="review-recommend">
+          <i className="fa-light fa-check"></i>
+          <span className="review-rec-text">{'I recommend this product'}</span>
+        </div>
+      );
+    }
     return recDiv;
   },
 

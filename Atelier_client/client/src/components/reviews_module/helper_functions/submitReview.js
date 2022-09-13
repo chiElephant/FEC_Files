@@ -15,7 +15,7 @@ const initialState = {
 };
 
 const helpers = {
-  handleSubmit: function (userInputs, setUserInputs) {
+  handleSubmit: (userInputs, setUserInputs) => {
     axios
       .post('/reviews', userInputs)
       .then((response) => {
@@ -30,12 +30,14 @@ const helpers = {
       });
   },
 
-  validateUserData: function (
+  validateUserData: (
+    error,
     userInputs,
     setUserInputs,
+    setErrorModal,
     characteristics,
     setShowReviewModal
-  ) {
+  ) => {
     const { rating, recommend, summary, body, photos, name, email } =
       userInputs;
     const characteristicsLength = Object.keys(
