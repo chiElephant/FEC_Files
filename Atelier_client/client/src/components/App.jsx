@@ -40,8 +40,8 @@ function App() {
   const widgets =
     productId !== 0 ? (
       <>
-        <Overview product_id={productId} />
-        <ReviewsModule product_id={productId} product_name={productName} />
+        {/* <Overview product_id={productId} />
+        <ReviewsModule product_id={productId} product_name={productName} /> */}
         <QandAModule product_id={productId} product_name={productName} />
       </>
     ) : null;

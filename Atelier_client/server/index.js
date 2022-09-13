@@ -29,6 +29,10 @@ app.use('/', (req, res, next) => {
   console.log(`${req.method} REQUEST ON ${req.url}`);
   next();
 });
+
+// app.get('/:id', (req, res) => {
+//   res.sendFile(path.join(__dirname, '/../client/dist/index.html'));
+// });
 // *** Q & A *** //
 
 // Question List;
