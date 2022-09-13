@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 
 function ProductBreakdown({ characteristics }) {
-  const [charsDiv, setCharsDiv] = useState(<div />);
 
-  useEffect(() => {
-    createCharsDiv();
-  }, [characteristics]);
+  const characteristicsBreakDown = useMemo(() => {
+    return createCharsDiv(characteristics);
+  }, [characteristics])
 
   function createCharsDiv() {
     const newCharDiv = [];
@@ -57,14 +56,13 @@ function ProductBreakdown({ characteristics }) {
         );
       }
     }
-
-    setCharsDiv((charsDiv) => newCharDiv);
+    return newCharDiv;
   }
 
   return (
     <div>
       <h3 hidden>Product Breakdown</h3>
-      {charsDiv}
+      {characteristicsBreakDown}
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import ProductBreakdown from './ProductBreakdown.jsx';
 
 import helpers from './helper_functions/ratings_bd.js';
@@ -10,23 +10,35 @@ function RatingsBreakdown({
   setCurrentFilters,
   currentFilters,
 }) {
-  const [ratingsGraphDiv, setRatingsGraphDiv] = useState(<div />);
+  const [ratingsBreakdown, setRatingsBreakdown] = useState(<div />);
   const [starsDiv, setStarsDiv] = useState(<div />);
 
   const [totalReviews, setTotalReviews] = useState('');
   const [percentRec, setPercentRec] = useState('');
   const [avgRating, setAvgRating] = useState('');
 
+  const metadata = useRef({});
+
+  const ratingsBreakDown = useMemo(() => {
+    return helpers.createRatingsBD(metadata, setRatingsBreakdown, setCurrentFilters)
+  }, [metadata.current])
+
+  const characteristicsBD = useMemo(() => {
+    console.log('CharsUPDATED')
+  }, [characteristics])
+
   useEffect(() => {
-    helpers.getMetadata(product_id, handleMetadata, currentFilters);
+    helpers.getMetadata(product_id, (meta) => {
+      console.log('RENDER')
+      metadata.current = meta;
+      setCharacteristics(() => meta.characteristics);
+      // handleRatings(meta.ratings);
+      // handleRecommend(meta.recommend);
+      // helpers.createRatingsBD(meta.ratings, setRatingsBreakdown, setCurrentFilters)
+    });
   }, [product_id]);
 
-  function handleMetadata(metadata) {
-    setCharacteristics(() => metadata.characteristics);
-    handleRatings(metadata.ratings);
-    handleRecommend(metadata.recommended);
-    createRatingsGraphDiv(metadata.ratings);
-  }
+
 
   function handleFilters(target) {
     const className = target.className;
@@ -47,33 +59,6 @@ function RatingsBreakdown({
     }));
   }
 
-  async function createRatingsGraphDiv(ratings) {
-    const ratingsPercent = await helpers.handleRatingsPercent(ratings);
-    const ratingsGraphDiv = [];
-
-    const NUM_BARS = 5;
-
-    for (var i = NUM_BARS; i > 0; i--) {
-      ratingsGraphDiv.push(
-        <div id="filter-star" key={i}>
-          <div
-            id={`filter-star-${i}`}
-            className="graph-text"
-            data-id={`${i}`}
-            onClick={(e) => handleFilters(e.target, setCurrentFilters)}
-          >
-            {`${i} stars`}
-          </div>
-          <div className="graph-meter">
-            <span style={{ width: ratingsPercent[i] + '%' }}></span>
-          </div>
-          <div className="graph-rating">{ratings[i]}</div>
-        </div>
-      );
-    }
-    setRatingsGraphDiv(() => ratingsGraphDiv);
-  }
-
   function createStarsRatingDiv(avg) {
     let starRatingDiv = [];
 
@@ -85,19 +70,15 @@ function RatingsBreakdown({
 
     if (remainder < 0.25) {
       starFraction = 'none';
-      // console.log('none');
     }
     if (0.25 <= remainder && remainder < 0.5) {
       starFraction = 'quarter';
-      // console.log('quarter');
     }
     if (0.5 <= remainder && remainder < 0.75) {
       starFraction = 'half';
-      // console.log('half');
     }
     if (0.75 <= remainder) {
       starFraction = 'three-quarter';
-      // console.log('three-quarter');
     }
 
     if (avg !== 0) {
@@ -107,9 +88,11 @@ function RatingsBreakdown({
         );
       }
 
-      starRatingDiv.push(
-        <i className="fak fa-star-half-stroke-solid" key="star-fraction"></i>
-      );
+      if (starFraction !== 'none') {
+        starRatingDiv.push(
+          <i className="fak fa-star-half-stroke-solid" key="star-fraction"></i>
+        );
+      }
 
       const start = base + 1;
 
@@ -162,7 +145,7 @@ function RatingsBreakdown({
       <div id="recommend-percent">
         {`${percentRec}% of reviewers recommend this product`}
       </div>
-      <div id="ratings-graph">{ratingsGraphDiv}</div>
+      <div id="ratings-graph">{ratingsBreakDown}</div>
       <ProductBreakdown characteristics={characteristics} />
     </div>
   );

@@ -1,6 +1,7 @@
 import React from 'react';
 
 function ErrorModal({ error, errorModal, setErrorModal }) {
+
   return errorModal ? (
     <div id="error-window">
       <div id="error-modal">
@@ -10,7 +11,7 @@ function ErrorModal({ error, errorModal, setErrorModal }) {
             id="error-modal-icon"
           ></i>
         </div>
-        <div id="error">{`You must enter the following: ${error.toUpperCase()}`}</div>
+        <div id="error">{`You must enter the following: ${error.current.toUpperCase()}`}</div>
         <div id="error-msg">{'missing field or incorrect format'}</div>
       </div>
     </div>

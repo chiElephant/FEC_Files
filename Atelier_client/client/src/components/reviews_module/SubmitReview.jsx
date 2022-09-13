@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect, useRef } from 'react';
 
+import { initialState, helpers, reviewForm } from './helper_functions/submitReview';
 import Characteristics from './Characteristics.jsx';
 import ErrorModal from './ErrorModal.jsx';
 import StarRating from './StarRating.jsx';
@@ -13,21 +13,10 @@ function SubmitReview({
   product_id,
   characteristics,
 }) {
-  const inputInitState = {
-    product_id: 0,
-    recommend: null,
-    characteristics: {},
-    summary: '',
-    photos: [],
-    rating: 0,
-    email: '',
-    body: '',
-    name: '',
-  };
-
+  const [userInputs, setUserInputs] = useState(initialState.reviewForm);
   const [errorModal, setErrorModal] = useState('');
-  const [error, setError] = useState('');
-  const [userInputs, setUserInputs] = useState(inputInitState);
+
+  const error = useRef('');
 
   useEffect(() => {
     const newValue = { product_id: product_id };
@@ -60,58 +49,6 @@ function SubmitReview({
     }
   }
 
-  function validateUserData() {
-    const { rating, recommend, summary, body, photos, name, email } =
-      userInputs;
-    const characteristicsLength = Object.keys(
-      userInputs.characteristics
-    ).length;
-    const charsLength = Object.keys(characteristics).length;
-
-    const validationKey = {
-      rating: rating !== 0,
-      recommend: typeof recommend === 'boolean',
-      characteristics: charsLength === characteristicsLength,
-      summary: summary.length <= 60,
-      body: body.length >= 50 && body.length <= 1000,
-      photos: photos.length <= 5,
-      name: 0 < name.length && name.length <= 60,
-      email: 0 < email.length && email.length <= 60,
-    };
-
-    function validateEmail() {
-      var validationExp = /\S+@\S+\.\S+/;
-      const valid = validationExp.test(userInputs.email);
-      validationKey.email = valid;
-    }
-    validateEmail();
-
-    for (let input in validationKey) {
-      if (!validationKey[input]) {
-        setError((error) => input);
-        setErrorModal((errorModal) => true);
-        return;
-      }
-    }
-    setShowReviewModal((prevState) => false);
-    handleSubmit();
-  }
-
-  const handleSubmit = () => {
-    axios
-      .post('/reviews', userInputs)
-      .then((response) => {
-        setUserInputs((prevState) => ({
-          ...prevState,
-          ...inputInitState,
-        }));
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log('post error: ', error);
-      });
-  };
-
   return !showReviewModal ? (
     ''
   ) : (
@@ -127,12 +64,13 @@ function SubmitReview({
         <h1>Write Your Review</h1>
         <h3>About the {product_name}</h3>
 
+        {/* This will allow the user to rate the product */}
         <StarRating
           rating={userInputs.rating}
           handleUserInputs={handleUserInputs}
         />
 
-        {/* This div will ask the customer if they recommend the product*/}
+        {/* This will allow the user if they recommend the product*/}
         <fieldset id="recommend" required="required">
           <legend>Do you recommend this product?*</legend>
           <label className="rec-radio-text">
@@ -157,12 +95,13 @@ function SubmitReview({
           </label>
         </fieldset>
 
+        {/* This will allow the user to rate the product characteristics */ }
         <Characteristics
           characteristics={characteristics}
           handleUserInputs={handleUserInputs}
         />
 
-        {/* This div will alllow the user to enter a summary */}
+        {/* This will alllow the user to enter a summary */}
         <fieldset id="review-summary-input">
           <legend>Summary</legend>
           <textarea
@@ -175,7 +114,7 @@ function SubmitReview({
           ></textarea>
         </fieldset>
 
-        {/* This div will allow a user to enter a review body */}
+        {/* This will allow a user to enter a review body */}
         <fieldset id="review-body-input">
           <legend>Review*</legend>
           <textarea
@@ -198,12 +137,13 @@ function SubmitReview({
           </span>
         </fieldset>
 
+        {/* This will allow the user to upload photos */}
         <Photos
           photos={userInputs.photos}
           handleUserInputs={handleUserInputs}
         />
 
-        {/* This div will ask the user to enter their enter their name */}
+        {/* This will allow the user to enter their enter their name */}
         <fieldset id="name-input">
           <legend>What is your Name?*</legend>
           <input
@@ -221,7 +161,7 @@ function SubmitReview({
           </span>
         </fieldset>
 
-        {/* This div will ask the user to enter their email */}
+        {/* This will allow the user to enter their email */}
         <fieldset id="email-input">
           <legend>Your email*</legend>
           <input
@@ -241,7 +181,14 @@ function SubmitReview({
           id="submit-review"
           type="submit"
           className="reviews-btn"
-          onClick={() => validateUserData(userInputs, handleSubmit)}
+          onClick={() =>
+            helpers.validateUserData(
+              userInputs,
+              setUserInputs,
+              characteristics,
+              setShowReviewModal
+            )
+          }
         >
           Submit Review
         </button>

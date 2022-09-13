@@ -15,13 +15,9 @@ function ReviewsModule({ product_id, product_name }) {
   const [reviewsShown, setReviewsShown] = useState(initialReviewState);
   const [currentFilters, setCurrentFilters] = useState(initialFilters);
   const [showReviewModal, setShowReviewModal] = useState(false);
-  // const [reviews, setReviews] = useState(initialReviewState);
-  const [sort, setSort] = useState('relevance');
-
-
   const [characteristics, setCharacteristics] = useState({});
-  // const [reviewCount, setReviewCount] = useState(0);
   const [countShown, setCountShown] = useState(2);
+  const [sort, setSort] = useState('relevance');
 
   const reviews = useRef(initialReviewState);
   const reviewCount = useRef(0);
@@ -45,7 +41,7 @@ function ReviewsModule({ product_id, product_name }) {
   }, [countShown, currentFilters])
 
   function handleCountShown() {
-    if (countShown >= reviewCount) {
+    if (countShown >= reviewCount.current) {
       const element = document.getElementById('more-reviews');
       element.remove();
     }

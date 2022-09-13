@@ -4,6 +4,9 @@ import axios from 'axios';
 
 const helpers = {
   handleRatingsPercent: function (ratings) {
+
+    const currentRatings = ratings.current.ratings
+
     let sum = 0;
 
     let percentKey = {
@@ -14,18 +17,53 @@ const helpers = {
       5: 0,
     };
 
-    for (let rating in ratings) {
-      sum += parseInt(ratings[rating]);
+    for (let rating in currentRatings) {
+      sum += parseInt(currentRatings[rating]);
     }
 
-    for (let rating in ratings) {
-      const value = ratings[rating];
+    for (let rating in currentRatings) {
+      const value = currentRatings[rating];
       percentKey[rating] = Math.floor((value / sum) * 100);
     }
     return percentKey;
   },
 
-  getMetadata: function (product_id, handleMetadata) {
+  createRatingsBD: function(ratings, setRatingsBreakdown, setCurrentFilters) {
+
+    const ratingsPercent = helpers.handleRatingsPercent(ratings);
+    const currentRatings = ratings.current.ratings;
+    let ratingsGraphDiv = [<div key="ratingsBD"/>];
+
+    if (currentRatings) {
+      const NUM_BARS = 5;
+      ratingsGraphDiv = [];
+
+      for (var i = NUM_BARS; i > 0; i--) {
+        ratingsGraphDiv.push(
+          <div id="filter-star" key={i}>
+            <div
+              id={`filter-star-${i}`}
+              className="graph-text"
+              data-id={`${i}`}
+              onClick={(e) => handleFilters(e.target, setCurrentFilters)}
+            >
+              {`${i} stars`}
+            </div>
+            <div className="graph-meter">
+              <span style={{ width: ratingsPercent[i] + '%' }}></span>
+            </div>
+            <div className="graph-rating">{currentRatings[i]}</div>
+          </div>
+        );
+      }
+      setRatingsBreakdown(() => ratingsGraphDiv);
+      console.log(ratingsGraphDiv)
+    }
+    return ratingsGraphDiv;
+
+  },
+
+  getMetadata: function (product_id, cb) {
     const options = {
       params: { product_id },
     };
@@ -33,7 +71,7 @@ const helpers = {
     axios
       .get('/reviews/meta', options)
       .then((meta) => {
-        handleMetadata(meta.data);
+        cb(meta.data);
       })
       .catch((err) => console.log('Error fetching metadata: ', err));
   },
