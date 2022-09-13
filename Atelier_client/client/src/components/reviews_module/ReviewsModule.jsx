@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
-import { initialState, helpers} from './helper_functions/reviews_module';
+import { initialState, helpers } from './helper_functions/reviews_module';
 import RatingsBreakdown from './RatingsBreakdown.jsx';
 import SubmitReview from './SubmitReview.jsx';
 import ReviewsList from './ReviewsList.jsx';
@@ -25,12 +25,22 @@ function ReviewsModule({ product_id, product_name }) {
     helpers.getReviews(params, currentFilters, (reviewData) => {
       reviews.current = reviewData;
       reviewCount.current = reviewData.length;
-      helpers.filterReviews(reviews, currentFilters, countShown, setReviewsShown);
+      helpers.filterReviews(
+        reviews,
+        currentFilters,
+        countShown,
+        setReviewsShown
+      );
     });
   }, [product_id, sort]);
 
   const filteredReviews = useMemo(() => {
-    return helpers.filterReviews(reviews, currentFilters, countShown, setReviewsShown);
+    return helpers.filterReviews(
+      reviews,
+      currentFilters,
+      countShown,
+      setReviewsShown
+    );
   }, [countShown, currentFilters]);
 
   return (
@@ -71,7 +81,9 @@ function ReviewsModule({ product_id, product_name }) {
         <button
           id="more-reviews"
           className="reviews-btn"
-          onClick={() => helpers.handleCountShown(countShown, reviewCount, setCountShown)}
+          onClick={() =>
+            helpers.handleCountShown(countShown, reviewCount, setCountShown)
+          }
         >
           MORE REVIEWS
         </button>

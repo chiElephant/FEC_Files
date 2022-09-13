@@ -1,10 +1,9 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
 
 function ProductBreakdown({ characteristics }) {
-
   const characteristicsBreakDown = useMemo(() => {
     return createCharsDiv(characteristics);
-  }, [characteristics])
+  }, [characteristics]);
 
   function createCharsDiv() {
     const newCharDiv = [];

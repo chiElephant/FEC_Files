@@ -1,24 +1,25 @@
 import axios from 'axios';
 
 const initialState = {
-  review: [{
-    review_id: 12345,
-    rating: '',
-    summary: '',
-    recommend: '',
-    response: null,
-    body: '',
-    date: '',
-    reviewer_name: '',
-    helpfulness: '',
-    photos: [],
-  }],
+  review: [
+    {
+      review_id: 12345,
+      rating: '',
+      summary: '',
+      recommend: '',
+      response: null,
+      body: '',
+      date: '',
+      reviewer_name: '',
+      helpfulness: '',
+      photos: [],
+    },
+  ],
 
-  filters: { 5: false, 4: false, 3: false, 2: false, 1: false }
-}
+  filters: { 5: false, 4: false, 3: false, 2: false, 1: false },
+};
 
 const helpers = {
-
   handleCountShown: (countShown, reviewCount, setCountShown) => {
     if (countShown >= reviewCount.current) {
       const element = document.getElementById('more-reviews');
@@ -57,9 +58,7 @@ const helpers = {
 
     const reviewsToDisplay = reviews.current.slice(0, countShown);
     setReviewsShown(reviewsToDisplay);
-  }
-}
-
-
+  },
+};
 
 export { initialState, helpers };

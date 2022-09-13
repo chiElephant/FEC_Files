@@ -4,7 +4,7 @@ import Review from './Review.jsx';
 function ReviewsList({ reviews, setSortType, reviewCount }) {
   const [currentSort, setCurrentSort] = useState('relevance');
 
-  const currentSortType = useRef('relevance')
+  const currentSortType = useRef('relevance');
 
   function handleSort(sort) {
     const sortType = sort === 'relevant' ? 'relevance' : sort;

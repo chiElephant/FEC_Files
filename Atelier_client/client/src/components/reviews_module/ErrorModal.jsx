@@ -1,7 +1,6 @@
 import React from 'react';
 
 function ErrorModal({ error, errorModal, setErrorModal }) {
-
   return errorModal ? (
     <div id="error-window">
       <div id="error-modal">
