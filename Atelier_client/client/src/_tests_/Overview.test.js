@@ -1,5 +1,5 @@
 import renderer from 'react-test-renderer';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, act } from '@testing-library/react';
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 import Overview from '../components/overview_module/Overview.jsx';
@@ -8,71 +8,123 @@ import App from '../components/App.jsx';
 import Styles from '../components/overview_module/Styles.jsx';
 import '@testing-library/jest-dom';
 
-const product = {
-  id: 71697,
-  campus: 'hr-rpp',
-  name: 'Camo Onesie',
-  slogan: 'Blend in to your crowd',
-  description:
-    'The So Fatigues will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.',
-  category: 'Jackets',
-  default_price: '140.00',
-  created_at: '2022-05-11T19:38:15.373Z',
-  updated_at: '2022-05-11T19:38:15.373Z',
-  features: [
-    { feature: 'Fabric', value: 'Canvas' },
-    { feature: 'Buttons', value: 'Brass' },
-  ],
-};
-
-const styles = {
-  product_id: '71697',
-  results: [
-    {
-      default: true,
-      name: 'Forest Green & Black',
-      original_price: '140.00',
-      photos: [
-        {
-          thumbnail_url:
-            'https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80',
-          url: 'https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80',
-        },
-      ],
-      sale_price: null,
-      skus: {
-        2580526: {
-          quantity: 8,
-          size: 'XS',
-        },
-      },
-      style_id: 444218,
-    },
-  ],
-};
-
-const features = [
-  { feature: 'Fabric', value: 'Canvas' },
-  { feature: 'Buttons', value: 'Brass' },
-];
-
 describe('Atelier topbar', () => {
   test('The Atelier Topbar renders correctly', () => {
     // eslint-disable-next-line react/jsx-filename-extension
     render(<App />);
-    const element = screen.getByRole('heading', {
-      name: /The RedBean Atelier App/i,
-    });
+    const element = screen.getByText(/atelier/i);
     expect(element).toBeInTheDocument();
   });
 });
 
+// describe('Overview Component', () => {
+//   test('Renders the overview component', async () => {
+//     // eslint-disable-next-line react/jsx-filename-extension
+//     render(<Overview product_id={71701} />);
+//     waitFor(() => {
+//       const outfit = screen.getByRole('button', {
+//         name: /add to my outfit/i,
+//       });
+//       expect(outfit).toBeInTheDocument();
+//     });
+//   });
+// });
+
 describe('Overview Component', () => {
-  it('Renders the overview component', async () => {
-    render(<ProductInfo />);
-    const outfit = await waitFor(() =>
-      screen.getByRole('button', { name: /Add to My Outfit/i })
-    );
-    expect(outfit).toBeInTheDocument();
+  render(<Overview product_id={71701} />);
+  describe('Renders the Product Info component', () => {
+    test('Renders the add to outfit button', async () => {
+      // eslint-disable-next-line react/jsx-filename-extension
+      waitFor(() => {
+        const outfit = screen.getByRole('button', {
+          name: /add to my outfit/i,
+        });
+        expect(outfit).toBeInTheDocument();
+      });
+    });
+
+    test('Renders the ratings', async () => {
+      // eslint-disable-next-line react/jsx-filename-extension
+      waitFor(() => {
+        const starRatings = screen.getByRole('group');
+        expect(starRatings).toBeInTheDocument();
+      });
+    });
+
+    test('Renders the read all button', async () => {
+      // eslint-disable-next-line react/jsx-filename-extension
+      waitFor(() => {
+        const readAll = screen.getByText(/read all \(87\) reviews/i);
+        expect(readAll).toBeInTheDocument();
+      });
+    });
+
+    test('Renders the category', async () => {
+      // eslint-disable-next-line react/jsx-filename-extension
+      waitFor(() => {
+        const category = screen.getByText(/kicks/i);
+        expect(category).toBeInTheDocument();
+      });
+    });
+
+    test('Renders the product slogan', async () => {
+      // eslint-disable-next-line react/jsx-filename-extension
+      waitFor(() => {
+        const slogan = screen.getByRole('heading', {
+          name: /a sneaker dynasty/i,
+        });
+        expect(slogan).toBeInTheDocument();
+      });
+    });
+
+    test('Renders the style name', async () => {
+      // eslint-disable-next-line react/jsx-filename-extension
+      waitFor(() => {
+        const styleName = screen.getByRole('heading', {
+          name: /a sneaker dynasty/i,
+        });
+        expect(styleName).toBeInTheDocument();
+      });
+    });
+
+    test('Renders the price', async () => {
+      // eslint-disable-next-line react/jsx-filename-extension
+      waitFor(() => {
+        const price = screen.getByText(/\$99\.00/i);
+        expect(price).toBeInTheDocument();
+      });
+    });
+
+    test('Renders the feature list', async () => {
+      // eslint-disable-next-line react/jsx-filename-extension
+      waitFor(() => {
+        const features = screen.getByRole('list');
+        expect(features).toBeInTheDocument();
+      });
+    });
+
+    test('Renders the style selector', async () => {
+      // eslint-disable-next-line react/jsx-filename-extension
+      waitFor(() => {
+        const styleSelector = screen.getByTestId('style-selector')
+        expect(styleSelector).toBeInTheDocument();
+      });
+    });
+
+    test('Renders the price', async () => {
+      // eslint-disable-next-line react/jsx-filename-extension
+      waitFor(() => {
+        const price = screen.getByText(/\$99\.00/i);
+        expect(price).toBeInTheDocument();
+      });
+    });
+
+    test('Renders the price', async () => {
+      // eslint-disable-next-line react/jsx-filename-extension
+      waitFor(() => {
+        const price = screen.getByText(/\$99\.00/i);
+        expect(price).toBeInTheDocument();
+      });
+    });
   });
 });
