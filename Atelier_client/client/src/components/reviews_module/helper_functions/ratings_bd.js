@@ -3,7 +3,6 @@ import axios from 'axios';
 // ******************** Helper Functions ******************** //
 
 const helpers = {
-
   handleFilters: function (target, setCurrentFilters) {
     const className = target.className;
     const rating = target.dataset.id;
@@ -23,7 +22,7 @@ const helpers = {
     }));
   },
 
-  handleRatings: function (ratings , cb) {
+  handleRatings: function (ratings, cb) {
     const currentRatings = ratings;
 
     let reviewsCount = 0;
@@ -41,12 +40,10 @@ const helpers = {
     avg = (sum / reviewsCount).toFixed(1);
 
     cb(avg, reviewsCount);
-
   },
 
   handleRatingsPercent: function (ratings) {
-
-    const currentRatings = ratings.current.ratings
+    const currentRatings = ratings.current.ratings;
 
     let sum = 0;
 
@@ -69,7 +66,7 @@ const helpers = {
     return percentKey;
   },
 
-  handleRecommended: function(recommended, setPercentRecommended) {
+  handleRecommended: function (recommended, setPercentRecommended) {
     const noCount = recommended.false;
     const yesCount = recommended.true;
     const totalCount = noCount + yesCount;
@@ -78,7 +75,7 @@ const helpers = {
     setPercentRecommended(avg);
   },
 
-  createStarsRating: function(avg) {
+  createStarsRating: function (avg) {
     const currentAverage = avg.current;
     let starRatingDiv = [<div key="star-rating" />];
 
@@ -112,7 +109,10 @@ const helpers = {
 
         if (starFraction !== 'none') {
           starRatingDiv.push(
-            <i className="fak fa-star-half-stroke-solid" key="star-fraction"></i>
+            <i
+              className="fak fa-star-half-stroke-solid"
+              key="star-fraction"
+            ></i>
           );
         }
 
@@ -128,11 +128,10 @@ const helpers = {
     }
   },
 
-  createRatingsBD: function(ratings, setCurrentFilters) {
-
+  createRatingsBD: function (ratings, setCurrentFilters) {
     const ratingsPercent = helpers.handleRatingsPercent(ratings);
     const currentRatings = ratings.current.ratings;
-    let ratingsGraphDiv = [<div key="ratingsBD"/>];
+    let ratingsGraphDiv = [<div key="ratingsBD" />];
 
     if (currentRatings) {
       const NUM_BARS = 5;
@@ -145,7 +144,9 @@ const helpers = {
               id={`filter-star-${i}`}
               className="graph-text"
               data-id={`${i}`}
-              onClick={(e) => helpers.handleFilters(e.target, setCurrentFilters)}
+              onClick={(e) =>
+                helpers.handleFilters(e.target, setCurrentFilters)
+              }
             >
               {`${i} stars`}
             </div>

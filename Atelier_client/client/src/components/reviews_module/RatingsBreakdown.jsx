@@ -10,19 +10,18 @@ function RatingsBreakdown({
   setCurrentFilters,
   currentFilters,
 }) {
-
   const percentRecommended = useRef(0);
   const totalReviews = useRef(0);
   const avgRating = useRef(0);
   const metadata = useRef({});
 
-  const starsRatings = useMemo( () => {
-    return helpers.createStarsRating(avgRating)
-  }, [avgRating.current])
+  const starsRatings = useMemo(() => {
+    return helpers.createStarsRating(avgRating);
+  }, [avgRating.current]);
 
   const ratingsBreakDown = useMemo(() => {
     return helpers.createRatingsBD(metadata, setCurrentFilters);
-  }, [metadata.current])
+  }, [metadata.current]);
 
   useEffect(() => {
     helpers.getMetadata(product_id, (meta) => {
@@ -30,8 +29,7 @@ function RatingsBreakdown({
 
       helpers.handleRatings(meta.ratings, (avg, reviewsCount) => {
         totalReviews.current = reviewsCount;
-        avgRating.current = avg
-
+        avgRating.current = avg;
       });
 
       helpers.handleRecommended(meta.recommended, (avg) => {
@@ -39,30 +37,8 @@ function RatingsBreakdown({
       });
 
       setCharacteristics(() => meta.characteristics);
-
     });
-
   }, [product_id]);
-
-
-  function handleFilters(target) {
-    const className = target.className;
-    const rating = target.dataset.id;
-    const id = target.id;
-
-    if (className === 'graph-text') {
-      const element = document.getElementById(id);
-      element.classList.add('graph-text-filter');
-    } else {
-      const element = document.getElementById(id);
-      element.classList.remove('graph-text-filter');
-    }
-
-    setCurrentFilters((currentFilters) => ({
-      ...currentFilters,
-      [rating]: !currentFilters[rating],
-    }));
-  }
 
   return (
     <div id="ratings-breakdown">
