@@ -87,19 +87,22 @@ const helpers = {
   },
 
   createPhotosDiv: (photos, photoURL, setViewPhoto) => {
-    const photoDiv = [];
+    let photoDiv = [<div key="photos" />];
 
-    photos.forEach((photo) => {
-      photoDiv.push(
-        <img
-          key={photo.id}
-          className="review-image"
-          src={photo.url}
-          alt="image not available"
-          onClick={() => helpers.enlargePhotos(photo, photoURL, setViewPhoto)}
-        />
-      );
-    });
+    if (photos) {
+      photoDiv = [];
+      photos.forEach((photo) => {
+        photoDiv.push(
+          <img
+            key={photo.id}
+            className="review-image"
+            src={photo.url}
+            alt="image not available"
+            onClick={() => helpers.enlargePhotos(photo, photoURL, setViewPhoto)}
+          />
+        );
+      });
+    }
     return photoDiv;
   },
 
