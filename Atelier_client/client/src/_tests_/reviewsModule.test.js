@@ -1,72 +1,134 @@
-// import renderer from 'react-test-renderer';
-import { render, screen } from '@testing-library/react';
-import ReviewsModule from '../components/reviews_module/ReviewsModule.jsx';
-import ReviewsList from '../components/reviews_module/ReviewsList.jsx';
-import Review from '../components/reviews_module/Review.jsx';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+
+import {
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+  act,
+} from '@testing-library/react';
+
 import ProductBreakdown from '../components/reviews_module/ProductBreakdown.jsx';
 import RatingsBreakdown from '../components/reviews_module/RatingsBreakdown.jsx';
+import Characteristics from '../components/reviews_module/Characteristics.jsx';
+import ReviewsModule from '../components/reviews_module/ReviewsModule.jsx';
 import SubmitReview from '../components/reviews_module/SubmitReview.jsx';
+import ReviewsList from '../components/reviews_module/ReviewsList.jsx';
+import ErrorModal from '../components/reviews_module/ErrorModal.jsx';
+import PhotoModal from '../components/reviews_module/PhotoModal.jsx';
+import StarRating from '../components/reviews_module/StarRating.jsx';
+import Photos from '../components/reviews_module/Photos.jsx';
+import Review from '../components/reviews_module/Review.jsx';
 
-describe('Ratings and Reviews renders correctly', () => {
-  describe('RatingsModule', () => {
-    test('Reviews Module heading is displayed', () => {
-      render(<ReviewsModule />);
-      const element = screen.getByRole('button', {
-        name: /add review/i,
-      });
-      expect(element).toBeInTheDocument();
-    });
-  });
+let container;
 
-  describe('ReviewsList', () => {
-    test('Reviews List heading is displayed', () => {
-      render(<ReviewsList />);
-      const element = screen.getByRole('heading', {
-        hidden: true,
-        name: /reviews list/i,
-      });
-      expect(element).toBeInTheDocument();
-    });
-  });
+beforeEach(() => {
+  container = document.createElement('div');
+  document.body.appendChild(container);
+});
 
-  describe('SubmitReview', () => {
-    test(`Should display a 'Write Your Review' heading`, () => {
-      render(<SubmitReview showReviewModal={true} />);
-      const element = screen.getByRole('heading', {
-        hidden: true,
-        name: /write your review/i,
-      });
-      expect(element).toBeInTheDocument();
-    });
-  });
+afterEach(() => {
+  document.body.removeChild(container);
+  container = null;
+});
 
-  describe('Review', () => {
-    test(`Should display date reveiewed`, () => {
-      render(<Review />);
-      const element = screen.getByText(/date reviewed/i);
-      expect(element).toBeInTheDocument();
-    });
-  });
-
-  describe('RatingsBreakdown', () => {
-    test('Ratings Breakdonw heading is displayed', () => {
-      render(<RatingsBreakdown />);
-      const element = screen.getByRole('heading', {
-        hidden: true,
-        name: /ratings breakdown/i,
-      });
-      expect(element).toBeInTheDocument();
-    });
-  });
-
-  describe('ProductBreakdown', () => {
-    test('Product Breakdown heading is displayed', () => {
-      render(<ProductBreakdown />);
-      const element = screen.getByRole('heading', {
-        hidden: true,
-        name: /product breakdown/i,
-      });
-      expect(element).toBeInTheDocument();
-    });
+describe('Reviews Module', () => {
+  it('renders Reviews Module', () => {
+    act(() => {
+      ReactDOM.createRoot(container).render(
+      <ReviewsModule />
+    )});
   });
 });
+
+describe('Reviews List', () => {
+  it('renders Reviews List', () => {
+    act(() => {
+      ReactDOM.createRoot(container).render(
+      <ReviewsList />
+    )});
+  });
+});
+
+describe('Ratings Breakdown', () => {
+  it('renders Ratings Breakdown', () => {
+    act(() => {
+      ReactDOM.createRoot(container).render(
+      <RatingsBreakdown />
+    )});
+  });
+});
+
+describe('Product Breakdown', () => {
+  it('renders Product Breakdown', () => {
+    act(() => {
+      ReactDOM.createRoot(container).render(
+      <ProductBreakdown />
+    )});
+  });
+});
+
+describe('Review', () => {
+  it('renders Reviews', () => {
+    act(() => {
+      ReactDOM.createRoot(container).render(
+      <Review />
+    )});
+  });
+});
+
+describe('Submit Review Modal', () => {
+  it('renders submit Review Modal', () => {
+    act(() => {
+      ReactDOM.createRoot(container).render(
+      <SubmitReview />
+    )});
+  });
+});
+
+describe('Photo Modal ', () => {
+  it('renders Photo Modal', () => {
+    act(() => {
+      ReactDOM.createRoot(container).render(
+      <PhotoModal />
+    )});
+  });
+});
+
+describe('Error Modal', () => {
+  it('renders Error Modal', () => {
+    act(() => {
+      ReactDOM.createRoot(container).render(
+      <ErrorModal />
+    )});
+  });
+});
+
+describe('Characteristics', () => {
+  it('renders Characteristics', () => {
+    act(() => {
+      ReactDOM.createRoot(container).render(
+      <Characteristics />
+    )});
+  });
+});
+
+describe('Photos', () => {
+  it('renders Photos', () => {
+    act(() => {
+      ReactDOM.createRoot(container).render(
+      <Photos />
+    )});
+  });
+});
+
+describe('Star Rating', () => {
+  it('renders Reviews Module', () => {
+    act(() => {
+      ReactDOM.createRoot(container).render(
+      <StarRating />
+    )});
+  });
+});
+

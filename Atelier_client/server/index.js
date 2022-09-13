@@ -131,6 +131,8 @@ app.post('/cart/:sku/:qty', (req, res) => {
 });
 
 //*** RATINGS and REVIEWS ***//
+
+// GET reviews
 app.get('/reviews', (req, res) => {
   reviewsHelpers.getReviews(req.query, (error, reviews) => {
     if(error) {

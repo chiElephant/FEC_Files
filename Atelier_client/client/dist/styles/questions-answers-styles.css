@@ -83,7 +83,6 @@ textarea:invalid#formInput ~ span {
 /****************/
 
 #QandA-main {
-  height: 100%;
   width: 840px;
   margin: 0 auto;
 }

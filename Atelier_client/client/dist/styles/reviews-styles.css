@@ -43,7 +43,6 @@
 #reviews-list {
   float: left;
   height: 85vh;
-  /* padding: 12px; */
 }
 
 /****** Reviews List *****/
@@ -114,6 +113,7 @@
   height: 72vh;
   overflow-y: scroll;
   width: 550px;
+
 }
 
 /* Review Tile */
