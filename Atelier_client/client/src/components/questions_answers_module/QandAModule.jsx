@@ -140,13 +140,15 @@ function QandAModule({ product_id, product_name }) {
   );
 
   return (
-    <div id="QandAtop">
-      <h1>Questions & Answers</h1>
-      <SearchQ
-        handleUpdateSearchText={handleUpdateSearchText}
-        searchText={searchText}
-      />
-      {list}
+    <div id="QandA-main">
+      <div id="QandAtop">
+        <h1>Questions & Answers</h1>
+        <SearchQ
+          handleUpdateSearchText={handleUpdateSearchText}
+          searchText={searchText}
+        />
+        {list}
+      </div>
     </div>
   );
 }

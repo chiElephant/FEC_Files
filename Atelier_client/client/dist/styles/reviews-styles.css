@@ -1,16 +1,20 @@
 /* Reviews Module */
+#reviews-body {
+  height: 100%;
+  width: 1000px;
+  margin: 0 auto 80px auto;
+}
 #reviews-module {
   max-height: 100vh;
   width: 100%;
-  justify-items: center;
-  padding-left: 25%;
+  margin: 0 auto;
 }
 
 #ratings-reviews {
   font-size: large;
   color: rgb(82, 82, 82);
   font-weight: 300;
-  padding-left: 12px;
+  /* padding-left: 12px; */
   margin-top: 80px;
 
 }
@@ -30,17 +34,22 @@
   float: right;
 }
 
+.reviews-btn:hover {
+  background-color: rgb(235, 235, 235);
+}
+
 /* Reviews List & Ratings Breakdown */
 #ratings-breakdown,
 #reviews-list {
   float: left;
   height: 85vh;
-  padding: 12px;
+  /* padding: 12px; */
 }
 
 /****** Reviews List *****/
 #reviews-list {
   width: 55%;
+  padding-left: 70px;
 }
 
 /* Review Sort Dropdown */
@@ -102,9 +111,9 @@
 
 /* Reviews Holder */
 #reviews {
-  height: 75vh;
+  height: 80vh;
   overflow-y: scroll;
-  width: 525px;
+  width: 550px;
 }
 
 /* Review Tile */

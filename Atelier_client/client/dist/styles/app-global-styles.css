@@ -51,11 +51,11 @@
    overflow-wrap: break-word;
  }
 
- main {
+ /* main {
    max-width: 840px;
    padding: 20px;
 
- }
+ } */
 
  button {
   float: right;

@@ -45,7 +45,6 @@ const helpers = {
     let filteredReviews = [];
 
     const filtersIndx = Object.values(currentFilters).indexOf(true);
-    console.log(filtersIndx)
     if (filtersIndx >= 0) {
       for (let review of reviews.current) {
         if (currentFilters[review.rating]) {
