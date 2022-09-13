@@ -71,35 +71,6 @@ app.put('/answer/:answer_id/report', reportAnswer, (req, res) => {
 /////////////// OVERVIEW COMPONENT //////////////////////
 
 app.get('/products/:id', (req, res) => {
-  // console.log(`Received a get request to get the prodcut information for product: ${req.params.id} and  url: ${req.url}`);
-  axios
-    .get(url + req.url, {
-      headers: {
-        Authorization: process.env.GIT,
-      },
-    })
-    .then((product_info) => {
-      // console.log('This is the product info: ', product_info.data);
-      res.send(product_info.data);
-    });
-});
-
-app.get('/products/:id/styles', (req, res) => {
-  axios
-    .get(url + req.url, {
-      headers: {
-        Authorization: process.env.GIT,
-      },
-    })
-    .then((product_styles) => {
-      // console.log('These are the product styles: ', product_styles.data);
-      res.send(product_styles.data);
-    });
-});
-
-/////////////// OVERVIEW COMPONENT //////////////////////
-
-app.get('/products/:id', (req, res) => {
   console.log(
     `Received a get request to get the prodcut information for product: ${req.params.id} and  url: ${req.url}`
   );
@@ -126,6 +97,33 @@ app.get('/products/:id/styles', (req, res) => {
       console.log('These are the product styles: ', product_styles.data);
       res.send(product_styles.data);
     });
+});
+
+app.post('/cart/:sku/:qty', (req, res) => {
+  // console.log(`You selected ${req.params.qty} pieces of ${req.params.sku}`);
+  // for (let i = 0; i < req.params.qty; i++) {
+  // axios
+  //   .post(`${url}/cart/`, {
+  //     headers: {
+  //       Authorization: TOKEN,
+  //     },
+  //     data: {
+  //       sku_id: req.params.sku,
+  //     },
+  //   })
+  axios({
+    method: 'post',
+    url: `${url}/cart`,
+    headers: {
+      Authorization: TOKEN,
+    },
+    data: {
+      sku_id: req.params.sku,
+    },
+  }).then(() => {
+    res.status(201);
+  });
+  // }
 });
 
 //*** RATINGS and REVIEWS ***//
