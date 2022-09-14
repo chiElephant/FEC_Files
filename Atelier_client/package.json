@@ -7,9 +7,10 @@
     "test": "jest",
     "test Q&A": "jest ./client/src/_tests_/questions-answers.test.jsx",
     "coverage": "jest --coverage",
+    "start": "node server/index.js",
+    "build": "webpack --mode production",
     "server-dev": "nodemon --watch server server/index.js",
-    "client-dev": "npx webpack --watch --mode development",
-    "build": "webpack --mode production"
+    "client-dev": "npx webpack --watch --mode development"
   },
   "repository": {
     "type": "git",
