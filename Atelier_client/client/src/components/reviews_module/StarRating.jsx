@@ -24,8 +24,9 @@ function StarRating({ rating, handleUserInputs }) {
     for (let i = 1; i <= NUM_STARS; i++) {
       formStarRatingDiv.push(
         <FontAwesomeIcon
-          key={`${i}`}
           id={`star-${i}`}
+          fromelement="Ratings/Reviews"
+          key={`${i}`}
           className="review-modal-stars"
           icon={rating >= i ? 'fak fa-star-solid' : 'fak fa-star-thin'}
           onClick={() => {
@@ -38,8 +39,10 @@ function StarRating({ rating, handleUserInputs }) {
   }
 
   return (
-    <fieldset id="rate-by-star">
-      <legend>Overall Rating*</legend>
+    <fieldset id="rate-by-star" fromelement="Ratings/Reviews">
+      <legend id="user-rating" fromelement="Ratings/Reviews">
+        Overall Rating*
+      </legend>
       {formStarRating}
       {keyText}
     </fieldset>

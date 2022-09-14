@@ -47,7 +47,7 @@ function ReviewsModule({ product_id, product_name }) {
     <div id="reviews-body">
 
       <div id="reviews-module">
-        <h2 id="ratings-reviews"> Ratings and Reviews </h2>
+        <h2 id="ratings-reviews-header" fromelement="Ratings/Reviews"> Ratings and Reviews </h2>
         <RatingsBreakdown
           product_id={product_id}
           setCharacteristics={setCharacteristics}
@@ -74,6 +74,7 @@ function ReviewsModule({ product_id, product_name }) {
         <div id="main-buttons">
           <button
             id="add-review"
+            fromelement="Ratings/Reviews"
             className="reviews-btn add-reviews"
             onClick={() =>
               setShowReviewModal((showReviewModal) => !showReviewModal)
@@ -83,6 +84,7 @@ function ReviewsModule({ product_id, product_name }) {
           </button>
           <button
             id="more-reviews"
+            fromelement="Ratings/Reviews"
             className="reviews-btn more-reviews"
             onClick={() =>
               helpers.handleCountShown(

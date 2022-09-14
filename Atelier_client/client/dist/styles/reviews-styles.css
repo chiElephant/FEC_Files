@@ -10,13 +10,11 @@
   margin: 0 auto;
 }
 
-#ratings-reviews {
+#ratings-reviews-header {
   font-size: large;
   color: rgb(82, 82, 82);
   font-weight: 300;
-  /* padding-left: 12px; */
   margin-top: 80px;
-
 }
 
 #main-buttons {
@@ -130,7 +128,7 @@
   margin-bottom: 8px;
 }
 
-.stars {
+.review-stars {
   width: 20%;
   display: flex;
   justify-content: space-between;
@@ -138,22 +136,22 @@
   float: left;
 }
 
-.username,
-.date {
+.review-username,
+.review-date {
   font-size: small;
   float: right;
   color: rgb(125, 125, 125);
   margin-right: 8px;
 }
 
-.summary {
+.review-summary {
   font-size: large;
   font-weight: bolder;
   text-overflow: ellipsis;
   color: rgb(82, 82, 82);
 }
 
-.body {
+.review-body {
   font-size: medium;
   color: rgb(103, 103, 103);
   overflow-wrap: break-word;
@@ -195,7 +193,7 @@
   color: rgb(125, 125, 125);
 }
 
-.helpfulness {
+.review-helpfulness {
   width: 500px;
   color: rgb(125, 125, 125);
   font-size: small;

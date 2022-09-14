@@ -11,10 +11,11 @@ const helpers = {
     let helpfulDiv = [];
 
     helpfulDiv.push(
-      <div id="helpful-text" key={'helpful'}>
-        <span className="review-helpfulness">{'Helpful?'}</span>
+      <div id="helpful-text" fromelement="Ratings/Reviews" key={'helpful'}>
+        <span className="review-helpfulness" fromelement="Ratings/Reviews">{'Helpful?'}</span>
         <span
           className="helpful-yes"
+          fromelement="Ratings/Reviews"
           onClick={() =>
             helpers.markHelpful(
               helpfulCount,
@@ -26,10 +27,11 @@ const helpers = {
         >
           {'Yes '}
         </span>
-        <span className="review-helpfulness">{`(${helpfulCount})`}</span>
-        <span className="review-helpfulness">{'|'}</span>
+        <span className="review-helpfulness" fromelement="Ratings/Reviews">{`(${helpfulCount})`}</span>
+        <span className="review-helpfulness" fromelement="Ratings/Reviews">{'|'}</span>
         <span
           className="review-report"
+          fromelement="Ratings/Reviews"
           onClick={() => helpers.reportReview(review_id)}
         >
           {'Report'}
@@ -45,9 +47,9 @@ const helpers = {
     if (recommend) {
       recDiv = [];
       recDiv.push(
-        <div key={'recommend'} className="review-recommend">
-          <i className="fa-light fa-check"></i>
-          <span className="review-rec-text">{'I recommend this product'}</span>
+        <div className="review-recommend" fromelement="Ratings/Reviews" key={'recommend'} >
+          <i className="fa-light fa-check" fromelement="Ratings/Reviews"></i>
+          <span className="review-rec-text" fromelement="Ratings/Reviews">{'I recommend this product'}</span>
         </div>
       );
     }
@@ -59,9 +61,9 @@ const helpers = {
 
     if (response !== null) {
       responseDiv.push(
-        <div key={'response'} id="user-response">
-          <div className="response">Response:</div>
-          <div className="user-response">{`${response}`}</div>
+        <div id="user-response" fromelement="Ratings/Reviews" key="response">
+          <div className="response" fromelement="Ratings/Reviews">Response:</div>
+          <div className="user-response" fromelement="Ratings/Reviews">{`${response}`}</div>
         </div>
       );
       reviewResponse.current = responseDiv;
@@ -75,12 +77,12 @@ const helpers = {
 
     for (let i = 1; i <= rating; i++) {
       starRatingDiv.push(
-        <i className="fak fa-star-solid star" key={`star-solid-${i}`}></i>
+        <i className="fak fa-star-solid star" fromelement="Ratings/Reviews" key={`star-solid-${i}`}></i>
       );
     }
     for (let i = rating; i < 5; i++) {
       starRatingDiv.push(
-        <i className="fak fa-star-thin star" key={`star-${i}`}></i>
+        <i className="fak fa-star-thin star" fromelement="Ratings/Reviews" key={`star-${i}`}></i>
       );
     }
     return starRatingDiv;
@@ -94,8 +96,9 @@ const helpers = {
       photos.forEach((photo) => {
         photoDiv.push(
           <img
-            key={photo.id}
             className="review-image"
+            fromelement="Ratings/Reviews"
+            key={photo.id}
             src={photo.url}
             alt="image not available"
             onClick={() => helpers.enlargePhotos(photo, photoURL, setViewPhoto)}

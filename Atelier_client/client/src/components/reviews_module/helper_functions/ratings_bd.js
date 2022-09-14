@@ -105,7 +105,11 @@ const helpers = {
       if (currentAverage !== 0) {
         for (let i = 1; i <= base; i++) {
           starRatingDiv.push(
-            <i className="fak fa-star-solid star" key={`${i}-solid`}></i>
+            <i
+              className="fak fa-star-solid star"
+              fromelement="Ratings/Reviews"
+              key={`${i}-solid`}
+            ></i>
           );
         }
 
@@ -113,6 +117,7 @@ const helpers = {
           starRatingDiv.push(
             <i
               className="fak fa-star-half-stroke-solid"
+              fromelement="Ratings/Reviews"
               key="star-fraction"
             ></i>
           );
@@ -122,7 +127,11 @@ const helpers = {
 
         for (let i = start; i < NUM_STARS; i++) {
           starRatingDiv.push(
-            <i className="fak fa-star-thin star" key={`${i}-regular`}></i>
+            <i
+              className="fak fa-star-thin star"
+              fromelement="Ratings/Reviews"
+              key={`${i}-regular`}
+            ></i>
           );
         }
       }
@@ -141,9 +150,10 @@ const helpers = {
 
       for (var i = NUM_BARS; i > 0; i--) {
         ratingsGraphDiv.push(
-          <div id="filter-star" key={i}>
+          <div id="filter-star" fromelement="Ratings/Reviews" key={i}>
             <div
               id={`filter-star-${i}`}
+              fromelement="Ratings/Reviews"
               className="graph-text"
               data-id={`${i}`}
               onClick={(e) =>
@@ -152,10 +162,16 @@ const helpers = {
             >
               {`${i} stars`}
             </div>
-            <div className="graph-meter">
-              <span style={{ width: ratingsPercent[i] + '%' }}></span>
+            <div className="graph-meter" fromelement="Ratings/Reviews">
+              <span
+                className="brekdown-meter"
+                fromelement="Ratings/Reviews"
+                style={{ width: ratingsPercent[i] + '%' }}
+              ></span>
             </div>
-            <div className="graph-rating">{currentRatings[i]}</div>
+            <div className="graph-rating" fromelement="Ratings/Reviews">
+              {currentRatings[i]}
+            </div>
           </div>
         );
       }

@@ -41,16 +41,16 @@ function RatingsBreakdown({
   }, [product_id]);
 
   return (
-    <div id="ratings-breakdown">
+    <div id="ratings-breakdown" fromelement="Ratings/Reviews">
       <div id="average-rating">
-        <div id="average">{`${avgRating.current}`}</div>
-        <div id="breakdown-stars">{starsRatings}</div>
+        <div id="average" fromelement="Ratings/Reviews">{`${avgRating.current}`}</div>
+        <div id="breakdown-stars" fromelement="Ratings/Reviews">{starsRatings}</div>
       </div>
-      <div id="review-count">{`out of ${totalReviews.current} ratings`}</div>
-      <div id="recommend-percent">
+      <div id="review-count" fromelement="Ratings/Reviews">{`out of ${totalReviews.current} ratings`}</div>
+      <div id="recommend-percent" fromelement="Ratings/Reviews">
         {`${percentRecommended.current}% of reviewers recommend this product`}
       </div>
-      <div id="ratings-graph">{ratingsBreakDown}</div>
+      <div id="ratings-graph" fromelement="Ratings/Reviews">{ratingsBreakDown}</div>
       <ProductBreakdown characteristics={characteristics} />
     </div>
   );

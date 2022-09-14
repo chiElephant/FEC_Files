@@ -32,16 +32,21 @@ function Photos({ photos, handleUserInputs }) {
   }
 
   return (
-    <fieldset id="review-photos">
-      <legend>Upload your photos</legend>
+    <fieldset id="review-photos"   fromelement="Ratings/Reviews"
+    >
+      <legend id="review-photos-header"   fromelement="Ratings/Reviews"
+>Upload your photos</legend>
       <input
         id="photo-input"
+        fromelement="Ratings/Reviews"
+
         type="file"
         accept="image/png, image/jpeg"
         multiple
         onChange={(e) => handlePhotos(e)}
       ></input>
-      <div id="images"></div>
+      <div id="review-images"   fromelement="Ratings/Reviews"
+></div>
     </fieldset>
   );
 }

@@ -22,17 +22,17 @@ const reviewsHelpers = require('./utils/reviewsHelpers.js');
 
 app.use(compression());
 
-app.use('/', (req, res, next) => {
-  console.log(`${req.method} REQUEST ON ${req.url}`);
-  next();
-});
+// app.use('/', (req, res, next) => {
+//   console.log(`${req.method} REQUEST ON ${req.url}`);
+//   next();
+// });
 
 app.use(express.static(path.join(__dirname, '/../client/dist')));
 app.use(express.json({ limit: '50mb' }));
 
-app.get('/', (req, res) => {
-  res.send('This is our express server for FEC');
-});
+// app.get('/', (req, res) => {
+//   res.redirect('/products/:id');
+// });
 
 // *** Q & A *** //
 

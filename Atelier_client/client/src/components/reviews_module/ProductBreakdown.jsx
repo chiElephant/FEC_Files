@@ -9,22 +9,22 @@ function ProductBreakdown({ characteristics }) {
     const newCharDiv = [];
 
     const poorAndGreat = [
-      <div id="poor" key="poor">
+      <div id="poor" fromelement="Ratings/Reviews" key="poor">
         Poor
       </div>,
-      <div id="great" key="great">
+      <div id="great" fromelement="Ratings/Reviews" key="great">
         Great
       </div>,
     ];
 
     const bigAndSmall = [
-      <div id="too-small" key="small">
+      <div id="too-small" fromelement="Ratings/Reviews" key="small">
         Too Small
       </div>,
-      <div id="perfect" key="perfect">
+      <div id="perfect" fromelement="Ratings/Reviews" key="perfect">
         Perfect
       </div>,
-      <div id="too-big" key="big">
+      <div id="too-big" fromelement="Ratings/Reviews" key="big">
         Too Big
       </div>,
     ];
@@ -41,16 +41,27 @@ function ProductBreakdown({ characteristics }) {
           element = bigAndSmall;
         }
         newCharDiv.push(
-          <div className="characteristic" key={key}>
-            <div className="char-name">{`${char}`}</div>
-            <div className="char-meter">
+          <div
+            className="characteristic"
+            fromelement="Ratings/Reviews"
+            key={key}
+          >
+            <div
+              className="char-name"
+              fromelement="Ratings/Reviews"
+            >{`${char}`}</div>
+            <div className="char-meter" fromelement="Ratings/Reviews">
               <i
-                className="char-icon"
+                // className="char-icon"
+                id="char-icon"
+                fromelement="Ratings/Reviews"
                 className="fak fa-triangle-solid fa-flip-vertical"
                 style={{ marginLeft: value * 20 + '%' }}
               ></i>
             </div>
-            <div className="breakdown-descrip">{element}</div>
+            <div className="breakdown-descrip" fromelement="Ratings/Reviews">
+              {element}
+            </div>
           </div>
         );
       }

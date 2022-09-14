@@ -1,6 +1,6 @@
 #Environment
-.pem
-.sh
+*.pem
+*.sh
 
 # Logs
 logs

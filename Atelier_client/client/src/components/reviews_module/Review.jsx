@@ -55,13 +55,26 @@ function Review(props) {
   return (
     <div className="review" data-testid="review">
       <div className="review-tile-top-bar">
-        <div className="stars">{starRating}</div>
-        <div className="date">{formatedDate}</div>
-        <div className="username">{`${username},`}</div>
+        <div className="review-stars" fromelement="Ratings/Reviews">
+          {starRating}
+        </div>
+        <div className="review-date" fromelement="Ratings/Reviews">
+          {formatedDate}
+        </div>
+        <div
+          className="review-username"
+          fromelement="Ratings/Reviews"
+        >{`${username},`}</div>
       </div>
-      <div className="summary">{summary}</div>
-      <div className="body">{body}</div>
-      <div className="photos">{photosDisplay}</div>
+      <div className="review-summary" fromelement="Ratings/Reviews">
+        {summary}
+      </div>
+      <div className="review-body" fromelement="Ratings/Reviews">
+        {body}
+      </div>
+      <div className="review-photos" fromelement="Ratings/Reviews">
+        {photosDisplay}
+      </div>
       <PhotoModal
         photoURL={photoURL.current}
         viewPhoto={viewPhoto}
@@ -70,7 +83,9 @@ function Review(props) {
       />
       {recommended}
       {reviewResponse.current}
-      <div className="helpfulness">{helpful}</div>
+      <div className="review-helpfulness" fromelement="Ratings/Reviews">
+        {helpful}
+      </div>
     </div>
   );
 }
