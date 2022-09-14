@@ -1,3 +1,7 @@
+#Environment
+.pem
+.sh
+
 # Logs
 logs
 *.log
