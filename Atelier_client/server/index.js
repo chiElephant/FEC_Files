@@ -13,7 +13,7 @@ const {
 } = require('./utils/questionsAnswersHelper.js');
 const { uploadToCloudinary } = require('./utils/uploadToCloudinary');
 
-const { URL, TOKEN } = process.env;
+const { URL, TOKEN, PORT } = process.env;
 const app = express();
 const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
 const reviewsHelper = require('./utils/reviewsHelper.js');
