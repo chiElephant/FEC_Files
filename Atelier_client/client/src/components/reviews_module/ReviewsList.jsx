@@ -20,14 +20,14 @@ function ReviewsList({ reviews, setSortType, reviewCount }) {
           {currentSort}
           <div id="sort-dropdown-content">
             <ul className="review-sort-types">
-              <li className="relevant" onClick={() => handleSort('relevant')}>
-                {'relevance'}
+              <li className="relevant" role="relevant" onClick={() => handleSort('relevant')}>
+                relevance
               </li>
-              <li className="newest" onClick={() => handleSort('newest')}>
-                {'newest'}
+              <li className="newest" role="newest" onClick={() => handleSort('newest')}>
+                newest
               </li>
-              <li className="helpful" onClick={() => handleSort('helpful')}>
-                {'helpful'}
+              <li className="helpful" role="helpful" onClick={() => handleSort('helpful')} value="helpful">
+                helpful
               </li>
             </ul>
           </div>

@@ -73,7 +73,8 @@ function ReviewsModule({ product_id, product_name }) {
         />
         <div id="main-buttons">
           <button
-            className="reviews-btn"
+            id="add-review"
+            className="reviews-btn add-reviews"
             onClick={() =>
               setShowReviewModal((showReviewModal) => !showReviewModal)
             }
@@ -82,7 +83,7 @@ function ReviewsModule({ product_id, product_name }) {
           </button>
           <button
             id="more-reviews"
-            className="reviews-btn"
+            className="reviews-btn more-reviews"
             onClick={() =>
               helpers.handleCountShown(
                 displayedCount,

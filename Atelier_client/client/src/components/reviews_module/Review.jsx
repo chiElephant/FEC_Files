@@ -53,7 +53,7 @@ function Review(props) {
   }, [review_id]);
 
   return (
-    <div className="review">
+    <div className="review" data-testid="review">
       <div className="review-tile-top-bar">
         <div className="stars">{starRating}</div>
         <div className="date">{formatedDate}</div>

@@ -16,7 +16,7 @@ const {
 } = require('./utils/questionsAnswersHelper.js');
 const { uploadToCloudinary } = require('./utils/uploadToCloudinary');
 
-const { URL, TOKEN } = process.env;
+const { URL, TOKEN, PORT } = process.env;
 const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
 const reviewsHelpers = require('./utils/reviewsHelpers.js');
 
@@ -192,7 +192,7 @@ app.use((err, req, res, next) => {
   res.status(500).send({ error: err.message });
 });
 
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 8000
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);

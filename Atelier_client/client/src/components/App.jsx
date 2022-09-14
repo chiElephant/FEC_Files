@@ -10,10 +10,10 @@ function App(props) {
 
   return (
     <div>
-      {/* <Topbar /> */}
-      {/* <Overview product_id={product_id} /> */}
+      <Topbar />
+      <Overview product_id={product_id} />
       <ReviewsModule product_id={product_id} product_name={productName} />
-      {/* <QandAModule product_id={product_id} product_name={productName} /> */}
+      <QandAModule product_id={product_id} product_name={productName} />
     </div>
   );
 }

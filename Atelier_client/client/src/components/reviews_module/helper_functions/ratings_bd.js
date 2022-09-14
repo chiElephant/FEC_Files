@@ -67,12 +67,14 @@ const helpers = {
   },
 
   handleRecommended: (recommended, setPercentRecommended) => {
-    const noCount = recommended.false;
-    const yesCount = recommended.true;
-    const totalCount = noCount + yesCount;
-    const avg = Math.floor((yesCount / totalCount) * 100);
+    if (recommended !== undefined) {
+      const noCount = recommended.false;
+      const yesCount = recommended.true;
+      const totalCount = noCount + yesCount;
+      const avg = Math.floor((yesCount / totalCount) * 100);
 
-    setPercentRecommended(avg);
+      setPercentRecommended(avg);
+    }
   },
 
   createStarsRating: (avg) => {
