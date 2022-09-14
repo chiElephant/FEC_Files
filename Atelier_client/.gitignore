@@ -1,3 +1,7 @@
+#deployment
+*.pem
+*.sh
+
 # Logs
 logs
 *.log
