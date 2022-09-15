@@ -2,16 +2,16 @@
   "name": "atelier",
   "version": "1.0.0",
   "description": "fec redbean project",
-  "main": "webpack.config.js",
-  "scripts": {
-    "start": "node server/index.js",
+  "main": "webpack.config.js",  "scripts": {
     "test": "jest",
     "test Q&A": "jest ./_tests_/questions-answers.test.jsx",
     "test Overview": "jest ./_tests_/Overview.test.js",
     "test-reviews": "jest ./_tests_/reviewsModule.test.js",
     "coverage": "jest --coverage",
+    "start": "node server/index.js",
+    "build": "webpack --mode production",
     "server-dev": "nodemon --watch server server/index.js",
-    "client-dev": "npx webpack --watch"
+    "client-dev": "npx webpack --watch --mode development"
   },
   "repository": {
     "type": "git",
