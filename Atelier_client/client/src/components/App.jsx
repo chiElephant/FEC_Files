@@ -5,14 +5,13 @@ import Overview from './overview_module/Overview.jsx';
 import QandAModule from './questions_answers_module/QandAModule.jsx';
 import ReviewsModule from './reviews_module/ReviewsModule.jsx';
 import ProductLinks from './ProductLinks.jsx';
+import Topbar from './Topbar.jsx';
 
 function App() {
   const { id } = useParams();
   const [products, setProducts] = useState([]);
   const [productId, setProductId] = useState(0);
   const [productName, setProductName] = useState('');
-
-  console.log('id ', id);
 
   useEffect(() => {
     axios.get(`/products/${id}`).then((res) => {
@@ -22,6 +21,7 @@ function App() {
   }, [id]);
 
   useEffect(() => {
+    console.log('fire');
     const options = {
       method: 'get',
       url: `/products`,

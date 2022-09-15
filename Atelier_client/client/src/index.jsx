@@ -12,9 +12,7 @@ const root = ReactDOM.createRoot(container);
 root.render(
   <BrowserRouter>
     <Routes>
-      <Route path="/:id" element={<App />}>
-        {/* <Route path=":id" element={<App />} /> */}
-      </Route>
+      <Route path="/:id" element={<App />} />
     </Routes>
   </BrowserRouter>
 );
