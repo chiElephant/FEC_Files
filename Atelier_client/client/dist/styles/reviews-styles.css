@@ -140,7 +140,8 @@
 .review-date {
   font-size: small;
   float: right;
-  color: rgb(125, 125, 125);
+  /* color: rgb(125, 125, 125); */
+  color: rgb(103, 103, 103);
   margin-right: 8px;
 }
 
@@ -170,7 +171,7 @@
 .review-recommend {
   max-width: fit-content;
   margin-bottom: 12px;
-  color: rgb(125, 125, 125);
+  color: rgb(103, 103, 103);
 }
 
 .review-rec-text {
@@ -195,7 +196,8 @@
 
 .review-helpfulness {
   width: 500px;
-  color: rgb(125, 125, 125);
+  /* color: rgb(125, 125, 125); */
+  color: rgb(103, 103, 103);
   font-size: small;
 }
 
