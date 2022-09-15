@@ -13,10 +13,9 @@ function ReviewsModule({ product_id, product_name }) {
   const [reviewsShown, setReviewsShown] = useState(initialReviewState);
   const [currentFilters, setCurrentFilters] = useState(initialFilters);
   const [showReviewModal, setShowReviewModal] = useState(false);
-  const [productName, setProductName] = useState(product_name);
+
   const [reviews, setReviews] = useState(initialReviewState);
   const [characteristics, setCharacteristics] = useState({});
-  const [productId, setProductId] = useState(product_id);
   const [sortType, setSortType] = useState('relevance');
   const [reviewCount, setReviewCount] = useState(0);
   const [countShown, setCountShown] = useState(2);
@@ -24,8 +23,8 @@ function ReviewsModule({ product_id, product_name }) {
   useEffect(() => {
     const MAX_COUNT = 300;
 
-    getReviews(productId, sortType, MAX_COUNT, setReviews, setReviewCount);
-  }, [productId, sortType]);
+    getReviews(product_id, sortType, MAX_COUNT, setReviews, setReviewCount);
+  }, [product_id, sortType]);
 
   useEffect(() => {
     filterReviews(reviews, currentFilters, setReviewsShown, countShown);
@@ -47,7 +46,7 @@ function ReviewsModule({ product_id, product_name }) {
     <div id="reviews-module">
       <h2 id="ratings-reviews"> Ratings and Reviews </h2>
       <RatingsBreakdown
-        productId={productId}
+        productId={product_id}
         setCharacteristics={setCharacteristics}
         characteristics={characteristics}
         setCurrentFilters={setCurrentFilters}
@@ -65,8 +64,8 @@ function ReviewsModule({ product_id, product_name }) {
       <SubmitReview
         showReviewModal={showReviewModal}
         setShowReviewModal={setShowReviewModal}
-        productName={productName}
-        product_id={productId}
+        productName={product_name}
+        product_id={product_id}
         characteristics={characteristics}
       />
       <div id="main-buttons">

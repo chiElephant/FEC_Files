@@ -56,7 +56,7 @@ function Overview(props) {
       console.log(data.data);
       setStyles(data.data);
     });
-  }, []);
+  }, [props.product_id]);
 
   useEffect(() => {
     let def = {};
