@@ -18,7 +18,6 @@ const { uploadToCloudinary } = require('./utils/uploadToCloudinary');
 const { postInteractions } = require('./utils/postInteractions');
 
 const { URL, TOKEN, PORT } = process.env;
-const app = express();
 const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
 const reviewsHelpers = require('./utils/reviewsHelpers.js');
 
