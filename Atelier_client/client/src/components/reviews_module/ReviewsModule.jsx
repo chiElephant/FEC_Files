@@ -3,6 +3,7 @@ import { initialState, helpers } from './helper_functions/reviews_module';
 import RatingsBreakdown from './RatingsBreakdown.jsx';
 import SubmitReview from './SubmitReview.jsx';
 import ReviewsList from './ReviewsList.jsx';
+// import { handleInteraction } from '../../interactionHandler.js'
 
 function ReviewsModule({ product_id, product_name }) {
   const [reviewsDisplayed, setReviewsDisplayed] = useState(initialState.review);

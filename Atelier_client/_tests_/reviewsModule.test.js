@@ -10,17 +10,17 @@ import {
   cleanup,
 } from '@testing-library/react';
 
-import ProductBreakdown from '../components/reviews_module/ProductBreakdown.jsx';
-import RatingsBreakdown from '../components/reviews_module/RatingsBreakdown.jsx';
-import Characteristics from '../components/reviews_module/Characteristics.jsx';
-import ReviewsModule from '../components/reviews_module/ReviewsModule.jsx';
-import SubmitReview from '../components/reviews_module/SubmitReview.jsx';
-import ReviewsList from '../components/reviews_module/ReviewsList.jsx';
-import ErrorModal from '../components/reviews_module/ErrorModal.jsx';
-import PhotoModal from '../components/reviews_module/PhotoModal.jsx';
-import StarRating from '../components/reviews_module/StarRating.jsx';
-import Photos from '../components/reviews_module/Photos.jsx';
-import Review from '../components/reviews_module/Review.jsx';
+import ProductBreakdown from '../client/src/components/reviews_module/ProductBreakdown.jsx';
+import RatingsBreakdown from '../client/src/components/reviews_module/RatingsBreakdown.jsx';
+import Characteristics from '../client/src/components/reviews_module/Characteristics.jsx';
+import ReviewsModule from '../client/src/components/reviews_module/ReviewsModule.jsx';
+import SubmitReview from '../client/src/components/reviews_module/SubmitReview.jsx';
+import ReviewsList from '../client/src/components/reviews_module/ReviewsList.jsx';
+import ErrorModal from '../client/src/components/reviews_module/ErrorModal.jsx';
+import PhotoModal from '../client/src/components/reviews_module/PhotoModal.jsx';
+import StarRating from '../client/src/components/reviews_module/StarRating.jsx';
+import Photos from '../client/src/components/reviews_module/Photos.jsx';
+import Review from '../client/src/components/reviews_module/Review.jsx';
 
 import {mockMetadata, mockReviews} from './mocks/Reviews-mock-data';
 

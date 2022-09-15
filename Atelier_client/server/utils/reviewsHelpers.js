@@ -3,8 +3,6 @@ const axios = require('axios');
 
 const { URL, TOKEN } = process.env;
 
-const helpfulEndpoint = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/:review_id/helpful`;
-
 const getReviews = (query, cb) => {
   const url = `${URL}/reviews`;
 

@@ -15,6 +15,7 @@ const {
   reportAnswer,
 } = require('./utils/questionsAnswersHelper.js');
 const { uploadToCloudinary } = require('./utils/uploadToCloudinary');
+const { postInteractions } = require('./utils/postInteractions');
 
 const { URL, TOKEN, PORT } = process.env;
 const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
@@ -22,17 +23,13 @@ const reviewsHelpers = require('./utils/reviewsHelpers.js');
 
 app.use(compression());
 
-// app.use('/', (req, res, next) => {
-//   console.log(`${req.method} REQUEST ON ${req.url}`);
-//   next();
-// });
+app.use('/', (req, res, next) => {
+  console.log(`${req.method} REQUEST ON ${req.url}`);
+  next();
+});
 
 app.use(express.static(path.join(__dirname, '/../client/dist')));
-app.use(express.json({ limit: '50mb' }));
-
-// app.get('/', (req, res) => {
-//   res.redirect('/products/:id');
-// });
+app.use(express.json());
 
 // *** Q & A *** //
 
@@ -183,9 +180,22 @@ app.put('/reviews/:review_id/report', (req, res) => {
   })
 })
 
+//Reviews Wild Card
 app.use('/reviews/*', (req, res) => {
   res.send('404: This page does not exist');
 });
+
+//POST interactions
+app.post('/interactions', (req, res) => {
+  postInteractions(req.body, (error, response) => {
+    if(error) {
+      res.sendStatus(422)
+    }
+    res.sendStatus(201)
+  })
+})
+
+
 
 app.use((err, req, res, next) => {
   console.log('error in express error handler: ', err.message);
