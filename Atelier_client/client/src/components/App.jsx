@@ -40,15 +40,15 @@ function App() {
   const widgets =
     productId !== 0 ? (
       <>
-        {/* <Overview product_id={productId} />
-        <ReviewsModule product_id={productId} product_name={productName} /> */}
+        <Overview product_id={productId} />
+        <ReviewsModule product_id={productId} product_name={productName} />
         <QandAModule product_id={productId} product_name={productName} />
       </>
     ) : null;
 
   return (
     <div>
-      <h1> The RedBean Atelier App </h1>
+      <Topbar />
       <ProductLinks products={products} />
       {widgets}
     </div>
