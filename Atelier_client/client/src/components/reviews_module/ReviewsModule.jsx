@@ -25,7 +25,7 @@ function ReviewsModule({ product_id, product_name }) {
     };
 
     console.log(product_id);
-    if(product_id !== 12345) {
+    if (product_id !== 12345) {
       helpers.getReviews(params, currentFilters, (reviewData) => {
         reviews.current = reviewData;
         reviewCount.current = reviewData.length;
@@ -39,8 +39,9 @@ function ReviewsModule({ product_id, product_name }) {
     }
   }, [product_id, sort]);
 
+  // eslint-disable-next-line no-unused-vars
   const filteredReviews = useMemo(() => {
-    return helpers.filterReviews(
+    helpers.filterReviews(
       reviews,
       currentFilters,
       displayedCount,
@@ -50,9 +51,11 @@ function ReviewsModule({ product_id, product_name }) {
 
   return (
     <div id="reviews-body">
-
       <div id="reviews-module">
-        <h2 id="ratings-reviews-header" fromelement="Ratings/Reviews"> Ratings and Reviews </h2>
+        <h2 id="ratings-reviews-header" fromelement="Ratings/Reviews">
+          {' '}
+          Ratings and Reviews{' '}
+        </h2>
         <RatingsBreakdown
           product_id={product_id}
           setCharacteristics={setCharacteristics}
@@ -81,9 +84,7 @@ function ReviewsModule({ product_id, product_name }) {
             id="add-review"
             fromelement="Ratings/Reviews"
             className="reviews-btn add-reviews"
-            onClick={() =>
-              setShowReviewModal((showReviewModal) => !showReviewModal)
-            }
+            onClick={() => setShowReviewModal((prevState) => !prevState)}
           >
             ADD A REVIEW +
           </button>
