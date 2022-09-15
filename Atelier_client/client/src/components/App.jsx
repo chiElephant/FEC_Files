@@ -10,9 +10,11 @@ function App(props) {
   const [product_id, setProduct_id] = useState(71701);
   const [productName, setProductName] = useState('Heir Force Ones');
 
-  const body = document.querySelector('#root');
+  const body = document.querySelector('body');
   body.onclick = function(e) {
     e.preventDefault();
+
+    console.log(e.target.attributes)
 
     const element = e.target.attributes[0].value;
     const widget = e.target.attributes[1].value;
@@ -31,7 +33,7 @@ function App(props) {
 
   return (
     <div>
-      <Topbar />
+      {/* <Topbar /> */}
       {/* <Overview product_id={product_id} />  */}
       <ReviewsModule product_id={product_id} product_name={productName} />
       {/* <QandAModule product_id={product_id} product_name={productName} /> */}
