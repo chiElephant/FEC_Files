@@ -98,6 +98,7 @@ const helpers = {
           <img
             className="review-image"
             fromelement="Ratings/Reviews"
+            fetchpriority="high"
             key={photo.id}
             src={photo.url}
             alt="image not available"

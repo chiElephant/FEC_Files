@@ -23,16 +23,20 @@ function ReviewsModule({ product_id, product_name }) {
       sort,
       count,
     };
-    helpers.getReviews(params, currentFilters, (reviewData) => {
-      reviews.current = reviewData;
-      reviewCount.current = reviewData.length;
-      helpers.filterReviews(
-        reviews,
-        currentFilters,
-        displayedCount,
-        setReviewsDisplayed
-      );
-    });
+
+    console.log(product_id);
+    if(product_id !== 12345) {
+      helpers.getReviews(params, currentFilters, (reviewData) => {
+        reviews.current = reviewData;
+        reviewCount.current = reviewData.length;
+        helpers.filterReviews(
+          reviews,
+          currentFilters,
+          displayedCount,
+          setReviewsDisplayed
+        );
+      });
+    }
   }, [product_id, sort]);
 
   const filteredReviews = useMemo(() => {

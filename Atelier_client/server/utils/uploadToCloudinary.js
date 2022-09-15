@@ -22,8 +22,19 @@ const uploadToCloudinary = (req, res, next) => {
   );
 
   Promise.all(promises).then((urls) => {
-    req.body.photoUrls = urls;
-    console.log('uploaded photos urls: ', urls);
+
+    let formatedURLs = [];
+    for(let url of urls) {
+      var sliced = url.split('upload/')
+      var combine = sliced[0].concat('upload/f_auto/', sliced[1])
+      formatedURLs.push(combine);
+    }
+
+    return formatedURLs;
+  })
+  .then(formatedURLs => {
+    req.body.photoUrls = formatedURLs;
+    console.log('uploaded photos urls: ', formatedURLs);
     next();
   });
 };

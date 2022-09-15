@@ -10,26 +10,26 @@ function App(props) {
   const [product_id, setProduct_id] = useState(71701);
   const [productName, setProductName] = useState('Heir Force Ones');
 
-  const body = document.querySelector('body');
-  body.onclick = function(e) {
-    e.preventDefault();
+  // const body = document.querySelector('body');
+  // body.onclick = function(e) {
+  //   // e.preventDefault();
 
-    console.log(e.target.attributes)
+  //   console.log(e.target.attributes)
 
-    const element = e.target.attributes[0].value;
-    const widget = e.target.attributes[1].value;
-    const time = new Date().toString().split(' ')[4];
+  //   const element = e.target.attributes[0].value;
+  //   const widget = e.target.attributes[1].value;
+  //   const time = new Date().toString().split(' ')[4];
 
-    if (element && widget) {
-      axios.post('/interactions', { element, widget, time })
-        .then(response => {
-          console.log(response.status, response.data);
-        })
-        .catch(error => {
-          console.log('Error in click event listener: ', error);
-        })
-    }
-  };
+  //   if (element && widget) {
+  //     axios.post('/interactions', { element, widget, time })
+  //       .then(response => {
+  //         console.log(response.status, response.data);
+  //       })
+  //       .catch(error => {
+  //         console.log('Error in click event listener: ', error);
+  //       })
+  //   }
+  // };
 
   return (
     <div>
