@@ -28,6 +28,20 @@ function Overview(props) {
       },
     ],
   });
+  const [selectedStyle, setSelectedStyle] = useState({
+    style_id: 1,
+    name: '',
+    original_price: '',
+    sale_price: 0,
+    default: true,
+    photos: [
+      {
+        thumbnail_url: '',
+        url: '',
+      },
+    ],
+    skus: {},
+  });
 
   useEffect(() => {
     axios.get(`/products/${props.product_id}`).then((data) => {
@@ -42,7 +56,7 @@ function Overview(props) {
       console.log(data.data);
       setStyles(data.data);
     });
-  }, []);
+  }, [props.product_id]);
 
   useEffect(() => {
     let def = {};
