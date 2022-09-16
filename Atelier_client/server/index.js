@@ -19,7 +19,7 @@ const {
 const { uploadToCloudinary } = require('./utils/uploadToCloudinary');
 const { postInteractions } = require('./utils/postInteractions');
 const { getProduct } = require('./utils/productDetails.js');
-const reviewsHelper = require('./utils/reviewsHelper.js');
+const reviewsHelpers = require('./utils/reviewsHelpers.js');
 
 const { URL, TOKEN, PORT } = process.env;
 const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
@@ -197,6 +197,7 @@ app.post('/interactions', (req, res) => {
       res.sendStatus(201);
     }
   });
+});
 
 app.use((err, req, res, next) => {
   console.log('error in express error handler: ', err.message);

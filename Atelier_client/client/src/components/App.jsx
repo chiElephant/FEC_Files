@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 
-import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import Overview from './overview_module/Overview.jsx';
 import QandAModule from './questions_answers_module/QandAModule.jsx';
