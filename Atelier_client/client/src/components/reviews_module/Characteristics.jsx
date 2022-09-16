@@ -13,12 +13,6 @@ function Characteristics({
     createCharsDiv();
   }, []);
 
-  // Handles user input on product characteristics when adding a review.
-  const handleCharacteristics = (char, id, value) => {
-    handleUserInputs('characteristics', id, value);
-    handleCharText(char, id, value);
-  };
-
   // Handles the text output above each characteristic in the add review form.
   const handleCharText = (char, id, value) => {
     const currentDisplay = document.getElementById(id);
@@ -26,26 +20,31 @@ function Characteristics({
     currentDisplay.textContent = newDisplay;
   };
 
+  // Handles user input on product characteristics when adding a review.
+  const handleCharacteristics = (char, id, value) => {
+    handleUserInputs('characteristics', id, value);
+    handleCharText(char, id, value);
+  };
+
   // Creates the characteristics div in the add review form.
   const createCharsDiv = () => {
-    let div = [];
+    const div = [];
 
-    for (let char in characteristics) {
-      const id = characteristics[char].id;
+    for (const char in characteristics) {
+      const { id } = characteristics[char];
 
       div.push(
-        <div id="add-characteristic" fromelement="Ratings/Reviews" key={id}>
-          <div id="char-descrip-output" fromelement="Ratings/Reviews">
-            <div id={id} fromelement="Ratings/Reviews" className="char-descrip-output">
+        <div id="add-characteristic" key={id}>
+          <div id="char-descrip-output">
+            <div id={id} className="char-descrip-output">
               None Selected
             </div>
           </div>
-          <div className="char-radios-text" fromelement="Ratings/Reviews"> {`${char}`} </div>
+          <div className="char-radios-text"> {`${char}`} </div>
 
-          <div id="char-radios" fromelement="Ratings/Reviews">
+          <div id="char-radios">
             <input
               id={id}
-              fromelement="Ratings/Reviews"
               className="char-radios"
               type="radio"
               name={`${char}`}
@@ -54,7 +53,6 @@ function Characteristics({
             />
             <input
               id={id}
-              fromelement="Ratings/Reviews"
               className="char-radios"
               type="radio"
               name={`${char}`}
@@ -63,7 +61,6 @@ function Characteristics({
             />
             <input
               id={id}
-              fromelement="Ratings/Reviews"
               className="char-radios"
               type="radio"
               name={`${char}`}
@@ -72,7 +69,6 @@ function Characteristics({
             />
             <input
               id={id}
-              fromelement="Ratings/Reviews"
               className="char-radios"
               type="radio"
               name={`${char}`}
@@ -81,7 +77,6 @@ function Characteristics({
             />
             <input
               id={id}
-              fromelement="Ratings/Reviews"
               className="char-radios"
               type="radio"
               name={`${char}`}
@@ -89,9 +84,9 @@ function Characteristics({
               onClick={() => handleCharacteristics(char, id, 5)}
             />
           </div>
-          <div id="char-descrip" fromelement="Ratings/Reviews">
-            <div className="char-descrip-1" fromelement="Ratings/Reviews"> {`(1) ${charsKey[char][1]}`} </div>
-            <div className="char-descrip-5" fromelement="Ratings/Reviews"> {`(5) ${charsKey[char][5]}`} </div>
+          <div id="char-descrip">
+            <div className="char-descrip-1"> {`(1) ${charsKey[char][1]}`} </div>
+            <div className="char-descrip-5"> {`(5) ${charsKey[char][5]}`} </div>
           </div>
         </div>
       );
@@ -100,8 +95,8 @@ function Characteristics({
   };
 
   return (
-    <fieldset id="characteristics-radios" fromelement="Ratings/Reviews">
-      <legend id="characteristics-inputs" fromelement="Ratings/Reviews">Characteristics*</legend>
+    <fieldset id="characteristics-radios">
+      <legend id="characteristics-inputs">Characteristics*</legend>
       {charsDiv}
     </fieldset>
   );

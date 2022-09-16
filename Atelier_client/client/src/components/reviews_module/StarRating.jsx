@@ -2,9 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function StarRating({ rating, handleUserInputs }) {
-  const formStarRating = useMemo(() => {
-    return createFormStarRating();
-  }, [rating]);
+  const formStarRating = useMemo(() => createFormStarRating(), [rating]);
 
   const starKey = {
     1: 'Poor',
@@ -17,7 +15,7 @@ function StarRating({ rating, handleUserInputs }) {
   const keyText = starKey[rating];
 
   function createFormStarRating() {
-    let formStarRatingDiv = [];
+    const formStarRatingDiv = [];
 
     const NUM_STARS = 5;
 
@@ -25,7 +23,6 @@ function StarRating({ rating, handleUserInputs }) {
       formStarRatingDiv.push(
         <FontAwesomeIcon
           id={`star-${i}`}
-          fromelement="Ratings/Reviews"
           key={`${i}`}
           className="review-modal-stars"
           icon={rating >= i ? 'fak fa-star-solid' : 'fak fa-star-thin'}
@@ -39,10 +36,8 @@ function StarRating({ rating, handleUserInputs }) {
   }
 
   return (
-    <fieldset id="rate-by-star" fromelement="Ratings/Reviews">
-      <legend id="user-rating" fromelement="Ratings/Reviews">
-        Overall Rating*
-      </legend>
+    <fieldset id="rate-by-star">
+      <legend id="user-rating">Overall Rating*</legend>
       {formStarRating}
       {keyText}
     </fieldset>

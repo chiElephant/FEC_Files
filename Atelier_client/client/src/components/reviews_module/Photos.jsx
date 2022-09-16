@@ -19,10 +19,10 @@ function Photos({ photos, handleUserInputs }) {
       img.className = 'review-image';
       img.file = file;
       img.width = 80;
-      img.onclick = function(e) {
+      img.onclick = function (e) {
         e.target.remove();
         console.log(files);
-      }
+      };
 
       images.appendChild(img);
 
@@ -37,18 +37,15 @@ function Photos({ photos, handleUserInputs }) {
   }
 
   return (
-    <fieldset id="review-photos" fromelement="Ratings/Reviews">
-      <legend id="review-photos-header" fromelement="Ratings/Reviews">
-        Upload your photos
-      </legend>
+    <fieldset id="review-photos">
+      <legend id="review-photos-header">Upload your photos</legend>
       <input
         id="photo-input"
-        fromelement="Ratings/Reviews"
         type="file"
         accept="image/png, image/jpeg"
         onChange={(e) => handlePhotos(e)}
       ></input>
-      <div id="images" fromelement="Ratings/Reviews"></div>
+      <div id="images"></div>
     </fieldset>
   );
 }
