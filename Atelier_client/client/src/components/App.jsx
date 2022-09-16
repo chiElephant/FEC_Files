@@ -1,25 +1,52 @@
+import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 
 import axios from 'axios';
-// import url from 'url';
+import { useParams } from 'react-router-dom';
 import Overview from './overview_module/Overview.jsx';
 import QandAModule from './questions_answers_module/QandAModule.jsx';
 import ReviewsModule from './reviews_module/ReviewsModule.jsx';
-import Topbar from './overview_module/Topbar.jsx';
+import ProductLinks from './ProductLinks.jsx';
+import Topbar from './Topbar.jsx';
 
 function App() {
-  const [product_id, setProduct_id] = useState(71697);
-  const [productName, setProductName] = useState('Heir Force Ones');
-
-  const queryParams = {
-    product_id: 71701,
-  };
-
-  const params = new URLSearchParams(queryParams);
+  const { id } = useParams();
+  const [products, setProducts] = useState([]);
+  const [productId, setProductId] = useState(0);
+  const [productName, setProductName] = useState('');
 
   useEffect(() => {
-    axios.get(`/products/?${params}`).then((res) => console.log(res));
-  });
+    axios.get(`/products/${id}`).then((res) => {
+      setProductName(res.data.name);
+      setProductId(res.data.id);
+    });
+  }, [id]);
+
+  useEffect(() => {
+    console.log('fire');
+    const options = {
+      method: 'get',
+      url: `/products`,
+    };
+
+    axios(options)
+      .then((response) => {
+        const productList = response.data;
+        setProducts([...productList]);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  const widgets =
+    productId !== 0 ? (
+      <>
+        <Overview product_id={productId} />
+        <ReviewsModule product_id={productId} product_name={productName} />
+        <QandAModule product_id={productId} product_name={productName} />
+      </>
+    ) : null;
 
   // const body = document.querySelector('body');
   // body.onclick = function(e) {
@@ -44,10 +71,9 @@ function App() {
 
   return (
     <div>
-      {/* <Topbar /> */}
-      {/* <Overview product_id={product_id} /> */}
-      <ReviewsModule product_id={product_id} product_name={productName} />
-      {/* <QandAModule product_id={product_id} product_name={productName} /> */}
+      <Topbar />
+      <ProductLinks products={products} />
+      {widgets}
     </div>
   );
 }

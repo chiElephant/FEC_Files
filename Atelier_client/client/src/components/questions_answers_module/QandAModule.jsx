@@ -12,12 +12,21 @@ function QandAModule({ product_id, product_name }) {
   const [showMoreQuestions, setShowMoreQuestions] = useState(false);
   const [fetchQuestions, setFetchQuestions] = useState(false);
 
+  useEffect(() => {
+    setDisplayList([]);
+    setCountShown(2);
+    setShowMoreQuestions(false);
+    setFetchQuestions(false);
+  }, [product_id]);
+
   const questionList = useGetQuestions(
     product_id,
     setDisplayList,
     setShowMoreQuestions,
     fetchQuestions
   );
+  console.log('displayList: ', displayList);
+  console.log('questionList: ', displayList);
 
   //filtered questions state
   const [displayFiltered, setDisplayFiltered] = useState([]);

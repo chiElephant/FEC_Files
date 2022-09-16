@@ -5,6 +5,7 @@ const axios = require('axios');
 
 const app = express();
 const compression = require('compression');
+const history = require('connect-history-api-fallback');
 
 const {
   getQuestions,
@@ -17,31 +18,38 @@ const {
 } = require('./utils/questionsAnswersHelper.js');
 const { uploadToCloudinary } = require('./utils/uploadToCloudinary');
 const { postInteractions } = require('./utils/postInteractions');
+const { getProduct } = require('./utils/productDetails.js');
+const reviewsHelper = require('./utils/reviewsHelper.js');
 
 const { URL, TOKEN, PORT } = process.env;
 const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
-const reviewsHelpers = require('./utils/reviewsHelpers.js');
 
-app.use(compression());
 
 app.use('/', (req, res, next) => {
   console.log(`${req.method} REQUEST ON ${req.url}`);
   next();
 });
 
+app.use(history());
+app.use(compression());
 app.use(express.static(path.join(__dirname, '/../client/dist')));
-app.use(express.json({ limit: '2mb' }));
+app.use(express.json({ limit: '10mb' }));
+
+app.use('/', (req, res, next) => {
+  console.log(`${req.method} REQUEST ON ${req.url}`);
+  next();
+});
 
 // *** Q & A *** //
 
 // Question List;
 app.get('/questions/:product_id/', getQuestions, (req, res) => {
+  console.log('questions: ', res.body);
   res.status(200).send(res.body);
 });
 
 // Answer List;
 app.get('/answers/:question_id/:page/:count', getAnswers, (req, res) => {
-  console.log('answeers: ', res.body);
   res.status(200).send(res.body);
 });
 
@@ -70,62 +78,52 @@ app.put('/answer/:answer_id/report', reportAnswer, (req, res) => {
   res.sendStatus(204);
 });
 
+/////////////// Products //////////////////
+
+app.get('/products', (req, res, next) => {
+  // console.log(`Received a get request to get the prodcut information for product: ${req.params.id} and  url: ${req.url}`);
+
+  axios
+    .get(URL + req.url, {
+      headers: {
+        Authorization: process.env.GIT,
+      },
+    })
+    .then((products) => {
+      res.status(200).send(products.data);
+    })
+    .catch(next);
+});
+
 /////////////// OVERVIEW COMPONENT //////////////////////
 
-app.get('/products/:id', (req, res) => {
-  console.log(
-    `Received a get request to get the prodcut information for product: ${req.params.id} and  url: ${req.url}`
-  );
+app.get('/products/:id', (req, res, next) => {
+  // console.log(`Received a get request to get the prodcut information for product: ${req.params.id} and  url: ${req.url}`);
   axios
     .get(url + req.url, {
       headers: {
-        Authorization: TOKEN,
+        Authorization: process.env.GIT,
       },
     })
     .then((product_info) => {
-      console.log('This is the product info: ', product_info.data);
+      // console.log('This is the product info: ', product_info.data);
       res.send(product_info.data);
-    });
+    })
+    .catch(next);
 });
 
-app.get('/products/:id/styles', (req, res) => {
+app.get('/products/:id/styles', (req, res, next) => {
   axios
     .get(url + req.url, {
       headers: {
-        Authorization: TOKEN,
+        Authorization: process.env.GIT,
       },
     })
     .then((product_styles) => {
-      console.log('These are the product styles: ', product_styles.data);
+      // console.log('These are the product styles: ', product_styles.data);
       res.send(product_styles.data);
-    });
-});
-
-app.post('/cart/:sku/:qty', (req, res) => {
-  // console.log(`You selected ${req.params.qty} pieces of ${req.params.sku}`);
-  // for (let i = 0; i < req.params.qty; i++) {
-  // axios
-  //   .post(`${url}/cart/`, {
-  //     headers: {
-  //       Authorization: TOKEN,
-  //     },
-  //     data: {
-  //       sku_id: req.params.sku,
-  //     },
-  //   })
-  axios({
-    method: 'post',
-    url: `${url}/cart`,
-    headers: {
-      Authorization: TOKEN,
-    },
-    data: {
-      sku_id: req.params.sku,
-    },
-  }).then(() => {
-    res.status(201);
-  });
-  // }
+    })
+    .catch(next);
 });
 
 //*** RATINGS and REVIEWS ***//
@@ -199,7 +197,6 @@ app.post('/interactions', (req, res) => {
       res.sendStatus(201);
     }
   });
-});
 
 app.use((err, req, res, next) => {
   console.log('error in express error handler: ', err.message);

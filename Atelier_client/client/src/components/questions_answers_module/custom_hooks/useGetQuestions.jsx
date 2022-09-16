@@ -25,7 +25,7 @@ export default function useGetQuestions(
       .catch((error) => {
         console.log(error);
       });
-  }, [fetchQuestions]);
+  }, [fetchQuestions, product_id]);
 
   return questions;
 }
