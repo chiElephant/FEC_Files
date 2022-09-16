@@ -71,7 +71,7 @@ function Overview(props) {
   }, [styles]);
 
   const changeStyleSelected = (style) => {
-    console.log(`The selected style is: ${style}`);
+    console.log(`The selected style is: ${JSON.stringify(style)}`);
     setSelectedStyle(style);
   };
 
