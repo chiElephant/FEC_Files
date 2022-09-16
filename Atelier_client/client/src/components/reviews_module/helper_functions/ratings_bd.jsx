@@ -7,9 +7,9 @@ const helpers = {
   handleFilters: (target, setCurrentFilters) => {
     const document = this;
     console.log(this);
-    const { className } = target;
+    const className = target.className;
     const rating = target.dataset.id;
-    const { id } = target;
+    const id = target.id;
 
     if (className === 'graph-text') {
       const element = document.getElementById(id);
@@ -122,11 +122,13 @@ const helpers = {
     if (currentAverage !== 0) {
       for (let i = 1; i <= base; i++) {
         starRatingDiv.push(
-          <i
-            className="fak fa-star-solid star"
-            fromelement="Ratings/Reviews"
-            key={`${i}-solid`}
-          />
+          <>
+            <i
+              className="fak fa-star-solid star"
+              fromelement="Ratings/Reviews"
+              key={`${i}-solid`}
+            />
+          </>
         );
       }
 
