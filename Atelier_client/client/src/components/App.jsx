@@ -50,8 +50,8 @@ function App() {
   return (
     <div>
       <Topbar />
-      <ProductLinks products={products} />
       {widgets}
+      <ProductLinks products={products} />
     </div>
   );
 }
