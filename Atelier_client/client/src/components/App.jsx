@@ -41,32 +41,11 @@ function App() {
   const widgets =
     productId !== 0 ? (
       <>
-        {/* <Overview product_id={productId} /> */}
+        <Overview product_id={productId} />
         <ReviewsModule product_id={productId} product_name={productName} />
-        {/* <QandAModule product_id={productId} product_name={productName} /> */}
+        <QandAModule product_id={productId} product_name={productName} />
       </>
     ) : null;
-
-  // const body = document.querySelector('body');
-  // body.onclick = function(e) {
-  //   // e.preventDefault();
-
-  //   console.log(e.target.attributes)
-
-  //   const element = e.target.attributes[0].value;
-  //   const widget = e.target.attributes[1].value;
-  //   const time = new Date().toString().split(' ')[4];
-
-  //   if (element && widget) {
-  //     axios.post('/interactions', { element, widget, time })
-  //       .then(response => {
-  //         console.log(response.status, response.data);
-  //       })
-  //       .catch(error => {
-  //         console.log('Error in click event listener: ', error);
-  //       })
-  //   }
-  // };
 
   return (
     <div>
