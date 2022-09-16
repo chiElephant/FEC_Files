@@ -34,17 +34,18 @@ function Characteristics({
       const id = characteristics[char].id;
 
       div.push(
-        <div id="add-characteristic" key={id}>
-          <div id="char-descrip-output">
-            <div id={id} className="char-descrip-output">
+        <div id="add-characteristic" fromelement="Ratings/Reviews" key={id}>
+          <div id="char-descrip-output" fromelement="Ratings/Reviews">
+            <div id={id} fromelement="Ratings/Reviews" className="char-descrip-output">
               None Selected
             </div>
           </div>
-          <div className="char-radios-text"> {`${char}`} </div>
+          <div className="char-radios-text" fromelement="Ratings/Reviews"> {`${char}`} </div>
 
-          <div id="char-radios">
+          <div id="char-radios" fromelement="Ratings/Reviews">
             <input
               id={id}
+              fromelement="Ratings/Reviews"
               className="char-radios"
               type="radio"
               name={`${char}`}
@@ -53,6 +54,7 @@ function Characteristics({
             />
             <input
               id={id}
+              fromelement="Ratings/Reviews"
               className="char-radios"
               type="radio"
               name={`${char}`}
@@ -61,6 +63,7 @@ function Characteristics({
             />
             <input
               id={id}
+              fromelement="Ratings/Reviews"
               className="char-radios"
               type="radio"
               name={`${char}`}
@@ -69,6 +72,7 @@ function Characteristics({
             />
             <input
               id={id}
+              fromelement="Ratings/Reviews"
               className="char-radios"
               type="radio"
               name={`${char}`}
@@ -77,6 +81,7 @@ function Characteristics({
             />
             <input
               id={id}
+              fromelement="Ratings/Reviews"
               className="char-radios"
               type="radio"
               name={`${char}`}
@@ -84,11 +89,9 @@ function Characteristics({
               onClick={() => handleCharacteristics(char, id, 5)}
             />
           </div>
-          {/* </label> */}
-          {/* <br /> */}
-          <div id="char-descrip">
-            <div className="char-descrip-1"> {`(1) ${charsKey[char][1]}`} </div>
-            <div className="char-descrip-5"> {`(5) ${charsKey[char][5]}`} </div>
+          <div id="char-descrip" fromelement="Ratings/Reviews">
+            <div className="char-descrip-1" fromelement="Ratings/Reviews"> {`(1) ${charsKey[char][1]}`} </div>
+            <div className="char-descrip-5" fromelement="Ratings/Reviews"> {`(5) ${charsKey[char][5]}`} </div>
           </div>
         </div>
       );
@@ -97,8 +100,8 @@ function Characteristics({
   };
 
   return (
-    <fieldset id="characteristics-radios">
-      <legend>Characteristics*</legend>
+    <fieldset id="characteristics-radios" fromelement="Ratings/Reviews">
+      <legend id="characteristics-inputs" fromelement="Ratings/Reviews">Characteristics*</legend>
       {charsDiv}
     </fieldset>
   );

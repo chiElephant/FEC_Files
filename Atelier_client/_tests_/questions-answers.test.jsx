@@ -8,13 +8,13 @@ import {
   act,
 } from '@testing-library/react';
 // import '@testing-library/jest-dom/extend-expect';
-import QandAModule from '../components/questions_answers_module/QandAModule.jsx';
-import Question from '../components/questions_answers_module/Question.jsx';
-import Answer from '../components/questions_answers_module/Answer.jsx';
-import SearchQ from '../components/questions_answers_module/SearchQ.jsx';
-import ModalAnswer from '../components/questions_answers_module/ModalAnswer.jsx';
-import ModalQuestion from '../components/questions_answers_module/ModalQuestion.jsx';
-import AnswerList from '../components/questions_answers_module/AnswerList.jsx';
+import QandAModule from '../client/src/components/questions_answers_module/QandAModule.jsx';
+import Question from '../client/src/components/questions_answers_module/Question.jsx';
+import Answer from '../client/src/components/questions_answers_module/Answer.jsx';
+import SearchQ from '../client/src/components/questions_answers_module/SearchQ.jsx';
+import ModalAnswer from '../client/src/components/questions_answers_module/ModalAnswer.jsx';
+import ModalQuestion from '../client/src/components/questions_answers_module/ModalQuestion.jsx';
+import AnswerList from '../client/src/components/questions_answers_module/AnswerList.jsx';
 
 describe('Questions and Answers renders correctly', () => {
   describe('QandAModule', () => {

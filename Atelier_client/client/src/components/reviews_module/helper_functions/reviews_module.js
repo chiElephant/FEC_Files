@@ -1,56 +1,70 @@
 import axios from 'axios';
 
-const initialReviewState = [
-  {
-    review_id: 12345,
-    rating: '',
-    summary: '',
-    recommend: '',
-    response: '',
-    body: '',
-    date: '',
-    reviewer_name: '',
-    helpfulness: '',
-    photos: [],
-  },
-];
+const initialState = {
+  review: [
+    {
+      review_id: 12345,
+      rating: '',
+      summary: '',
+      recommend: '',
+      response: null,
+      body: '',
+      date: '',
+      reviewer_name: '',
+      helpfulness: '',
+      photos: [],
+    },
+  ],
 
-const initialFilters = { 5: false, 4: false, 3: false, 2: false, 1: false };
+  filters: { 5: false, 4: false, 3: false, 2: false, 1: false },
+};
 
-function getReviews(product_id, sort, count, setReviews, setReviewCount) {
-  const options = {
-    params: { product_id, sort, count },
-  };
-
-  axios
-    .get('/reviews', options)
-    .then((response) => {
-      setReviews((prevReviews) => response.data);
-      setReviewCount((prevReviewCount) => response.data.length);
-    })
-    .catch((error) => {
-      console.log('Error fetching reviews: ', error);
-    });
-}
-
-function filterReviews(reviews, currentFilters, setReviewsShown, countShown) {
-  let filteredReviews = [];
-  let reviewsToShow;
-
-  for (let review of reviews) {
-    if (currentFilters[review.rating]) {
-      filteredReviews.push(review);
+const helpers = {
+  handleCountShown: (displayedCount, reviewCount, setDisplayedCount) => {
+    if (displayedCount >= reviewCount.current) {
+      //add the next line, if broken, remove
+      const document = this;
+      const element = document.getElementById('more-reviews');
+      element.remove();
     }
-  }
+    setDisplayedCount((prevState) => prevState + 2);
+  },
 
-  if (filteredReviews.length === 0) {
-    reviewsToShow = reviews.slice(0, countShown);
-    setReviewsShown((reviewsShown) => reviewsToShow);
-    return;
-  }
+  getReviews: (params, currentFilters, handleReviewData) => {
+    const options = { params };
 
-  reviewsToShow = filteredReviews.slice(0, countShown);
-  setReviewsShown((reviewsShown) => filteredReviews);
-}
+    axios
+      .get('/reviews', options)
+      .then((response) => {
+        handleReviewData(response.data);
+      })
+      .catch((error) => {
+        console.log('Error fetching reviews: ', error);
+      });
+  },
 
-export { getReviews, initialReviewState, initialFilters, filterReviews };
+  filterReviews: (reviews, currentFilters, displayedCount, setReviewsShown) => {
+    const filteredReviews = [];
+
+    const filtersIndx = Object.values(currentFilters).indexOf(true);
+    if (filtersIndx >= 0) {
+      for (let i = 0; i < reviews.current.length; i++) {
+        if (currentFilters[i].rating) {
+          filteredReviews.push(reviews.current[i]);
+        }
+      }
+      // for (let review of reviews.current) {
+      //   if (currentFilters[review.rating]) {
+      //     filteredReviews.push(review);
+      //   }
+      // }
+      setReviewsShown(filteredReviews);
+      return;
+    }
+
+    const reviewsToDisplay = reviews.current.slice(0, displayedCount);
+    setReviewsShown(reviewsToDisplay);
+  },
+};
+
+export { initialState, helpers };

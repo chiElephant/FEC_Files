@@ -77,7 +77,7 @@ function Overview(props) {
 
   if (Object.keys(product).length) {
     return (
-      <div className="main-container">
+      <div id="main-container" className="main-container">
         <div data-testid="overview" className="overview">
           {/* <Styles
             // product={product}

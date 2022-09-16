@@ -1,8 +1,10 @@
-import React, { useState, onEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import Review from './Review.jsx';
 
 function ReviewsList({ reviews, setSortType, reviewCount }) {
   const [currentSort, setCurrentSort] = useState('relevance');
+
+  const currentSortType = useRef('relevance');
 
   function handleSort(sort) {
     const sortType = sort === 'relevant' ? 'relevance' : sort;
@@ -11,30 +13,31 @@ function ReviewsList({ reviews, setSortType, reviewCount }) {
   }
 
   return (
-    <div id="reviews-list">
-      <div id="review-sort">
-        <div id="sort-text">{`${reviewCount} reviews, sorted by`}</div>
-        <div id="sort-dropdown">
+    <div id="reviews-list" fromelement="Ratings/Reviews">
+      <div id="review-sort" fromelement="Ratings/Reviews">
+        <div id="sort-text" fromelement="Ratings/Reviews">{`${reviewCount} reviews, sorted by`}</div>
+        <div id="sort-dropdown" fromelement="Ratings/Reviews">
           {currentSort}
-          <div id="sort-dropdown-content">
-            <ul className="review-sort-types">
-              <li className="relevant" onClick={() => handleSort('relevant')}>
-                {'relevance'}
+          <div id="sort-dropdown-content" fromelement="Ratings/Reviews">
+            <ul className="review-sort-types" fromelement="Ratings/Reviews">
+              <li className="relevant" fromelement="Ratings/Reviews" role="relevant" onClick={() => handleSort('relevant')}>
+                relevance
               </li>
-              <li className="newest" onClick={() => handleSort('newest')}>
-                {'newest'}
+              <li className="newest" fromelement="Ratings/Reviews" role="newest" onClick={() => handleSort('newest')}>
+                newest
               </li>
-              <li className="helpful" onClick={() => handleSort('helpful')}>
-                {'helpful'}
+              <li className="helpful" fromelement="Ratings/Reviews" role="helpful" onClick={() => handleSort('helpful')} value="helpful">
+                helpful
               </li>
             </ul>
           </div>
-          <div id="sort-icon">
-            <i className="fa-regular fa-angle-down fa-lg"></i>
+          <div id="sort-icon" fromelement="Ratings/Reviews">
+            <i className="fa-regular fa-angle-down fa-lg" fromelement="Ratings/Reviews"></i>
           </div>
         </div>
       </div>
-      <div id="reviews">
+
+      <div id="reviews" fromelement="Ratings/Reviews">
         {reviews
           ? reviews.map((review) => (
               <Review

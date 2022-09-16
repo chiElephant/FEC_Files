@@ -1,5 +1,10 @@
 
 /* Overview styling */
+.main-container {
+  /* width: 1000px; */
+  margin: 0 auto;
+}
+
 
 .product-info-container {
   display: flex;
@@ -307,7 +312,8 @@
 
 .main-container {
   padding-top: 20px;
-
+  padding-left: 20px;
+  margin: 0 auto;
 }
 
 .atelier {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import PhotoModal from './PhotoModal.jsx';
 import { helpers } from './helper_functions/review.js';
 
@@ -17,183 +17,75 @@ function Review(props) {
     photos,
   } = props;
 
-  const [currentHelpful, setCurrentHelpful] = useState(helpfulness);
-  const [currentPhotoURL, setCurrentPhotoURL] = useState('');
-  const [formatedDate, setFormatedDate] = useState('');
+  const [helpfulCount, setHelpfulCount] = useState(helpfulness);
   const [viewPhoto, setViewPhoto] = useState(false);
 
-  const [reviewDivs, setReviewDivs] = useState({
-    helpfulnessDiv: [<div key={'help'} />],
-    recommendDiv: [<div key={'rec'} />],
-    responseDiv: [<div key={'resp'} />],
-    photosDiv: [<div key={'photos'} />],
-    starsDiv: [<div key={'stars'} />],
-  });
+  const reviewResponse = useRef([<div key="response" />]);
+  const photoURL = useRef('');
 
-  useEffect(() => {
-    async function handleDate() {
-      const convertedDate = await helpers.convertDate(date);
-      setFormatedDate((formatedDate) => convertedDate);
-    }
-    handleDate();
+  const formatedDate = useMemo(() => {
+    return helpers.formatDate(date);
+  }, [date]);
 
-    async function handlePhotos() {
-      const div = await createPhotosDiv(photos);
+  const photosDisplay = useMemo(() => {
+    return helpers.createPhotosDiv(photos, photoURL, setViewPhoto);
+  }, [photos]);
 
-      const newPhotosDiv = { photosDiv: div };
-      setReviewDivs((reviewDiv) => ({
-        ...reviewDiv,
-        ...newPhotosDiv,
-      }));
-    }
-    handlePhotos();
-  }, []);
+  const starRating = useMemo(() => {
+    return helpers.createStarDiv(rating);
+  }, [rating]);
 
-  useEffect(() => {
-    createStarDiv();
-    createRecommendDiv();
-    createResponseDiv();
-    createHelpfulnessDiv();
-  }, []);
-
-  useEffect(() => {
-    createHelpfulnessDiv();
-  }, [currentHelpful]);
-
-  async function enlargePhotos(photo) {
-    await setCurrentPhotoURL(photo.url);
-    setViewPhoto((viewPhoto) => true);
-  }
-
-  function createPhotosDiv() {
-    const photoDiv = [];
-    if (photos) {
-      photos.forEach((photo) => {
-        photoDiv.push(
-          <img
-            key={photo.id}
-            className="review-image"
-            src={photo.url}
-            alt="image not available"
-            onClick={() => enlargePhotos(photo)}
-          />
-        );
-      });
-    }
-    return photoDiv;
-  }
-
-  function createStarDiv() {
-    let starRating = [];
-    if (rating !== 0) {
-      for (let i = 1; i <= rating; i++) {
-        starRating.push(
-          <i className="fak fa-star-solid star" key={`star-solid-${i}`}></i>
-        );
-      }
-      for (let i = rating; i < 5; i++) {
-        starRating.push(
-          <i className="fak fa-star-thin star" key={`star-${i}`}></i>
-        );
-      }
-    }
-    const newStarsDiv = { starsDiv: starRating };
-    setReviewDivs((reviewDivs) => ({
-      ...reviewDivs,
-      ...newStarsDiv,
-    }));
-  }
-
-  function createRecommendDiv() {
-    let recDiv = [];
-
-    if (recommend) {
-      recDiv.push(
-        <div key={'recommend'} id="user-recommend">
-          <i className="fa-light fa-check"></i>
-          <span id="user-rec">{'I recommend this product'}</span>
-        </div>
-      );
-      const newRecDiv = { recommendDiv: recDiv };
-      setReviewDivs((reviewDivs) => ({
-        ...reviewDivs,
-        ...newRecDiv,
-      }));
-    }
-  }
-
-  function createResponseDiv() {
-    let responseDiv = [];
-
-    if (response) {
-      responseDiv.push(
-        <div key={'response'} id="user-response">
-          <div className="response">{'Response:'}</div>
-          <div className="user-response">{`${response}`}</div>
-        </div>
-      );
-      const newResponseDiv = { responseDiv: responseDiv };
-      setReviewDivs((reviewDivs) => ({
-        ...reviewDiv,
-        ...newResponseDiv,
-      }));
-    }
-  }
-
-  function createHelpfulnessDiv() {
-    let helpfulDiv = [];
-
-    helpfulDiv.push(
-      <div id="helpful-text" key={'helpful'}>
-        <div>{'Helpful?'}</div>
-        <div className="helpful-yes" onClick={() => markHelpful()}>
-          {'Yes '}
-        </div>
-        <div>{`(${currentHelpful})`}</div>
-        <div>{'|'}</div>
-        <div>{'Report'}</div>
-      </div>
+  const helpful = useMemo(() => {
+    return helpers.createHelpfulnessDiv(
+      helpfulCount,
+      setHelpfulCount,
+      helpfulness,
+      review_id
     );
-    const newHelpfulDiv = { helpfulnessDiv: helpfulDiv };
-    setReviewDivs((reviewDivs) => ({
-      ...reviewDivs,
-      ...newHelpfulDiv,
-    }));
-  }
+  }, [helpfulCount]);
 
-  function markHelpful() {
-    if (currentHelpful === helpfulness) {
-      const newHelpful = currentHelpful + 1;
+  const recommended = useMemo(() => {
+    return helpers.createRecommendDiv(recommend);
+  }, [recommend]);
 
-      setCurrentHelpful((currentHelpful) => newHelpful);
-      helpers.markHelpful(review_id);
-    }
-  }
-
-  function closePhotoModal() {
-    setViewPhoto(() => false);
-  }
+  useEffect(() => {
+    helpers.createResponseDiv(response, reviewResponse);
+  }, [review_id]);
 
   return (
-    <div id="review">
-      <div id="review-top-bar">
-        <div id="stars">{reviewDivs.starsDiv}</div>
-        <div id="date">{formatedDate}</div>
-        <div id="username">{`${username},`}</div>
+    <div className="review" data-testid="review">
+      <div className="review-tile-top-bar">
+        <div className="review-stars" fromelement="Ratings/Reviews">
+          {starRating}
+        </div>
+        <div className="review-date" fromelement="Ratings/Reviews">
+          {formatedDate}
+        </div>
+        <div
+          className="review-username"
+          fromelement="Ratings/Reviews"
+        >{`${username},`}</div>
       </div>
-      <div id="summary">{summary}</div>
-      <div id="body">{body}</div>
-      <div id="photos">{reviewDivs.photosDiv}</div>
+      <div className="review-summary" fromelement="Ratings/Reviews">
+        {summary}
+      </div>
+      <div className="review-body" fromelement="Ratings/Reviews">
+        {body}
+      </div>
+      <div className="review-photos" fromelement="Ratings/Reviews">
+        {photosDisplay}
+      </div>
       <PhotoModal
-        photoURL={currentPhotoURL}
+        photoURL={photoURL.current}
         viewPhoto={viewPhoto}
-        closeModal={closePhotoModal}
+        closePhotoModal={helpers.closePhotoModal}
+        setViewPhoto={setViewPhoto}
       />
-      <div id="recommend">{reviewDivs.recommendDiv}</div>
-      <div id={response !== null ? 'recommend' : ''}>
-        {reviewDivs.responseDiv}
+      {recommended}
+      {reviewResponse.current}
+      <div className="review-helpfulness" fromelement="Ratings/Reviews">
+        {helpful}
       </div>
-      <div id="helpfulness">{reviewDivs.helpfulnessDiv}</div>
     </div>
   );
 }

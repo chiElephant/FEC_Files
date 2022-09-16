@@ -82,6 +82,11 @@ textarea:invalid#formInput ~ span {
 
 /****************/
 
+#QandA-main {
+  width: 840px;
+  margin: 0 auto;
+}
+
 /* #QandAtop {
   display: flex;
   flex-direction: column;

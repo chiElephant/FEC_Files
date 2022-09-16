@@ -2,6 +2,9 @@ require('dotenv').config();
 const path = require('path');
 const express = require('express');
 const axios = require('axios');
+
+const app = express();
+const compression = require('compression');
 const history = require('connect-history-api-fallback');
 
 const {
@@ -14,25 +17,29 @@ const {
   reportAnswer,
 } = require('./utils/questionsAnswersHelper.js');
 const { uploadToCloudinary } = require('./utils/uploadToCloudinary');
+const { postInteractions } = require('./utils/postInteractions');
 const { getProduct } = require('./utils/productDetails.js');
-const reviewsHelper = require('./utils/reviewsHelper.js');
+const reviewsHelpers = require('./utils/reviewsHelpers.js');
 
 const { URL, TOKEN, PORT } = process.env;
-const app = express();
 const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
 
-app.use(history());
-app.use(express.static(path.join(__dirname, '/../client/dist')));
-app.use(express.json({ limit: '50mb' }));
 
 app.use('/', (req, res, next) => {
   console.log(`${req.method} REQUEST ON ${req.url}`);
   next();
 });
 
-// app.get('/:id', (req, res) => {
-//   res.sendFile(path.join(__dirname, '/../client/dist/index.html'));
-// });
+app.use(history());
+app.use(compression());
+app.use(express.static(path.join(__dirname, '/../client/dist')));
+app.use(express.json({ limit: '10mb' }));
+
+app.use('/', (req, res, next) => {
+  console.log(`${req.method} REQUEST ON ${req.url}`);
+  next();
+});
+
 // *** Q & A *** //
 
 // Question List;
@@ -121,29 +128,42 @@ app.get('/products/:id/styles', (req, res, next) => {
 
 //*** RATINGS and REVIEWS ***//
 
-//GET reviews
-app.get('/reviews', reviewsHelper.getReviews, (req, res) => {
-  res.status(200).send(res.body);
+// GET reviews
+app.get('/reviews', (req, res) => {
+  reviewsHelpers.getReviews(req.query, (error, reviews) => {
+    if (error) {
+      res.status(500).send(error);
+    } else {
+      res.status(200).send(reviews);
+    }
+  });
 });
 
-//POST reviews
-app.post(
-  '/reviews',
-  uploadToCloudinary,
-  reviewsHelper.postReview,
-  (req, res) => {
-    res.sendStatus(201);
-  }
-);
+// POST new review
+app.post('/reviews', uploadToCloudinary, (req, res) => {
+  reviewsHelpers.postReview(req.body, (error) => {
+    if (error) {
+      res.status(500).send(error);
+    } else {
+      res.sendStatus(201);
+    }
+  });
+});
 
 //GET review metadata
-app.get('/reviews/meta', reviewsHelper.getMetaData, (req, res) => {
-  res.status(200).send(res.body);
+app.get('/reviews/meta', (req, res) => {
+  reviewsHelpers.getMetaData(req.query, (error, metadata) => {
+    if (error) {
+      res.status(500).send(error);
+    } else {
+      res.status(200).send(metadata);
+    }
+  });
 });
 
 //PUT mark review helpful
 app.put('/reviews/:review_id/helpful', (req, res) => {
-  reviewsHelper.markHelpful(req.params, (error, success) => {
+  reviewsHelpers.markHelpful(req.params, (error) => {
     if (error) {
       res.status(500).send(error);
     } else {
@@ -152,8 +172,31 @@ app.put('/reviews/:review_id/helpful', (req, res) => {
   });
 });
 
-app.get('/reviews/*', (req, res) => {
-  res.render('/');
+//PUT report review
+app.put('/reviews/:review_id/report', (req, res) => {
+  reviewsHelpers.reportReview(req.params, (error) => {
+    if (error) {
+      res.status(500).send(error);
+    } else {
+      res.sendStatus(204);
+    }
+  });
+});
+
+//Reviews Wild Card
+app.use('/reviews/*', (req, res) => {
+  res.send('404: This page does not exist');
+});
+
+//POST interactions
+app.post('/interactions', (req, res) => {
+  postInteractions(req.body, (error) => {
+    if (error) {
+      res.sendStatus(422);
+    } else {
+      res.sendStatus(201);
+    }
+  });
 });
 
 app.use((err, req, res, next) => {

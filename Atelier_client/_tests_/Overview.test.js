@@ -2,10 +2,10 @@ import renderer from 'react-test-renderer';
 import { render, screen, waitFor, act } from '@testing-library/react';
 import React from 'react';
 import userEvent from '@testing-library/user-event';
-import Overview from '../components/overview_module/Overview.jsx';
-import ProductInfo from '../components/overview_module/ProductInfo.jsx';
-import App from '../components/App.jsx';
-import Styles from '../components/overview_module/Styles.jsx';
+import Overview from '../client/src/components/overview_module/Overview.jsx'
+import ProductInfo from '../client/src/components/overview_module/ProductInfo.jsx';
+import App from '../client/src/components/App.jsx';
+import Styles from '../client/src/components/overview_module/Styles.jsx';
 import '@testing-library/jest-dom';
 
 describe('Atelier topbar', () => {

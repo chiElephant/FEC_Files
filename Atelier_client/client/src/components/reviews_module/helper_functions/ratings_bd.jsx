@@ -1,12 +1,15 @@
+import React from 'react';
 import axios from 'axios';
 
 // ******************** Helper Functions ******************** //
 
 const helpers = {
   handleFilters: (target, setCurrentFilters) => {
-    const className = target.className;
+    const document = this;
+    console.log(this);
+    const { className } = target;
     const rating = target.dataset.id;
-    const id = target.id;
+    const { id } = target;
 
     if (className === 'graph-text') {
       const element = document.getElementById(id);
@@ -29,13 +32,28 @@ const helpers = {
     let sum = 0;
     let avg = 0;
 
-    for (const rating in currentRatings) {
-      const key = parseInt(rating, 10);
-      const value = parseInt(currentRatings[rating], 10);
+    const ratingsData = Object.keys(currentRatings).map((key) => [
+      parseInt(key, 10),
+      parseInt(currentRatings[key], 10),
+    ]);
+
+    for (let i = 0; i < ratingsData.length; i++) {
+      const key = ratingsData[i][0];
+      const value = ratingsData[i][1];
 
       reviewsCount += value;
       sum += key * value;
     }
+
+    // for (const rating in currentRatings) {
+    //   if (rating) {
+    //     const key = parseInt(rating, 10);
+    //     const value = parseInt(currentRatings[rating], 10);
+
+    //     reviewsCount += value;
+    //     sum += key * value;
+    //   }
+    // }
 
     avg = (sum / reviewsCount).toFixed(1);
 
@@ -47,7 +65,7 @@ const helpers = {
 
     let sum = 0;
 
-    let percentKey = {
+    const percentKey = {
       1: 0,
       2: 0,
       3: 0,
@@ -55,11 +73,11 @@ const helpers = {
       5: 0,
     };
 
-    for (let rating in currentRatings) {
+    for (const rating in currentRatings) {
       sum += parseInt(currentRatings[rating]);
     }
 
-    for (let rating in currentRatings) {
+    for (const rating in currentRatings) {
       const value = currentRatings[rating];
       percentKey[rating] = Math.floor((value / sum) * 100);
     }
@@ -81,62 +99,61 @@ const helpers = {
     const currentAverage = avg.current;
     let starRatingDiv = [<div key="star-rating" />];
 
-    if (currentAverage) {
-      starRatingDiv = [];
-      const NUM_STARS = 5;
+    starRatingDiv = [];
+    const NUM_STARS = 5;
 
-      const base = Math.floor(currentAverage);
-      const remainder = currentAverage - base;
-      let starFraction;
+    const base = Math.floor(currentAverage);
+    const remainder = currentAverage - base;
+    let starFraction;
 
-      if (remainder < 0.25) {
-        starFraction = 'none';
-      }
-      if (0.25 <= remainder && remainder < 0.5) {
-        starFraction = 'quarter';
-      }
-      if (0.5 <= remainder && remainder < 0.75) {
-        starFraction = 'half';
-      }
-      if (0.75 <= remainder) {
-        starFraction = 'three-quarter';
-      }
-
-      if (currentAverage !== 0) {
-        for (let i = 1; i <= base; i++) {
-          starRatingDiv.push(
-            <i
-              className="fak fa-star-solid star"
-              fromelement="Ratings/Reviews"
-              key={`${i}-solid`}
-            ></i>
-          );
-        }
-
-        if (starFraction !== 'none') {
-          starRatingDiv.push(
-            <i
-              className="fak fa-star-half-stroke-solid"
-              fromelement="Ratings/Reviews"
-              key="star-fraction"
-            ></i>
-          );
-        }
-
-        const start = base + 1;
-
-        for (let i = start; i < NUM_STARS; i++) {
-          starRatingDiv.push(
-            <i
-              className="fak fa-star-thin star"
-              fromelement="Ratings/Reviews"
-              key={`${i}-regular`}
-            ></i>
-          );
-        }
-      }
-      return starRatingDiv;
+    if (remainder < 0.25) {
+      starFraction = 'none';
     }
+    if (remainder >= 0.25 && remainder < 0.5) {
+      starFraction = 'quarter';
+    }
+    if (remainder >= 0.5 && remainder < 0.75) {
+      starFraction = 'half';
+    }
+    if (remainder >= 0.75) {
+      starFraction = 'three-quarter';
+    }
+
+    if (currentAverage !== 0) {
+      for (let i = 1; i <= base; i++) {
+        starRatingDiv.push(
+          <i
+            className="fak fa-star-solid star"
+            fromelement="Ratings/Reviews"
+            key={`${i}-solid`}
+          />
+        );
+      }
+
+      if (starFraction !== 'none') {
+        starRatingDiv.push(
+          <i
+            className="fak fa-star-half-stroke-solid"
+            fromelement="Ratings/Reviews"
+            key="star-fraction"
+          />
+        );
+      }
+
+      const start = base + 1;
+
+      for (let i = start; i < NUM_STARS; i++) {
+        starRatingDiv.push(
+          <i
+            className="fak fa-star-thin star"
+            fromelement="Ratings/Reviews"
+            key={`${i}-regular`}
+          />
+        );
+      }
+    }
+
+    return starRatingDiv;
   },
 
   createRatingsBD: (ratings, setCurrentFilters) => {
@@ -148,7 +165,7 @@ const helpers = {
       const NUM_BARS = 5;
       ratingsGraphDiv = [];
 
-      for (var i = NUM_BARS; i > 0; i--) {
+      for (let i = NUM_BARS; i > 0; i--) {
         ratingsGraphDiv.push(
           <div id="filter-star" fromelement="Ratings/Reviews" key={i}>
             <div
@@ -166,8 +183,8 @@ const helpers = {
               <span
                 className="brekdown-meter"
                 fromelement="Ratings/Reviews"
-                style={{ width: ratingsPercent[i] + '%' }}
-              ></span>
+                style={{ width: `${ratingsPercent[i]}%` }}
+              />
             </div>
             <div className="graph-rating" fromelement="Ratings/Reviews">
               {currentRatings[i]}

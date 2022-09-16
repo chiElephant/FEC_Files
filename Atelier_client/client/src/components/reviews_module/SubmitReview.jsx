@@ -1,6 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect, useRef } from 'react';
 
+import {
+  initialState,
+  helpers,
+  reviewForm,
+} from './helper_functions/submitReview';
 import Characteristics from './Characteristics.jsx';
 import ErrorModal from './ErrorModal.jsx';
 import StarRating from './StarRating.jsx';
@@ -9,25 +13,14 @@ import Photos from './Photos.jsx';
 function SubmitReview({
   showReviewModal,
   setShowReviewModal,
-  productName,
+  product_name,
   product_id,
   characteristics,
 }) {
-  const inputInitState = {
-    product_id: 0,
-    recommend: null,
-    characteristics: {},
-    summary: '',
-    photos: [],
-    rating: 0,
-    email: '',
-    body: '',
-    name: '',
-  };
-
+  const [userInputs, setUserInputs] = useState(initialState.reviewForm);
   const [errorModal, setErrorModal] = useState('');
-  const [error, setError] = useState('');
-  const [userInputs, setUserInputs] = useState(inputInitState);
+
+  const error = useRef('');
 
   useEffect(() => {
     const newValue = { product_id: product_id };
@@ -60,112 +53,84 @@ function SubmitReview({
     }
   }
 
-  function validateUserData() {
-    const { rating, recommend, summary, body, photos, name, email } =
-      userInputs;
-    const characteristicsLength = Object.keys(
-      userInputs.characteristics
-    ).length;
-    const charsLength = Object.keys(characteristics).length;
-
-    const validationKey = {
-      rating: rating !== 0,
-      recommend: typeof recommend === 'boolean',
-      characteristics: charsLength === characteristicsLength,
-      summary: summary.length <= 60,
-      body: 50 <= body.length && body.length <= 100,
-      photos: photos.length <= 5,
-      name: 0 < name.length && name.length <= 60,
-      email: 0 < email.length && email.length <= 60,
-    };
-
-    function validateEmail() {
-      var validationExp = /\S+@\S+\.\S+/;
-      const valid = validationExp.test(userInputs.email);
-      validationKey.email = valid;
-    }
-    validateEmail();
-
-    for (let input in validationKey) {
-      if (!validationKey[input]) {
-        setError((error) => input);
-        setErrorModal((errorModal) => true);
-        return;
-      }
-    }
-    setShowReviewModal((prevState) => false);
-    handleSubmit();
-  }
-
-  const handleSubmit = () => {
-    axios
-      .post('/reviews', userInputs)
-      .then((response) => {
-        setUserInputs((prevState) => ({
-          ...prevState,
-          ...inputInitState,
-        }));
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log('post error: ', error);
-      });
-  };
-
   return !showReviewModal ? (
     ''
   ) : (
-    <div id="review-window">
-      <div id="review-form" onSubmit={(e) => e.preventDefault()}>
+    <div id="review-window" fromelement="Ratings/Reviews">
+      <div
+        id="review-form"
+        fromelement="Ratings/Reviews"
+        onSubmit={(e) => e.preventDefault()}
+      >
         <div onClick={() => setShowReviewModal((showReviewModal) => false)}>
           <i
-            className="fak fa-square-xmark-light fa-2xl"
             id="review-window-icon"
+            fromelement="Ratings/Reviews"
+            className="fak fa-square-xmark-light fa-2xl"
           ></i>
         </div>
 
-        <h1>Write Your Review</h1>
-        <h3>About the {productName}</h3>
+        <h1 id="add-review-header" fromelement="Ratings/Reviews">
+          Write Your Review
+        </h1>
+        <h3 id="product-name" fromelement="Ratings/Reviews">About the {product_name}</h3>
 
+        {/* This will allow the user to rate the product */}
         <StarRating
           rating={userInputs.rating}
           handleUserInputs={handleUserInputs}
         />
 
-        {/* This div will ask the customer if they recommend the product*/}
-        <fieldset id="recommend" required="required">
-          <legend>Do you recommend this product?*</legend>
-          <label className="rec-radio-text">
+        {/* This will allow the user if they recommend the product*/}
+        <fieldset
+          id="recommend"
+          fromelement="Ratings/Reviews"
+          required="required"
+        >
+          <legend id="user-recommend" fromelement="Ratings/Reviews">
+            Do you recommend this product?*
+          </legend>
+          <label className="rec-radio-text" fromelement="Ratings/Reviews">
             <input
+              className="rec-radio"
+              fromelement="Ratings/Reviews"
               type="radio"
               name="rec"
               value="yes"
-              className="rec-radio"
               onClick={() => handleUserInputs('recommend', true)}
             />
             Yes
           </label>
-          <label className="rec-radio-text">
+          <label className="rec-radio-text" fromelement="Ratings/Reviews">
             <input
+              className="rec-radio"
+              fromelement="Ratings/Reviews"
               type="radio"
               name="rec"
               value="no"
-              className="rec-radio"
               onClick={() => handleUserInputs('recommend', false)}
             />
             No
           </label>
         </fieldset>
 
+        {/* This will allow the user to rate the product characteristics */}
         <Characteristics
           characteristics={characteristics}
           handleUserInputs={handleUserInputs}
         />
 
-        {/* This div will alllow the user to enter a summary */}
+        {/* This will alllow the user to enter a summary */}
         <fieldset id="review-summary-input">
-          <legend>Summary</legend>
+          <legend
+            className="user-summary-heading"
+            fromelement="Ratings/Reviews"
+          >
+            Summary
+          </legend>
           <textarea
+            className="user-summary"
+            fromelement="Ratings/Reviews"
             maxLength="60"
             placeholder={'Example: Best purchse ever!'}
             rows="2"
@@ -175,10 +140,12 @@ function SubmitReview({
           ></textarea>
         </fieldset>
 
-        {/* This div will allow a user to enter a review body */}
-        <fieldset id="review-body-input">
-          <legend>Review*</legend>
+        {/* This will allow a user to enter a review body */}
+        <fieldset id="review-body-input" fromelement="Ratings/Reviews">
+          <legend className="user-review-header" fromelement="Ratings/Reviews">Review*</legend>
           <textarea
+            className="user-review"
+            fromelement="Ratings/Reviews"
             minLength="50"
             maxLength="1000"
             placeholder={'Why did you like this product or not?'}
@@ -189,7 +156,7 @@ function SubmitReview({
             onChange={(e) => handleUserInputs('body', e.target.value)}
           ></textarea>
 
-          <span>
+          <span className="review-char-count" fromelement="Ratings/Reviews">
             {userInputs.body.length < 50
               ? `Minimum required characters left: ${
                   50 - userInputs.body.length
@@ -198,12 +165,18 @@ function SubmitReview({
           </span>
         </fieldset>
 
-        <Photos photos={photos} handleUserInputs={handleUserInputs} />
+        {/* This will allow the user to upload photos */}
+        <Photos
+          photos={userInputs.photos}
+          handleUserInputs={handleUserInputs}
+        />
 
-        {/* This div will ask the user to enter their enter their name */}
-        <fieldset id="name-input">
-          <legend>What is your Name?*</legend>
+        {/* This will allow the user to enter their enter their name */}
+        <fieldset id="name-input" fromelement="Ratings/Reviews">
+          <legend id="add-review-header" fromelement="Ratings/Reviews">What is your Name?*</legend>
           <input
+            className="user-name"
+            fromelement="Ratings/Reviews"
             type="text"
             className="name-input"
             placeholder="Example: jackson11!"
@@ -213,17 +186,20 @@ function SubmitReview({
             onChange={(e) => handleUserInputs('name', e.target.value)}
           ></input>
           <br />
-          <span>
+          <span className="review-name-privacy" fromelement="Ratings/Reviews">
             For privacy reasons, do not use your full name or email address
           </span>
         </fieldset>
 
-        {/* This div will ask the user to enter their email */}
-        <fieldset id="email-input">
-          <legend>Your email*</legend>
+        {/* This will allow the user to enter their email */}
+        <fieldset id="email-input" fromelement="Ratings/Reviews">
+          <legend className="user-review-email" fromelement="Ratings/Reviews">
+            Your email*
+          </legend>
           <input
-            type="email"
             className="email-input"
+            fromelement="Ratings/Reviews"
+            type="email"
             placeholder="Example: jackson11@email.com"
             maxLength="60"
             size="35"
@@ -231,18 +207,32 @@ function SubmitReview({
             onChange={(e) => handleUserInputs('email', e.target.value)}
           ></input>
           <br />
-          <span>For authentication reasons, you will not be emailed</span>
+          <span className="review-authentication" fromelement="Ratings/Reviews">
+            For authentication reasons, you will not be emailed
+          </span>
         </fieldset>
         <br />
         <button
           id="submit-review"
+          fromelement="Ratings/Reviews"
           type="submit"
           className="reviews-btn"
-          onClick={() => validateUserData(userInputs, handleSubmit)}
+          onClick={() =>
+            helpers.validateUserData(
+              error,
+              userInputs,
+              setUserInputs,
+              setErrorModal,
+              characteristics,
+              setShowReviewModal
+            )
+          }
         >
           Submit Review
         </button>
-        <span>*required</span>
+        <span className="review-field-required" fromelement="Ratings/Reviews">
+          *required
+        </span>
       </div>
       <ErrorModal
         error={error}
