@@ -1,5 +1,12 @@
 /* Questions and Answers styling */
 
+#qanda-header {
+  font-size: large;
+  color: rgb(82, 82, 82);
+  font-weight: 300;
+  margin-top: 80px;
+}
+
 /* Modal */
 #new-question-window {
   position: fixed;
@@ -41,11 +48,11 @@ textarea#formInput {
 }
 
 div#form-entry > label {
-  color: rgb(205, 194, 194);
+  color: rgb(82, 82, 82);
 }
 
 div#form-entry > div {
-  color: rgb(205, 194, 194);
+  color: rgb(82, 82, 82);
 }
 
 button#submit-question-button {
@@ -71,15 +78,6 @@ div#answer-img > img {
 }
 
 
-
-/* input:invalid#formInput ~ span {
-  display: block;
-}
-
-textarea:invalid#formInput ~ span {
-  display: block;
-} */
-
 /****************/
 
 #QandA-main {
@@ -87,12 +85,6 @@ textarea:invalid#formInput ~ span {
   margin: 0 auto;
 }
 
-/* #QandAtop {
-  display: flex;
-  flex-direction: column;
-  border: solid;
-  border-color: blueviolet;
-} */
 
  div.question {
   display: flex;
@@ -108,7 +100,8 @@ div.question>div {
 
 div.question>div > h3{
   padding-right: 10px;
-  font-size: 25px;
+  font-size: medium;
+  color: rgb(82, 82, 82);
 }
 
 #answer-under {
@@ -116,6 +109,7 @@ div.question>div > h3{
   display: flex;
   flex-direction: column;
   padding-left: 20px;
+  font-size: small;
 }
 
 div.answer {
@@ -125,12 +119,12 @@ div.answer {
 }
 
 div.answer > div > p {
-  font-size: 18px;
+  font-size: medium;
 }
 
 div.answer>div > h3 {
   padding-right: 10px;
-  font-size: 25px;
+  font-size: medium;
 }
 
 div.answer>div {
@@ -166,6 +160,7 @@ div.question-helpful {
 
 div.question-helpful>div {
   padding-right: 10px;
+  font-size: small;
 }
 
 div.answer-helpful {
@@ -191,6 +186,7 @@ div.answer-yes {
 div.question-add-answer {
   text-decoration: underline;
   padding-left: 10px;
+  font-size: small;
 }
 
 div.answer-report {
@@ -249,7 +245,7 @@ div#questions-buttons {
 div#questions-buttons > button {
 
   background-color: white;
-  font-size: 20px;
+  font-size: medium;
   width: 500px;
   height:60px;
   margin-right: 20px;
@@ -260,6 +256,7 @@ div.more-answers {
   padding-bottom: 10px;
   padding-left: 30px;
   font-weight: bold;
+  font-size: small;
 }
 
 img#answer-img {

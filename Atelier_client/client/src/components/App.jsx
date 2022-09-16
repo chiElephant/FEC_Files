@@ -22,7 +22,6 @@ function App() {
   }, [id]);
 
   useEffect(() => {
-    console.log('fire');
     const options = {
       method: 'get',
       url: `/products`,
@@ -42,16 +41,16 @@ function App() {
     productId !== 0 ? (
       <>
         <Overview product_id={productId} />
-        <ReviewsModule product_id={productId} product_name={productName} />
         <QandAModule product_id={productId} product_name={productName} />
+        <ReviewsModule product_id={productId} product_name={productName} />
       </>
     ) : null;
 
   return (
     <div>
       <Topbar />
-      <ProductLinks products={products} />
       {widgets}
+      <ProductLinks products={products} />
     </div>
   );
 }
