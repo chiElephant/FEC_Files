@@ -26,8 +26,7 @@ export default function addQuestion(
   };
 
   axios(options)
-    .then((response) => {
-      console.log(response.status);
+    .then(() => {
       handleFetchQuestions();
     })
     .catch((error) => {

@@ -83,7 +83,6 @@ function ModalAnswer({
 
     convertToBase64url(e, errorMessage)
       .then((res) => {
-        console.log('his:', res)
         const copyArray = values.photos.slice();
         res.forEach((item) => {
           if (
@@ -101,7 +100,6 @@ function ModalAnswer({
         if (values.photos.length === 0) {
           setValidEntries({ ...validEntries, photos: false });
         }
-        console.log('error: ', error);
       });
   };
 

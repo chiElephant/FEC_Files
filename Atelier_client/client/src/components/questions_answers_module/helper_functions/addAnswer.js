@@ -16,7 +16,6 @@ export default function addAnswer(
     photos,
   });
 
-  console.log(data);
   const options = {
     method: 'post',
     url,
@@ -27,8 +26,7 @@ export default function addAnswer(
   };
 
   axios(options)
-    .then((response) => {
-      console.log(response.status);
+    .then(() => {
       handleFetchAnswers();
     })
     .catch((error) => {

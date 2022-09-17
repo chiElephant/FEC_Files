@@ -2,7 +2,7 @@
 #reviews-body {
   height: 100%;
   width: 1000px;
-  margin: 0 auto 80px auto;
+  margin: 0 auto 40px auto;
 }
 #reviews-module {
   max-height: 100vh;
@@ -14,7 +14,7 @@
   font-size: large;
   color: rgb(82, 82, 82);
   font-weight: 300;
-  margin-top: 80px;
+  margin-bottom:20px;
 }
 
 #main-buttons {

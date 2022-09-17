@@ -62,9 +62,8 @@ function ModalQuestion({
   ];
 
   const validateForm = () => {
-    console.log('validate!');
     const error = Object.values(validEntries).every((item) => !item);
-    console.log('error: ', error);
+
     if (error) {
       setFormError(error);
     } else {
@@ -82,7 +81,7 @@ function ModalQuestion({
     const isValueValid = e.target.validity.valid;
     const targetName = e.target.name;
     const targetValue = e.target.value;
-    console.log('isValueValid: ', isValueValid);
+
     if (isValueValid) {
       setValidEntries({
         ...validEntries,
