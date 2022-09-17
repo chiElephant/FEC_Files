@@ -1,8 +1,6 @@
 import React, { useEffect, useMemo, useRef } from 'react';
 import ProductBreakdown from './ProductBreakdown.jsx';
-
 import helpers from './helper_functions/ratings_bd.js';
-
 function RatingsBreakdown({
   product_id,
   setCharacteristics,
@@ -28,20 +26,16 @@ function RatingsBreakdown({
   useEffect(() => {
     helpers.getMetadata(product_id, (meta) => {
       metadata.current = meta;
-
       helpers.handleRatings(meta.ratings, (avg, reviewsCount) => {
         totalReviews.current = reviewsCount;
         avgRating.current = avg;
       });
-
       helpers.handleRecommended(meta.recommended, (avg) => {
         percentRecommended.current = avg;
       });
-
       setCharacteristics(() => meta.characteristics);
     });
   }, [product_id]);
-
   return (
     <div id="ratings-breakdown" fromelement="Ratings/Reviews">
       <div id="average-rating">
@@ -67,5 +61,4 @@ function RatingsBreakdown({
     </div>
   );
 }
-
 export default RatingsBreakdown;
