@@ -123,11 +123,11 @@ function ProductInfo(props) {
           )}
         </div>
         {/* <div className="description">{props.product.description}</div> */}
-        <ul>
+        {/* <ul>
           {props.product.features.map((feature, index) => (
             <li key={index}>{`${feature.value} ${feature.feature}`}</li>
           ))}
-        </ul>
+        </ul> */}
 
         <button className="addto-outfit">Add to My Outfit</button>
       </div>
