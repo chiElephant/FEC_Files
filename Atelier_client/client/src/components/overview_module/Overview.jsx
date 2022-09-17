@@ -53,7 +53,6 @@ function Overview(props) {
       setStyles(data.data);
     });
     axios.get(`/products/${props.product_id}/styles`).then((data) => {
-      console.log(data.data);
       setStyles(data.data);
     });
   }, [props.product_id]);
@@ -71,7 +70,7 @@ function Overview(props) {
   }, [styles]);
 
   const changeStyleSelected = (style) => {
-    console.log(`The selected style is: ${JSON.stringify(style)}`);
+    // console.log(`The selected style is: ${JSON.stringify(style)}`);
     setSelectedStyle(style);
   };
 

@@ -21,7 +21,7 @@ function Gallery(props) {
   useEffect(() => {
     const testAsync = async () => {
       const photos = await selectedStyle.photos;
-      await console.log('THESE ARE THE PHOTOS', photos);
+      // await console.log('THESE ARE THE PHOTOS', photos);
       setSelectedPhoto(photos[selectedIndex].url);
     };
     testAsync();
@@ -32,7 +32,7 @@ function Gallery(props) {
     e.preventDefault();
     // console.log(e.target.src);
     setSelectedPhoto(e.target.src);
-    console.log(Number(e.target.getAttribute('index')));
+    // console.log(Number(e.target.getAttribute('index')));
     setSelectedIndex(Number(e.target.getAttribute('index')));
   };
 
@@ -84,7 +84,11 @@ function Gallery(props) {
   };
 
   if (Object.keys(selectedStyle).length) {
-    if (view === 'default' && Object.keys(selectedStyle.photos).length && selectedPhoto !== null) {
+    if (
+      view === 'default' &&
+      Object.keys(selectedStyle.photos).length &&
+      selectedPhoto !== null
+    ) {
       return (
         <div className="gallery-container">
           <img

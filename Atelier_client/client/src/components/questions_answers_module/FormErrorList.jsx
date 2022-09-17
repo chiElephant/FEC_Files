@@ -12,8 +12,6 @@ function FormErrorList({ validEntries, inputs }) {
     (item) => item === null
   );
 
-  console.log('allErrorCleared: ', allErrorCleared);
-
   if (!allErrorCleared) {
     return (
       <div id="questions-answers-form-error">

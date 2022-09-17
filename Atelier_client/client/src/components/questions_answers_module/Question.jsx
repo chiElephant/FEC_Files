@@ -59,7 +59,6 @@ function Question({ question_id, body, helpfulness, productName, productId }) {
     setPage(1);
     setDisplayAfterFetchCount((prevState) => prevState + 1);
     setFetchAnswers((prevState) => !prevState);
-    console.log('FETCH ANSWERS FIRE: ', fetchAnswers);
   };
   let userVote;
   if (allowUserVote) {

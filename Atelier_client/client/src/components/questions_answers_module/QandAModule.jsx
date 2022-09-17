@@ -25,8 +25,6 @@ function QandAModule({ product_id, product_name }) {
     setShowMoreQuestions,
     fetchQuestions
   );
-  console.log('displayList: ', displayList);
-  console.log('questionList: ', displayList);
 
   //filtered questions state
   const [displayFiltered, setDisplayFiltered] = useState([]);
@@ -151,7 +149,7 @@ function QandAModule({ product_id, product_name }) {
   return (
     <div id="QandA-main">
       <div id="QandAtop">
-        <h1>Questions & Answers</h1>
+        <h1 id="qanda-header">Questions & Answers</h1>
         <SearchQ
           handleUpdateSearchText={handleUpdateSearchText}
           searchText={searchText}

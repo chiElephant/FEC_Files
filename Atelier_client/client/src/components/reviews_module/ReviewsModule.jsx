@@ -24,7 +24,6 @@ function ReviewsModule({ product_id, product_name }) {
       count,
     };
 
-    console.log(product_id);
     if (product_id !== 12345) {
       helpers.getReviews(params, currentFilters, (reviewData) => {
         reviews.current = reviewData;

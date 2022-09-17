@@ -1,5 +1,13 @@
 /* Questions and Answers styling */
 
+#qanda-header {
+  font-size: large;
+  color: rgb(82, 82, 82);
+  font-weight: 300;
+  margin-top: 80px;
+  margin-bottom:20px;
+}
+
 /* Modal */
 #new-question-window {
   position: fixed;
@@ -15,7 +23,7 @@
 }
 
 form#question-form {
-  padding: 0px 60px;
+  padding: 10px 60px;
   width: 800px;
   right: 16px;
   background-color: rgb(35, 35, 35);
@@ -37,19 +45,17 @@ input#formInput {
 textarea#formInput {
   font-size: 20px;
   resize: none;
-  height: 400px;
-}
-
-div#form-entry > label {
-  color: rgb(205, 194, 194);
-}
-
-div#form-entry > div {
-  color: rgb(205, 194, 194);
+  height: 300px;
 }
 
 button#submit-question-button {
-  margin-bottom:20px;
+  background-color: white;
+  border: solid 1px;
+  color: rgb(82, 82, 82);
+  padding: 16px 32px;
+  margin-left: 12px;
+  float: right;
+  margin-bottom: 10px;
 }
 
 div#questions-answers-form-error {
@@ -71,28 +77,14 @@ div#answer-img > img {
 }
 
 
-
-/* input:invalid#formInput ~ span {
-  display: block;
-}
-
-textarea:invalid#formInput ~ span {
-  display: block;
-} */
-
 /****************/
 
 #QandA-main {
-  width: 840px;
-  margin: 0 auto;
+  height: 100%;
+  width: 1000px;
+  margin: 0 auto 30px auto;
 }
 
-/* #QandAtop {
-  display: flex;
-  flex-direction: column;
-  border: solid;
-  border-color: blueviolet;
-} */
 
  div.question {
   display: flex;
@@ -108,7 +100,10 @@ div.question>div {
 
 div.question>div > h3{
   padding-right: 10px;
-  font-size: 25px;
+  font-size: large;
+  font-weight: bolder;
+  text-overflow: ellipsis;
+  color: rgb(82, 82, 82);
 }
 
 #answer-under {
@@ -116,6 +111,8 @@ div.question>div > h3{
   display: flex;
   flex-direction: column;
   padding-left: 20px;
+  font-size: small;
+  color: rgb(103, 103, 103);
 }
 
 div.answer {
@@ -125,12 +122,15 @@ div.answer {
 }
 
 div.answer > div > p {
-  font-size: 18px;
+  font-size: medium;
+  color: rgb(103, 103, 103);
+  overflow-wrap: break-word;
 }
 
 div.answer>div > h3 {
   padding-right: 10px;
-  font-size: 25px;
+  font-size: medium;
+  color: rgb(103, 103, 103);
 }
 
 div.answer>div {
@@ -140,6 +140,8 @@ div.answer>div {
 
 div.question-options {
   display: flex;
+  font-size: small;
+  color: rgb(103, 103, 103);
 }
 
 div.answer-options > div:nth-child(1) {
@@ -165,7 +167,8 @@ div.question-helpful {
 }
 
 div.question-helpful>div {
-  padding-right: 10px;
+  padding-right: 5px;
+  font-size: small;
 }
 
 div.answer-helpful {
@@ -177,7 +180,7 @@ div.answer-helpful {
 }
 
 div.answer-helpful>div {
-  padding-right: 10px;
+  padding-right: 5px;
 }
 
 div.question-yes {
@@ -191,6 +194,7 @@ div.answer-yes {
 div.question-add-answer {
   text-decoration: underline;
   padding-left: 10px;
+  font-size: small;
 }
 
 div.answer-report {
@@ -210,7 +214,7 @@ div.search {
 div.searchInputs  {
   display:flex;
   justify-content: flex-start;
-  border: solid 2px black;
+  border: solid 2px rgb(82, 82, 82);
   align-items: center;
 }
 
@@ -226,6 +230,7 @@ div.searchInputs >input {
 #QandAtop > div.search > div.searchInputs > svg {
   font-size: 30px;
   padding-right: 20px;
+  color:  rgb(82, 82, 82);
 }
 
 
@@ -241,18 +246,20 @@ div.searchInputs > input:focus {
 
 div#questions-buttons {
 
-  display: flex;
-  margin-top:20px;
-  margin-bottom:20px;
+  display: inline-block;
+  width: 100%;
+  padding-top: 20px;
 }
 
 div#questions-buttons > button {
 
+
   background-color: white;
-  font-size: 20px;
-  width: 500px;
-  height:60px;
-  margin-right: 20px;
+  border: solid 1px;
+  color: rgb(82, 82, 82);
+  padding: 16px 32px;
+  margin-left: 12px;
+  float: left;
 }
 
 div.more-answers {
@@ -260,15 +267,18 @@ div.more-answers {
   padding-bottom: 10px;
   padding-left: 30px;
   font-weight: bold;
+  font-size: small;
+  color: rgb(82, 82, 82);
 }
 
 img#answer-img {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin: 10px;
   float: left;
-  width:  200px;
-  height: 200px;
+  width: 100px;
+  height: 100px;
   object-fit: cover;
-  margin-right:10px;
-  margin-top:10px;
 }
 
 div#answer-list {
@@ -284,4 +294,5 @@ div#question-list {
 
 #seller-name {
   font-weight: bold;
+  color: rgb(82, 82, 82);
 }

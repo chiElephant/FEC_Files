@@ -9,9 +9,7 @@ export default function markQuestionAsHelpful(question_id) {
   };
 
   axios(options)
-    .then((response) => {
-      console.log(response.status);
-    })
+    .then((response) => response)
     .catch((error) => {
       console.log(error);
     });
