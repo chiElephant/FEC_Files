@@ -48,9 +48,9 @@ function App() {
 
   return (
     <div>
-      <Topbar />
+      {/* <Topbar /> */}
       {widgets}
-      <ProductLinks products={products} />
+      {/* <ProductLinks products={products} /> */}
     </div>
   );
 }
