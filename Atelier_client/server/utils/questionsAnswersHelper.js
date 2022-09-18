@@ -1,7 +1,5 @@
 require('dotenv').config();
 const axios = require('axios');
-const e = require('express');
-const { uploadToCloudinary } = require('./uploadToCloudinary');
 
 const { URL, TOKEN } = process.env;
 
@@ -28,7 +26,26 @@ const getQuestions = (req, res, next) => {
           store = [...store, ...questionList];
           get(page + 1);
         } else {
-          res.body = store;
+          const filteredAnswers = store.map((obj) => {
+            const answers = Object.values(obj.answers);
+
+            const filterBySeller = answers.filter(
+              (item) => item.answerer_name === 'Seller'
+            );
+
+            const filterRestAndSortByHelpfulness = answers
+              .filter((item) => item.answerer_name !== 'Seller')
+              .sort((a, b) => b.helpfulness - a.helpfulness);
+
+            obj.answers = [
+              ...filterBySeller,
+              ...filterRestAndSortByHelpfulness,
+            ];
+
+            return obj;
+          });
+
+          res.body = filteredAnswers;
           next();
         }
       })

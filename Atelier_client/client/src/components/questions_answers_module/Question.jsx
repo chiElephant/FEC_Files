@@ -6,32 +6,40 @@ import ModalAnswer from './ModalAnswer.jsx';
 
 const RESULTS_PER_PAGE = 100;
 
-function Question({ question_id, body, helpfulness, productName, productId }) {
-  const [answerList, setAnswerList] = useState([]);
+function Question({
+  question_id,
+  body,
+  helpfulness,
+  productName,
+  productId,
+  answers,
+  handleFetchQuestions,
+}) {
+  // const [answerList, setAnswerList] = useState([]);
   const [displayList, setDisplayList] = useState([]);
-  const [page, setPage] = useState(1);
+  // const [page, setPage] = useState(1);
   const [showMoreAnswers, setShowMoreAnswers] = useState(false);
   const [helpCount, setHelpCount] = useState(helpfulness);
   const [allowUserVote, setAllowUserVote] = useState(false);
   const [isModal, setIsModal] = useState(false);
-  const [fetchAnswers, setFetchAnswers] = useState(false);
-  const [displayAfterFetchCount, setDisplayAfterFetchCount] = useState(0);
-  const answerListLength = answerList.length;
+  // const [fetchAnswers, setFetchAnswers] = useState(false);
+  // const [displayAfterFetchCount, setDisplayAfterFetchCount] = useState(0);
+  // const answerListLength = answerList.length;
 
-  useEffect(() => {
-    getAnswers(
-      question_id,
-      page,
-      RESULTS_PER_PAGE,
-      setAnswerList,
-      setPage,
-      displayList,
-      setDisplayList,
-      setShowMoreAnswers,
-      displayAfterFetchCount,
-      setDisplayAfterFetchCount
-    );
-  }, [page, fetchAnswers]);
+  // useEffect(() => {
+  //   getAnswers(
+  //     question_id,
+  //     page,
+  //     RESULTS_PER_PAGE,
+  //     setAnswerList,
+  //     setPage,
+  //     displayList,
+  //     setDisplayList,
+  //     setShowMoreAnswers,
+  //     displayAfterFetchCount,
+  //     setDisplayAfterFetchCount
+  //   );
+  // }, [page, fetchAnswers]);
 
   const handleSeeMoreAnswers = () => {
     setDisplayList(answerList);
@@ -55,11 +63,11 @@ function Question({ question_id, body, helpfulness, productName, productId }) {
     setAllowUserVote(true);
   };
 
-  const handleFetchAnswers = () => {
-    setPage(1);
-    setDisplayAfterFetchCount((prevState) => prevState + 1);
-    setFetchAnswers((prevState) => !prevState);
-  };
+  // const handleFetchAnswers = () => {
+  //   setPage(1);
+  //   setDisplayAfterFetchCount((prevState) => prevState + 1);
+  //   setFetchAnswers((prevState) => !prevState);
+  // };
   let userVote;
   if (allowUserVote) {
     userVote = <div className="question-yes">Yes({helpCount})</div>;

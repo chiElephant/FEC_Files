@@ -39,6 +39,8 @@ function QuestionList({
       <div data-testid="test-questions" ref={containerRef} id="question-list">
         {displayList.map((q) => (
           <Question
+            handleFetchQuestions={handleFetchQuestions}
+            answers={q.answers}
             productName={productName}
             productId={productId}
             key={q.question_id}
