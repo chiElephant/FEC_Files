@@ -98,11 +98,16 @@ div.question>div {
   justify-content: space-between;
 }
 
-div.question>div > h3{
+div.question>div > h2{
   padding-right: 10px;
   font-size: large;
   font-weight: bolder;
   text-overflow: ellipsis;
+  color: rgb(82, 82, 82);
+}
+
+div.question>div > h3{
+  font-size: large;
   color: rgb(82, 82, 82);
 }
 

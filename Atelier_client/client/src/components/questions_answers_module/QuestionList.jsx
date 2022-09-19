@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import Question from './Question.jsx';
 import ModalQuestion from './ModalQuestion.jsx';
 import useAutoScroll from './custom_hooks/useAutoScroll.jsx';

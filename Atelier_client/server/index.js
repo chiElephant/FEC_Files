@@ -24,7 +24,6 @@ const reviewsHelpers = require('./utils/reviewsHelpers.js');
 const { URL, TOKEN, PORT } = process.env;
 const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
 
-
 app.use('/', (req, res, next) => {
   console.log(`${req.method} REQUEST ON ${req.url}`);
   next();
@@ -49,7 +48,7 @@ app.get('/questions/:product_id/', getQuestions, (req, res) => {
 });
 
 // Answer List;
-app.get('/answers/:question_id/:page/:count', getAnswers, (req, res) => {
+app.get('/answers/:question_id', getAnswers, (req, res) => {
   res.status(200).send(res.body);
 });
 
