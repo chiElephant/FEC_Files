@@ -13,8 +13,8 @@ function Slogan(props) {
   if (Object.keys(props.product).length) {
     return (
       <div className="slogan-features">
-        <h4>{props.product.slogan}</h4>
-        <ul>
+        <div className="slogan">{props.product.slogan}</div>
+        <ul className="features">
           {props.product.features.map((feature, index) => (
             <li key={index}>{`${feature.value} ${feature.feature}`}</li>
           ))}

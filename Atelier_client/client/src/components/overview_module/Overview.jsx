@@ -101,7 +101,7 @@ function Overview(props) {
             />
           </div>
         </div>
-        {/* <Slogan product={product} /> */}
+        <Slogan product={product} />
       </div>
     );
   }
