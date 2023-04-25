@@ -30,8 +30,8 @@ function AnswerList({
       <div id="answer-list">
         {displayList.map((a) => (
           <Answer
-            key={a.answer_id}
-            answer_id={a.answer_id}
+            key={a.id || a.answer_id}
+            answer_id={a.id || a.answer_id}
             answerer_name={a.answerer_name}
             body={a.body}
             date={a.date}
@@ -44,8 +44,8 @@ function AnswerList({
       <div>
         {displayList.map((a) => (
           <Answer
-            key={a.answer_id}
-            answer_id={a.answer_id}
+            key={a.id || a.answer_id}
+            answer_id={a.id || a.answer_id}
             answerer_name={a.answerer_name}
             body={a.body}
             date={a.date}

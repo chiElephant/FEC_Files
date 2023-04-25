@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import Question from './Question.jsx';
 import ModalQuestion from './ModalQuestion.jsx';
 import useAutoScroll from './custom_hooks/useAutoScroll.jsx';
@@ -39,6 +39,8 @@ function QuestionList({
       <div data-testid="test-questions" ref={containerRef} id="question-list">
         {displayList.map((q) => (
           <Question
+            handleFetchQuestions={handleFetchQuestions}
+            answers={q.answers}
             productName={productName}
             productId={productId}
             key={q.question_id}

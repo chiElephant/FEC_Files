@@ -1,12 +1,41 @@
 require('dotenv').config();
 const axios = require('axios');
-const e = require('express');
-const { uploadToCloudinary } = require('./uploadToCloudinary');
 
 const { URL, TOKEN } = process.env;
 
 // only have to take care of one request here
 // client will be in charge of sending mutiple requests
+
+const filteredAnswers = (object) =>
+  object.map((obj) => {
+    const answers = Object.values(obj.answers);
+
+    const filterBySeller = answers.filter(
+      (item) => item.answerer_name === 'Seller'
+    );
+
+    const filterRestAndSortByHelpfulness = answers
+      .filter((item) => item.answerer_name !== 'Seller')
+      .sort((a, b) => b.date - a.date)
+      .sort((a, b) => b.helpfulness - a.helpfulness);
+
+    obj.answers = [...filterBySeller, ...filterRestAndSortByHelpfulness];
+
+    return obj;
+  });
+
+const filteredAnswersFromGet = (inputArray) => {
+  const filterBySeller = inputArray.filter(
+    (item) => item.answerer_name === 'Seller'
+  );
+
+  const filterRestAndSortByHelpfulness = inputArray
+    .filter((item) => item.answerer_name !== 'Seller')
+    .sort((a, b) => b.date - a.date)
+    .sort((a, b) => b.helpfulness - a.helpfulness);
+
+  return [...filterBySeller, ...filterRestAndSortByHelpfulness];
+};
 
 const getQuestions = (req, res, next) => {
   const { product_id } = req.params;
@@ -28,7 +57,9 @@ const getQuestions = (req, res, next) => {
           store = [...store, ...questionList];
           get(page + 1);
         } else {
-          res.body = store;
+          filteredAnswers(store);
+
+          res.body = filteredAnswers(store);
           next();
         }
       })
@@ -39,22 +70,33 @@ const getQuestions = (req, res, next) => {
 };
 
 const getAnswers = (req, res, next) => {
-  const { question_id, page, count } = req.params;
+  const { question_id } = req.params;
+  let store = [];
+  const count = 100;
 
-  const url = `${URL}/qa/questions/${question_id}/answers?page=${page}&count=${count}`;
+  function get(page) {
+    const url = `${URL}/qa/questions/${question_id}/answers?page=${page}&count=${count}`;
 
-  const options = {
-    headers: { Authorization: TOKEN },
-  };
+    const options = {
+      headers: { Authorization: TOKEN },
+    };
+    axios
+      .get(url, options)
+      .then((response) => {
+        const answerlist = response.data.results;
 
-  axios
-    .get(url, options)
-    .then((response) => {
-      res.body = response.data;
+        if (answerlist.length > 0) {
+          store = [...store, ...answerlist];
+          get(page + 1);
+        } else {
+          res.body = filteredAnswersFromGet(store);
+          next();
+        }
+      })
+      .catch(next);
+  }
 
-      next();
-    })
-    .catch(next);
+  get(1);
 };
 
 const addQuestion = (req, res, next) => {
