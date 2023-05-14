@@ -6,8 +6,8 @@
   "scripts": {
     "start": "node Controller/server/index.js",
     "build": "webpack --mode production",
-    "server-dev": "nodemon --watch server Controller/server/index.js",
-    "client-dev": "npx webpack --watch --mode development"
+    "dev-server": "nodemon --watch server Controller/server/index.js",
+    "dev-client": "npx webpack --watch --mode development"
   },
   "repository": {
     "type": "git",
