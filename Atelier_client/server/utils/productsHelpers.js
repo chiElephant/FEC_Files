@@ -21,6 +21,28 @@ const getProduct = (req, res, next) => {
     .catch(next);
 };
 
+const fetchAllProducts = async (page, count, allProducts) => {
+  const response = await axios.get(`${URL}/products`, {
+    headers: {
+      authorization: process.env.GIT,
+    },
+    params: {
+      page,
+      count,
+    },
+  });
+
+  const products = response.data;
+  const updatedProducts = [...allProducts, ...products];
+
+  if (products.length === count) {
+    return fetchAllProducts(page + 1, count, updatedProducts);
+  }
+
+  return updatedProducts;
+};
+
 module.exports = {
   getProduct,
+  fetchAllProducts,
 };

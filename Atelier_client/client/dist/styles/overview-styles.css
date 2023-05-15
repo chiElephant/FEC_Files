@@ -299,7 +299,7 @@
   width: 100vw;
   margin-left: 0;
   color: aliceblue;
-  position: absolute;
+  /* position: absolute; */
   top: 0;
   left: 0;
   height: 50px;

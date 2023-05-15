@@ -4,6 +4,7 @@ const path = require('path');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 const DIST_DIR = path.join(__dirname, '/client/dist');
 const SRC_DIR = path.join(__dirname, '/client/src');
@@ -28,7 +29,8 @@ module.exports = {
     ],
   },
   optimization: {
-    minimizer: [new CssMinimizerPlugin()],
+    minimize: true,
+    minimizer: [new CssMinimizerPlugin(), new TerserPlugin()],
   },
   plugins: [
     new HtmlWebpackPlugin({

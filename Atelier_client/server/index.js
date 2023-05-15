@@ -5,7 +5,6 @@ const axios = require('axios');
 
 const app = express();
 const compression = require('compression');
-const history = require('connect-history-api-fallback');
 
 const {
   getQuestions,
@@ -18,32 +17,35 @@ const {
 } = require('./utils/questionsAnswersHelper.js');
 const { uploadToCloudinary } = require('./utils/uploadToCloudinary');
 const { postInteractions } = require('./utils/postInteractions');
-const { getProduct } = require('./utils/productDetails.js');
+const { getProduct, fetchAllProducts } = require('./utils/productsHelpers.js');
 const reviewsHelpers = require('./utils/reviewsHelpers.js');
 
-const { URL, TOKEN, PORT } = process.env;
-const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
+const { TOKEN, PORT } = process.env;
+const URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
 
 app.use('/', (req, res, next) => {
   console.log(`${req.method} REQUEST ON ${req.url}`);
   next();
 });
 
-app.use(history());
 app.use(compression());
 app.use(express.static(path.join(__dirname, '/../client/dist')));
-app.use(express.json({ limit: '10mb' }));
+// app.use(express.json({ limit: '10mb' }));
 
-app.use('/', (req, res, next) => {
-  console.log(`${req.method} REQUEST ON ${req.url}`);
-  next();
+app.get('/:id', (req, res, next) => {
+  const { id } = req.params;
+
+  if (!Number.isNaN(Number(id))) {
+    res.sendFile(path.join(__dirname, '/../client/dist/index.html'));
+  } else {
+    next();
+  }
 });
 
 // *** Q & A *** //
 
 // Question List;
 app.get('/questions/:product_id/', getQuestions, (req, res) => {
-  console.log('questions: ', res.body);
   res.status(200).send(res.body);
 });
 
@@ -77,52 +79,229 @@ app.put('/answer/:answer_id/report', reportAnswer, (req, res) => {
   res.sendStatus(204);
 });
 
-/////////////// Products //////////////////
+/////////////// PRODUCTS //////////////////
 
-app.get('/products', (req, res, next) => {
-  // console.log(`Received a get request to get the prodcut information for product: ${req.params.id} and  url: ${req.url}`);
-
-  axios
-    .get(URL + req.url, {
+// Get all the products
+app.get('/products', async (req, res, next) => {
+  try {
+    const products = await axios.get(URL + req.url, {
       headers: {
-        Authorization: process.env.GIT,
+        authorization: process.env.GIT,
       },
-    })
-    .then((products) => {
-      res.status(200).send(products.data);
-    })
-    .catch(next);
+      params: {
+        page: 1,
+        count: 15,
+      },
+    });
+
+    const productsWithImages = await Promise.all(
+      products.data.map(async (item) => {
+        const { default_price: defaultPrice, ...rest } = item;
+
+        const [productStyles, productFeatures, productRatings] =
+          await Promise.all([
+            axios.get(`${URL}/products/${item.id}/styles`, {
+              headers: {
+                authorization: process.env.GIT,
+              },
+            }),
+            axios.get(`${URL}/products/${item.id}`, {
+              headers: {
+                authorization: process.env.GIT,
+              },
+            }),
+            axios.get(`${URL}/reviews/meta?product_id=${item.id}`, {
+              headers: {
+                authorization: process.env.GIT,
+              },
+            }),
+          ]);
+
+        const [features, ratings, styles] = [
+          productFeatures.data.features,
+          productRatings.data.ratings,
+          productStyles.data.results,
+        ];
+
+        const { totalSum, totalCount } = Object.entries(ratings).reduce(
+          (accumulator, [key, value]) => {
+            const numericalRating = Number(key);
+            const count = Number(value);
+            accumulator.totalSum += numericalRating * count;
+            accumulator.totalCount += count;
+            return accumulator;
+          },
+          { totalSum: 0, totalCount: 0 }
+        );
+
+        let ratingAverage = totalSum / totalCount;
+        ratingAverage = Math.round(ratingAverage * 2) / 2;
+
+        const firstStyle = productStyles.data.results[0];
+        const photo = firstStyle ? firstStyle.photos[0].thumbnail_url : null;
+        return {
+          ...rest,
+          defaultPrice,
+          photo,
+          ratingAverage,
+          reviewsCount: totalCount,
+          features,
+          styles,
+        };
+      })
+    );
+
+    res.status(200).send(productsWithImages);
+  } catch (error) {
+    next(error);
+  }
 });
 
 /////////////// OVERVIEW COMPONENT //////////////////////
 
-app.get('/products/:id', (req, res, next) => {
-  // console.log(`Received a get request to get the prodcut information for product: ${req.params.id} and  url: ${req.url}`);
-  axios
-    .get(url + req.url, {
+app.get('/products/:id', async (req, res, next) => {
+  try {
+    const product = await axios.get(URL + req.url, {
       headers: {
-        Authorization: process.env.GIT,
+        authorization: process.env.GIT,
       },
-    })
-    .then((product_info) => {
-      // console.log('This is the product info: ', product_info.data);
-      res.send(product_info.data);
-    })
-    .catch(next);
+    });
+    const { default_price: defaultPrice, ...rest } = product.data;
+
+    const [productStyles, productFeatures, productRatings] = await Promise.all([
+      axios.get(`${URL}/products/${req.params.id}/styles`, {
+        headers: {
+          authorization: process.env.GIT,
+        },
+      }),
+      axios.get(`${URL}/products/${req.params.id}`, {
+        headers: {
+          authorization: process.env.GIT,
+        },
+      }),
+      axios.get(`${URL}/reviews/meta?product_id=${req.params.id}`, {
+        headers: {
+          authorization: process.env.GIT,
+        },
+      }),
+    ]);
+
+    const [features, ratings, styles] = [
+      productFeatures.data.features,
+      productRatings.data.ratings,
+      productStyles.data.results,
+    ];
+
+    const { totalSum, totalCount } = Object.entries(ratings).reduce(
+      (accumulator, [key, value]) => {
+        const numericalRating = Number(key);
+        const count = Number(value);
+        accumulator.totalSum += numericalRating * count;
+        accumulator.totalCount += count;
+        return accumulator;
+      },
+      { totalSum: 0, totalCount: 0 }
+    );
+
+    let ratingAverage = totalSum / totalCount;
+    ratingAverage = Math.round(ratingAverage * 2) / 2;
+
+    const firstStyle = productStyles.data.results[0];
+    const photo = firstStyle ? firstStyle.photos[0].thumbnail_url : null;
+    const productData = {
+      ...rest,
+      defaultPrice,
+      photo,
+      ratingAverage,
+      reviewsCount: totalCount,
+      features,
+      styles,
+    };
+
+    res.status(200).json(productData);
+  } catch (error) {
+    next(error);
+  }
 });
 
-app.get('/products/:id/styles', (req, res, next) => {
-  axios
-    .get(url + req.url, {
+// Get all the related products
+app.get('/products/:product_id/related', async (req, res, next) => {
+  const { productId } = req.params;
+
+  try {
+    const products = await axios.get(URL + req.url, {
       headers: {
-        Authorization: process.env.GIT,
+        authorization: process.env.GIT,
       },
-    })
-    .then((product_styles) => {
-      // console.log('These are the product styles: ', product_styles.data);
-      res.send(product_styles.data);
-    })
-    .catch(next);
+    });
+
+    const productsWithImages = await Promise.all(
+      products.data.map(async (item) => {
+        const [productData, productStyles, productFeatures, productRatings] =
+          await Promise.all([
+            axios.get(`${URL}/products/${item}`, {
+              headers: {
+                Authorization: TOKEN,
+              },
+            }),
+            axios.get(`${URL}/products/${item}/styles`, {
+              headers: {
+                authorization: process.env.GIT,
+              },
+            }),
+            axios.get(`${URL}/products/${item}`, {
+              headers: {
+                authorization: process.env.GIT,
+              },
+            }),
+            axios.get(`${URL}/reviews/meta?product_id=${item}`, {
+              headers: {
+                authorization: process.env.GIT,
+              },
+            }),
+          ]);
+
+        const [data, features, ratings, styles] = [
+          productData.data,
+          productFeatures.data.features,
+          productRatings.data.ratings,
+          productStyles.data.results,
+        ];
+
+        const { default_price: defaultPrice, ...rest } = data;
+
+        const { totalSum, totalCount } = Object.entries(ratings).reduce(
+          (accumulator, [key, value]) => {
+            const numericalRating = Number(key);
+            const count = Number(value);
+            accumulator.totalSum += numericalRating * count;
+            accumulator.totalCount += count;
+            return accumulator;
+          },
+          { totalSum: 0, totalCount: 0 }
+        );
+
+        let ratingAverage = totalSum / totalCount;
+        ratingAverage = Math.round(ratingAverage * 2) / 2;
+
+        const firstStyle = productStyles.data.results[0];
+        const photo = firstStyle ? firstStyle.photos[0].thumbnail_url : null;
+        return {
+          ...rest,
+          defaultPrice,
+          photo,
+          ratingAverage,
+          reviewsCount: totalCount,
+          features,
+          styles,
+        };
+      })
+    );
+
+    res.status(200).send(productsWithImages);
+  } catch (error) {
+    next(error);
+  }
 });
 
 //*** RATINGS and REVIEWS ***//
@@ -203,7 +382,7 @@ app.use((err, req, res, next) => {
   res.status(500).send({ error: err.message });
 });
 
-const port = process.env.PORT || 8000;
+const port = PORT || 8000;
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);

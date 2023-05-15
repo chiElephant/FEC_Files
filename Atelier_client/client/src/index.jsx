@@ -1,15 +1,12 @@
 /* global document */
 
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import React, { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Topbar from './components/Topbar.jsx';
 import Home from './components/Home.jsx';
 import App from './components/App.jsx';
 
-const container = document.getElementById('root');
-
-const root = ReactDOM.createRoot(container);
+const root = createRoot(document.getElementById('root'));
 
 root.render(
   <BrowserRouter>

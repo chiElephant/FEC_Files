@@ -1,56 +1,74 @@
-import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
+import axios from 'axios';
 import Overview from './overview_module/Overview.jsx';
 import QandAModule from './questions_answers_module/QandAModule.jsx';
 import ReviewsModule from './reviews_module/ReviewsModule.jsx';
-import ProductLinks from './ProductLinks.jsx';
 import Topbar from './Topbar.jsx';
+import Products from './Products.jsx';
 
 function App() {
-  const { id } = useParams();
-  const [products, setProducts] = useState([]);
-  const [productId, setProductId] = useState(0);
-  const [productName, setProductName] = useState('');
+  const location = useLocation();
+  const { id: paramId } = useParams();
+  const [productData, setProductData] = useState({
+    id: null,
+    campus: null,
+    name: null,
+    slogan: null,
+    description: null,
+    category: null,
+    created_at: null,
+    updated_at: null,
+    defaultPrice: null,
+    photo: null,
+    ratingAverage: null,
+    reviewsCount: null,
+    features: [],
+    styles: [],
+  });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    axios.get(`/products/${id}`).then((res) => {
-      setProductName(res.data.name);
-      setProductId(res.data.id);
-    });
-  }, [id]);
+    async function getProductInfo() {
+      try {
+        if (location.state && location.state.id) {
+          setProductData(location.state);
+        } else {
+          const response = await axios.get(`/products/${paramId}`);
+          setProductData(response.data);
+        }
+      } catch (err) {
+        console.error(err);
+        setError(err);
+      } finally {
+        setLoading(false);
+      }
+    }
+    getProductInfo();
+  }, [location.state, paramId]);
 
-  useEffect(() => {
-    const options = {
-      method: 'get',
-      url: `/products`,
-    };
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
-    axios(options)
-      .then((response) => {
-        const productList = response.data;
-        setProducts([...productList]);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
-
-  const widgets =
-    productId !== 0 ? (
-      <>
-        <Overview product_id={productId} />
-        <QandAModule product_id={productId} product_name={productName} />
-        <ReviewsModule product_id={productId} product_name={productName} />
-      </>
-    ) : null;
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
 
   return (
     <div>
       <Topbar />
-      {widgets}
-      <ProductLinks products={products} />
+      <Overview productData={productData} />
+      <Products />
+      <QandAModule
+        product_id={productData.id}
+        product_name={productData.name}
+      />
+      <ReviewsModule
+        product_id={productData.id}
+        product_name={productData.name}
+      />
     </div>
   );
 }

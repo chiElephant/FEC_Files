@@ -20,6 +20,8 @@ const getReviews = (query, cb) => {
 
 const getMetaData = (params, cb) => {
   const url = `${URL}/reviews/meta`;
+
+  console.log('url: ', url);
   const options = {
     method: 'get',
     url,
