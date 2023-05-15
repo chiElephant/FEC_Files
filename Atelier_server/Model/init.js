@@ -1,107 +1,100 @@
-const { exec } = require("child_process");
+const { exec } = require('child_process');
 
-const productsCSV = "/Users/anthony/Desktop/init_data/product.csv";
-const featuresCSV = "/Users/anthony/Desktop/init_data/features.csv";
-const stylesCSV = "/Users/anthony/Desktop/init_data/styles.csv";
-const skusCSV = "/Users/anthony/Desktop/init_data/skus.csv";
-const photosCSV = "/Users/anthony/Desktop/init_data/photos.csv";
+// Define paths to CSV files
+const productsCSV = '/init_data/product.csv';
+const featuresCSV = '/init_data/features.csv';
+const stylesCSV = '/init_data/styles.csv';
+const skusCSV = '/init_data/skus.csv';
+const photosCSV = '/init_data/photos.csv';
 
-use("products");
-db.dropDatabase();
-console.log("Dropped Products");
+const options = {
+  maxTimeMS: 999999999, // set the maximum time for the aggregation in milliseconds
+};
 
+// Define aggregation pipelines for products and styles
 const productAggregation = [
   {
-    $addFields: {
-      last_modified: new Date(),
+    $set: {
+      lastModified: new Date(),
     },
   },
   {
     $lookup: {
-      from: "features",
-      localField: "product_id",
-      foreignField: "product_id",
-      pipeline: [
-        {
-          $project: {
-            _id: 0,
-            product_id: 0,
-            feature_id: 0,
-          },
-        },
-      ],
-      as: "features",
+      from: 'features',
+      localField: 'id',
+      foreignField: 'product_id',
+      as: 'features',
+    },
+  },
+  {
+    $project: {
+      features: {
+        id: 0,
+        product_id: 0,
+        _id: 0,
+      },
     },
   },
   {
     $merge: {
-      into: "products",
+      into: 'products',
     },
   },
 ];
 
 const styleAggregation = [
   {
-    $addFields: {
-      last_modified: new Date(),
+    $set: {
+      lastModified: new Date(),
     },
   },
   {
     $lookup: {
-      from: "photos",
-      localField: "style_id",
-      foreignField: "style_id",
+      from: 'photos',
+      localField: 'id',
+      foreignField: 'styleId',
+      as: 'photos',
       pipeline: [
         {
           $project: {
             _id: 0,
-            style_id: 0,
-            photo_id: 0,
+            styleId: 0,
+            id: 0,
           },
         },
       ],
-      as: "photos",
     },
   },
   {
     $lookup: {
-      from: "skus",
-      localField: "style_id",
-      foreignField: "style_id",
-      pipeline: [
-        {
-          $project: {
-            _id: 0,
-            style_id: 0,
-          },
-        },
-      ],
-      as: "skus",
+      from: 'skus',
+      localField: 'id',
+      foreignField: 'styleId',
+      as: 'skus',
     },
   },
   {
     $addFields: {
       skus: {
         $arrayToObject: {
-          $zip: {
-            inputs: [
-              {
-                $map: {
-                  input: {
-                    $range: [
-                      0,
-                      {
-                        $size: "$skus",
-                      },
-                    ],
+          $reduce: {
+            input: '$skus',
+            initialValue: [],
+            in: {
+              $concatArrays: [
+                '$$value',
+                [
+                  {
+                    k: {
+                      $toString: '$$this.size',
+                    },
+                    v: {
+                      quantity: '$$this.quantity',
+                    },
                   },
-                  in: {
-                    $toString: "$$this",
-                  },
-                },
-              },
-              "$skus",
-            ],
+                ],
+              ],
+            },
           },
         },
       },
@@ -109,17 +102,19 @@ const styleAggregation = [
   },
   {
     $merge: {
-      into: "styles",
+      into: 'styles',
     },
   },
 ];
 
+// Define function to import data from a CSV file to a MongoDB collection
 const createDocs = (csvFilePath, collection) =>
   new Promise((resolve, reject) => {
     console.log(`Importing ${collection}`);
     exec(
-      `mongoimport --uri=mongodb://localhost/products --collection=${collection} --file=${csvFilePath} --type=csv --headerline`,
+      `mongoimport --uri=mongodb://localhost/atelier --collection=${collection} --file=${csvFilePath} --type=csv --headerline`,
       (error, stdout, stderr) => {
+        console.log('stdout', stdout);
         if (error) {
           reject(error);
         }
@@ -132,49 +127,50 @@ const createDocs = (csvFilePath, collection) =>
     );
   });
 
-const importData = () =>
-  new Promise(async (resolve, reject) => {
-    createDocs(productsCSV, "products")
-      .then(() => {
-        console.log("Indexing Products");
-        db.products.createIndex({ product_id: 1 });
-      })
-      .catch((err) => console.error("Error creating products", err));
+// Define function to import data from all CSV files and create indexes
+const importData = async () => {
+  try {
+    await Promise.all([
+      createDocs(productsCSV, 'products'),
+      createDocs(featuresCSV, 'features'),
+      createDocs(stylesCSV, 'styles'),
+      createDocs(photosCSV, 'photos'),
+      createDocs(skusCSV, 'skus'),
+    ]);
 
-    createDocs(featuresCSV, "features")
-      .then(() => {
-        console.log("Indexing Features");
-        db.features.createIndex({ product_id: 1 });
-      })
-      .catch((err) => console.log("Error creating features", err));
+    console.log('Indexing Products');
+    await db.products.createIndex({ id: 1 });
 
-    createDocs(stylesCSV, "styles")
-      .then(() => {
-        console.log("Indexing Styles");
-        db.styles.createIndex({ product_id: 1 });
-      })
-      .catch((err) => console.log("Error creating styles", err));
+    console.log('Indexing Features');
+    await db.features.createIndex({ product_id: 1 });
 
-    createDocs(photosCSV, "photos")
-      .then(() => {
-        console.log("Indexing Photos");
-        db.photos.createIndex({ style_id: 1 });
-      })
-      .catch((err) => console.log("Error creating photos", err));
+    console.log('Indexing Styles');
+    await db.styles.createIndex({ productId: 1 });
 
-    createDocs(skusCSV, "skus")
-      .then(() => {
-        console.log("Indexing Skus");
-        db.skus.createIndex({ style_id: 1 });
-      })
-      .catch((err) => console.log("Error creating skus", err));
+    console.log('Indexing Photos');
+    await db.photos.createIndex({ styleId: 1 });
 
-    resolve();
-  });
+    console.log('Indexing Skus');
+    await db.skus.createIndex({ styleId: 1 });
 
-importData()
-  .then(() => {
-    db.products.aggregate(productAggregation);
-    db.styles.aggregate(styleAggregation);
-  })
-  .catch((err) => console.log("Error Aggregating", err));
+    console.log('Aggregating Products');
+    await db.products.aggregate(productAggregation);
+
+    console.log('Aggregating Styles');
+    await db.styles.aggregate(styleAggregation, options);
+    db.features.drop();
+    db.photos.drop();
+    db.skus.drop();
+
+    console.log('Done importing and aggregating data');
+  } catch (err) {
+    console.log('Error importing data', err);
+  }
+};
+
+// Connect to MongoDB database and drop existing data
+use('atelier');
+db.dropDatabase();
+console.log('Dropped Atelier');
+
+importData();

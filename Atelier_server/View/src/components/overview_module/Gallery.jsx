@@ -1,33 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import Expanded from './Expanded.jsx';
 
-function Gallery({ style, current }) {
-  // const [style, setstyle] = useState({});
-  const [selectedPhoto, setSelectedPhoto] = useState('');
+function Gallery({ styles }) {
+  const [selectedPhoto, setSelectedPhoto] = useState(null);
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [selectedStyle, setSelectedStyle] = useState(null);
   const [view, setView] = useState('default');
 
   useEffect(() => {
-    const testAsync = async () => {
-      const photos = await style.photos;
-      if (photos) {
-        setSelectedPhoto(photos[selectedIndex].url);
-      }
-    };
-    testAsync();
-  }, [style]);
+    function setDefaultStyle() {
+      styles.filter((style) => {
+        if (style.default_style) {
+          setSelectedStyle(style);
+          setSelectedPhoto(style.photos[selectedIndex].url);
+        }
+      });
+    }
 
-  // useEffect(() => {
-  //   const currentStyle = current.current;
-
-  //   if (currentStyle.name !== undefined) {
-  //     console.log(currentStyle.name);
-  //     console.log(currentStyle.photos);
-  //     setSelectedPhoto(currentStyle.photos[selectedIndex].url);
-  //   }
-  // }, [current.current]);
+    setDefaultStyle();
+  }, [styles]);
 
   const handleChangePhoto = (e) => {
     e.preventDefault();
@@ -35,12 +28,8 @@ function Gallery({ style, current }) {
     setSelectedIndex(Number(e.target.getAttribute('index')));
   };
 
-  const handleChangeViewExpanded = () => {
-    setView('expanded');
-  };
-
-  const handleChangeViewDefault = () => {
-    setView('default');
+  const handleChangeView = (viewType) => {
+    setView(viewType);
   };
 
   let minRange = 0;
@@ -51,10 +40,9 @@ function Gallery({ style, current }) {
     if (selectedIndex > 0) {
       const newIndex = selectedIndex - 1;
       setSelectedIndex(newIndex);
-      const newPhoto = style.photos[newIndex].url;
+      const newPhoto = selectedStyle.photos[newIndex].url;
       setSelectedPhoto(newPhoto);
       if (selectedIndex <= maxRange) {
-        console.log('SCROLL UP');
         const container = document.getElementById('photo-container');
         if (container) {
           container.scrollBy({ top: -40, left: 0, behaviour: 'smooth' });
@@ -67,10 +55,10 @@ function Gallery({ style, current }) {
 
   const nextPhoto = (e) => {
     e.preventDefault();
-    if (selectedIndex < style.photos.length - 1) {
+    if (selectedIndex < selectedStyle.photos.length - 1) {
       const newIndex = selectedIndex + 1;
       setSelectedIndex(newIndex);
-      const newPhoto = style.photos[newIndex].url;
+      const newPhoto = selectedStyle.photos[newIndex].url;
       setSelectedPhoto(newPhoto);
       if (selectedIndex > maxRange) {
         const container = document.getElementById('photo-container');
@@ -81,10 +69,10 @@ function Gallery({ style, current }) {
     }
   };
 
-  if (Object.keys(style).length) {
+  if (styles !== null) {
     if (
       view === 'default' &&
-      Object.keys(style.photos).length &&
+      selectedStyle !== null &&
       selectedPhoto !== null
     ) {
       return (
@@ -92,8 +80,8 @@ function Gallery({ style, current }) {
           <img
             className="main-img"
             src={selectedPhoto}
-            onClick={handleChangeViewExpanded}
-            alt={"Not Available"}
+            onClick={() => handleChangeView('expanded')}
+            alt="Not Available"
           />
           <div className="sidebar">
             {selectedIndex !== 0 ? (
@@ -103,7 +91,7 @@ function Gallery({ style, current }) {
               />
             ) : null}
             <div className="photo-container" id="photo-container">
-              {style.photos.map((photo, index) => {
+              {selectedStyle.photos.map((photo, index) => {
                 if (index === selectedIndex) {
                   return (
                     <img
@@ -112,9 +100,9 @@ function Gallery({ style, current }) {
                       }}
                       className="style-other-imgs-selected"
                       src={photo.url}
-                      index={index}
-                      key={index}
-                      alt={"Not vailable"}
+                      // index={index}
+                      key={photo.url}
+                      alt="Not vailable"
                     />
                   );
                 }
@@ -131,7 +119,7 @@ function Gallery({ style, current }) {
                 );
               })}
             </div>
-            {selectedIndex < style.photos.length - 1 ? (
+            {selectedIndex < selectedStyle.photos.length - 1 ? (
               <KeyboardArrowDownIcon
                 className="arrow-down"
                 onClick={nextPhoto}
@@ -146,8 +134,8 @@ function Gallery({ style, current }) {
         <Expanded
           nextPhoto={nextPhoto}
           previousPhoto={previousPhoto}
-          changeViewDefault={handleChangeViewDefault}
-          photos={style.photos}
+          changeViewDefault={() => handleChangeView('default')}
+          photos={selectedStyle.photos}
           selectedPhoto={selectedPhoto}
           changeSelectedPhoto={handleChangePhoto}
           selectedIndex={selectedIndex}
@@ -158,4 +146,3 @@ function Gallery({ style, current }) {
 }
 
 export default Gallery;
-

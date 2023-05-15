@@ -13,13 +13,14 @@ function AddToCart({ style, current }) {
     const resultObj = {};
     let skusArray;
     if (skus) {
-      skusArray = Object.entries(skus);
-      if (skusArray.length > 0) {
-        skusArray.forEach((size) => {
-          const sizesArray = Object.entries(size[1]);
-          resultObj[sizesArray[1][1]] = sizesArray[0][1];
-        });
-      }
+      console.log(skus);
+      // skusArray = Object.entries(skus);
+      // if (skusArray.length > 0) {
+      //   skusArray.forEach((size) => {
+      //     const sizesArray = Object.entries(size[1]);
+      //     resultObj[sizesArray[1][1]] = sizesArray[0][1];
+      //   });
+      // }
     }
 
     setStyleAvail(resultObj);
@@ -62,6 +63,7 @@ function AddToCart({ style, current }) {
   };
 
   useEffect(() => {
+    console.log('style', style);
     availability(style.skus);
   }, [style]);
 

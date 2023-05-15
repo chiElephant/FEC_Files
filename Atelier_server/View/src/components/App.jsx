@@ -2,62 +2,58 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 
 import { useParams } from 'react-router-dom';
-import Overview from './overview_module/Overview.jsx';
-import QandAModule from './questions_answers_module/QandAModule.jsx';
-import ReviewsModule from './reviews_module/ReviewsModule.jsx';
-import ProductLinks from './ProductLinks.jsx';
 import Topbar from './Topbar.jsx';
+import Overview from './overview_module/Overview.jsx';
+// import QandAModule from './questions_answers_module/QandAModule.jsx';
+// import ReviewsModule from './reviews_module/ReviewsModule.jsx';
+// import ProductLinks from './ProductLinks.jsx';
 
 function App() {
   const { id } = useParams();
-  const [products, setProducts] = useState([]);
-  const [productId, setProductId] = useState(111784);
-  const [productName, setProductName] = useState('');
+  const [currentProduct, setCurrentProduct] = useState(null);
+  // const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    axios.get(`/products/${id}`).then((res) => {
-      setProductName(res.data.name);
-      setProductId(res.data.id);
+    const product_id = id || 1;
+    axios.get(`/products/${product_id}`).then((res) => {
+      setCurrentProduct(res.data);
     });
   }, [id]);
 
-  useEffect(() => {
-    const options = {
-      method: 'get',
-      url: `/products`,
-    };
+  // useEffect(() => {
+  //   const options = {
+  //     method: 'get',
+  //     url: `/products`,
+  //   };
 
-    axios(options)
-      .then((response) => {
-        const productList = response.data;
-        setProducts([...productList]);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+  //   axios(options)
+  //     .then((response) => {
+  //       const productList = response.data;
+  //       setProducts([...productList]);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }, []);
 
   const widgets =
-    productId !== 0 ? (
+    currentProduct === null ? (
+      ''
+    ) : (
       <>
-        <Overview product_id={productId} />
+        <Overview product_id={currentProduct.id} product={currentProduct} />
         {/* <QandAModule product_id={productId} product_name={productName} />
         <ReviewsModule product_id={productId} product_name={productName} /> */}
       </>
-    ) : null;
+    );
 
   return (
     <div>
       <Topbar />
       {widgets}
-      <ProductLinks products={products} />
+      {/* <ProductLinks products={products} /> */}
     </div>
   );
 }
 
 export default App;
-
-       // const id = res.data[0].product_id;
-        // const url = new URL(window.location);
-        // url.searchParams.append('product_id', `${id}`);
-        // window.history.pushState({}, '', url);

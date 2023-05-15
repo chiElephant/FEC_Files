@@ -5,8 +5,8 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const DIST_DIR = path.join(__dirname, '/client/dist');
-const SRC_DIR = path.join(__dirname, '/client/src');
+const DIST_DIR = path.join(__dirname, '/View/dist');
+const SRC_DIR = path.join(__dirname, '/View/src');
 
 module.exports = {
   mode: 'development',
@@ -50,7 +50,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './client/dist/template.html',
+      template: './View/dist/template.html',
       inject: 'body',
     }),
     new MiniCssExtractPlugin(),
