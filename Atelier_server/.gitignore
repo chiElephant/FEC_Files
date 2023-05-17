@@ -7,3 +7,8 @@ node_modules
 ## Envirornment Variables
 .env
 
+## Build
+View/dist/bundle.js
+./View/dist/index.html
+bundle.js
+/View/dist/bundle.js

@@ -24,24 +24,25 @@ const styleInterface = {
 function Overview({ product_id, product, avgRating, totalReviews }) {
   const [selectedStyle, setSelectedStyle] = useState(styleInterface);
   const [styles, setStyles] = useState([styleInterface]);
-  // const selectedSty = useRef(styleInterface);
 
+  // If a product id is not null
   useEffect(() => {
     if (product_id) {
+      // Get product styles and set styles state
       axios
         .get(`/products/${product_id}/styles`)
         .then((response) => {
           setStyles(response.data);
           return response.data;
         })
+        // Get default style and set default style state
         .then((data) => {
           data.filter((style) => {
             const { default_style } = style;
             if (default_style) {
               setSelectedStyle(style);
-              // selectedSty.current = style;
-              return style;
             }
+            return null;
           });
         })
         .catch((error) => console.log('Error fetching styles', error));

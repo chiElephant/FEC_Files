@@ -1,77 +1,69 @@
-import React, { useState } from 'react';
-import Button from '@mui/material/Button';
+import React from 'react';
 import ReactImageZoom from 'react-image-zoom';
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import Sidebar from './Sidebar.jsx';
 
-function Expanded(props) {
-  const imageProps = {
-    img: props.selectedPhoto,
-    zoomPosition: 'original',
-    alt: 'Image not Available'
-  };
-
+function Expanded({
+  nextPhoto,
+  previousPhoto,
+  changeViewDefault,
+  selectedIndex,
+  selectedPhoto,
+  selectedStyle,
+  containerRef,
+  handleChangePhoto,
+}) {
   return (
     <div className="modalBackground">
       <div className="modalContainer">
-
-        <Button
-          variant="text"
-          className="x"
+        <button
+          className="close-modal-btn"
           onClick={() => {
-            props.changeViewDefault();
+            changeViewDefault();
           }}
         >
-          X
-        </Button>
+          x
+        </button>
+
         <div className="main-img-container">
           <div className="main-img-and-arrows">
-            <Button
-              onClick={(e) => {
-                props.previousPhoto(e);
-              }}
-              variant="text"
-            >
-              &lt;
-            </Button>
-            <ReactImageZoom {...imageProps} />
-            <Button
-              onClick={(e) => {
-                props.nextPhoto(e);
-              }}
-            >
-              &gt;
-            </Button>
+            <KeyboardArrowLeftIcon
+              className="arrow-up"
+              onClick={previousPhoto}
+              style={
+                selectedIndex === 0
+                  ? { color: 'transparent' }
+                  : { color: 'gray' }
+              }
+            />
+            <div className="modal-img">
+              <ReactImageZoom
+                img={selectedPhoto}
+                height={600}
+                zoomPosition="original"
+                alt="Not Available"
+              />
+            </div>
+            <KeyboardArrowRightIcon
+              className="arrow-down"
+              onClick={nextPhoto}
+              style={
+                selectedIndex < selectedStyle.photos.length - 1
+                  ? { color: 'gray' }
+                  : { color: 'transparent' }
+              }
+            />
           </div>
         </div>
-        <div className="expanded-photo-gallery">
-          {props.photos.map((photo, index) => {
-            if (index === props.selectedIndex) {
-              return (
-                <img
-                  onClick={(e) => {
-                    handleChangePhoto(e);
-                  }}
-                  key={index}
-                  className="style-other-imgs-selected"
-                  src={photo.url}
-                  index={index}
-                  alt={"Image Unavailable"}
-                />
-              );
-            }
-            return (
-              <img
-                onClick={(e) => {
-                  props.changeSelectedPhoto(e);
-                }}
-                className="style-other-imgs"
-                src={photo.url}
-                key={index}
-                index={index}
-                alt={"Image Unavailable"}
-              />
-            );
-          })}
-        </div>
+        <Sidebar
+          selectedIndex={selectedIndex}
+          previousPhoto={previousPhoto}
+          nextPhoto={nextPhoto}
+          containerRef={containerRef}
+          selectedStyle={selectedStyle}
+          handleChangePhoto={handleChangePhoto}
+        />
       </div>
     </div>
   );

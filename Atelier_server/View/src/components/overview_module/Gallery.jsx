@@ -1,39 +1,39 @@
 import React, { useState, useEffect, useRef } from 'react';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import Expanded from './Expanded.jsx';
+import Sidebar from './Sidebar.jsx';
 
 function Gallery({ styles }) {
   const [selectedPhoto, setSelectedPhoto] = useState(null);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [selectedStyle, setSelectedStyle] = useState(null);
   const [view, setView] = useState('default');
+  const containerRef = useRef(null);
+  const minRangeRef = useRef(0);
+  const maxRangeRef = useRef(2);
 
+  // Set the default style
   useEffect(() => {
-    function setDefaultStyle() {
-      styles.filter((style) => {
+    const setDefaultStyle = () => {
+      styles.forEach((style) => {
         if (style.default_style) {
           setSelectedStyle(style);
           setSelectedPhoto(style.photos[selectedIndex].url);
         }
       });
-    }
+    };
 
     setDefaultStyle();
-  }, [styles]);
+  }, [selectedIndex, styles]);
 
   const handleChangePhoto = (e) => {
     e.preventDefault();
     setSelectedPhoto(e.target.src);
-    setSelectedIndex(Number(e.target.getAttribute('index')));
+    setSelectedIndex(Number(e.target.getAttribute('data')));
   };
 
   const handleChangeView = (viewType) => {
     setView(viewType);
   };
-
-  let minRange = 0;
-  let maxRange = 2;
 
   const previousPhoto = (e) => {
     e.preventDefault();
@@ -42,12 +42,12 @@ function Gallery({ styles }) {
       setSelectedIndex(newIndex);
       const newPhoto = selectedStyle.photos[newIndex].url;
       setSelectedPhoto(newPhoto);
-      if (selectedIndex <= maxRange) {
-        const container = document.getElementById('photo-container');
+      if (selectedIndex <= maxRangeRef.current) {
+        const container = containerRef.current;
         if (container) {
-          container.scrollBy({ top: -40, left: 0, behaviour: 'smooth' });
-          maxRange--;
-          minRange--;
+          container.scrollBy({ top: -40, left: 0, behavior: 'smooth' });
+          maxRangeRef.current--;
+          minRangeRef.current--;
         }
       }
     }
@@ -60,89 +60,57 @@ function Gallery({ styles }) {
       setSelectedIndex(newIndex);
       const newPhoto = selectedStyle.photos[newIndex].url;
       setSelectedPhoto(newPhoto);
-      if (selectedIndex > maxRange) {
-        const container = document.getElementById('photo-container');
-        container.scrollBy({ top: 40, left: 0, behaviour: 'smooth' });
-        maxRange++;
-        minRange++;
+      if (selectedIndex > maxRangeRef.current) {
+        const container = containerRef.current;
+        container.scrollBy({ top: 40, left: 0, behavior: 'smooth' });
+        maxRangeRef.current++;
+        minRangeRef.current++;
       }
     }
   };
 
-  if (styles !== null) {
-    if (
-      view === 'default' &&
-      selectedStyle !== null &&
-      selectedPhoto !== null
-    ) {
-      return (
-        <div className="gallery-container">
-          <img
-            className="main-img"
-            src={selectedPhoto}
+  // Default View
+  if (view === 'default' && selectedStyle && selectedPhoto) {
+    return (
+      <div className="gallery-container">
+        <div>
+          <button
+            className="image-btn"
             onClick={() => handleChangeView('expanded')}
-            alt="Not Available"
-          />
-          <div className="sidebar">
-            {selectedIndex !== 0 ? (
-              <KeyboardArrowUpIcon
-                className="arrow-up"
-                onClick={previousPhoto}
-              />
-            ) : null}
-            <div className="photo-container" id="photo-container">
-              {selectedStyle.photos.map((photo, index) => {
-                if (index === selectedIndex) {
-                  return (
-                    <img
-                      onClick={(e) => {
-                        handleChangePhoto(e);
-                      }}
-                      className="style-other-imgs-selected"
-                      src={photo.url}
-                      // index={index}
-                      key={photo.url}
-                      alt="Not vailable"
-                    />
-                  );
-                }
-                return (
-                  <img
-                    onClick={(e) => {
-                      handleChangePhoto(e);
-                    }}
-                    className="style-other-imgs"
-                    src={photo.url}
-                    index={index}
-                    key={index}
-                  />
-                );
-              })}
-            </div>
-            {selectedIndex < selectedStyle.photos.length - 1 ? (
-              <KeyboardArrowDownIcon
-                className="arrow-down"
-                onClick={nextPhoto}
-              />
-            ) : null}
-          </div>
+          >
+            <img className="main-img" src={selectedPhoto} alt="Not Available" />
+          </button>
         </div>
-      );
-    }
-    if (view === 'expanded') {
-      return (
-        <Expanded
-          nextPhoto={nextPhoto}
-          previousPhoto={previousPhoto}
-          changeViewDefault={() => handleChangeView('default')}
-          photos={selectedStyle.photos}
-          selectedPhoto={selectedPhoto}
-          changeSelectedPhoto={handleChangePhoto}
+
+        <Sidebar
           selectedIndex={selectedIndex}
+          previousPhoto={previousPhoto}
+          nextPhoto={nextPhoto}
+          containerRef={containerRef}
+          selectedStyle={selectedStyle}
+          handleChangePhoto={handleChangePhoto}
         />
-      );
-    }
+      </div>
+    );
   }
+
+  // Expanded view modal
+  if (view === 'expanded') {
+    return (
+      <Expanded
+        nextPhoto={nextPhoto}
+        previousPhoto={previousPhoto}
+        changeViewDefault={() => handleChangeView('default')}
+        photos={selectedStyle.photos}
+        selectedPhoto={selectedPhoto}
+        handleChangePhoto={handleChangePhoto}
+        selectedIndex={selectedIndex}
+        selectedStyle={selectedStyle}
+        containerRef={containerRef}
+      />
+    );
+  }
+  // }
 }
 
 export default Gallery;
