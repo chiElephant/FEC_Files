@@ -17,7 +17,6 @@ async function readAllProducts(req, res) {
 
 async function readProduct(req, res) {
   const { product_id } = req.params;
-
   try {
     const product = await Products.findOne({ id: product_id });
     res.status(200).json(product);
@@ -32,7 +31,6 @@ async function readStyles(req, res) {
 
   try {
     const styles = await Styles.find({ productId: product_id });
-    console.log('styles', styles, product_id);
     res.status(200).json(styles);
   } catch (error) {
     console.error(
@@ -43,77 +41,27 @@ async function readStyles(req, res) {
   }
 }
 
-// function readProduct(req, res) {
-//   const { product_id } = req.params;
+// function readRelated(req, res) {}
 
-//   cache
-//     .get(product_id)
-//     .then((reply) => {
-//       if (reply !== null) {
-//         console.log('Returned Data from Cache');
-//         return res.status(200).json(JSON.parse(reply));
-//       }
-//       Products.findOne({ product_id }, async (error, product) => {
-//         if (error) {
-//           return res
-//             .status(500)
-//             .send(`Error reading product_id ${product_id} from db`, error);
-//         }
-//         await cache
-//           .set(`${product_id}`, JSON.stringify(product))
-//           .catch((err) => res.status(500).send(err));
+async function createCart(req, res) {
+  const { size, qty } = req.params;
+  const { styleId } = req.body;
 
-//         res.status(200).json(product);
-//       });
-//     })
-//     .catch((er) => res.status(500).send(er));
-// }
-
-// function readStyle(req, res) {
-//   const { product_id } = req.params;
-
-//   cache
-//     .get(`${product_id}_styles`)
-//     .then((reply) => {
-//       if (reply !== null) {
-//         console.log('Returned Data from Cache');
-//         return res.status(200).json(JSON.parse(reply));
-//       }
-
-//       Styles.find({ product_id }, async (error, styles) => {
-//         if (error) {
-//           return res
-//             .status(500)
-//             .send(
-//               `Error reading product_id ${product_id} styles from db`,
-//               error
-//             );
-//         }
-
-//         const { length } = styles;
-
-//         if (length === 0) {
-//           res.status(404).send('Product ID does not exist');
-//         } else {
-//           await cache
-//             .set(`${product_id}_styles`, JSON.stringify(styles))
-//             .catch((err) => console.error(err));
-
-//           res.status(200).json(styles);
-//         }
-//       });
-//     })
-//     .catch((err) => res.status(500).send(err));
-// }
-
-function readRelated(req, res) {}
-
-function createCart(req, res) {}
+  try {
+    const style = await Styles.findOne({ _id: styleId });
+    style.skus[size].quantity -= parseInt(qty, 10);
+    await style.save();
+    res.status(200).json(style);
+  } catch (error) {
+    console.error(`Error updating style ${styleId} quantity`, error);
+    res.status(500).send('Error adding quantity to cart');
+  }
+}
 
 module.exports = {
   readAllProducts,
   readProduct,
   readStyles,
-  readRelated,
+  // readRelated,
   createCart,
 };

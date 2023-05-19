@@ -7,49 +7,54 @@ export default function Sidebar({
   previousPhoto,
   nextPhoto,
   containerRef,
-  selectedStyle,
+  currentStyle,
   handleChangePhoto,
+  altPhoto,
+  displayNav,
 }) {
   return (
     <div className="sidebar">
-      <KeyboardArrowLeftIcon
-        className="arrow-up"
-        onClick={previousPhoto}
-        style={
-          selectedIndex === 0 ? { color: 'transparent' } : { color: 'gray' }
-        }
-      />
+      {displayNav ? (
+        <KeyboardArrowLeftIcon
+          className="arrow-up"
+          onClick={previousPhoto}
+          style={
+            selectedIndex === 0 ? { color: 'transparent' } : { color: 'gray' }
+          }
+        />
+      ) : null}
       <div className="photo-container" ref={containerRef}>
-        {selectedStyle.photos.map((photo, index) => (
+        {currentStyle.photos.map((photo, index) => (
           <button
-            key={photo.url}
+            key={photo.url || altPhoto}
             className="image-btn"
             onClick={(e) => handleChangePhoto(e)}
           >
             <img
-              className={`${
+              className={
                 index === selectedIndex
                   ? 'style-other-imgs-selected'
                   : 'style-other-imgs'
-              }`}
-              src={photo.url}
+              }
+              src={photo.url || altPhoto}
               data={index}
-              key={photo.url}
-              alt="Not available"
+              key={photo.url || altPhoto}
+              alt={altPhoto}
             />
           </button>
         ))}
       </div>
-
-      <KeyboardArrowRightIcon
-        className="arrow-down"
-        onClick={nextPhoto}
-        style={
-          selectedIndex < selectedStyle.photos.length - 1
-            ? { color: 'gray' }
-            : { color: 'transparent' }
-        }
-      />
+      {displayNav ? (
+        <KeyboardArrowRightIcon
+          className="arrow-down"
+          onClick={nextPhoto}
+          style={
+            selectedIndex < currentStyle.photos.length - 1
+              ? { color: 'gray' }
+              : { color: 'transparent' }
+          }
+        />
+      ) : null}
     </div>
   );
 }

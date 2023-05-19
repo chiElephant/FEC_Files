@@ -1,29 +1,26 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Expanded from './Expanded.jsx';
+import ImageModal from './ImageModal.jsx';
 import Sidebar from './Sidebar.jsx';
 
-function Gallery({ styles }) {
+function Gallery({ currentStyle, altPhoto }) {
   const [selectedPhoto, setSelectedPhoto] = useState(null);
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [selectedStyle, setSelectedStyle] = useState(null);
-  const [view, setView] = useState('default');
+  const [isModal, setIsModal] = useState(false);
   const containerRef = useRef(null);
   const minRangeRef = useRef(0);
   const maxRangeRef = useRef(2);
 
-  // Set the default style
   useEffect(() => {
     const setDefaultStyle = () => {
-      styles.forEach((style) => {
-        if (style.default_style) {
-          setSelectedStyle(style);
-          setSelectedPhoto(style.photos[selectedIndex].url);
-        }
-      });
+      if (currentStyle.photos.length > 0) {
+        setSelectedPhoto(currentStyle.photos[selectedIndex].url);
+      } else {
+        setSelectedPhoto(altPhoto);
+      }
     };
 
     setDefaultStyle();
-  }, [selectedIndex, styles]);
+  }, [selectedIndex, currentStyle]);
 
   const handleChangePhoto = (e) => {
     e.preventDefault();
@@ -31,8 +28,8 @@ function Gallery({ styles }) {
     setSelectedIndex(Number(e.target.getAttribute('data')));
   };
 
-  const handleChangeView = (viewType) => {
-    setView(viewType);
+  const handleChangeView = () => {
+    setIsModal((prevState) => !prevState);
   };
 
   const previousPhoto = (e) => {
@@ -40,7 +37,7 @@ function Gallery({ styles }) {
     if (selectedIndex > 0) {
       const newIndex = selectedIndex - 1;
       setSelectedIndex(newIndex);
-      const newPhoto = selectedStyle.photos[newIndex].url;
+      const newPhoto = currentStyle.photos[newIndex].url || altPhoto;
       setSelectedPhoto(newPhoto);
       if (selectedIndex <= maxRangeRef.current) {
         const container = containerRef.current;
@@ -55,10 +52,10 @@ function Gallery({ styles }) {
 
   const nextPhoto = (e) => {
     e.preventDefault();
-    if (selectedIndex < selectedStyle.photos.length - 1) {
+    if (selectedIndex < currentStyle.photos.length - 1) {
       const newIndex = selectedIndex + 1;
       setSelectedIndex(newIndex);
-      const newPhoto = selectedStyle.photos[newIndex].url;
+      const newPhoto = currentStyle.photos[newIndex].url || altPhoto;
       setSelectedPhoto(newPhoto);
       if (selectedIndex > maxRangeRef.current) {
         const container = containerRef.current;
@@ -69,48 +66,41 @@ function Gallery({ styles }) {
     }
   };
 
-  // Default View
-  if (view === 'default' && selectedStyle && selectedPhoto) {
+  if (currentStyle && selectedPhoto) {
     return (
       <div className="gallery-container">
         <div>
-          <button
-            className="image-btn"
-            onClick={() => handleChangeView('expanded')}
-          >
-            <img className="main-img" src={selectedPhoto} alt="Not Available" />
+          <button className="image-btn" onClick={() => handleChangeView()}>
+            <img className="main-img" src={selectedPhoto} alt={altPhoto} />
           </button>
         </div>
-
         <Sidebar
           selectedIndex={selectedIndex}
           previousPhoto={previousPhoto}
           nextPhoto={nextPhoto}
           containerRef={containerRef}
-          selectedStyle={selectedStyle}
+          currentStyle={currentStyle}
           handleChangePhoto={handleChangePhoto}
+          altPhoto={altPhoto}
+          displayNav
         />
+        {isModal ? (
+          <ImageModal
+            nextPhoto={nextPhoto}
+            previousPhoto={previousPhoto}
+            closeModal={() => handleChangeView()}
+            photos={currentStyle.photos}
+            selectedPhoto={selectedPhoto}
+            handleChangePhoto={handleChangePhoto}
+            selectedIndex={selectedIndex}
+            currentStyle={currentStyle}
+            containerRef={containerRef}
+            altPhoto={altPhoto}
+          />
+        ) : null}
       </div>
     );
   }
-
-  // Expanded view modal
-  if (view === 'expanded') {
-    return (
-      <Expanded
-        nextPhoto={nextPhoto}
-        previousPhoto={previousPhoto}
-        changeViewDefault={() => handleChangeView('default')}
-        photos={selectedStyle.photos}
-        selectedPhoto={selectedPhoto}
-        handleChangePhoto={handleChangePhoto}
-        selectedIndex={selectedIndex}
-        selectedStyle={selectedStyle}
-        containerRef={containerRef}
-      />
-    );
-  }
-  // }
 }
 
 export default Gallery;

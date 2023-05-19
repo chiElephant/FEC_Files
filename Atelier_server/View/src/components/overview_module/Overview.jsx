@@ -1,10 +1,9 @@
-import _ from 'lodash';
-import React, { useState, useEffect, useRef } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 import ProductInfo from './ProductInfo.jsx';
 import Styles from './Styles.jsx';
 import Gallery from './Gallery.jsx';
 import Slogan from './Slogan.jsx';
+import { getStyles } from '../../lib/dataHandlers.js';
 
 const styleInterface = {
   style_id: 0,
@@ -21,63 +20,46 @@ const styleInterface = {
   skus: {},
 };
 
-function Overview({ product_id, product, avgRating, totalReviews }) {
-  const [selectedStyle, setSelectedStyle] = useState(styleInterface);
+function Overview({ product, metadata, altPhoto }) {
+  const [currentStyle, setCurrentStyle] = useState(styleInterface);
   const [styles, setStyles] = useState([styleInterface]);
 
-  // If a product id is not null
   useEffect(() => {
-    if (product_id) {
-      // Get product styles and set styles state
-      axios
-        .get(`/products/${product_id}/styles`)
-        .then((response) => {
-          setStyles(response.data);
-          return response.data;
-        })
-        // Get default style and set default style state
-        .then((data) => {
-          data.filter((style) => {
-            const { default_style } = style;
-            if (default_style) {
-              setSelectedStyle(style);
-            }
-            return null;
-          });
-        })
-        .catch((error) => console.log('Error fetching styles', error));
+    async function handleStyles() {
+      const stylesData = await getStyles(product.id);
+      if (stylesData !== undefined) {
+        setStyles(stylesData.styles);
+        setCurrentStyle(stylesData.defaultStyle);
+      }
     }
-  }, [product_id]);
+    if (product !== null) {
+      handleStyles();
+    }
+  }, [product]);
 
-  // const changeStyleSelected = (newStyle) => {
-  //   setSelectedStyle(newStyle);
-  //   selectedSty.current(newStyle);
-  // };
+  const handleStyleChange = (newStyle) => {
+    setCurrentStyle(newStyle);
+  };
 
   const content =
-    product_id === null ? (
-      ''
-    ) : (
+    product === null ? null : (
       <div id="main-container" className="main-container">
         <div data-testid="overview" className="overview">
-          <Gallery styles={styles} />
-          {/* <Gallery style={selectedStyle} current={selectedSty} /> */}
-          <div className="new-right">
-            {/* <ProductInfo
+          <Gallery currentStyle={currentStyle} altPhoto={altPhoto} />
+          <div className="product-data-container">
+            <ProductInfo
               product={product}
-              style={selectedStyle}
-              avgRating={avgRating}
-              totalReviews={totalReviews}
+              style={currentStyle}
+              metadata={metadata}
             />
             <Styles
               styles={styles}
-              changeStyleSelected={changeStyleSelected}
-              style={selectedStyle}
-              current={selectedSty}
-            /> */}
+              currentStyle={currentStyle}
+              handleStyleChange={handleStyleChange}
+            />
           </div>
         </div>
-        {/* <Slogan product={product} /> */}
+        <Slogan product={product} />
       </div>
     );
 

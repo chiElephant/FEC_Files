@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef } from 'react';
 import ProductBreakdown from './ProductBreakdown.jsx';
 import helpers from './helper_functions/ratings_bd.js';
+
 function RatingsBreakdown({
   product_id,
   setCharacteristics,
@@ -39,26 +40,16 @@ function RatingsBreakdown({
     });
   }, [product_id]);
   return (
-    <div id="ratings-breakdown" >
+    <div id="ratings-breakdown">
       <div id="average-rating">
-        <div
-          id="average"
-
-        >{`${avgRating.current}`}</div>
-        <div id="breakdown-stars" >
-          {starsRatings}
-        </div>
+        <div id="average">{`${avgRating.current}`}</div>
+        <div id="breakdown-stars">{starsRatings}</div>
       </div>
-      <div
-        id="review-count"
-
-      >{`out of ${totalReviews.current} ratings`}</div>
-      <div id="recommend-percent" >
+      <div id="review-count">{`out of ${totalReviews.current} ratings`}</div>
+      <div id="recommend-percent">
         {`${percentRecommended.current}% of reviewers recommend this product`}
       </div>
-      <div id="ratings-graph" >
-        {ratingsBreakDown}
-      </div>
+      <div id="ratings-graph">{ratingsBreakDown}</div>
       <ProductBreakdown characteristics={characteristics} />
     </div>
   );

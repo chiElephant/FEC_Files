@@ -7,7 +7,7 @@ export default function Link({ to, component }) {
     const navigationEvent = new PopStateEvent('navigate');
     window.dispatchEvent(navigationEvent);
   };
-  console.log(to);
+  // console.log(to);
   return (
     <a href={to} onClick={preventReload}>
       {component}

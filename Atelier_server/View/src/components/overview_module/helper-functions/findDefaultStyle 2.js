@@ -3,7 +3,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-restricted-syntax */
 const findDefaultStyle = (styles) => {
-  console.log(styles);
+  // console.log('DS2');
   for (let i = 0; i < styles.length; i++) {
     if (styles[i]['default?']) {
       return styles[i];

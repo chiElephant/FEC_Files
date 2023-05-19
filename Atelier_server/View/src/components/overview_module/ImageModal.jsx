@@ -4,15 +4,16 @@ import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import Sidebar from './Sidebar.jsx';
 
-function Expanded({
+export default function ImageModal({
   nextPhoto,
   previousPhoto,
-  changeViewDefault,
+  closeModal,
   selectedIndex,
   selectedPhoto,
-  selectedStyle,
+  currentStyle,
   containerRef,
   handleChangePhoto,
+  altPhoto,
 }) {
   return (
     <div className="modalBackground">
@@ -20,7 +21,7 @@ function Expanded({
         <button
           className="close-modal-btn"
           onClick={() => {
-            changeViewDefault();
+            closeModal();
           }}
         >
           x
@@ -42,14 +43,14 @@ function Expanded({
                 img={selectedPhoto}
                 height={600}
                 zoomPosition="original"
-                alt="Not Available"
+                alt={altPhoto}
               />
             </div>
             <KeyboardArrowRightIcon
               className="arrow-down"
               onClick={nextPhoto}
               style={
-                selectedIndex < selectedStyle.photos.length - 1
+                selectedIndex < currentStyle.photos.length - 1
                   ? { color: 'gray' }
                   : { color: 'transparent' }
               }
@@ -61,12 +62,11 @@ function Expanded({
           previousPhoto={previousPhoto}
           nextPhoto={nextPhoto}
           containerRef={containerRef}
-          selectedStyle={selectedStyle}
+          currentStyle={currentStyle}
           handleChangePhoto={handleChangePhoto}
+          altPhoto={altPhoto}
         />
       </div>
     </div>
   );
 }
-
-export default Expanded;

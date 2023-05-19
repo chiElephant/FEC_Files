@@ -1,9 +1,9 @@
-import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import { useParams } from 'react-router-dom';
 import Topbar from './Topbar.jsx';
 import Overview from './overview_module/Overview.jsx';
+import { getProductData, getMetadata } from '../lib/dataHandlers.js';
 // import QandAModule from './questions_answers_module/QandAModule.jsx';
 // import ReviewsModule from './reviews_module/ReviewsModule.jsx';
 // import ProductLinks from './ProductLinks.jsx';
@@ -11,13 +11,27 @@ import Overview from './overview_module/Overview.jsx';
 function App() {
   const { id } = useParams();
   const [currentProduct, setCurrentProduct] = useState(null);
+  const [currentMetadata, setCurrentMetadata] = useState(null);
+  const altPhoto = useRef(
+    'https://res.cloudinary.com/dxvlke88h/image/upload/v1684474914/3309274_0_zyxev2.png'
+  );
   // const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    const product_id = id || 1;
-    axios.get(`/products/${product_id}`).then((res) => {
-      setCurrentProduct(res.data);
-    });
+    const productId = id || 1;
+
+    async function handleProductId() {
+      const product = await getProductData(productId);
+      setCurrentProduct(product);
+    }
+
+    async function handleMetadata() {
+      const meta = await getMetadata(productId);
+      setCurrentMetadata(meta);
+    }
+
+    handleProductId();
+    handleMetadata();
   }, [id]);
 
   // useEffect(() => {
@@ -37,13 +51,18 @@ function App() {
   // }, []);
 
   const widgets =
-    currentProduct === null ? (
-      ''
-    ) : (
+    currentProduct === null ? null : (
       <>
-        <Overview product_id={currentProduct.id} product={currentProduct} />
-        {/* <QandAModule product_id={productId} product_name={productName} />
-        <ReviewsModule product_id={productId} product_name={productName} /> */}
+        <Overview
+          product={currentProduct}
+          metadata={currentMetadata}
+          altPhoto={altPhoto.current}
+        />
+        {/* <QandAModule id={productId} product_name={productName} /> */}
+        {/* <ReviewsModule
+          id={currentProduct !== null ? currentProduct.id : null}
+          product_name={currentProduct !== null ? currentProduct.name : null}
+        /> */}
       </>
     );
 

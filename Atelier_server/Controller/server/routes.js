@@ -18,7 +18,7 @@ router.route('/products/:product_id/styles').get(products.readStyles);
 
 // router.route('/products/:product_id/related').get(products.readRelated);
 
-// router.route('/cart/:sku/:qty').post(products.createCart);
+router.route('/cart/:size/:qty').post(products.createCart);
 
 /*
   Question Routes
