@@ -3,9 +3,6 @@ const axios = require('axios');
 
 const { URL, TOKEN } = process.env;
 
-// only have to take care of one request here
-// client will be in charge of sending mutiple requests
-
 const filteredAnswers = (object) =>
   object.map((obj) => {
     const answers = Object.values(obj.answers);
@@ -37,36 +34,29 @@ const filteredAnswersFromGet = (inputArray) => {
   return [...filterBySeller, ...filterRestAndSortByHelpfulness];
 };
 
-const getQuestions = (req, res, next) => {
-  const { product_id } = req.params;
+const getQuestions = async (productId) => {
   let store = [];
   const count = 100;
 
-  function get(page) {
-    const url = `${URL}/qa/questions?product_id=${product_id}&page=${page}&count=${count}`;
+  async function get(page) {
+    const url = `${URL}/qa/questions?product_id=${productId}&page=${page}&count=${count}`;
 
     const options = {
       headers: { Authorization: TOKEN },
     };
-    axios
-      .get(url, options)
-      .then((response) => {
-        const questionList = response.data.results;
 
-        if (questionList.length > 0) {
-          store = [...store, ...questionList];
-          get(page + 1);
-        } else {
-          filteredAnswers(store);
+    const response = await axios.get(url, options);
+    const questionList = response.data.results;
 
-          res.body = filteredAnswers(store);
-          next();
-        }
-      })
-      .catch(next);
+    if (questionList.length > 0) {
+      store = [...store, ...questionList];
+      await get(page + 1);
+    }
+    return filteredAnswers(store);
   }
 
-  get(1);
+  await get(1);
+  return store;
 };
 
 const getAnswers = (req, res, next) => {

@@ -6,6 +6,7 @@ import QandAModule from './questions_answers_module/QandAModule.jsx';
 import ReviewsModule from './reviews_module/ReviewsModule.jsx';
 import Topbar from './Topbar.jsx';
 import Products from './Products.jsx';
+import Loading from './Loading.jsx';
 
 function App() {
   const location = useLocation();
@@ -25,6 +26,7 @@ function App() {
     reviewsCount: null,
     features: [],
     styles: [],
+    questionsWithAnswers: [],
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -49,7 +51,7 @@ function App() {
   }, [location.state, paramId]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   if (error) {
@@ -64,6 +66,7 @@ function App() {
       <QandAModule
         product_id={productData.id}
         product_name={productData.name}
+        questions_answers={productData.questionsWithAnswers}
       />
       <ReviewsModule
         product_id={productData.id}

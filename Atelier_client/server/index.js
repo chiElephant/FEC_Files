@@ -45,7 +45,14 @@ app.get('/:id', (req, res, next) => {
 // *** Q & A *** //
 
 // Question List;
-app.get('/questions/:product_id/', getQuestions, (req, res) => {
+app.get('/questions/:product_id/', async (req, res, next) => {
+  try {
+    const questionsWithAnswers = await getQuestions(req.params.id);
+    res.body = questionsWithAnswers;
+  } catch (error) {
+    next(error);
+  }
+
   res.status(200).send(res.body);
 });
 
@@ -168,7 +175,12 @@ app.get('/products/:id', async (req, res, next) => {
     });
     const { default_price: defaultPrice, ...rest } = product.data;
 
-    const [productStyles, productFeatures, productRatings] = await Promise.all([
+    const [
+      productStyles,
+      productFeatures,
+      productRatings,
+      questionsWithAnswers,
+    ] = await Promise.all([
       axios.get(`${URL}/products/${req.params.id}/styles`, {
         headers: {
           authorization: process.env.GIT,
@@ -184,7 +196,10 @@ app.get('/products/:id', async (req, res, next) => {
           authorization: process.env.GIT,
         },
       }),
+      getQuestions(req.params.id),
     ]);
+
+    // const questionsWithAnswers = await getQuestions(req.params.id);
 
     const [features, ratings, styles] = [
       productFeatures.data.features,
@@ -216,6 +231,7 @@ app.get('/products/:id', async (req, res, next) => {
       reviewsCount: totalCount,
       features,
       styles,
+      questionsWithAnswers,
     };
 
     res.status(200).json(productData);

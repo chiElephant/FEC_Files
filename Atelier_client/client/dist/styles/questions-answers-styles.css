@@ -292,7 +292,8 @@ div#answer-list {
 }
 
 div#question-list {
-  max-height: 100vh;
+  /* max-height: 100vh; */
+  height: 500px;
   padding-right:20px;
   overflow: auto;
 }

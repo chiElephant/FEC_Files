@@ -11,14 +11,14 @@ function QuestionList({
   handleShowMoreQuestions,
   handleFetchQuestions,
 }) {
-  const [isModel, setIsModel] = useState(false);
+  const [isModal, setIsModal] = useState(false);
   const containerRef = useAutoScroll(displayList.length);
 
   const showModal = () => {
-    setIsModel(!isModel);
+    setIsModal(!isModal);
   };
 
-  const model = isModel ? (
+  const modal = isModal ? (
     <ModalQuestion
       handleFetchQuestions={handleFetchQuestions}
       productName={productName}
@@ -29,17 +29,18 @@ function QuestionList({
     />
   ) : null;
 
+  // console.log('showMoreQuestions: ', showMoreQuestions);
+
   const showMoreQuestionsButton = showMoreQuestions ? (
     <button onClick={handleShowMoreQuestions}> More Answered Questions </button>
   ) : null;
 
   return (
     <>
-      {model}
+      {modal}
       <div data-testid="test-questions" ref={containerRef} id="question-list">
         {displayList.map((q) => (
           <Question
-            handleFetchQuestions={handleFetchQuestions}
             answers={q.answers}
             productName={productName}
             productId={productId}

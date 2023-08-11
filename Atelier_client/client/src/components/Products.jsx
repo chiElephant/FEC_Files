@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Product from './Product.jsx';
+import Loading from './Loading.jsx';
 
 const initialProductData = {
   id: null,
@@ -66,7 +67,7 @@ function Products() {
   }, [id]);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   if (error) {
