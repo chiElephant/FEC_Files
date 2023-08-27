@@ -12,7 +12,9 @@ const helpers = {
 
     helpfulDiv.push(
       <div id="helpful-text" fromelement="Ratings/Reviews" key={'helpful'}>
-        <span className="review-helpfulness" fromelement="Ratings/Reviews">{'Helpful?'}</span>
+        <span className="review-helpfulness" fromelement="Ratings/Reviews">
+          {'Helpful?'}
+        </span>
         <span
           className="helpful-yes"
           fromelement="Ratings/Reviews"
@@ -27,8 +29,13 @@ const helpers = {
         >
           {'Yes '}
         </span>
-        <span className="review-helpfulness" fromelement="Ratings/Reviews">{`(${helpfulCount})`}</span>
-        <span className="review-helpfulness" fromelement="Ratings/Reviews">{'|'}</span>
+        <span
+          className="review-helpfulness"
+          fromelement="Ratings/Reviews"
+        >{`(${helpfulCount})`}</span>
+        <span className="review-helpfulness" fromelement="Ratings/Reviews">
+          {'|'}
+        </span>
         <span
           className="review-report"
           fromelement="Ratings/Reviews"
@@ -47,9 +54,15 @@ const helpers = {
     if (recommend) {
       recDiv = [];
       recDiv.push(
-        <div className="review-recommend" fromelement="Ratings/Reviews" key={'recommend'} >
+        <div
+          className="review-recommend"
+          fromelement="Ratings/Reviews"
+          key={'recommend'}
+        >
           <i className="fa-light fa-check" fromelement="Ratings/Reviews"></i>
-          <span className="review-rec-text" fromelement="Ratings/Reviews">{'I recommend this product'}</span>
+          <span className="review-rec-text" fromelement="Ratings/Reviews">
+            {'I recommend this product'}
+          </span>
         </div>
       );
     }
@@ -62,8 +75,13 @@ const helpers = {
     if (response !== null) {
       responseDiv.push(
         <div id="user-response" fromelement="Ratings/Reviews" key="response">
-          <div className="response" fromelement="Ratings/Reviews">Response:</div>
-          <div className="user-response" fromelement="Ratings/Reviews">{`${response}`}</div>
+          <div className="response" fromelement="Ratings/Reviews">
+            Response:
+          </div>
+          <div
+            className="user-response"
+            fromelement="Ratings/Reviews"
+          >{`${response}`}</div>
         </div>
       );
       reviewResponse.current = responseDiv;
@@ -77,12 +95,20 @@ const helpers = {
 
     for (let i = 1; i <= rating; i++) {
       starRatingDiv.push(
-        <i className="fak fa-star-solid star" fromelement="Ratings/Reviews" key={`star-solid-${i}`}></i>
+        <i
+          className="fak fa-star-solid star"
+          fromelement="Ratings/Reviews"
+          key={`star-solid-${i}`}
+        ></i>
       );
     }
     for (let i = rating; i < 5; i++) {
       starRatingDiv.push(
-        <i className="fak fa-star-thin star" fromelement="Ratings/Reviews" key={`star-${i}`}></i>
+        <i
+          className="fak fa-star-thin star"
+          fromelement="Ratings/Reviews"
+          key={`star-${i}`}
+        ></i>
       );
     }
     return starRatingDiv;

@@ -1,78 +1,104 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+/* global Image */
+
+import React, { useState, useEffect, Suspense, lazy } from 'react';
+import { useParams } from 'react-router-dom';
+
 import axios from 'axios';
-import Overview from './overview_module/Overview.jsx';
+import Loading from './Loading.jsx';
 import QandAModule from './questions_answers_module/QandAModule.jsx';
 import ReviewsModule from './reviews_module/ReviewsModule.jsx';
-import Topbar from './Topbar.jsx';
-import Products from './Products.jsx';
-import Loading from './Loading.jsx';
+import RelatedProducts from './RelatedProducts.jsx';
+import Overview from './overview_module/Overview.jsx';
+
+// // Lazy-loaded components
+// const Overview = lazy(() => import('./overview_module/Overview.jsx'));
+// const RelatedProducts = lazy(() => import('./RelatedProducts.jsx'));
+// const QandAModule = lazy(() =>
+//   import('./questions_answers_module/QandAModule.jsx')
+// );
+// const ReviewsModule = lazy(() => import('./reviews_module/ReviewsModule.jsx'));
 
 function App() {
-  const location = useLocation();
   const { id: paramId } = useParams();
-  const [productData, setProductData] = useState({
-    id: null,
-    campus: null,
-    name: null,
-    slogan: null,
-    description: null,
-    category: null,
-    created_at: null,
-    updated_at: null,
-    defaultPrice: null,
-    photo: null,
-    ratingAverage: null,
-    reviewsCount: null,
-    features: [],
-    styles: [],
-    questionsWithAnswers: [],
-  });
+  const [productData, setProductData] = useState(null);
+  const [relatedProducts, setRelatedProducts] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    async function getProductInfo() {
-      try {
-        if (location.state && location.state.id) {
-          setProductData(location.state);
-        } else {
-          const response = await axios.get(`/products/${paramId}`);
-          setProductData(response.data);
-        }
-      } catch (err) {
-        console.error(err);
-        setError(err);
-      } finally {
-        setLoading(false);
-      }
-    }
-    getProductInfo();
-  }, [location.state, paramId]);
+  const checkImagesLoaded = (imageUrls) => {
+    const promises = imageUrls.map(
+      (url) =>
+        new Promise((resolve, reject) => {
+          const img = new Image();
+          img.src = url;
+          img.onload = () => resolve();
+          img.onerror = (err) => reject(err);
+        })
+    );
 
-  if (loading) {
-    return <Loading />;
-  }
+    return Promise.all(promises);
+  };
+
+  const fetchData = async () => {
+    try {
+      const [productResponse, relatedProductsResponse] = await Promise.all([
+        axios.get(`/products/${paramId}`),
+        axios.get(`/products/${paramId}/related`),
+      ]);
+
+      // const displayPicUrl = productResponse.data.styles[0].photos[0].url;
+      // const relatedProductPicUrls = relatedProductsResponse.data
+      //   .filter((product) => product.photo !== null)
+      //   .map((product) => product.photo);
+
+      // const imageUrls = [displayPicUrl, ...relatedProductPicUrls];
+
+      // await checkImagesLoaded(imageUrls);
+      setProductData(productResponse.data);
+      setRelatedProducts(relatedProductsResponse.data);
+      // setLoading(false);
+    } catch (err) {
+      setError(err);
+      // setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    // setLoading(true);
+    fetchData();
+  }, [paramId]);
+
+  console.log('productData: ', productData);
+  console.log('paramId: ', paramId);
+
+  // if (loading) {
+  //   return <Loading />;
+  // }
 
   if (error) {
     return <div>Error: {error.message}</div>;
   }
 
   return (
-    <div>
-      <Topbar />
-      <Overview productData={productData} />
-      <Products />
-      <QandAModule
-        product_id={productData.id}
-        product_name={productData.name}
-        questions_answers={productData.questionsWithAnswers}
-      />
-      <ReviewsModule
-        product_id={productData.id}
-        product_name={productData.name}
-      />
-    </div>
+    <Suspense fallback={<div>Test</div>}>
+      {productData && (
+        <div id="components">
+          <Overview productData={productData} />
+          <RelatedProducts relatedProducts={relatedProducts} />
+          <QandAModule
+            product_id={productData.id}
+            product_name={productData.name}
+            questions_answers={productData.questionsWithAnswers}
+          />
+          <ReviewsModule
+            product_id={productData.id}
+            product_name={productData.name}
+            reviewsData={productData.reviews}
+            metaData={productData.metaData}
+          />
+        </div>
+      )}
+    </Suspense>
   );
 }
 

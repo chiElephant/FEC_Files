@@ -1,5 +1,10 @@
 /* Questions and Answers styling */
 
+#QandA-main {
+  height: 900px;
+  width: 1000px;
+}
+
 #qanda-header {
   font-size: large;
   color: rgb(82, 82, 82);
@@ -63,7 +68,7 @@ div#questions-answers-form-error {
   color:red;
 }
 div#answer-img {
-  display: flex;;
+  display: flex;
 }
 
 div#answer-img > img {
@@ -78,13 +83,6 @@ div#answer-img > img {
 
 
 /****************/
-
-#QandA-main {
-  height: 100%;
-  width: 1000px;
-  margin: 0 auto 30px auto;
-}
-
 
  div.question {
   display: flex;

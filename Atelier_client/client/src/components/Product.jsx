@@ -1,25 +1,10 @@
+/* global window */
+
 import React from 'react';
 import { Link } from 'react-router-dom';
+import defaultImage from './global-helpers/defaultImage';
 
-function Product({
-  id,
-  campus,
-  name,
-  slogan,
-  description,
-  category,
-  created_at,
-  updated_at,
-  defaultPrice,
-  photo,
-  ratingAverage,
-  reviewsCount,
-  features,
-  styles,
-}) {
-  const defaultImage =
-    'https://res.cloudinary.com/red-bean-rulez/image/upload/v1682800370/FEC_project/i2e4rxjyvxnzhl43vwa3.webp';
-
+function Product({ id, name, category, defaultPrice, photo, ratingAverage }) {
   const renderRating = () => {
     const fullStars = Math.floor(ratingAverage);
     const hasHalfStar = ratingAverage % 1 !== 0;
@@ -47,32 +32,11 @@ function Product({
     return starElements;
   };
 
-  const handleLinkClick = () => {
-    const newUrl = `/${id}`;
-    window.location.href = newUrl;
-  };
-
   return (
     <Link
+      key={id}
       to={`/${id}`}
-      state={{
-        id,
-        campus,
-        name,
-        slogan,
-        description,
-        category,
-        created_at,
-        updated_at,
-        defaultPrice,
-        photo,
-        ratingAverage,
-        reviewsCount,
-        features,
-        styles,
-      }}
       style={{ textDecoration: 'none', color: 'inherit' }}
-      onClick={handleLinkClick}
     >
       <div className="product-card">
         <img

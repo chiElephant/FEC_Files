@@ -5,32 +5,26 @@ import Gallery from './Gallery.jsx';
 import Slogan from './Slogan.jsx';
 
 function Overview({ productData }) {
-  const [selectedStyle, setSelectedStyle] = useState(null);
+  const [selectedStyle, setSelectedStyle] = useState(productData.styles[0]);
 
-  useEffect(() => {
-    setSelectedStyle(productData.styles[0]);
-  }, [productData]);
+  console.log('selectedStyle: ', selectedStyle);
 
   const changeStyleSelected = (style) => {
     setSelectedStyle(style);
   };
 
-  if (selectedStyle === null) {
-    return <div>Loading...</div>;
-  }
-
   return (
-    <div id="main-container" className="main-container">
+    <div className="main-container">
       <div data-testid="overview" className="overview">
         <Gallery selectedStyle={selectedStyle} />
-        <div className="new-right">
+        {/* <div className="new-right">
           <ProductInfo {...productData} selectedStyle={selectedStyle} />
           <Styles
             styles={productData.styles}
             changeStyleSelected={changeStyleSelected}
             selectedStyle={selectedStyle}
           />
-        </div>
+        </div> */}
       </div>
       <Slogan product={productData} />
     </div>

@@ -70,7 +70,7 @@ const helpers = {
     if (recommended !== undefined) {
       const noCount = recommended.false;
       const yesCount = recommended.true;
-      const totalCount = noCount + yesCount;
+      const totalCount = Number(noCount) + Number(yesCount);
       const avg = Math.floor((yesCount / totalCount) * 100);
 
       setPercentRecommended(avg);

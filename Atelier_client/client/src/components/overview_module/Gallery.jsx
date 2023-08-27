@@ -1,11 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import preloadImages from '../global-helpers/preloadImages.jsx';
 import Expanded from './Expanded.jsx';
 
 function Gallery({ selectedStyle }) {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [view, setView] = useState('default');
+  const [selectedPhoto, setSelectedPhotot] = useState(
+    selectedStyle.photos[selectedIndex].url
+  );
 
   const handleChangeViewExpanded = () => {
     setView('expanded');
@@ -33,17 +37,21 @@ function Gallery({ selectedStyle }) {
     }
   };
 
-  if (view === 'default' && selectedStyle.photos.length > 0) {
-    const selectedPhoto = selectedStyle.photos[selectedIndex].url;
+  // if (view === 'default' && selectedStyle.photos.length > 0) {
+  //   const selectedPhoto = selectedStyle.photos[selectedIndex].url;
+  // }
 
-    return (
-      <div className="gallery-container">
-        <img
-          className="main-img"
-          src={selectedPhoto}
-          onClick={handleChangeViewExpanded}
-        />
-        <div className="sidebar">
+  return (
+    <div className="gallery-container">
+      <img
+        className="main-img"
+        alt="Image"
+        src={selectedPhoto}
+        // loading="lazy"
+        onClick={handleChangeViewExpanded}
+      />
+
+      {/* <div className="sidebar">
           {selectedIndex !== 0 && (
             <KeyboardArrowUpIcon className="arrow-up" onClick={previousPhoto} />
           )}
@@ -64,28 +72,27 @@ function Gallery({ selectedStyle }) {
           {selectedIndex < selectedStyle.photos.length - 1 && (
             <KeyboardArrowDownIcon className="arrow-down" onClick={nextPhoto} />
           )}
-        </div>
-      </div>
-    );
-  }
-
-  if (view === 'expanded') {
-    const selectedPhoto = selectedStyle.photos[selectedIndex].url;
-
-    return (
-      <Expanded
-        photos={selectedStyle.photos}
-        nextPhoto={nextPhoto}
-        previousPhoto={previousPhoto}
-        changeViewDefault={handleChangeViewDefault}
-        selectedPhoto={selectedPhoto}
-        changeSelectedPhoto={handleChangePhoto}
-        selectedIndex={selectedIndex}
-      />
-    );
-  }
-
-  return null;
+        </div> */}
+    </div>
+  );
 }
+
+// if (view === 'expanded') {
+//   const selectedPhoto = selectedStyle.photos[selectedIndex].url;
+
+//   return (
+//     <Expanded
+//       photos={selectedStyle.photos}
+//       nextPhoto={nextPhoto}
+//       previousPhoto={previousPhoto}
+//       changeViewDefault={handleChangeViewDefault}
+//       selectedPhoto={selectedPhoto}
+//       changeSelectedPhoto={handleChangePhoto}
+//       selectedIndex={selectedIndex}
+//     />
+//   );
+// }
+
+// return null;
 
 export default Gallery;

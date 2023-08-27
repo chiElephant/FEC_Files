@@ -5,16 +5,17 @@ import SubmitReview from './SubmitReview.jsx';
 import ReviewsList from './ReviewsList.jsx';
 // import { handleInteraction } from '../../interactionHandler.js'
 
-function ReviewsModule({ product_id, product_name }) {
-  const [reviewsDisplayed, setReviewsDisplayed] = useState(initialState.review);
+function ReviewsModule({ product_id, product_name, reviewsData, metaData }) {
+  const [reviewsDisplayed, setReviewsDisplayed] = useState(reviewsData);
   const [currentFilters, setCurrentFilters] = useState(initialState.filters);
   const [showReviewModal, setShowReviewModal] = useState(false);
   const [characteristics, setCharacteristics] = useState({});
   const [displayedCount, setDisplayedCount] = useState(2);
   const [sort, setSort] = useState('relevance');
 
-  const reviews = useRef(initialState.review);
-  const reviewCount = useRef(0);
+  const reviews = useRef(reviewsData);
+  const reviewCount = useRef(reviewsData.length);
+  const isInitialRender = useRef(true);
 
   useEffect(() => {
     const count = 300;
@@ -23,8 +24,9 @@ function ReviewsModule({ product_id, product_name }) {
       sort,
       count,
     };
-
-    if (product_id !== 12345) {
+    if (isInitialRender.current) {
+      isInitialRender.current = false;
+    } else {
       helpers.getReviews(params, currentFilters, (reviewData) => {
         reviews.current = reviewData;
         reviewCount.current = reviewData.length;
@@ -36,7 +38,7 @@ function ReviewsModule({ product_id, product_name }) {
         );
       });
     }
-  }, [product_id, sort]);
+  }, [sort]);
 
   // eslint-disable-next-line no-unused-vars
   const filteredReviews = useMemo(() => {
@@ -61,6 +63,7 @@ function ReviewsModule({ product_id, product_name }) {
           characteristics={characteristics}
           setCurrentFilters={setCurrentFilters}
           currentFilters={currentFilters}
+          metaData={metaData}
         />
         {reviewsDisplayed.length === 0 ? (
           ''

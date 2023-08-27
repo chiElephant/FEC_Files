@@ -1,19 +1,14 @@
 /* Reviews Module */
 #reviews-body {
-  height: 100%;
+  height: 900px;
   width: 1000px;
-  margin: 0 auto 40px auto;
-}
-#reviews-module {
-  max-height: 100vh;
-  width: 100%;
-  margin: 0 auto;
 }
 
 #ratings-reviews-header {
   font-size: large;
   color: rgb(82, 82, 82);
   font-weight: 300;
+  margin-top: 80px;
   margin-bottom:20px;
 }
 

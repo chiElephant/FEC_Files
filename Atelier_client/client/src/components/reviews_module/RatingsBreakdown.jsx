@@ -1,17 +1,20 @@
 import React, { useEffect, useMemo, useRef } from 'react';
 import ProductBreakdown from './ProductBreakdown.jsx';
 import helpers from './helper_functions/ratings_bd.js';
+
 function RatingsBreakdown({
   product_id,
   setCharacteristics,
   characteristics,
   setCurrentFilters,
   currentFilters,
+  metaData,
 }) {
-  const percentRecommended = useRef(0);
-  const totalReviews = useRef(0);
-  const avgRating = useRef(0);
-  const metadata = useRef({});
+  const percentRecommended = useRef(metaData.percentRecommended);
+  const totalReviews = useRef(metaData.totalReviews);
+  const avgRating = useRef(metaData.avgRating);
+  const metadata = useRef(metaData);
+  const isInitialRender = useRef(true);
 
   const starsRatings = useMemo(
     () => helpers.createStarsRating(avgRating),
@@ -24,18 +27,24 @@ function RatingsBreakdown({
   );
 
   useEffect(() => {
-    helpers.getMetadata(product_id, (meta) => {
-      metadata.current = meta;
-      helpers.handleRatings(meta.ratings, (avg, reviewsCount) => {
-        totalReviews.current = reviewsCount;
-        avgRating.current = avg;
+    if (isInitialRender.current) {
+      isInitialRender.current = false;
+    } else {
+      helpers.getMetadata(product_id, (meta) => {
+        metadata.current = meta;
+        helpers.handleRatings(meta.ratings, (avg, reviewsCount) => {
+          totalReviews.current = reviewsCount;
+          avgRating.current = avg;
+        });
+        helpers.handleRecommended(meta.recommended, (avg) => {
+          percentRecommended.current = avg;
+        });
+
+        setCharacteristics(() => meta.characteristics);
       });
-      helpers.handleRecommended(meta.recommended, (avg) => {
-        percentRecommended.current = avg;
-      });
-      setCharacteristics(() => meta.characteristics);
-    });
+    }
   }, [product_id]);
+
   return (
     <div id="ratings-breakdown" fromelement="Ratings/Reviews">
       <div id="average-rating">

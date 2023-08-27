@@ -53,11 +53,7 @@ const helpers = {
           filteredReviews.push(reviews.current[i]);
         }
       }
-      // for (let review of reviews.current) {
-      //   if (currentFilters[review.rating]) {
-      //     filteredReviews.push(review);
-      //   }
-      // }
+
       setReviewsShown(filteredReviews);
       return;
     }

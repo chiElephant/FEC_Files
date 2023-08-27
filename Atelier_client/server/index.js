@@ -30,7 +30,6 @@ app.use('/', (req, res, next) => {
 
 app.use(compression());
 app.use(express.static(path.join(__dirname, '/../client/dist')));
-// app.use(express.json({ limit: '10mb' }));
 
 app.get('/:id', (req, res, next) => {
   const { id } = req.params;
@@ -178,6 +177,7 @@ app.get('/products/:id', async (req, res, next) => {
     const [
       productStyles,
       productFeatures,
+      productReviews,
       productRatings,
       questionsWithAnswers,
     ] = await Promise.all([
@@ -191,6 +191,16 @@ app.get('/products/:id', async (req, res, next) => {
           authorization: process.env.GIT,
         },
       }),
+      axios.get(
+        `${URL}/reviews?product_id=${
+          req.params.id
+        }&page=${1}&count=${300}&sort=${'relevance'}`,
+        {
+          headers: {
+            authorization: process.env.GIT,
+          },
+        }
+      ),
       axios.get(`${URL}/reviews/meta?product_id=${req.params.id}`, {
         headers: {
           authorization: process.env.GIT,
@@ -199,15 +209,14 @@ app.get('/products/:id', async (req, res, next) => {
       getQuestions(req.params.id),
     ]);
 
-    // const questionsWithAnswers = await getQuestions(req.params.id);
-
-    const [features, ratings, styles] = [
+    const [features, reviews, metaData, styles] = [
       productFeatures.data.features,
-      productRatings.data.ratings,
+      productReviews.data.results,
+      productRatings.data,
       productStyles.data.results,
     ];
 
-    const { totalSum, totalCount } = Object.entries(ratings).reduce(
+    const { totalSum, totalCount } = Object.entries(metaData.ratings).reduce(
       (accumulator, [key, value]) => {
         const numericalRating = Number(key);
         const count = Number(value);
@@ -221,6 +230,13 @@ app.get('/products/:id', async (req, res, next) => {
     let ratingAverage = totalSum / totalCount;
     ratingAverage = Math.round(ratingAverage * 2) / 2;
 
+    metaData.percentRecommended = Math.floor(
+      (Number(metaData.recommended.true) / Number(totalCount)) * 100
+    );
+
+    metaData.totalReviews = totalCount;
+    metaData.avgRating = ratingAverage;
+
     const firstStyle = productStyles.data.results[0];
     const photo = firstStyle ? firstStyle.photos[0].thumbnail_url : null;
     const productData = {
@@ -232,6 +248,8 @@ app.get('/products/:id', async (req, res, next) => {
       features,
       styles,
       questionsWithAnswers,
+      reviews,
+      metaData,
     };
 
     res.status(200).json(productData);
@@ -242,8 +260,6 @@ app.get('/products/:id', async (req, res, next) => {
 
 // Get all the related products
 app.get('/products/:product_id/related', async (req, res, next) => {
-  const { productId } = req.params;
-
   try {
     const products = await axios.get(URL + req.url, {
       headers: {
@@ -253,35 +269,28 @@ app.get('/products/:product_id/related', async (req, res, next) => {
 
     const productsWithImages = await Promise.all(
       products.data.map(async (item) => {
-        const [productData, productStyles, productFeatures, productRatings] =
-          await Promise.all([
-            axios.get(`${URL}/products/${item}`, {
-              headers: {
-                Authorization: TOKEN,
-              },
-            }),
-            axios.get(`${URL}/products/${item}/styles`, {
-              headers: {
-                authorization: process.env.GIT,
-              },
-            }),
-            axios.get(`${URL}/products/${item}`, {
-              headers: {
-                authorization: process.env.GIT,
-              },
-            }),
-            axios.get(`${URL}/reviews/meta?product_id=${item}`, {
-              headers: {
-                authorization: process.env.GIT,
-              },
-            }),
-          ]);
+        const [productData, productStyles, productRatings] = await Promise.all([
+          axios.get(`${URL}/products/${item}`, {
+            headers: {
+              Authorization: TOKEN,
+            },
+          }),
+          axios.get(`${URL}/products/${item}/styles`, {
+            headers: {
+              authorization: process.env.GIT,
+            },
+          }),
+          axios.get(`${URL}/reviews/meta?product_id=${item}`, {
+            headers: {
+              authorization: process.env.GIT,
+            },
+          }),
+        ]);
 
-        const [data, features, ratings, styles] = [
+        const [data, styles, ratings] = [
           productData.data,
-          productFeatures.data.features,
-          productRatings.data.ratings,
           productStyles.data.results,
+          productRatings.data.ratings,
         ];
 
         const { default_price: defaultPrice, ...rest } = data;
@@ -300,16 +309,13 @@ app.get('/products/:product_id/related', async (req, res, next) => {
         let ratingAverage = totalSum / totalCount;
         ratingAverage = Math.round(ratingAverage * 2) / 2;
 
-        const firstStyle = productStyles.data.results[0];
+        const firstStyle = styles[0];
         const photo = firstStyle ? firstStyle.photos[0].thumbnail_url : null;
         return {
           ...rest,
           defaultPrice,
           photo,
           ratingAverage,
-          reviewsCount: totalCount,
-          features,
-          styles,
         };
       })
     );

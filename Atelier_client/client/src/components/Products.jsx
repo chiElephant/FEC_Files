@@ -1,5 +1,6 @@
+/* global localStorage */
+
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Product from './Product.jsx';
 import Loading from './Loading.jsx';
@@ -25,18 +26,18 @@ function Products() {
   const [productsData, setProductsData] = useState([initialProductData]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const { id } = useParams();
 
   const fetchProductsData = async (url) => {
     try {
       const response = await axios.get(url);
       const newData = response.data;
 
-      // Check if localStorage is nearing its limit
+      const newDataSize = JSON.stringify(newData).length;
+
       const localStorageSize = JSON.stringify(localStorage).length;
       const remainingSize = 5 * 1024 * 1024 - localStorageSize;
 
-      if (remainingSize < JSON.stringify(newData).length) {
+      if (remainingSize < newDataSize) {
         localStorage.clear();
       }
 
@@ -50,21 +51,14 @@ function Products() {
   };
 
   useEffect(() => {
-    let url;
-    if (id) {
-      url = `/products/${id}/related`;
-    } else {
-      url = '/products';
-    }
-    // check if data already exists in local storage
-    const savedData = JSON.parse(localStorage.getItem(url));
+    const savedData = JSON.parse(localStorage.getItem('/products'));
     if (savedData) {
       setProductsData(savedData);
       setIsLoading(false);
     } else {
-      fetchProductsData(url);
+      fetchProductsData('/products');
     }
-  }, [id]);
+  }, []);
 
   if (isLoading) {
     return <Loading />;
@@ -78,23 +72,11 @@ function Products() {
     <Product key={item.id} {...item} />
   ));
 
-  let content;
-  if (id) {
-    content = (
-      <div id="QandA-main">
-        <h1 id="qanda-header">Related Products</h1>
-        <div className="product-list-product-page">{productElements}</div>
-      </div>
-    );
-  } else {
-    content = (
-      <div className="product-list-parent">
-        <div className="product-list">{productElements}</div>
-      </div>
-    );
-  }
-
-  return content;
+  return (
+    <div className="product-list-parent">
+      <div className="product-list">{productElements}</div>
+    </div>
+  );
 }
 
 export default Products;
