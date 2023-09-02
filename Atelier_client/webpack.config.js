@@ -1,54 +1,66 @@
-require('dotenv').config();
 const path = require('path');
-
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const webpack = require('webpack');
+const nodeExternals = require('webpack-node-externals');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-const DIST_DIR = path.join(__dirname, '/client/dist');
-const SRC_DIR = path.join(__dirname, '/client/src');
-
-module.exports = {
-  entry: `${SRC_DIR}/index.jsx`,
+const browserConfig = {
+  entry: './src/browser/index.js',
   output: {
+    path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
-    path: DIST_DIR,
   },
   module: {
     rules: [
-      {
-        test: /\.(js|jsx)$/,
-        exclude: [/node_modules/, /_tests_/],
-        loader: 'babel-loader',
-      },
+      { test: /\.(js|jsx)$/, use: 'babel-loader' },
+      { test: /\.css$/, use: ['css-loader'] },
+    ],
+  },
+  plugins: [
+    new webpack.DefinePlugin({
+      __isBrowser__: 'true',
+    }),
+  ],
+};
+
+const serverConfig = {
+  entry: './src/server/index.js',
+  target: 'node',
+  externals: [nodeExternals()],
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'server.js',
+  },
+  module: {
+    rules: [
+      { test: /\.(js|jsx)$/, use: 'babel-loader' },
       {
         test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
-      },
-      {
-        test: /\.(gif|png|jpe?g|svg)$/i,
         use: [
           {
-            loader: 'file-loader',
+            loader: MiniCssExtractPlugin.loader,
+          },
+          {
+            loader: 'css-loader',
             options: {
-              name: '[path][name].[ext]',
-              publicPath: '/',
+              modules: {
+                localIdentName: '[local]',
+              },
             },
           },
         ],
       },
     ],
   },
-  optimization: {
-    minimize: true,
-    minimizer: [new CssMinimizerPlugin(), new TerserPlugin()],
-  },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: './client/src/template.html',
-      inject: 'body',
+    new CopyWebpackPlugin({
+      patterns: [{ from: './template.html', to: 'template.html' }],
     }),
     new MiniCssExtractPlugin(),
+    new webpack.DefinePlugin({
+      __isBrowser__: 'false',
+    }),
   ],
 };
+
+module.exports = [browserConfig, serverConfig];

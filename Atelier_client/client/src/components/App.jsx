@@ -1,6 +1,6 @@
 /* global Image */
 
-import React, { useState, useEffect, Suspense, lazy } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { useParams } from 'react-router-dom';
 
 import axios from 'axios';
@@ -9,14 +9,6 @@ import QandAModule from './questions_answers_module/QandAModule.jsx';
 import ReviewsModule from './reviews_module/ReviewsModule.jsx';
 import RelatedProducts from './RelatedProducts.jsx';
 import Overview from './overview_module/Overview.jsx';
-
-// // Lazy-loaded components
-// const Overview = lazy(() => import('./overview_module/Overview.jsx'));
-// const RelatedProducts = lazy(() => import('./RelatedProducts.jsx'));
-// const QandAModule = lazy(() =>
-//   import('./questions_answers_module/QandAModule.jsx')
-// );
-// const ReviewsModule = lazy(() => import('./reviews_module/ReviewsModule.jsx'));
 
 function App() {
   const { id: paramId } = useParams();
@@ -46,59 +38,57 @@ function App() {
         axios.get(`/products/${paramId}/related`),
       ]);
 
-      // const displayPicUrl = productResponse.data.styles[0].photos[0].url;
-      // const relatedProductPicUrls = relatedProductsResponse.data
-      //   .filter((product) => product.photo !== null)
-      //   .map((product) => product.photo);
+      const displayPicUrl = productResponse.data.styles[0].photos[0].url;
+      const relatedProductPicUrls = relatedProductsResponse.data
+        .filter((product) => product.photo !== null)
+        .map((product) => product.photo);
 
-      // const imageUrls = [displayPicUrl, ...relatedProductPicUrls];
+      const imageUrls = [displayPicUrl, ...relatedProductPicUrls];
 
-      // await checkImagesLoaded(imageUrls);
+      await checkImagesLoaded(imageUrls);
       setProductData(productResponse.data);
       setRelatedProducts(relatedProductsResponse.data);
-      // setLoading(false);
+      setLoading(false);
     } catch (err) {
       setError(err);
-      // setLoading(false);
+      setLoading(false);
     }
   };
 
   useEffect(() => {
-    // setLoading(true);
+    setLoading(true);
     fetchData();
   }, [paramId]);
 
   console.log('productData: ', productData);
   console.log('paramId: ', paramId);
 
-  // if (loading) {
-  //   return <Loading />;
-  // }
+  if (loading) {
+    return <Loading />;
+  }
 
   if (error) {
     return <div>Error: {error.message}</div>;
   }
 
   return (
-    <Suspense fallback={<div>Test</div>}>
-      {productData && (
-        <div id="components">
-          <Overview productData={productData} />
-          <RelatedProducts relatedProducts={relatedProducts} />
-          <QandAModule
-            product_id={productData.id}
-            product_name={productData.name}
-            questions_answers={productData.questionsWithAnswers}
-          />
-          <ReviewsModule
-            product_id={productData.id}
-            product_name={productData.name}
-            reviewsData={productData.reviews}
-            metaData={productData.metaData}
-          />
-        </div>
-      )}
-    </Suspense>
+    // <Suspense fallback={<div>Test</div>}>
+    //   {productData && (
+    <div id="components">
+      <Overview productData={productData} />
+      <RelatedProducts relatedProducts={relatedProducts} />
+      <QandAModule
+        product_id={productData.id}
+        product_name={productData.name}
+        questions_answers={productData.questionsWithAnswers}
+      />
+      <ReviewsModule
+        product_id={productData.id}
+        product_name={productData.name}
+        reviewsData={productData.reviews}
+        metaData={productData.metaData}
+      />
+    </div>
   );
 }
 
