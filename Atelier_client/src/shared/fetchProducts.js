@@ -1,15 +1,12 @@
 import axios from 'axios';
-import dotenv from 'dotenv';
-
-dotenv.config();
 
 const URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
 
-export default async function fetchProducts() {
+export default async function fetchProducts({ API_KEY, productId = null }) {
   try {
     const products = await axios.get(`${URL}/products`, {
       headers: {
-        authorization: process.env.GIT,
+        authorization: API_KEY,
       },
       params: {
         page: 1,
@@ -25,17 +22,17 @@ export default async function fetchProducts() {
           await Promise.all([
             axios.get(`${URL}/products/${item.id}/styles`, {
               headers: {
-                authorization: process.env.GIT,
+                authorization: API_KEY,
               },
             }),
             axios.get(`${URL}/products/${item.id}`, {
               headers: {
-                authorization: process.env.GIT,
+                authorization: API_KEY,
               },
             }),
             axios.get(`${URL}/reviews/meta?product_id=${item.id}`, {
               headers: {
-                authorization: process.env.GIT,
+                authorization: API_KEY,
               },
             }),
           ]);
@@ -62,6 +59,7 @@ export default async function fetchProducts() {
 
         const firstStyle = productStyles.data.results[0];
         const photo = firstStyle ? firstStyle.photos[0].thumbnail_url : null;
+
         return {
           ...rest,
           defaultPrice,
@@ -74,7 +72,7 @@ export default async function fetchProducts() {
       })
     );
 
-    return productsWithImages;
+    return productsWithImages.filter((item) => item.photo !== null);
   } catch (error) {
     throw Error(error);
   }

@@ -1,19 +1,24 @@
 /* eslint-disable no-underscore-dangle */
 /* global document */
-/* global window */
 
 import * as React from 'react';
 import { hydrateRoot } from 'react-dom/client';
-import { library, config } from '@fortawesome/fontawesome-svg-core';
-import { faStar, faStarHalfAlt } from '@fortawesome/free-solid-svg-icons';
-import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
-import Products from '../shared/components/Products.jsx';
+import { BrowserRouter } from 'react-router-dom';
+import { CacheProvider } from '@emotion/react';
+import createEmotionCache from '../shared/createEmotionCache';
+import CssBaseline from '@mui/material/CssBaseline';
 
-config.autoAddCss = false;
-library.add(faStar, faStarHalfAlt, farStar);
+import App from '../shared/components/App.jsx';
+
+const cache = createEmotionCache();
 
 const container = document.getElementById('root');
 hydrateRoot(
   container,
-  <Products initialProductsDataFromServer={window.__INITIAL_DATA__} />
+  <CacheProvider value={cache}>
+    <CssBaseline />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </CacheProvider>
 );

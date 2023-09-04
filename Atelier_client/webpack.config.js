@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+require('dotenv').config();
 
 const browserConfig = {
   entry: './src/browser/index.js',
@@ -19,6 +20,7 @@ const browserConfig = {
   plugins: [
     new webpack.DefinePlugin({
       __isBrowser__: 'true',
+      CLIENT_API_KEY: JSON.stringify(process.env.GIT),
     }),
   ],
 };

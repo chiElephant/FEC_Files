@@ -1,18 +1,24 @@
-/* global window */
-
 import React, { cloneElement } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faStar, faStarHalfAlt } from '@fortawesome/free-solid-svg-icons';
-// import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
-
+import { useNavigate } from 'react-router-dom';
+import {
+  Star,
+  StarHalfOutlined,
+  StarBorderOutlined,
+} from '@mui/icons-material';
 import defaultImage from './global-helpers/defaultImage';
 
-const fullStarIcon = <FontAwesomeIcon icon="fa fa-star" />;
-const halfStarIcon = <FontAwesomeIcon icon="fa fa-star-half-alt" />;
-const emptyStarIcon = <FontAwesomeIcon icon="far fa-star" />;
+const fullStarIcon = <Star />;
+const halfStarIcon = <StarHalfOutlined />;
+const emptyStarIcon = <StarBorderOutlined />;
 
 function Product({ id, name, category, defaultPrice, photo, ratingAverage }) {
   const renderRating = () => {
+    if (ratingAverage === null) {
+      return Array(5)
+        .fill(null)
+        .map((_, i) => cloneElement(emptyStarIcon, { key: `empty-${i}` }));
+    }
+
     const fullStars = Math.floor(ratingAverage);
     const hasHalfStar = ratingAverage % 1 !== 0;
     const emptyStars = Math.floor(5 - ratingAverage);
@@ -28,16 +34,29 @@ function Product({ id, name, category, defaultPrice, photo, ratingAverage }) {
     }
 
     for (let i = 0; i < emptyStars; i++) {
-      starElements.push(
-        React.cloneElement(emptyStarIcon, { key: `empty-${i}` })
-      );
+      starElements.push(cloneElement(emptyStarIcon, { key: `empty-${i}` }));
     }
 
     return starElements;
   };
 
+  const navigate = useNavigate();
+
+  const handleProductClick = () => {
+    window.__INITIAL_DATA__ = null;
+    navigate(`/${id}`);
+  };
+
   return (
-    <div className="product-card">
+    <div
+      key={id}
+      className="product-card"
+      role="button"
+      tabIndex={0}
+      onClick={handleProductClick}
+      onKeyPress={handleProductClick}
+      style={{ textDecoration: 'none', color: 'inherit' }}
+    >
       <img
         src={photo === null ? defaultImage : photo}
         alt={name}

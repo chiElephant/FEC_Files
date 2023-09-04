@@ -11,6 +11,14 @@
         "prettier",
         "jest"
     ],
+
+    "globals": {
+        "window": "readonly",
+        "__isBrowser__": "readonly",
+        "CLIENT_API_KEY": "readonly"
+
+      },
+
     "rules": {
         "no-plusplus": "off",
         "spaced-comment":"off",
@@ -22,6 +30,12 @@
         "no-unused-vars": "warn",
         "no-console": "off",
         "react/jsx-props-no-spreading": "off",
-        "react/jsx-filename-extension": "off"
+        "react/jsx-filename-extension": "off",
+        "no-restricted-imports": [
+            "error",
+            {
+              "patterns": ["@mui/*/*/*"]
+            }
+          ]
     }
 }

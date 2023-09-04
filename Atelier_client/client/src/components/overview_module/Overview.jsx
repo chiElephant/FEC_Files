@@ -7,8 +7,6 @@ import Slogan from './Slogan.jsx';
 function Overview({ productData }) {
   const [selectedStyle, setSelectedStyle] = useState(productData.styles[0]);
 
-  console.log('selectedStyle: ', selectedStyle);
-
   const changeStyleSelected = (style) => {
     setSelectedStyle(style);
   };
