@@ -4,6 +4,7 @@ import QuestionList from './QuestionList.jsx';
 import useGetQuestions from './custom_hooks/useGetQuestions.jsx';
 import useDebounce from './custom_hooks/useDebounce.jsx';
 import useFilterByMatchingText from './custom_hooks/useFilterByMatchingText.jsx';
+import '../../styles/questions-answers-styles.css';
 
 function QandAModule({ questions_answers, product_id, product_name }) {
   const [questionsWithAnswersData, setQuestionsWithAnswersData] =

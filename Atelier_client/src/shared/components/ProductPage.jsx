@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import Overview from './overview_module/Overview.jsx';
+import QandAModule from './questions_answers_module/QandAModule.jsx';
+import RelatedProducts from './RelatedProducts.jsx';
 
 function ProductPage({ data, fetchInitialData }) {
   const { id: paramId } = useParams();
@@ -17,7 +19,7 @@ function ProductPage({ data, fetchInitialData }) {
 
   const fetchData = async () => {
     const res = await fetchInitialData({
-      API_KEY: CLIENT_API_KEY || '',
+      API_KEY: CLIENT_API_KEY,
       productId: paramId,
     });
     setProductData(res);
@@ -34,9 +36,17 @@ function ProductPage({ data, fetchInitialData }) {
     return <i className="loading">🤹‍♂️</i>;
   }
 
+  console.log('related: ', productData.relatedProducts);
+
   return (
     <div id="components">
       <Overview productData={productData} />
+      <RelatedProducts relatedProducts={productData.relatedProducts} />
+      <QandAModule
+        product_id={productData.id}
+        product_name={productData.name}
+        questions_answers={productData.questionsWithAnswers}
+      />
     </div>
   );
 }

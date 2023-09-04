@@ -2,7 +2,7 @@
 require('dotenv').config();
 const axios = require('axios');
 
-const URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
+const { URL, TOKEN } = process.env;
 
 const filteredAnswers = (object) =>
   object.map((obj) => {

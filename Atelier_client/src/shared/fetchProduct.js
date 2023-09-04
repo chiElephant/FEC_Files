@@ -1,24 +1,20 @@
 import axios from 'axios';
 import getQuestions from '../utils/getQuestions';
+import fetchRelatedProducts from '../utils/fetchRelatedProducts';
 
 const URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
 
-export default async function fetchProduct({ API_KEY, productId = null }) {
+export default async function fetchProduct({ API_KEY, productId }) {
   try {
-    const product = await axios.get(`${URL}/products/${productId}/related`, {
-      headers: {
-        authorization: API_KEY,
-      },
-    });
-    const { default_price: defaultPrice, ...rest } = product.data;
-
     const [
+      relatedProducts,
       productStyles,
       productFeatures,
       productReviews,
       productRatings,
       questionsWithAnswers,
     ] = await Promise.all([
+      fetchRelatedProducts(API_KEY, productId),
       axios.get(`${URL}/products/${productId}/styles`, {
         headers: {
           authorization: API_KEY,
@@ -76,8 +72,7 @@ export default async function fetchProduct({ API_KEY, productId = null }) {
     const firstStyle = productStyles.data.results[0];
     const photo = firstStyle ? firstStyle.photos[0].thumbnail_url : null;
     const productData = {
-      ...rest,
-      defaultPrice,
+      relatedProducts,
       photo,
       ratingAverage,
       reviewsCount: totalCount,
