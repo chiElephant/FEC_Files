@@ -9,17 +9,12 @@ export default function App({ serverData = null }) {
       <Topbar />
       <Routes>
         {routes.map((route) => {
-          const { path, fetchInitialData, component: Component } = route;
+          const { path, component: Component } = route;
           return (
             <Route
               key={path}
               path={path}
-              element={
-                <Component
-                  data={serverData}
-                  fetchInitialData={fetchInitialData}
-                />
-              }
+              element={<Component data={serverData} />}
             />
           );
         })}

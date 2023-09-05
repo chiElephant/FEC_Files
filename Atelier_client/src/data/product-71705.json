@@ -1,0 +1,629 @@
+{
+  "relatedProducts": [
+    {
+      "id": 71697,
+      "campus": "hr-rpp",
+      "name": "Camo Onesie",
+      "slogan": "Blend in to your crowd",
+      "description": "The So Fatigues will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.",
+      "category": "Jackets",
+      "created_at": "2022-05-11T19:38:15.373Z",
+      "updated_at": "2022-05-11T19:38:15.373Z",
+      "features": [
+        {
+          "feature": "Fabric",
+          "value": "Canvas"
+        },
+        {
+          "feature": "Buttons",
+          "value": "Brass"
+        }
+      ],
+      "defaultPrice": "140.00",
+      "photo": "https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+      "ratingAverage": 4
+    },
+    {
+      "id": 71698,
+      "campus": "hr-rpp",
+      "name": "Bright Future Sunglasses",
+      "slogan": "You've got to wear shades",
+      "description": "Where you're going you might not need roads, but you definitely need some shades. Give those baby blues a rest and let the future shine bright on these timeless lenses.",
+      "category": "Accessories",
+      "created_at": "2022-05-11T19:38:15.373Z",
+      "updated_at": "2022-05-11T19:38:15.373Z",
+      "features": [
+        {
+          "feature": "Lenses",
+          "value": "Ultrasheen"
+        },
+        {
+          "feature": "UV Protection",
+          "value": null
+        },
+        {
+          "feature": "Frames",
+          "value": "LightCompose"
+        }
+      ],
+      "defaultPrice": "69.00",
+      "photo": null,
+      "ratingAverage": 3.5
+    },
+    {
+      "id": 71702,
+      "campus": "hr-rpp",
+      "name": "Pumped Up Kicks",
+      "slogan": "Faster than a just about anything",
+      "description": "The Pumped Up serves up crisp court style with a modern look. These shoes show off tennis-whites shades and are constructed with a supple leather upper and a classic rubber cupsole.",
+      "category": "Kicks",
+      "created_at": "2022-05-11T19:38:15.373Z",
+      "updated_at": "2022-05-11T19:38:15.373Z",
+      "features": [
+        {
+          "feature": "Sole",
+          "value": "Rubber"
+        },
+        {
+          "feature": "Material",
+          "value": "FullControlSkin"
+        },
+        {
+          "feature": "Mid-Sole",
+          "value": "ControlSupport Arch Bridge"
+        },
+        {
+          "feature": "Stitching",
+          "value": "Double Stitch"
+        }
+      ],
+      "defaultPrice": "89.00",
+      "photo": "https://images.unsplash.com/photo-1477420143023-6a0e0b04b69a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+      "ratingAverage": 4
+    },
+    {
+      "id": 71703,
+      "campus": "hr-rpp",
+      "name": "Blues Suede Shoes",
+      "slogan": "2019 Stanley Cup Limited Edition",
+      "description": "Touch down in the land of the Delta Blues in the middle of the pouring rain",
+      "category": "Dress Shoes",
+      "created_at": "2022-05-11T19:38:15.373Z",
+      "updated_at": "2022-05-11T19:38:15.373Z",
+      "features": [
+        {
+          "feature": "Sole",
+          "value": "Rubber"
+        },
+        {
+          "feature": "Material",
+          "value": "FullControlSkin"
+        },
+        {
+          "feature": "Stitching",
+          "value": "Double Stitch"
+        }
+      ],
+      "defaultPrice": "120.00",
+      "photo": "https://images.unsplash.com/photo-1561861422-a549073e547a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+      "ratingAverage": 3.5
+    },
+    {
+      "id": 71701,
+      "campus": "hr-rpp",
+      "name": "Heir Force Ones",
+      "slogan": "A sneaker dynasty",
+      "description": "Now where da boxes where I keep mine? You should peep mine, maybe once or twice but never three times. I'm just a sneaker pro, I love Pumas and shell toes, but can't nothin compare to a fresh crispy white pearl",
+      "category": "Kicks",
+      "created_at": "2022-05-11T19:38:15.373Z",
+      "updated_at": "2022-05-11T19:38:15.373Z",
+      "features": [
+        {
+          "feature": "Sole",
+          "value": "Rubber"
+        },
+        {
+          "feature": "Material",
+          "value": "FullControlSkin"
+        },
+        {
+          "feature": "Mid-Sole",
+          "value": "ControlSupport Arch Bridge"
+        },
+        {
+          "feature": "Stitching",
+          "value": "Double Stitch"
+        }
+      ],
+      "defaultPrice": "99.00",
+      "photo": "https://images.unsplash.com/photo-1544441892-794166f1e3be?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80",
+      "ratingAverage": 3.5
+    },
+    {
+      "id": 71704,
+      "campus": "hr-rpp",
+      "name": "YEasy 350",
+      "slogan": "Just jumped over jumpman",
+      "description": "These stretchy knit shoes show off asymmetrical lacing and a big sculpted rubber midsole. In a nod to adidas soccer heritage.",
+      "category": "Kicks",
+      "created_at": "2022-05-11T19:38:15.373Z",
+      "updated_at": "2022-05-11T19:38:15.373Z",
+      "features": [
+        {
+          "feature": "Sole",
+          "value": "Rubber"
+        },
+        {
+          "feature": "Material",
+          "value": "FullControlSkin"
+        },
+        {
+          "feature": "Stitching",
+          "value": "Double Stitch"
+        }
+      ],
+      "defaultPrice": "450.00",
+      "photo": "https://images.unsplash.com/photo-1551489186-cf8726f514f8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+      "ratingAverage": 3.5
+    }
+  ],
+  "photo": "https://images.unsplash.com/photo-1550338300-f9a475b50ba2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+  "ratingAverage": 3,
+  "reviewsCount": 13,
+  "features": [
+    {
+      "feature": "Sole",
+      "value": "Rubber"
+    },
+    {
+      "feature": "Material",
+      "value": "FullControlSkin"
+    },
+    {
+      "feature": "Mid-Sole",
+      "value": "ControlSupport Arch Bridge"
+    },
+    {
+      "feature": "Stitching",
+      "value": "Double Stitch"
+    }
+  ],
+  "styles": [
+    {
+      "style_id": 444263,
+      "name": "White",
+      "original_price": "59.00",
+      "sale_price": null,
+      "default?": false,
+      "photos": [
+        {
+          "thumbnail_url": "https://images.unsplash.com/photo-1550338300-f9a475b50ba2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+          "url": "https://images.unsplash.com/photo-1550338300-f9a475b50ba2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1001&q=80"
+        },
+        {
+          "thumbnail_url": "https://images.unsplash.com/photo-1500699889581-a7f97ec155d6?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80",
+          "url": "https://images.unsplash.com/photo-1500699889581-a7f97ec155d6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80"
+        },
+        {
+          "thumbnail_url": "https://images.unsplash.com/photo-1498200163530-bdb7c50ec863?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+          "url": "https://images.unsplash.com/photo-1498200163530-bdb7c50ec863?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=975&q=80"
+        },
+        {
+          "thumbnail_url": "https://images.unsplash.com/photo-1558118070-09ba9a9efb2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+          "url": "https://images.unsplash.com/photo-1558118070-09ba9a9efb2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80"
+        },
+        {
+          "thumbnail_url": "https://images.unsplash.com/photo-1531889947080-bc5693ae9fa4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+          "url": "https://images.unsplash.com/photo-1531889947080-bc5693ae9fa4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2734&q=80"
+        },
+        {
+          "thumbnail_url": "https://images.unsplash.com/photo-1529108750117-bcbad8bd25dd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+          "url": "https://images.unsplash.com/photo-1529108750117-bcbad8bd25dd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=662&q=80"
+        }
+      ],
+      "skus": {
+        "2580872": {
+          "quantity": 14,
+          "size": "7"
+        },
+        "2580873": {
+          "quantity": 25,
+          "size": "7.5"
+        },
+        "2580874": {
+          "quantity": 9,
+          "size": "8"
+        },
+        "2580875": {
+          "quantity": 2,
+          "size": "8.5"
+        },
+        "2580876": {
+          "quantity": 18,
+          "size": "9"
+        },
+        "2580877": {
+          "quantity": 12,
+          "size": "9.5"
+        },
+        "2580878": {
+          "quantity": 10,
+          "size": "10"
+        },
+        "2580879": {
+          "quantity": 18,
+          "size": "10.5"
+        },
+        "2580880": {
+          "quantity": 11,
+          "size": "11"
+        },
+        "2580881": {
+          "quantity": 35,
+          "size": "11.5"
+        },
+        "2580882": {
+          "quantity": 25,
+          "size": "12"
+        }
+      }
+    }
+  ],
+  "questionsWithAnswers": [
+    {
+      "question_id": 644619,
+      "question_body": "Gee?",
+      "question_date": "2022-12-17T00:00:00.000Z",
+      "asker_name": "Gee?",
+      "question_helpfulness": 6,
+      "reported": false,
+      "answers": [
+        {
+          "id": 5990098,
+          "body": "Terry Crews",
+          "date": "2023-01-07T00:00:00.000Z",
+          "answerer_name": "Harry",
+          "helpfulness": 2,
+          "photos": []
+        },
+        {
+          "id": 5990603,
+          "body": "Target",
+          "date": "2023-02-08T00:00:00.000Z",
+          "answerer_name": "Fig",
+          "helpfulness": 1,
+          "photos": []
+        }
+      ]
+    },
+    {
+      "question_id": 644612,
+      "question_body": "Do you?",
+      "question_date": "2022-12-17T00:00:00.000Z",
+      "asker_name": "Do you?",
+      "question_helpfulness": 3,
+      "reported": false,
+      "answers": []
+    },
+    {
+      "question_id": 645746,
+      "question_body": "hahahahahahahaha1111111111111",
+      "question_date": "2023-04-08T00:00:00.000Z",
+      "asker_name": "asdasd212222",
+      "question_helpfulness": 0,
+      "reported": false,
+      "answers": []
+    },
+    {
+      "question_id": 645745,
+      "question_body": "asdasd",
+      "question_date": "2023-04-08T00:00:00.000Z",
+      "asker_name": "asdfsdfsdfsdf",
+      "question_helpfulness": 0,
+      "reported": false,
+      "answers": []
+    },
+    {
+      "question_id": 645184,
+      "question_body": "Do you liek mudkips?",
+      "question_date": "2023-02-18T00:00:00.000Z",
+      "asker_name": "ME",
+      "question_helpfulness": 0,
+      "reported": false,
+      "answers": []
+    },
+    {
+      "question_id": 645013,
+      "question_body": "hey now!",
+      "question_date": "2023-02-07T00:00:00.000Z",
+      "asker_name": "hey it do!",
+      "question_helpfulness": 0,
+      "reported": false,
+      "answers": []
+    },
+    {
+      "question_id": 645012,
+      "question_body": "where can I get it?",
+      "question_date": "2023-02-07T00:00:00.000Z",
+      "asker_name": "ddd",
+      "question_helpfulness": 0,
+      "reported": false,
+      "answers": []
+    },
+    {
+      "question_id": 645011,
+      "question_body": "where can I get it?",
+      "question_date": "2023-02-07T00:00:00.000Z",
+      "asker_name": "ddd",
+      "question_helpfulness": 0,
+      "reported": false,
+      "answers": []
+    },
+    {
+      "question_id": 645010,
+      "question_body": "where can I get it?",
+      "question_date": "2023-02-07T00:00:00.000Z",
+      "asker_name": "ddd",
+      "question_helpfulness": 0,
+      "reported": false,
+      "answers": []
+    },
+    {
+      "question_id": 645009,
+      "question_body": "where can I get it?",
+      "question_date": "2023-02-07T00:00:00.000Z",
+      "asker_name": "toni",
+      "question_helpfulness": 0,
+      "reported": false,
+      "answers": []
+    },
+    {
+      "question_id": 645008,
+      "question_body": "Where can I buy it?",
+      "question_date": "2023-02-07T00:00:00.000Z",
+      "asker_name": "Fig",
+      "question_helpfulness": 0,
+      "reported": false,
+      "answers": []
+    },
+    {
+      "question_id": 644896,
+      "question_body": "asdf",
+      "question_date": "2023-02-01T00:00:00.000Z",
+      "asker_name": "asdf",
+      "question_helpfulness": 0,
+      "reported": false,
+      "answers": []
+    },
+    {
+      "question_id": 644895,
+      "question_body": "asdf",
+      "question_date": "2023-02-01T00:00:00.000Z",
+      "asker_name": "asdf",
+      "question_helpfulness": 0,
+      "reported": false,
+      "answers": []
+    },
+    {
+      "question_id": 644655,
+      "question_body": "Just saying?",
+      "question_date": "2022-12-23T00:00:00.000Z",
+      "asker_name": "Harry",
+      "question_helpfulness": 0,
+      "reported": false,
+      "answers": []
+    },
+    {
+      "question_id": 644636,
+      "question_body": "Hello?",
+      "question_date": "2022-12-17T00:00:00.000Z",
+      "asker_name": "Stef",
+      "question_helpfulness": 0,
+      "reported": false,
+      "answers": []
+    },
+    {
+      "question_id": 644635,
+      "question_body": "Aye?",
+      "question_date": "2022-12-17T00:00:00.000Z",
+      "asker_name": "Jest",
+      "question_helpfulness": 0,
+      "reported": false,
+      "answers": []
+    },
+    {
+      "question_id": 644623,
+      "question_body": "What would you do if you had a pickle?",
+      "question_date": "2022-12-17T00:00:00.000Z",
+      "asker_name": "What would you do if you had a pickle?",
+      "question_helpfulness": 0,
+      "reported": false,
+      "answers": []
+    },
+    {
+      "question_id": 644622,
+      "question_body": "Gee?",
+      "question_date": "2022-12-17T00:00:00.000Z",
+      "asker_name": "Gee?",
+      "question_helpfulness": 0,
+      "reported": false,
+      "answers": []
+    },
+    {
+      "question_id": 644621,
+      "question_body": "Gee?",
+      "question_date": "2022-12-17T00:00:00.000Z",
+      "asker_name": "Gee?",
+      "question_helpfulness": 0,
+      "reported": false,
+      "answers": []
+    },
+    {
+      "question_id": 644620,
+      "question_body": "Gee?",
+      "question_date": "2022-12-17T00:00:00.000Z",
+      "asker_name": "Gee?",
+      "question_helpfulness": 0,
+      "reported": false,
+      "answers": []
+    },
+    {
+      "question_id": 644613,
+      "question_body": "Gee?",
+      "question_date": "2022-12-17T00:00:00.000Z",
+      "asker_name": "Gee?",
+      "question_helpfulness": 0,
+      "reported": false,
+      "answers": []
+    },
+    {
+      "question_id": 642619,
+      "question_body": "test",
+      "question_date": "2022-07-30T00:00:00.000Z",
+      "asker_name": "test",
+      "question_helpfulness": 0,
+      "reported": false,
+      "answers": [
+        {
+          "id": 5988698,
+          "body": "what are you testing?",
+          "date": "2022-10-17T00:00:00.000Z",
+          "answerer_name": "why?",
+          "helpfulness": 1,
+          "photos": []
+        },
+        {
+          "id": 5989082,
+          "body": "get answers",
+          "date": "2022-10-26T00:00:00.000Z",
+          "answerer_name": "will",
+          "helpfulness": 0,
+          "photos": []
+        },
+        {
+          "id": 5989083,
+          "body": "get answers try 2",
+          "date": "2022-10-26T00:00:00.000Z",
+          "answerer_name": "will",
+          "helpfulness": 0,
+          "photos": []
+        }
+      ]
+    },
+    {
+      "question_id": 642615,
+      "question_body": "test",
+      "question_date": "2022-07-30T00:00:00.000Z",
+      "asker_name": "test",
+      "question_helpfulness": 0,
+      "reported": false,
+      "answers": [
+        {
+          "id": 5988686,
+          "body": "ha?",
+          "date": "2022-10-17T00:00:00.000Z",
+          "answerer_name": "noway",
+          "helpfulness": 1,
+          "photos": []
+        }
+      ]
+    }
+  ],
+  "reviews": [
+    {
+      "review_id": 1278264,
+      "rating": 1,
+      "summary": "testing again should be false",
+      "recommend": true,
+      "response": null,
+      "body": "testing again should be false. testing again should be false.",
+      "date": "2023-01-15T00:00:00.000Z",
+      "reviewer_name": "asdff",
+      "helpfulness": 5,
+      "photos": []
+    },
+    {
+      "review_id": 1278265,
+      "rating": 5,
+      "summary": "dsa",
+      "recommend": false,
+      "response": null,
+      "body": "Warning: A component is changing an uncontrolled input to be controlled. This is likely caused by the value changing from undefined to a defined value, which should not...",
+      "date": "2023-01-15T00:00:00.000Z",
+      "reviewer_name": "asdf",
+      "helpfulness": 3,
+      "photos": []
+    },
+    {
+      "review_id": 1279580,
+      "rating": 4,
+      "summary": "tttttttttttttttt",
+      "recommend": true,
+      "response": null,
+      "body": "sssssssssssssssssssssssssssssssssssssssssssssssssssssss",
+      "date": "2023-04-08T00:00:00.000Z",
+      "reviewer_name": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "helpfulness": 0,
+      "photos": []
+    },
+    {
+      "review_id": 1277990,
+      "rating": 2,
+      "summary": "Example: Best Purchase Ever!",
+      "recommend": true,
+      "response": null,
+      "body": "Why did you like the product or not?",
+      "date": "2022-12-16T00:00:00.000Z",
+      "reviewer_name": "tvo",
+      "helpfulness": 0,
+      "photos": []
+    },
+    {
+      "review_id": 1277959,
+      "rating": 3,
+      "summary": "Example: Best Purchase Ever!",
+      "recommend": true,
+      "response": null,
+      "body": "Why did you like the product or not?",
+      "date": "2022-12-15T00:00:00.000Z",
+      "reviewer_name": "tvo",
+      "helpfulness": 0,
+      "photos": []
+    }
+  ],
+  "metaData": {
+    "product_id": "71705",
+    "ratings": {
+      "1": "3",
+      "2": "2",
+      "3": "3",
+      "4": "1",
+      "5": "4"
+    },
+    "recommended": {
+      "false": "3",
+      "true": "10"
+    },
+    "characteristics": {
+      "Size": {
+        "id": 240611,
+        "value": "2.7692307692307692"
+      },
+      "Width": {
+        "id": 240612,
+        "value": "3.0000000000000000"
+      },
+      "Comfort": {
+        "id": 240613,
+        "value": "3.0000000000000000"
+      },
+      "Quality": {
+        "id": 240614,
+        "value": "3.4166666666666667"
+      }
+    },
+    "percentRecommended": 76,
+    "totalReviews": 13,
+    "avgRating": 3
+  }
+}

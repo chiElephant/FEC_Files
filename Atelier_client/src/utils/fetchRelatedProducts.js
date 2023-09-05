@@ -13,8 +13,6 @@ export default async function fetchRelatedProducts(API_KEY, productId) {
       }
     );
 
-    console.log('relatedProducts in fetch: ', relatedProducts);
-
     const relatedProductsWithImages = await Promise.all(
       relatedProducts.data.map(async (item) => {
         const [productData, productStyles, productRatings] = await Promise.all([
@@ -68,7 +66,18 @@ export default async function fetchRelatedProducts(API_KEY, productId) {
       })
     );
 
-    return relatedProductsWithImages;
+    const removeDuplicatesByProperty = (arr, prop) => {
+      const seen = new Set();
+      return arr.filter((obj) => {
+        if (seen.has(obj[prop])) {
+          return false;
+        }
+        seen.add(obj[prop]);
+        return true;
+      });
+    };
+
+    return removeDuplicatesByProperty(relatedProductsWithImages, 'id');
   } catch (error) {
     throw Error(error);
   }

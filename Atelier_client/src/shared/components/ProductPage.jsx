@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 import Overview from './overview_module/Overview.jsx';
 import QandAModule from './questions_answers_module/QandAModule.jsx';
 import RelatedProducts from './RelatedProducts.jsx';
 
 function ProductPage({ data, fetchInitialData }) {
   const { id: paramId } = useParams();
-  const location = useLocation();
 
   const [productData, setProductData] = useState(() => {
     if (typeof window !== 'undefined' && window.__INITIAL_DATA__) {
@@ -16,14 +16,17 @@ function ProductPage({ data, fetchInitialData }) {
   });
 
   const [loading, setLoading] = useState(productData ? false : true);
+  const [error, setError] = useState(null);
 
   const fetchData = async () => {
-    const res = await fetchInitialData({
-      API_KEY: CLIENT_API_KEY,
-      productId: paramId,
-    });
-    setProductData(res);
-    setLoading(false);
+    try {
+      const res = await axios.get(`/products/${paramId}`);
+      setProductData(res.data);
+      setLoading(false);
+      setError(null);
+    } catch (err) {
+      setError(`Error fetching data: ${err}`);
+    }
   };
 
   useEffect(() => {
@@ -33,20 +36,22 @@ function ProductPage({ data, fetchInitialData }) {
   }, []);
 
   if (loading) {
-    return <i className="loading">🤹‍♂️</i>;
+    return <div>Loading....🤹</div>;
   }
 
-  console.log('related: ', productData.relatedProducts);
+  if (error) {
+    return <div>{error}</div>;
+  }
 
   return (
     <div id="components">
       <Overview productData={productData} />
       <RelatedProducts relatedProducts={productData.relatedProducts} />
-      <QandAModule
+      {/* <QandAModule
         product_id={productData.id}
         product_name={productData.name}
         questions_answers={productData.questionsWithAnswers}
-      />
+      /> */}
     </div>
   );
 }

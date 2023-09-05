@@ -8,7 +8,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { CacheProvider } from '@emotion/react';
 import createEmotionServer from '@emotion/server/create-instance';
 import dotenv from 'dotenv';
-import routes from '../shared/routes';
+import serverRoutes from '../shared/serverRoutes';
 import createEmotionCache from '../shared/createEmotionCache';
 
 import App from '../shared/components/App.jsx';
@@ -22,9 +22,42 @@ const app = express();
 
 app.use(express.static('dist'));
 
+app.get('/products', async (req, res, next) => {
+  const activeRoute = serverRoutes.find((route) => matchPath(route.path, '/'));
+
+  try {
+    const data = await activeRoute.fetchInitialData({
+      API_KEY: process.env.GIT,
+      productId: '/',
+    });
+
+    res.status(200).send(data);
+  } catch (err) {
+    next(err);
+  }
+});
+
+app.get('/products/:id', async (req, res, next) => {
+  const { id } = req.params;
+  const activeRoute = serverRoutes.find((route) =>
+    matchPath(route.path, `/${id}`)
+  );
+
+  try {
+    const data = await activeRoute.fetchInitialData({
+      API_KEY: process.env.GIT,
+      productId: id,
+    });
+
+    res.status(200).send(data);
+  } catch (err) {
+    next(err);
+  }
+});
+
 app.get('*', async (req, res, next) => {
   const activeRoute =
-    routes.find((route) => matchPath(route.path, req.url)) || {};
+    serverRoutes.find((route) => matchPath(route.path, req.url)) || {};
 
   try {
     const data = await activeRoute.fetchInitialData({
