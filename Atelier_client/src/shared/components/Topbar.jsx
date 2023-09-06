@@ -12,8 +12,8 @@ function Topbar() {
 
   return (
     <div className="topbar">
-      <div
-        role="button"
+      <button
+        className="menu-icon"
         tabIndex={0}
         onClick={handleMenuClick}
         onKeyPress={(e) => {
@@ -22,11 +22,11 @@ function Topbar() {
           }
         }}
         aria-label="Open Menu"
-        style={{ textDecoration: 'none', color: 'inherit' }}
       >
-        <Menu className="menu-icon" />
-      </div>
-      <div className="atelier">ATELIER</div>
+        Products
+      </button>
+
+      <div className="atelier">Red Bean Shop</div>
     </div>
   );
 }

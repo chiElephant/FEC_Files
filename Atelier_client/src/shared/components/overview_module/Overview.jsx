@@ -3,6 +3,7 @@ import ProductInfo from './ProductInfo.jsx';
 import Styles from './Styles.jsx';
 import Gallery from './Gallery.jsx';
 import Slogan from './Slogan.jsx';
+import '../../styles/overview-styles.css';
 
 function Overview({ productData }) {
   const [selectedStyle, setSelectedStyle] = useState(productData.styles[0]);
@@ -15,14 +16,14 @@ function Overview({ productData }) {
     <div className="main-container">
       <div data-testid="overview" className="overview">
         <Gallery selectedStyle={selectedStyle} />
-        {/* <div className="new-right">
+        <div className="new-right">
           <ProductInfo {...productData} selectedStyle={selectedStyle} />
           <Styles
             styles={productData.styles}
             changeStyleSelected={changeStyleSelected}
             selectedStyle={selectedStyle}
           />
-        </div> */}
+        </div>
       </div>
       <Slogan product={productData} />
     </div>

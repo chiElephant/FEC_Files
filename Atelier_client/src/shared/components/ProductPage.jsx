@@ -7,8 +7,6 @@ import RelatedProducts from './RelatedProducts.jsx';
 
 function ProductPage({ data }) {
   const { id: paramId } = useParams();
-  const location = useLocation();
-
   const [productData, setProductData] = useState(() => {
     if (typeof window !== 'undefined' && window.__INITIAL_DATA__) {
       return window.__INITIAL_DATA__;
@@ -24,36 +22,38 @@ function ProductPage({ data }) {
       const res = await axios.get(`/products/${paramId}`);
       setProductData(res.data);
       setLoading(false);
-      setError(null);
-      location.state = null;
     } catch (err) {
       setError(`Error fetching data: ${err}`);
     }
   };
 
   useEffect(() => {
-    if (loading || location.state) {
+    if (loading) {
       fetchData();
     }
-  }, [paramId]);
+  }, [productData]);
+
+  const resetProductData = () => {
+    window.__INITIAL_DATA__ = null;
+    setProductData(null);
+    setLoading(true);
+  };
 
   if (error) {
     return <div>{error}</div>;
   }
 
-  if (loading || location.state) {
+  if (loading) {
     return <div>Loading....🤹</div>;
   }
 
   return (
     <div id="components">
       <Overview productData={productData} />
-      <RelatedProducts relatedProducts={productData.relatedProducts} />
-      {/* <QandAModule
-        product_id={productData.id}
-        product_name={productData.name}
-        questions_answers={productData.questionsWithAnswers}
-      /> */}
+      <RelatedProducts
+        relatedProducts={productData.relatedProducts}
+        resetProductData={resetProductData}
+      />
     </div>
   );
 }

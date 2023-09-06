@@ -11,7 +11,15 @@ const fullStarIcon = <Star />;
 const halfStarIcon = <StarHalfOutlined />;
 const emptyStarIcon = <StarBorderOutlined />;
 
-function Product({ id, name, category, defaultPrice, photo, ratingAverage }) {
+function Product({
+  id,
+  name,
+  category,
+  defaultPrice,
+  photo,
+  ratingAverage,
+  resetProductData,
+}) {
   const renderRating = () => {
     if (ratingAverage === null) {
       return Array(5)
@@ -42,9 +50,10 @@ function Product({ id, name, category, defaultPrice, photo, ratingAverage }) {
 
   const navigate = useNavigate();
 
-  const handleProductClick = () => {
-    window.__INITIAL_DATA__ = null;
-    navigate(`/${id}`, { state: { changePage: true } });
+  const handleNavigate = () => {
+    console.log(`/${id}`);
+    navigate(`/${id}`);
+    resetProductData();
   };
 
   return (
@@ -53,8 +62,8 @@ function Product({ id, name, category, defaultPrice, photo, ratingAverage }) {
       className="product-card"
       role="button"
       tabIndex={0}
-      onClick={handleProductClick}
-      onKeyPress={handleProductClick}
+      onClick={handleNavigate}
+      onKeyPress={handleNavigate}
       style={{ textDecoration: 'none', color: 'inherit' }}
     >
       <img

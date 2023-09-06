@@ -69,7 +69,7 @@ export default async function fetchRelatedProducts(API_KEY, productId) {
     const removeDuplicatesByProperty = (arr, prop) => {
       const seen = new Set();
       return arr.filter((obj) => {
-        if (seen.has(obj[prop])) {
+        if (seen.has(obj[prop]) || obj[prop] === Number(productId)) {
           return false;
         }
         seen.add(obj[prop]);

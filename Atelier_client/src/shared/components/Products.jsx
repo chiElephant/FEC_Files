@@ -1,7 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Product from './Product.jsx';
 import '../styles/product-styles.module.css';
@@ -13,50 +12,44 @@ function Products({ data }) {
     }
     return data;
   });
+  const [loading, setLoading] = useState(productData ? false : true);
   const [error, setError] = useState(null);
 
   const fetchData = async () => {
     try {
       const res = await axios.get('/products');
       setProductData(res.data);
-      setError(null);
+      setLoading(false);
     } catch (err) {
       setError(`Error fetching data: ${err}`);
     }
   };
 
   useEffect(() => {
-    if (!productData) {
+    if (loading) {
       fetchData();
     }
   }, []);
 
-  const navigate = useNavigate();
-
-  const handleProductClick = () => {
+  const resetProductData = () => {
     window.__INITIAL_DATA__ = null;
-    navigate(`/${id}`);
+    setProductData(null);
+    setLoading(true);
   };
 
   if (error) {
     return <div>{error}</div>;
   }
 
-  const productElements = productData ? (
-    productData.map((item) => (
-      <Product
-        key={item.id}
-        {...item}
-        handleProductClick={handleProductClick}
-      />
-    ))
-  ) : (
-    <div>Loading....🤹</div>
-  );
+  if (loading) {
+    return <div>Loading....🤹</div>;
+  }
 
   return (
-    <div className="productListParent">
-      <div className="product-list">{productElements}</div>
+    <div className="product-list">
+      {productData.map((item) => (
+        <Product key={item.id} {...item} resetProductData={resetProductData} />
+      ))}
     </div>
   );
 }
