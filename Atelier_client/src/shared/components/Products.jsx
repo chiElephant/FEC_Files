@@ -1,6 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 
 import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Product from './Product.jsx';
 import '../styles/product-styles.module.css';
@@ -30,12 +31,25 @@ function Products({ data }) {
     }
   }, []);
 
+  const navigate = useNavigate();
+
+  const handleProductClick = () => {
+    window.__INITIAL_DATA__ = null;
+    navigate(`/${id}`);
+  };
+
   if (error) {
     return <div>{error}</div>;
   }
 
   const productElements = productData ? (
-    productData.map((item) => <Product key={item.id} {...item} />)
+    productData.map((item) => (
+      <Product
+        key={item.id}
+        {...item}
+        handleProductClick={handleProductClick}
+      />
+    ))
   ) : (
     <div>Loading....🤹</div>
   );

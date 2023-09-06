@@ -44,7 +44,7 @@ function Product({ id, name, category, defaultPrice, photo, ratingAverage }) {
 
   const handleProductClick = () => {
     window.__INITIAL_DATA__ = null;
-    navigate(`/${id}`);
+    navigate(`/${id}`, { state: { changePage: true } });
   };
 
   return (

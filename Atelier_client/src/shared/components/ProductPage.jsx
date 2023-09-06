@@ -1,12 +1,13 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useParams, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import Overview from './overview_module/Overview.jsx';
 import QandAModule from './questions_answers_module/QandAModule.jsx';
 import RelatedProducts from './RelatedProducts.jsx';
 
-function ProductPage({ data, fetchInitialData }) {
+function ProductPage({ data }) {
   const { id: paramId } = useParams();
+  const location = useLocation();
 
   const [productData, setProductData] = useState(() => {
     if (typeof window !== 'undefined' && window.__INITIAL_DATA__) {
@@ -24,23 +25,24 @@ function ProductPage({ data, fetchInitialData }) {
       setProductData(res.data);
       setLoading(false);
       setError(null);
+      location.state = null;
     } catch (err) {
       setError(`Error fetching data: ${err}`);
     }
   };
 
   useEffect(() => {
-    if (loading) {
+    if (loading || location.state) {
       fetchData();
     }
-  }, []);
-
-  if (loading) {
-    return <div>Loading....🤹</div>;
-  }
+  }, [paramId]);
 
   if (error) {
     return <div>{error}</div>;
+  }
+
+  if (loading || location.state) {
+    return <div>Loading....🤹</div>;
   }
 
   return (
