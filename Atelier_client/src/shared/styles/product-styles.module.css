@@ -1,12 +1,14 @@
 /* Product styling */
 
+
 .product-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, 225px);
   justify-content: center;
   gap: 10px;
-  padding: 10px
+  padding: 10px;
 }
+
 
 .product-list-product-page {
   display: flex;
@@ -76,14 +78,14 @@
 }
 
 .atelier {
-  font-size: 50px;
+  font-size: 30px;
   justify-self: center;
 }
 
 .menu-icon {
   background: none;
   border: none;
-  font-size: 25px;
+  font-size: 20px;
   font-weight: bold;
   margin: 10px;
   outline: none;

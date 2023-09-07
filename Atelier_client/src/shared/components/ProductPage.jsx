@@ -4,6 +4,7 @@ import axios from 'axios';
 import Overview from './overview_module/Overview.jsx';
 import QandAModule from './questions_answers_module/QandAModule.jsx';
 import RelatedProducts from './RelatedProducts.jsx';
+import '../styles/overview-styles.css';
 
 function ProductPage({ data }) {
   const { id: paramId } = useParams();
@@ -48,7 +49,14 @@ function ProductPage({ data }) {
   }
 
   return (
-    <div id="components">
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        width: '100%',
+      }}
+    >
       <Overview productData={productData} />
       <RelatedProducts
         relatedProducts={productData.relatedProducts}

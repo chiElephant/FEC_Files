@@ -3,6 +3,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import preloadImages from '../global-helpers/preloadImages.jsx';
 import Expanded from './Expanded.jsx';
+import defaultImage from '../global-helpers/defaultImage.js';
 
 function Gallery({ selectedStyle }) {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -46,33 +47,32 @@ function Gallery({ selectedStyle }) {
       <img
         className="main-img"
         alt="Image"
-        src={selectedPhoto}
-        // loading="lazy"
+        src={selectedPhoto === null ? defaultImage : selectedPhoto}
         onClick={handleChangeViewExpanded}
       />
 
       {/* <div className="sidebar">
-          {selectedIndex !== 0 && (
-            <KeyboardArrowUpIcon className="arrow-up" onClick={previousPhoto} />
-          )}
-          <div className="photo-container" id="photo-container">
-            {selectedStyle.photos.map((photo, index) => (
-              <img
-                onClick={() => handleChangePhoto(index)}
-                className={
-                  index === selectedIndex
-                    ? 'style-other-imgs-selected'
-                    : 'style-other-imgs'
-                }
-                src={photo.url}
-                key={index}
-              />
-            ))}
-          </div>
-          {selectedIndex < selectedStyle.photos.length - 1 && (
-            <KeyboardArrowDownIcon className="arrow-down" onClick={nextPhoto} />
-          )}
-        </div> */}
+        {selectedIndex !== 0 && (
+          <KeyboardArrowUpIcon className="arrow-up" onClick={previousPhoto} />
+        )}
+        <div className="photo-container" id="photo-container">
+          {selectedStyle.photos.map((photo, index) => (
+            <img
+              onClick={() => handleChangePhoto(index)}
+              className={
+                index === selectedIndex
+                  ? 'style-other-imgs-selected'
+                  : 'style-other-imgs'
+              }
+              src={photo.url}
+              key={index}
+            />
+          ))}
+        </div>
+        {selectedIndex < selectedStyle.photos.length - 1 && (
+          <KeyboardArrowDownIcon className="arrow-down" onClick={nextPhoto} />
+        )}
+      </div> */}
     </div>
   );
 }

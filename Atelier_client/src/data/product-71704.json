@@ -1754,5 +1754,14 @@
     "percentRecommended": 74,
     "totalReviews": 114,
     "avgRating": 3.5
-  }
+  },
+  "id": 71704,
+  "campus": "hr-rpp",
+  "name": "YEasy 350",
+  "slogan": "Just jumped over jumpman",
+  "description": "These stretchy knit shoes show off asymmetrical lacing and a big sculpted rubber midsole. In a nod to adidas soccer heritage.",
+  "category": "Kicks",
+  "default_price": "450.00",
+  "created_at": "2022-05-11T19:38:15.373Z",
+  "updated_at": "2022-05-11T19:38:15.373Z"
 }

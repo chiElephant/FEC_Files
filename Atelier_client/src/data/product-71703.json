@@ -159,33 +159,6 @@
       "ratingAverage": 4
     },
     {
-      "id": 71703,
-      "campus": "hr-rpp",
-      "name": "Blues Suede Shoes",
-      "slogan": "2019 Stanley Cup Limited Edition",
-      "description": "Touch down in the land of the Delta Blues in the middle of the pouring rain",
-      "category": "Dress Shoes",
-      "created_at": "2022-05-11T19:38:15.373Z",
-      "updated_at": "2022-05-11T19:38:15.373Z",
-      "features": [
-        {
-          "feature": "Sole",
-          "value": "Rubber"
-        },
-        {
-          "feature": "Material",
-          "value": "FullControlSkin"
-        },
-        {
-          "feature": "Stitching",
-          "value": "Double Stitch"
-        }
-      ],
-      "defaultPrice": "120.00",
-      "photo": "https://images.unsplash.com/photo-1561861422-a549073e547a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
-      "ratingAverage": 3.5
-    },
-    {
       "id": 71704,
       "campus": "hr-rpp",
       "name": "YEasy 350",
@@ -868,5 +841,14 @@
     "percentRecommended": 86,
     "totalReviews": 15,
     "avgRating": 3.5
-  }
+  },
+  "id": 71703,
+  "campus": "hr-rpp",
+  "name": "Blues Suede Shoes",
+  "slogan": "2019 Stanley Cup Limited Edition",
+  "description": "Touch down in the land of the Delta Blues in the middle of the pouring rain",
+  "category": "Dress Shoes",
+  "default_price": "120.00",
+  "created_at": "2022-05-11T19:38:15.373Z",
+  "updated_at": "2022-05-11T19:38:15.373Z"
 }

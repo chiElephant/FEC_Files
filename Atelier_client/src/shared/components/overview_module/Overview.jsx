@@ -3,7 +3,6 @@ import ProductInfo from './ProductInfo.jsx';
 import Styles from './Styles.jsx';
 import Gallery from './Gallery.jsx';
 import Slogan from './Slogan.jsx';
-import '../../styles/overview-styles.css';
 
 function Overview({ productData }) {
   const [selectedStyle, setSelectedStyle] = useState(productData.styles[0]);
@@ -25,7 +24,7 @@ function Overview({ productData }) {
           />
         </div>
       </div>
-      <Slogan product={productData} />
+      <Slogan {...productData} />
     </div>
   );
 }

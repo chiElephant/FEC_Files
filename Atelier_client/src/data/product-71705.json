@@ -625,5 +625,14 @@
     "percentRecommended": 76,
     "totalReviews": 13,
     "avgRating": 3
-  }
+  },
+  "id": 71705,
+  "campus": "hr-rpp",
+  "name": "Summer Shoes",
+  "slogan": "A risky call in the spring or fall",
+  "description": "Low-top panelled buffed leather and mesh sneakers. Sizing embroidered in black at round toe. Tonal lace-up closure. Pull-loop and rubberized style name at padded tongue. Padded collar. Pull-loop at heel collar. Logo embroidered in black at outer side. Tonal treaded rubber sole. Tonal stitching.",
+  "category": "Kicks",
+  "default_price": "59.00",
+  "created_at": "2022-05-11T19:38:15.373Z",
+  "updated_at": "2022-05-11T19:38:15.373Z"
 }

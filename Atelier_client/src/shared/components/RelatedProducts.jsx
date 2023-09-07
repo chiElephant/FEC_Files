@@ -3,10 +3,16 @@ import Product from './Product.jsx';
 
 function RelatedProducts({ relatedProducts, resetProductData }) {
   return (
-    <div className="product-list">
-      {relatedProducts.map((item) => (
-        <Product key={item.id} {...item} resetProductData={resetProductData} />
-      ))}
+    <div style={{ width: '1000px' }}>
+      <div className="product-list">
+        {relatedProducts.map((item) => (
+          <Product
+            key={item.id}
+            {...item}
+            resetProductData={resetProductData}
+          />
+        ))}
+      </div>
     </div>
   );
 }

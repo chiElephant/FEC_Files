@@ -1,16 +1,9 @@
 /* Overview styling */
-.main-container {
-  width: 1000px;
-  height: 700px;
-  display: flex;
-  flex-direction: column;
-}
+
 
 .overview {
   display: flex;
   flex-direction: row;
-  margin-top: 5%;
-  width: 100vw;
   color: rgb(82, 82, 82);
 }
 
@@ -19,12 +12,11 @@
   flex-direction: column;
   position: relative;
   overflow: hidden;
-  flex:0 0 auto;
-  width:60%;
+  height: 600px;
 }
 
 .main-img {
-  width: 700px;
+  width: 800px;
   height: 600px;
   object-fit: cover;
   cursor: -moz-zoom-in;
@@ -36,15 +28,9 @@
 .product-info-container {
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
-  margin-left: 5%;
-}
-
-.product_info_reviews {
-  display: flex;
-  flex-direction: row;
   justify-content: flex-start;
-  gap: 10px
+  gap: 10px;
+  margin-left: 10px
 }
 
 .style-other-imgs {
@@ -176,8 +162,8 @@
 
 .gallery-styles-container {
   display: flex;
-  flex-direction: row;
-  width: 100vw;
+  flex-wrap: wrap;
+  flex-direction: column;
   margin: 20px;
 }
 
@@ -187,7 +173,6 @@
   margin-left: 5%;
   flex:0 0 auto;
   flex-wrap: wrap;
-  width:25%;
 }
 
 
@@ -208,24 +193,14 @@
 }
 
 .scroll-review {
-  transition-duration: 0.4s;
-  background-color: white;
+
   color: black;
-  border: 2px;
-  border-color: rgb(192, 192, 192);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-left: 5px;
-  padding-right: 5px;
+  width: 300px
 }
 
 .scroll-review:hover {
-  background-color: #555555;
-  color: white;
+  color: #555555;
+  /* color: white; */
 }
 
 .add-to-cart {
@@ -259,10 +234,7 @@
 }
 
 .new-right {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: baseline;
+  height: 600px;
 }
 
 .description {
@@ -271,20 +243,15 @@
 }
 
 .slogan-features {
-  display: flex;
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 300px 300px;
+  gap: 20px;
   align-items: center;
-  justify-content: space-between;
-  width: 50vw;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 20px;
 }
 
-.slogan {
-  width: 50%;
-}
 
 .features {
   border-left: 2px solid rgb(0, 0, 0);
-  width: 50%;
+  word-wrap: break-word;
 }

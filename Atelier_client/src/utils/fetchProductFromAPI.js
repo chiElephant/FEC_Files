@@ -41,7 +41,8 @@ export default async function fetchProductFromAPI(API_KEY, productId) {
       getQuestions(API_KEY, productId),
     ]);
 
-    const [features, reviews, metaData, styles] = [
+    const [data, features, reviews, metaData, styles] = [
+      productFeatures.data,
       productFeatures.data.features,
       productReviews.data.results,
       productRatings.data,
@@ -81,6 +82,7 @@ export default async function fetchProductFromAPI(API_KEY, productId) {
       questionsWithAnswers,
       reviews,
       metaData,
+      ...data,
     };
 
     return productData;

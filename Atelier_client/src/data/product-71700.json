@@ -51,29 +51,6 @@
       "ratingAverage": 3.5
     },
     {
-      "id": 71700,
-      "campus": "hr-rpp",
-      "name": "Slacker's Slacks",
-      "slogan": "Comfortable for everything, or nothing",
-      "description": "I'll tell you how great they are after I nap for a bit.",
-      "category": "Pants",
-      "created_at": "2022-05-11T19:38:15.373Z",
-      "updated_at": "2022-05-11T19:38:15.373Z",
-      "features": [
-        {
-          "feature": "Fabric",
-          "value": "99% Cotton 1% Elastic"
-        },
-        {
-          "feature": "Cut",
-          "value": "Loose"
-        }
-      ],
-      "defaultPrice": "65.00",
-      "photo": "https://images.unsplash.com/photo-1554260570-9140fd3b7614?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
-      "ratingAverage": 4
-    },
-    {
       "id": 71701,
       "campus": "hr-rpp",
       "name": "Heir Force Ones",
@@ -2716,5 +2693,14 @@
     "percentRecommended": 78,
     "totalReviews": 158,
     "avgRating": 4
-  }
+  },
+  "id": 71700,
+  "campus": "hr-rpp",
+  "name": "Slacker's Slacks",
+  "slogan": "Comfortable for everything, or nothing",
+  "description": "I'll tell you how great they are after I nap for a bit.",
+  "category": "Pants",
+  "default_price": "65.00",
+  "created_at": "2022-05-11T19:38:15.373Z",
+  "updated_at": "2022-05-11T19:38:15.373Z"
 }

@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-scroll';
+import renderRatings from '../global-helpers/renderRatings';
 
 function ProductInfo({
   name,
-  slogan,
   category,
   ratingAverage,
   reviewsCount,
@@ -19,49 +18,14 @@ function ProductInfo({
     }
   }, [selectedStyle]);
 
-  const renderRating = () => {
-    const fullStars = Math.floor(ratingAverage);
-    const hasHalfStar = ratingAverage % 1 !== 0;
-    const emptyStars = Math.floor(5 - ratingAverage);
-
-    const starElements = [];
-
-    for (let i = 0; i < fullStars; i++) {
-      starElements.push(<i className="fa fa-star" key={i} />);
-    }
-
-    if (hasHalfStar) {
-      starElements.push(<i className="fa fa-star-half-o" key={fullStars} />);
-    }
-
-    for (let i = 0; i < emptyStars; i++) {
-      starElements.push(
-        <i
-          className="fa fa-star-o"
-          key={fullStars + (hasHalfStar ? 1 : 0) + i}
-        />
-      );
-    }
-
-    return starElements;
-  };
-
   return (
     <div className="product-info-container">
-      <div className="product_info_reviews">
-        <fieldset>{renderRating()}</fieldset>
-        <Link
-          className="scroll-review"
-          to="reviews-module"
-          smooth
-          duration={500}
-        >
-          Read all ({reviewsCount}) reviews
-        </Link>
+      <div className="rating">{renderRatings(ratingAverage)}</div>
+      <div className="scroll-review" to="reviews-module">
+        Read all ({reviewsCount}) reviews
       </div>
       <div>{category}</div>
       <h2>{name}</h2>
-      <h4>{slogan}</h4>
       <div>{selectedStyle.name}</div>
       <div>
         {price.discounted ? (
