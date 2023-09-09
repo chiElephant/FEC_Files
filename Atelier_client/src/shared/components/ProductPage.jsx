@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import Overview from './overview_module/Overview.jsx';
-import QandAModule from './questions_answers_module/QandAModule.jsx';
 import RelatedProducts from './RelatedProducts.jsx';
+import QandAModule from './questions_answers_module/QandAModule.jsx';
+import ReviewsModule from './reviews_module/ReviewsModule.jsx';
 import '../styles/overview-styles.css';
 
 function ProductPage({ data }) {
@@ -29,10 +30,11 @@ function ProductPage({ data }) {
   };
 
   useEffect(() => {
-    if (loading) {
+    if (!window.__INITIAL_DATA__) {
+      setLoading(true);
       fetchData();
     }
-  }, [productData]);
+  }, [paramId]);
 
   const resetProductData = () => {
     window.__INITIAL_DATA__ = null;
@@ -62,6 +64,15 @@ function ProductPage({ data }) {
         relatedProducts={productData.relatedProducts}
         resetProductData={resetProductData}
       />
+      <QandAModule
+        product_id={productData.id}
+        product_name={productData.name}
+        questions_answers={productData.questionsWithAnswers}
+      />
+      {/* <ReviewsModule
+        product_id={productData.id}
+        product_name={productData.name}
+      /> */}
     </div>
   );
 }

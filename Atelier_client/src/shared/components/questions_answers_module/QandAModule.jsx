@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import SearchQ from './SearchQ.jsx';
 import QuestionList from './QuestionList.jsx';
 import useGetQuestions from './custom_hooks/useGetQuestions.jsx';
@@ -7,32 +8,14 @@ import useFilterByMatchingText from './custom_hooks/useFilterByMatchingText.jsx'
 import '../../styles/questions-answers-styles.css';
 
 function QandAModule({ questions_answers, product_id, product_name }) {
-  const [questionsWithAnswersData, setQuestionsWithAnswersData] =
-    useState(questions_answers);
-  const [displayList, setDisplayList] = useState([]);
-  const [countShown, setCountShown] = useState(2);
-  const [showMoreQuestions, setShowMoreQuestions] = useState(false);
-  const [fetchQuestions, setFetchQuestions] = useState(false);
-
-  useEffect(() => {
-    setDisplayList(questionsWithAnswersData.slice(0, countShown));
-
-    if (countShown < questionsWithAnswersData.length) {
-      setShowMoreQuestions(true);
-    } else {
-      setShowMoreQuestions(false);
-    }
-  }, [questionsWithAnswersData, countShown]);
-
-  //filtered questions state
-  const [displayFiltered, setDisplayFiltered] = useState([]);
-  const [filterCountShown, setFilterCountShown] = useState(2);
-  const [showMoreFilteredQuestions, setShowMoreFilteredQuestions] =
-    useState(false);
-
-  //search text state
+  const [qaData, setQaData] = useState(questions_answers);
+  const [displayList, setDisplayList] = useState(qaData.slice(0, 2));
+  const [showMoreQuestions, setShowMoreQuestions] = useState(qaData.length > 2);
+  const [displayFilteredList, setDisplayFilteredList] = useState([]);
   const [searchText, setSearchText] = useState('');
   const [filterMode, setFilterMode] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const debouncedSearchText = useDebounce(searchText, 1500);
 
   const filteredList = useFilterByMatchingText(
@@ -41,120 +24,73 @@ function QandAModule({ questions_answers, product_id, product_name }) {
     'question_body'
   );
 
-  //as we incement count, also increment questions to display by two
-  // useEffect(() => {
-  //   if (countShown < displayList.length) {
-  //     let newList;
-  //     if (countShown === 2) {
-  //       newList = displayList;
-  //     } else {
-  //       const grabNextTwo = displayList.slice(countShown - 2, countShown);
-  //       newList = [...displayList, ...grabNextTwo];
-  //     }
+  const fetchData = async () => {
+    try {
+      const res = await axios.get(`/questions/${product_id}`);
+      setQaData(res.data);
+      setLoading(false);
+    } catch (err) {
+      setError(`Error fetching data: ${err}`);
+    }
+  };
 
-  //     setDisplayList(newList);
-  //     setShowMoreQuestions(true);
-  //   }
-  // }, [countShown]);
+  useEffect(() => {
+    if (debouncedSearchText.length !== 0) {
+      setDisplayFilteredList(filteredList);
+      setFilterMode(true);
+    } else {
+      setFilterMode(false);
+    }
+  }, [debouncedSearchText]);
 
-  //as we increment filtered count, also increment filtered questions to display by two
-  // useEffect(() => {
-  //   if (displayFiltered.length !== filterCountShown) {
-  //     if (filterCountShown < filteredList.length) {
-  //       let newList;
-  //       if (filterCountShown === 2) {
-  //         newList = displayFiltered;
-  //       } else {
-  //         const grabNextTwo = filteredList.slice(
-  //           filterCountShown - 2,
-  //           filterCountShown
-  //         );
-  //         newList = [...displayFiltered, ...grabNextTwo];
-  //       }
-
-  //       setDisplayFiltered(newList);
-  //       setShowMoreFilteredQuestions(true);
-  //     } else {
-  //       setDisplayFiltered(filteredList);
-  //       setShowMoreFilteredQuestions(false);
-  //     }
-  //   }
-  // }, [filterCountShown]);
-
-  // handle searching, want to only display first two questions
-  // useEffect(() => {
-  //   if (debouncedSearchText.length >= 3) {
-  //     const grabFirstTwo = filteredList.slice(0, 2);
-
-  //     if (filterCountShown < filteredList.length) {
-  //       setShowMoreFilteredQuestions(true);
-  //     } else {
-  //       setShowMoreFilteredQuestions(false);
-  //     }
-  //     setFilterMode(true);
-  //     setCountShown(2);
-  //     setFilterCountShown(2);
-  //     setDisplayFiltered(grabFirstTwo);
-  //   } else {
-  //     const grabFirstTwo = displayList.slice(0, 2);
-
-  //     setFilterMode(false);
-  //     setFilterCountShown(2);
-  //     setDisplayList(grabFirstTwo);
-  //   }
-  // }, [debouncedSearchText]);
+  useEffect(() => {
+    loading ? fetchData() : null;
+  }, [loading]);
 
   const handleUpdateSearchText = (e) => {
     setSearchText(e.target.value);
   };
 
   const handleShowMoreQuestions = () => {
-    console.log('countShown: ', countShown);
-    console.log('displayList.length: ', displayList.length);
-    console.log(countShown < displayList.length);
-
-    setCountShown((prevState) => prevState + 2);
-    console.log(countShown);
-  };
-
-  const handleShowMoreFilteredQuestions = () => {
-    setFilterCountShown((prevState) => prevState + 2);
-  };
-
-  const handleFetchQuestions = () => {
-    setFetchQuestions((prevState) => !prevState);
+    setDisplayList(qaData);
     setShowMoreQuestions(false);
   };
 
-  const list = filterMode ? (
-    <QuestionList
-      handleFetchQuestions={handleFetchQuestions}
-      displayList={displayFiltered}
-      productName={product_name}
-      productId={product_id}
-      showMoreQuestions={showMoreFilteredQuestions}
-      handleShowMoreQuestions={handleShowMoreFilteredQuestions}
-    />
-  ) : (
-    <QuestionList
-      handleFetchQuestions={handleFetchQuestions}
-      displayList={displayList}
-      productName={product_name}
-      productId={product_id}
-      showMoreQuestions={showMoreQuestions}
-      handleShowMoreQuestions={handleShowMoreQuestions}
-    />
-  );
+  const handleCollapseQuestions = () => {
+    setDisplayList(qaData.slice(0, 2));
+    setShowMoreQuestions(true);
+  };
+
+  const handleFetchQuestions = () => {
+    setLoading(true);
+  };
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+
+  if (loading) {
+    return <div>Loading....🤹</div>;
+  }
 
   return (
     <div id="QandA-main">
-      <div id="QandAtop">
-        <h1 id="qanda-header">Questions & Answers</h1>
+      <div>
+        <h3>QUESTIONS & ANSWERS</h3>
         <SearchQ
           handleUpdateSearchText={handleUpdateSearchText}
           searchText={searchText}
         />
-        {list}
+        <QuestionList
+          handleFetchQuestions={handleFetchQuestions}
+          displayList={filterMode ? displayFilteredList : displayList}
+          productName={product_name}
+          productId={product_id}
+          showMoreQuestions={showMoreQuestions}
+          handleShowMoreQuestions={handleShowMoreQuestions}
+          handleCollapseQuestions={handleCollapseQuestions}
+          filterMode={filterMode}
+        />
       </div>
     </div>
   );

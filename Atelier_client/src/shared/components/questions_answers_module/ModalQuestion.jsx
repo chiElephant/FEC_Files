@@ -1,9 +1,9 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useState, useEffect } from 'react';
-import addQuestion from './helper_functions/addQuestion';
 import FormInput from './FormInput.jsx';
 import FormErrorList from './FormErrorList.jsx';
 import useClickOutside from './custom_hooks/useClickOutside.jsx';
+import addQuestion from './helper_functions/addQuestion.js';
 
 function ModalQuestion({
   productName,
@@ -74,6 +74,7 @@ function ModalQuestion({
   const handleSubmit = (e) => {
     const { question, nickname, email } = values;
     addQuestion(productId, question, nickname, email, handleFetchQuestions);
+    handleFetchQuestions();
     showModal();
   };
 

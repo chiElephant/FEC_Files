@@ -1,7 +1,6 @@
 /* Questions and Answers styling */
 
 #QandA-main {
-  height: 900px;
   width: 1000px;
 }
 
@@ -67,15 +66,18 @@ div#questions-answers-form-error {
   padding: 3px;
   color:red;
 }
-div#answer-img {
-  display: flex;
+
+.answer_img_list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 100px);
+  gap: 10px;
+  width: 700px
 }
 
-div#answer-img > img {
+.answer_img_list > img {
+  box-sizing: border-box;
   border: 1px solid #ddd;
   border-radius: 4px;
-  margin: 10px;
-  float: left;
   width:  100px;
   height: 100px;
   object-fit: cover;
@@ -87,13 +89,12 @@ div#answer-img > img {
  div.question {
   display: flex;
   justify-content: space-between;
-  padding-top: 10px;
   align-items: baseline;
 }
 
 div.question>div {
   display: flex;
-  justify-content: space-between;
+  align-items: baseline;
 }
 
 div.question>div > h2{
@@ -121,7 +122,6 @@ div.question>div > h3{
 div.answer {
   display: flex;
   flex-direction: column;
-  padding-top: 10px;
 }
 
 div.answer > div > p {
@@ -219,6 +219,7 @@ div.searchInputs  {
   justify-content: flex-start;
   border: solid 2px rgb(82, 82, 82);
   align-items: center;
+  box-sizing: border-box
 }
 
 div.searchInputs >input {
@@ -230,11 +231,6 @@ div.searchInputs >input {
   border: none;
 }
 
-#QandAtop > div.search > div.searchInputs > svg {
-  font-size: 30px;
-  padding-right: 20px;
-  color:  rgb(82, 82, 82);
-}
 
 
 div.searchInputs > input:focus {
@@ -262,7 +258,6 @@ div#questions-buttons > button {
   color: rgb(82, 82, 82);
   padding: 16px 32px;
   margin-left: 12px;
-  float: left;
 }
 
 div.more-answers {
@@ -274,15 +269,7 @@ div.more-answers {
   color: rgb(82, 82, 82);
 }
 
-img#answer-img {
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  margin: 10px;
-  float: left;
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-}
+
 
 div#answer-list {
   max-height: 50vh;
@@ -290,10 +277,9 @@ div#answer-list {
 }
 
 div#question-list {
-  /* max-height: 100vh; */
-  height: 500px;
   padding-right:20px;
   overflow: auto;
+  max-height: 600px
 }
 
 #seller-name {

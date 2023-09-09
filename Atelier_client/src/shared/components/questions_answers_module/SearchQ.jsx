@@ -1,6 +1,5 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { Search } from '@mui/icons-material';
 
 function SearchQ({ searchText, handleUpdateSearchText }) {
   return (
@@ -12,9 +11,10 @@ function SearchQ({ searchText, handleUpdateSearchText }) {
           placeholder="Have a question? Search for answers..."
           onChange={handleUpdateSearchText}
         />
-        <FontAwesomeIcon icon={faSearch} className="searchInputs" />
+        <div style={{ paddingRight: '10px' }}>
+          <Search fontSize="large" />
+        </div>
       </div>
-      <div className="dataResult" />
     </div>
   );
 }

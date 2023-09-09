@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 const URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
 
 export default async function fetchRelatedProducts(API_KEY, productId) {

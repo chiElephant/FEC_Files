@@ -1,42 +1,29 @@
-const { cloudinary } = require('./cloudinary');
+import { cloudinary } from './cloudinary';
 
-const uploadToCloudinary = (req, res, next) => {
-  const { photos } = req.body;
-
+export default async function uploadToCloudinary(photos) {
   if (photos.length === 0) {
-    next();
     return;
   }
 
-  const promises = photos.map((file) =>
-    cloudinary.uploader
-      .upload(file, {
+  try {
+    const promises = photos.map(async (file) => {
+      const result = await cloudinary.uploader.upload(file, {
         upload_preset: 'FEC_project',
-      })
-      .then(
-        (result) =>
-          // console.log('Cloudinary Upload Success: ', result.url);
-          result.url
-      )
-      .catch(next)
-  );
+      });
+      return result.url;
+    });
 
-  Promise.all(promises).then((urls) => {
+    const urls = await Promise.all(promises);
 
-    let formatedURLs = [];
-    for(let url of urls) {
-      var sliced = url.split('upload/')
-      var combine = sliced[0].concat('upload/f_auto/', sliced[1])
-      formatedURLs.push(combine);
-    }
+    const formattedURLs = urls.map((url) => {
+      const sliced = url.split('upload/');
+      return `${sliced[0]}upload/f_auto/${sliced[1]}`;
+    });
 
-    return formatedURLs;
-  })
-  .then(formatedURLs => {
-    req.body.photoUrls = formatedURLs;
-    console.log('uploaded photos urls: ', formatedURLs);
-    next();
-  });
-};
+    return formattedURLs;
+  } catch (error) {
+   thorw Error(error)
+  }
+}
 
-module.exports = { uploadToCloudinary };
+export { uploadToCloudinary };

@@ -4,7 +4,7 @@ import Styles from './Styles.jsx';
 import Gallery from './Gallery.jsx';
 import Slogan from './Slogan.jsx';
 
-function Overview({ productData }) {
+export default function Overview({ productData }) {
   const [selectedStyle, setSelectedStyle] = useState(productData.styles[0]);
 
   const changeStyleSelected = (style) => {
@@ -28,5 +28,3 @@ function Overview({ productData }) {
     </div>
   );
 }
-
-export default Overview;

@@ -20,7 +20,9 @@ function ProductInfo({
 
   return (
     <div className="product-info-container">
-      <div className="rating">{renderRatings(ratingAverage)}</div>
+      <div className="rating" style={{ paddingTop: '10px' }}>
+        {renderRatings(ratingAverage)}
+      </div>
       <div className="scroll-review" to="reviews-module">
         Read all ({reviewsCount}) reviews
       </div>

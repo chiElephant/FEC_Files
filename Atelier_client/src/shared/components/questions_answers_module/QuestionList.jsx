@@ -10,6 +10,8 @@ function QuestionList({
   showMoreQuestions,
   handleShowMoreQuestions,
   handleFetchQuestions,
+  handleCollapseQuestions,
+  filterMode,
 }) {
   const [isModal, setIsModal] = useState(false);
   const containerRef = useAutoScroll(displayList.length);
@@ -29,11 +31,11 @@ function QuestionList({
     />
   ) : null;
 
-  // console.log('showMoreQuestions: ', showMoreQuestions);
-
   const showMoreQuestionsButton = showMoreQuestions ? (
     <button onClick={handleShowMoreQuestions}> More Answered Questions </button>
-  ) : null;
+  ) : (
+    <button onClick={handleCollapseQuestions}> Collapse Questions </button>
+  );
 
   return (
     <>
@@ -52,7 +54,7 @@ function QuestionList({
         ))}
       </div>
       <div id="questions-buttons">
-        {showMoreQuestionsButton}
+        {filterMode ? null : showMoreQuestionsButton}
         <button onClick={showModal}> Add Question + </button>
       </div>
     </>

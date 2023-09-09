@@ -2,27 +2,9 @@
 require('dotenv').config();
 const axios = require('axios');
 
-const { URL, TOKEN } = process.env;
+const { URL, GIT } = process.env;
 
-const filteredAnswers = (object) =>
-  object.map((obj) => {
-    const answers = Object.values(obj.answers);
-
-    const filterBySeller = answers.filter(
-      (item) => item.answerer_name === 'Seller'
-    );
-
-    const filterRestAndSortByHelpfulness = answers
-      .filter((item) => item.answerer_name !== 'Seller')
-      .sort((a, b) => b.date - a.date)
-      .sort((a, b) => b.helpfulness - a.helpfulness);
-
-    obj.answers = [...filterBySeller, ...filterRestAndSortByHelpfulness];
-
-    return obj;
-  });
-
-const filteredAnswersFromGet = (inputArray) => {
+const filteredAnswers = (inputArray) => {
   const filterBySeller = inputArray.filter(
     (item) => item.answerer_name === 'Seller'
   );
@@ -35,188 +17,120 @@ const filteredAnswersFromGet = (inputArray) => {
   return [...filterBySeller, ...filterRestAndSortByHelpfulness];
 };
 
-const getQuestions = async (productId) => {
+const getAnswers = async (question_id) => {
   let store = [];
   const count = 100;
 
   async function get(page) {
-    const url = `${URL}/qa/questions?product_id=${productId}&page=${page}&count=${count}`;
-
+    const url = `${URL}/qa/questions/${question_id}/answers?page=${page}&count=${count}`;
     const options = {
-      headers: { Authorization: TOKEN },
+      headers: { Authorization: GIT },
     };
 
-    const response = await axios.get(url, options);
-    const questionList = response.data.results;
+    try {
+      const response = await axios.get(url, options);
+      const answerlist = response.data.results;
 
-    if (questionList.length > 0) {
-      store = [...store, ...questionList];
-      await get(page + 1);
+      if (answerlist.length > 0) {
+        store = [...store, ...answerlist];
+        await get(page + 1);
+      } else {
+        return filteredAnswers(store);
+      }
+    } catch (error) {
+      throw Error(error);
     }
-    return filteredAnswers(store);
   }
 
   await get(1);
-  return store;
 };
 
-const getAnswers = (req, res, next) => {
-  const { question_id } = req.params;
-  let store = [];
-  const count = 100;
-
-  function get(page) {
-    const url = `${URL}/qa/questions/${question_id}/answers?page=${page}&count=${count}`;
-
-    const options = {
-      headers: { Authorization: TOKEN },
-    };
-    axios
-      .get(url, options)
-      .then((response) => {
-        const answerlist = response.data.results;
-
-        if (answerlist.length > 0) {
-          store = [...store, ...answerlist];
-          get(page + 1);
-        } else {
-          res.body = filteredAnswersFromGet(store);
-          next();
-        }
-      })
-      .catch(next);
+const addQuestion = async ({ body, name, email, product_id }) => {
+  try {
+    await axios.post(
+      `${URL}/qa/questions`,
+      { body, name, email, product_id },
+      {
+        headers: {
+          Authorization: GIT,
+        },
+      }
+    );
+  } catch (error) {
+    next(error);
   }
-
-  get(1);
 };
 
-const addQuestion = (req, res, next) => {
-  const url = `${URL}/qa/questions`;
-
-  const { body, name, email, product_id } = req.body;
-
-  console.log(req.body);
-
-  const data = JSON.stringify({
-    body,
-    name,
-    email,
-    product_id,
-  });
-
-  const options = {
-    method: 'post',
-    url,
-    headers: {
-      Authorization: TOKEN,
-      'Content-Type': 'application/json',
-    },
-    data,
-  };
-
-  axios(options)
-    .then(() => {
-      next();
-    })
-    .catch(next);
+const addAnswer = async (body, name, email, photoUrls, question_id) => {
+  try {
+    await axios.post(
+      `${URL}/qa/questions/${question_id}/answers`,
+      {
+        body,
+        name,
+        email,
+        photos: photoUrls || [],
+      },
+      {
+        headers: {
+          Authorization: GIT,
+        },
+      }
+    );
+  } catch (error) {
+    next(error);
+  }
 };
 
-const addAnswer = (req, res, next) => {
-  const { question_id } = req.params;
-  const { body, name, email, photoUrls } = req.body;
-
-  const url = `${URL}/qa/questions/${question_id}/answers`;
-
-  const data = JSON.stringify({
-    body,
-    name,
-    email,
-    photos: photoUrls || [],
-  });
-
-  console.log(data);
-
-  const options = {
-    method: 'post',
-    url,
-    headers: {
-      Authorization: TOKEN,
-      'Content-Type': 'application/json',
-    },
-    data,
-  };
-
-  axios(options)
-    .then(() => {
-      next();
-    })
-    .catch(next);
+const markQuestionAsHelpful = async (question_id) => {
+  try {
+    await axios.put(
+      `${URL}/qa/questions/${question_id}/helpful`,
+      {},
+      {
+        headers: {
+          Authorization: GIT,
+        },
+      }
+    );
+  } catch (error) {
+    next(error);
+  }
 };
 
-const markQuestionAsHelpful = (req, res, next) => {
-  const { question_id } = req.params;
-
-  const url = `${URL}/qa/questions/${question_id}/helpful`;
-
-  console.log(question_id, url);
-
-  const options = {
-    method: 'put',
-    url,
-    headers: {
-      Authorization: TOKEN,
-    },
-  };
-
-  axios(options)
-    .then(() => {
-      next();
-    })
-    .catch(next);
+const markAnswerAsHelpful = async (answer_id) => {
+  try {
+    await axios.put(
+      `${URL}/qa/answers/${answer_id}/helpful`,
+      {},
+      {
+        headers: {
+          Authorization: GIT,
+        },
+      }
+    );
+  } catch (error) {
+    next(error);
+  }
 };
 
-const markAnswerAsHelpful = (req, res, next) => {
-  const { answer_id } = req.params;
-
-  const url = `${URL}/qa/answers/${answer_id}/helpful`;
-
-  const options = {
-    method: 'put',
-    url,
-    headers: {
-      Authorization: TOKEN,
-    },
-  };
-
-  axios(options)
-    .then(() => {
-      next();
-    })
-    .catch(next);
-};
-
-const reportAnswer = (req, res, next) => {
-  const { answer_id } = req.params;
-
-  const url = `${URL}/qa/answers/${answer_id}/report`;
-
-  const options = {
-    method: 'put',
-    url,
-    headers: {
-      Authorization: TOKEN,
-    },
-  };
-
-  axios(options)
-    .then(() => {
-      next();
-    })
-    .catch(next);
+const reportAnswer = async (answer_id) => {
+  try {
+    await axios.put(
+      `${URL}/qa/answers/${answer_id}/report`,
+      {},
+      {
+        headers: {
+          Authorization: GIT,
+        },
+      }
+    );
+  } catch (error) {
+    next(error);
+  }
 };
 
 module.exports = {
-  getQuestions,
   getAnswers,
   addQuestion,
   addAnswer,

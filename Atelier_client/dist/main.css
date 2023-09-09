@@ -44,7 +44,7 @@
 }
 
 .product-image {
-  background-color: rgb(28, 118, 197);
+  background-color: rgb(176 210 219);
   width: 100%;
   height: 280px;
   object-fit: cover;
@@ -107,7 +107,6 @@
 /* Questions and Answers styling */
 
 #QandA-main {
-  height: 900px;
   width: 1000px;
 }
 
@@ -173,15 +172,18 @@ div#questions-answers-form-error {
   padding: 3px;
   color:red;
 }
-div#answer-img {
-  display: flex;
+
+.answer_img_list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 100px);
+  gap: 10px;
+  width: 700px
 }
 
-div#answer-img > img {
+.answer_img_list > img {
+  box-sizing: border-box;
   border: 1px solid #ddd;
   border-radius: 4px;
-  margin: 10px;
-  float: left;
   width:  100px;
   height: 100px;
   object-fit: cover;
@@ -193,13 +195,12 @@ div#answer-img > img {
  div.question {
   display: flex;
   justify-content: space-between;
-  padding-top: 10px;
   align-items: baseline;
 }
 
 div.question>div {
   display: flex;
-  justify-content: space-between;
+  align-items: baseline;
 }
 
 div.question>div > h2{
@@ -227,7 +228,6 @@ div.question>div > h3{
 div.answer {
   display: flex;
   flex-direction: column;
-  padding-top: 10px;
 }
 
 div.answer > div > p {
@@ -325,6 +325,7 @@ div.searchInputs  {
   justify-content: flex-start;
   border: solid 2px rgb(82, 82, 82);
   align-items: center;
+  box-sizing: border-box
 }
 
 div.searchInputs >input {
@@ -336,11 +337,6 @@ div.searchInputs >input {
   border: none;
 }
 
-#QandAtop > div.search > div.searchInputs > svg {
-  font-size: 30px;
-  padding-right: 20px;
-  color:  rgb(82, 82, 82);
-}
 
 
 div.searchInputs > input:focus {
@@ -368,7 +364,6 @@ div#questions-buttons > button {
   color: rgb(82, 82, 82);
   padding: 16px 32px;
   margin-left: 12px;
-  float: left;
 }
 
 div.more-answers {
@@ -380,15 +375,7 @@ div.more-answers {
   color: rgb(82, 82, 82);
 }
 
-img#answer-img {
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  margin: 10px;
-  float: left;
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-}
+
 
 div#answer-list {
   max-height: 50vh;
@@ -396,10 +383,9 @@ div#answer-list {
 }
 
 div#question-list {
-  /* max-height: 100vh; */
-  height: 500px;
   padding-right:20px;
   overflow: auto;
+  max-height: 600px
 }
 
 #seller-name {
@@ -427,6 +413,7 @@ div#question-list {
   height: 600px;
 }
 
+
 .main-img {
   width: 800px;
   height: 600px;
@@ -434,6 +421,7 @@ div#question-list {
   cursor: -moz-zoom-in;
   cursor: -webkit-zoom-in;
   cursor: zoom-in;
+    background-color: rgb(176 210 219);
 }
 
 
@@ -441,7 +429,6 @@ div#question-list {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  gap: 10px;
   margin-left: 10px
 }
 
@@ -451,13 +438,6 @@ div#question-list {
   object-fit: cover;
   margin: 10px;
   scroll-snap-align: end;
-}
-
-.style_thumbnail {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 50%;
 }
 
 .photo-container {
@@ -474,10 +454,6 @@ div#question-list {
   display: none;
 }
 
-.product_overview_style_selector {
-  display: flex;
-  flex-wrap: wrap;
-}
 
 .modalBackground {
   position: fixed;
@@ -572,22 +548,37 @@ div#question-list {
   border-radius: 50%;
 }
 
-.gallery-styles-container {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  margin: 20px;
+.style_button {
+  background: none;
+  padding: 0;
+  margin: 0;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.3s ease-in-out;
+  border-radius: 50%;
 }
 
-.right {
-  justify-content: center;
-  align-content: center;
-  margin-left: 5%;
-  flex:0 0 auto;
-  flex-wrap: wrap;
+.style_thumbnail {
+  box-sizing: border-box;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border: 5px solid transparent;
+  transition: border-color 0.3s ease-in-out;
+  border-radius: 50%;
 }
 
+.style_thumbnail.selected {
+  border: 5px solid #555;
+}
 
+.product_overview_style_selector {
+  display: grid;
+  grid-template-columns: 100px 100px 100px 100px;
+  margin: 10px;
+  box-sizing: border-box;
+}
 
 .addto-outfit {
 
@@ -607,7 +598,9 @@ div#question-list {
 .scroll-review {
 
   color: black;
-  width: 300px
+  width: 300px;
+  padding-top: 10px;
+  padding-bottom: 10px
 }
 
 .scroll-review:hover {
@@ -646,7 +639,8 @@ div#question-list {
 }
 
 .new-right {
-  height: 600px;
+  box-sizing: border-box;
+  padding-left:30px
 }
 
 .description {

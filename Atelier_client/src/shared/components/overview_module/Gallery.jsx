@@ -8,7 +8,7 @@ import defaultImage from '../global-helpers/defaultImage.js';
 function Gallery({ selectedStyle }) {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [view, setView] = useState('default');
-  const [selectedPhoto, setSelectedPhotot] = useState(
+  const [selectedPhoto, setSelectedPhoto] = useState(
     selectedStyle.photos[selectedIndex].url
   );
 

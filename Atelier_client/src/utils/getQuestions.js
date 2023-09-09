@@ -24,6 +24,17 @@ export default async function getQuestions(API_KEY, productId) {
       return obj;
     });
 
+  const removeDuplicatesByProperty = (arr, prop) => {
+    const seen = new Set();
+    return arr.filter((obj) => {
+      if (seen.has(obj[prop])) {
+        return false;
+      }
+      seen.add(obj[prop]);
+      return true;
+    });
+  };
+
   async function get(page) {
     const url = `${URL}/qa/questions?product_id=${productId}&page=${page}&count=${count}`;
 
@@ -38,9 +49,13 @@ export default async function getQuestions(API_KEY, productId) {
       store = [...store, ...questionList];
       await get(page + 1);
     }
-    return filteredAnswers(store);
+    return store;
   }
 
   await get(1);
-  return store;
+  const removedDuplicatesData = removeDuplicatesByProperty(
+    store,
+    'question_id'
+  );
+  return filteredAnswers(removedDuplicatesData);
 }

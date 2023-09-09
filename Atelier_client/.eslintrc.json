@@ -20,6 +20,7 @@
       },
 
     "rules": {
+        "allowTernary": true,
         "no-plusplus": "off",
         "spaced-comment":"off",
         "react/prop-types": "off",
