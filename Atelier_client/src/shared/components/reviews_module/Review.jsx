@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 import PhotoModal from './PhotoModal.jsx';
+import renderRatings from '../global-helpers/renderRatings.js';
 import { helpers } from './helper_functions/review.js';
 
 function Review(props) {

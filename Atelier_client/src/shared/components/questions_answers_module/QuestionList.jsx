@@ -32,9 +32,9 @@ function QuestionList({
   ) : null;
 
   const showMoreQuestionsButton = showMoreQuestions ? (
-    <button onClick={handleShowMoreQuestions}> More Answered Questions </button>
+    <button onClick={handleShowMoreQuestions}>MORE ANSWERED QUESTIONS</button>
   ) : (
-    <button onClick={handleCollapseQuestions}> Collapse Questions </button>
+    <button onClick={handleCollapseQuestions}>COLLAPSE</button>
   );
 
   return (
@@ -55,7 +55,7 @@ function QuestionList({
       </div>
       <div id="questions-buttons">
         {filterMode ? null : showMoreQuestionsButton}
-        <button onClick={showModal}> Add Question + </button>
+        <button onClick={showModal}> ADD QUESTION + </button>
       </div>
     </>
   );

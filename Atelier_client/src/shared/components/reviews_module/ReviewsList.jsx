@@ -15,24 +15,46 @@ function ReviewsList({ reviews, setSortType, reviewCount }) {
   return (
     <div id="reviews-list" fromelement="Ratings/Reviews">
       <div id="review-sort" fromelement="Ratings/Reviews">
-        <div id="sort-text" fromelement="Ratings/Reviews">{`${reviewCount} reviews, sorted by`}</div>
+        <div
+          id="sort-text"
+          fromelement="Ratings/Reviews"
+        >{`${reviewCount} reviews, sorted by`}</div>
         <div id="sort-dropdown" fromelement="Ratings/Reviews">
           {currentSort}
           <div id="sort-dropdown-content" fromelement="Ratings/Reviews">
             <ul className="review-sort-types" fromelement="Ratings/Reviews">
-              <li className="relevant" fromelement="Ratings/Reviews" role="relevant" onClick={() => handleSort('relevant')}>
+              <li
+                className="relevant"
+                fromelement="Ratings/Reviews"
+                role="relevant"
+                onClick={() => handleSort('relevant')}
+              >
                 relevance
               </li>
-              <li className="newest" fromelement="Ratings/Reviews" role="newest" onClick={() => handleSort('newest')}>
+              <li
+                className="newest"
+                fromelement="Ratings/Reviews"
+                role="newest"
+                onClick={() => handleSort('newest')}
+              >
                 newest
               </li>
-              <li className="helpful" fromelement="Ratings/Reviews" role="helpful" onClick={() => handleSort('helpful')} value="helpful">
+              <li
+                className="helpful"
+                fromelement="Ratings/Reviews"
+                role="helpful"
+                onClick={() => handleSort('helpful')}
+                value="helpful"
+              >
                 helpful
               </li>
             </ul>
           </div>
           <div id="sort-icon" fromelement="Ratings/Reviews">
-            <i className="fa-regular fa-angle-down fa-lg" fromelement="Ratings/Reviews"></i>
+            <i
+              className="fa-regular fa-angle-down fa-lg"
+              fromelement="Ratings/Reviews"
+            ></i>
           </div>
         </div>
       </div>
@@ -55,7 +77,7 @@ function ReviewsList({ reviews, setSortType, reviewCount }) {
                 date={review.date}
               />
             ))
-          : ''}
+          : null}
       </div>
     </div>
   );

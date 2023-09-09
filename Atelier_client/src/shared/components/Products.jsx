@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Product from './Product.jsx';
-import '../styles/product-styles.module.css';
+import '../styles/product-styles.css';
 
 function Products({ data }) {
   const [productData, setProductData] = useState(() => {

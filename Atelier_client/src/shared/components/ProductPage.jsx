@@ -69,10 +69,12 @@ function ProductPage({ data }) {
         product_name={productData.name}
         questions_answers={productData.questionsWithAnswers}
       />
-      {/* <ReviewsModule
+      <ReviewsModule
         product_id={productData.id}
         product_name={productData.name}
-      /> */}
+        reviewsData={productData.reviews}
+        metaData={productData.metaData}
+      />
     </div>
   );
 }

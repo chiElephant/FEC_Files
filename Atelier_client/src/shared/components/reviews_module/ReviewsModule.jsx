@@ -3,6 +3,7 @@ import { initialState, helpers } from './helper_functions/reviews_module';
 import RatingsBreakdown from './RatingsBreakdown.jsx';
 import SubmitReview from './SubmitReview.jsx';
 import ReviewsList from './ReviewsList.jsx';
+import '../../styles/reviews-styles.css';
 // import { handleInteraction } from '../../interactionHandler.js'
 
 function ReviewsModule({ product_id, product_name, reviewsData, metaData }) {
@@ -40,7 +41,6 @@ function ReviewsModule({ product_id, product_name, reviewsData, metaData }) {
     }
   }, [sort]);
 
-  // eslint-disable-next-line no-unused-vars
   const filteredReviews = useMemo(() => {
     helpers.filterReviews(
       reviews,
@@ -53,10 +53,7 @@ function ReviewsModule({ product_id, product_name, reviewsData, metaData }) {
   return (
     <div id="reviews-body">
       <div id="reviews-module">
-        <h2 id="ratings-reviews-header" fromelement="Ratings/Reviews">
-          {' '}
-          Ratings and Reviews{' '}
-        </h2>
+        <h3 fromelement="Ratings/Reviews"> RATINGS AND REVIEWS </h3>
         <RatingsBreakdown
           product_id={product_id}
           setCharacteristics={setCharacteristics}
@@ -65,9 +62,7 @@ function ReviewsModule({ product_id, product_name, reviewsData, metaData }) {
           currentFilters={currentFilters}
           metaData={metaData}
         />
-        {reviewsDisplayed.length === 0 ? (
-          ''
-        ) : (
+        {reviewsDisplayed.length === 0 ? null : (
           <ReviewsList
             reviews={reviewsDisplayed}
             setSortType={setSort}

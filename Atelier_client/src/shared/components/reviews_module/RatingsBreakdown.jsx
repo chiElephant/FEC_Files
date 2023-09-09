@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef } from 'react';
 import ProductBreakdown from './ProductBreakdown.jsx';
 import helpers from './helper_functions/ratings_bd.js';
+import renderRatings from '../global-helpers/renderRatings.js';
 
 function RatingsBreakdown({
   product_id,
@@ -17,7 +18,7 @@ function RatingsBreakdown({
   const isInitialRender = useRef(true);
 
   const starsRatings = useMemo(
-    () => helpers.createStarsRating(avgRating),
+    () => renderRatings(avgRating.current),
     [avgRating.current]
   );
 
@@ -53,7 +54,7 @@ function RatingsBreakdown({
           fromelement="Ratings/Reviews"
         >{`${avgRating.current}`}</div>
         <div id="breakdown-stars" fromelement="Ratings/Reviews">
-          {/* {starsRatings} */}
+          {starsRatings}
         </div>
       </div>
       <div
