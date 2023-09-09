@@ -39,27 +39,24 @@ export const handlers = [
     res(ctx.status(200), ctx.json(mockStyles))
   ),
 
-
-
   // Reviews mock server responses
   rest.get('/reviews', (req, res, ctx) => {
-    return res(ctx.status(200), ctx.json(mockReviews))
+    return res(ctx.status(200), ctx.json(mockReviews));
   }),
 
   rest.get('/reviews/meta', (req, res, ctx) => {
-    return res(ctx.status(200), ctx.json(mockMetadata))
+    return res(ctx.status(200), ctx.json(mockMetadata));
   }),
 
   rest.post('/reviews/meta', (req, res, ctx) => {
-    return res(ctx.status(201))
+    return res(ctx.status(201));
   }),
 
   rest.put('/reviews/:review_id/helpful', (req, res, ctx) => {
-    return res(ctx.status(204))
+    return res(ctx.status(204));
   }),
 
   rest.put('/reviews/:review_id/report', (req, res, ctx) => {
-    return res(ctx.status(204))
+    return res(ctx.status(204));
   }),
-
 ];

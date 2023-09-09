@@ -1,0 +1,854 @@
+{
+  "relatedProducts": [
+    {
+      "id": 71697,
+      "campus": "hr-rpp",
+      "name": "Camo Onesie",
+      "slogan": "Blend in to your crowd",
+      "description": "The So Fatigues will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.",
+      "category": "Jackets",
+      "created_at": "2022-05-11T19:38:15.373Z",
+      "updated_at": "2022-05-11T19:38:15.373Z",
+      "features": [
+        {
+          "feature": "Fabric",
+          "value": "Canvas"
+        },
+        {
+          "feature": "Buttons",
+          "value": "Brass"
+        }
+      ],
+      "defaultPrice": "140.00",
+      "photo": "https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+      "ratingAverage": 4
+    },
+    {
+      "id": 71698,
+      "campus": "hr-rpp",
+      "name": "Bright Future Sunglasses",
+      "slogan": "You've got to wear shades",
+      "description": "Where you're going you might not need roads, but you definitely need some shades. Give those baby blues a rest and let the future shine bright on these timeless lenses.",
+      "category": "Accessories",
+      "created_at": "2022-05-11T19:38:15.373Z",
+      "updated_at": "2022-05-11T19:38:15.373Z",
+      "features": [
+        {
+          "feature": "Lenses",
+          "value": "Ultrasheen"
+        },
+        {
+          "feature": "UV Protection",
+          "value": null
+        },
+        {
+          "feature": "Frames",
+          "value": "LightCompose"
+        }
+      ],
+      "defaultPrice": "69.00",
+      "photo": null,
+      "ratingAverage": 3.5
+    },
+    {
+      "id": 71699,
+      "campus": "hr-rpp",
+      "name": "Morning Joggers",
+      "slogan": "Make yourself a morning person",
+      "description": "Whether you're a morning person or not.  Whether you're gym bound or not.  Everyone looks good in joggers.",
+      "category": "Pants",
+      "created_at": "2022-05-11T19:38:15.373Z",
+      "updated_at": "2022-05-11T19:38:15.373Z",
+      "features": [
+        {
+          "feature": "Fabric",
+          "value": "100% Cotton"
+        },
+        {
+          "feature": "Cut",
+          "value": "Skinny"
+        }
+      ],
+      "defaultPrice": "40.00",
+      "photo": "https://images.unsplash.com/photo-1552902865-b72c031ac5ea?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+      "ratingAverage": 4
+    },
+    {
+      "id": 71700,
+      "campus": "hr-rpp",
+      "name": "Slacker's Slacks",
+      "slogan": "Comfortable for everything, or nothing",
+      "description": "I'll tell you how great they are after I nap for a bit.",
+      "category": "Pants",
+      "created_at": "2022-05-11T19:38:15.373Z",
+      "updated_at": "2022-05-11T19:38:15.373Z",
+      "features": [
+        {
+          "feature": "Fabric",
+          "value": "99% Cotton 1% Elastic"
+        },
+        {
+          "feature": "Cut",
+          "value": "Loose"
+        }
+      ],
+      "defaultPrice": "65.00",
+      "photo": "https://images.unsplash.com/photo-1554260570-9140fd3b7614?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+      "ratingAverage": 4
+    },
+    {
+      "id": 71701,
+      "campus": "hr-rpp",
+      "name": "Heir Force Ones",
+      "slogan": "A sneaker dynasty",
+      "description": "Now where da boxes where I keep mine? You should peep mine, maybe once or twice but never three times. I'm just a sneaker pro, I love Pumas and shell toes, but can't nothin compare to a fresh crispy white pearl",
+      "category": "Kicks",
+      "created_at": "2022-05-11T19:38:15.373Z",
+      "updated_at": "2022-05-11T19:38:15.373Z",
+      "features": [
+        {
+          "feature": "Sole",
+          "value": "Rubber"
+        },
+        {
+          "feature": "Material",
+          "value": "FullControlSkin"
+        },
+        {
+          "feature": "Mid-Sole",
+          "value": "ControlSupport Arch Bridge"
+        },
+        {
+          "feature": "Stitching",
+          "value": "Double Stitch"
+        }
+      ],
+      "defaultPrice": "99.00",
+      "photo": "https://images.unsplash.com/photo-1544441892-794166f1e3be?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80",
+      "ratingAverage": 3.5
+    },
+    {
+      "id": 71702,
+      "campus": "hr-rpp",
+      "name": "Pumped Up Kicks",
+      "slogan": "Faster than a just about anything",
+      "description": "The Pumped Up serves up crisp court style with a modern look. These shoes show off tennis-whites shades and are constructed with a supple leather upper and a classic rubber cupsole.",
+      "category": "Kicks",
+      "created_at": "2022-05-11T19:38:15.373Z",
+      "updated_at": "2022-05-11T19:38:15.373Z",
+      "features": [
+        {
+          "feature": "Sole",
+          "value": "Rubber"
+        },
+        {
+          "feature": "Material",
+          "value": "FullControlSkin"
+        },
+        {
+          "feature": "Mid-Sole",
+          "value": "ControlSupport Arch Bridge"
+        },
+        {
+          "feature": "Stitching",
+          "value": "Double Stitch"
+        }
+      ],
+      "defaultPrice": "89.00",
+      "photo": "https://images.unsplash.com/photo-1477420143023-6a0e0b04b69a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+      "ratingAverage": 4
+    },
+    {
+      "id": 71704,
+      "campus": "hr-rpp",
+      "name": "YEasy 350",
+      "slogan": "Just jumped over jumpman",
+      "description": "These stretchy knit shoes show off asymmetrical lacing and a big sculpted rubber midsole. In a nod to adidas soccer heritage.",
+      "category": "Kicks",
+      "created_at": "2022-05-11T19:38:15.373Z",
+      "updated_at": "2022-05-11T19:38:15.373Z",
+      "features": [
+        {
+          "feature": "Sole",
+          "value": "Rubber"
+        },
+        {
+          "feature": "Material",
+          "value": "FullControlSkin"
+        },
+        {
+          "feature": "Stitching",
+          "value": "Double Stitch"
+        }
+      ],
+      "defaultPrice": "450.00",
+      "photo": "https://images.unsplash.com/photo-1551489186-cf8726f514f8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+      "ratingAverage": 3.5
+    },
+    {
+      "id": 71705,
+      "campus": "hr-rpp",
+      "name": "Summer Shoes",
+      "slogan": "A risky call in the spring or fall",
+      "description": "Low-top panelled buffed leather and mesh sneakers. Sizing embroidered in black at round toe. Tonal lace-up closure. Pull-loop and rubberized style name at padded tongue. Padded collar. Pull-loop at heel collar. Logo embroidered in black at outer side. Tonal treaded rubber sole. Tonal stitching.",
+      "category": "Kicks",
+      "created_at": "2022-05-11T19:38:15.373Z",
+      "updated_at": "2022-05-11T19:38:15.373Z",
+      "features": [
+        {
+          "feature": "Sole",
+          "value": "Rubber"
+        },
+        {
+          "feature": "Material",
+          "value": "FullControlSkin"
+        },
+        {
+          "feature": "Mid-Sole",
+          "value": "ControlSupport Arch Bridge"
+        },
+        {
+          "feature": "Stitching",
+          "value": "Double Stitch"
+        }
+      ],
+      "defaultPrice": "59.00",
+      "photo": "https://images.unsplash.com/photo-1550338300-f9a475b50ba2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+      "ratingAverage": 3
+    }
+  ],
+  "photo": "https://images.unsplash.com/photo-1561861422-a549073e547a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+  "ratingAverage": 3.5,
+  "reviewsCount": 15,
+  "features": [
+    {
+      "feature": "Sole",
+      "value": "Rubber"
+    },
+    {
+      "feature": "Material",
+      "value": "FullControlSkin"
+    },
+    {
+      "feature": "Stitching",
+      "value": "Double Stitch"
+    }
+  ],
+  "styles": [
+    {
+      "style_id": 444249,
+      "name": "White Sole",
+      "original_price": "120.00",
+      "sale_price": null,
+      "default?": false,
+      "photos": [
+        {
+          "thumbnail_url": "https://images.unsplash.com/photo-1561861422-a549073e547a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+          "url": "https://images.unsplash.com/photo-1561861422-a549073e547a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80"
+        },
+        {
+          "thumbnail_url": "https://images.unsplash.com/photo-1560072810-1cffb09faf0f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+          "url": "https://images.unsplash.com/photo-1560072810-1cffb09faf0f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"
+        }
+      ],
+      "skus": {
+        "2580718": {
+          "quantity": 14,
+          "size": "7"
+        },
+        "2580719": {
+          "quantity": 25,
+          "size": "7.5"
+        },
+        "2580720": {
+          "quantity": 9,
+          "size": "8"
+        },
+        "2580721": {
+          "quantity": 2,
+          "size": "8.5"
+        },
+        "2580722": {
+          "quantity": 18,
+          "size": "9"
+        },
+        "2580723": {
+          "quantity": 12,
+          "size": "9.5"
+        },
+        "2580724": {
+          "quantity": 10,
+          "size": "10"
+        },
+        "2580725": {
+          "quantity": 18,
+          "size": "10.5"
+        },
+        "2580726": {
+          "quantity": 11,
+          "size": "11"
+        },
+        "2580727": {
+          "quantity": 35,
+          "size": "11.5"
+        },
+        "2580728": {
+          "quantity": 25,
+          "size": "12"
+        }
+      }
+    },
+    {
+      "style_id": 444250,
+      "name": "Black Sole",
+      "original_price": "120.00",
+      "sale_price": null,
+      "default?": false,
+      "photos": [
+        {
+          "thumbnail_url": "https://images.unsplash.com/uploads/1412198532414025532c0/6a31309c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+          "url": "https://images.unsplash.com/uploads/1412198532414025532c0/6a31309c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1600&q=80"
+        },
+        {
+          "thumbnail_url": "https://images.unsplash.com/photo-1454024183771-42d54053cd75?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+          "url": "https://images.unsplash.com/photo-1454024183771-42d54053cd75?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"
+        }
+      ],
+      "skus": {
+        "2580729": {
+          "quantity": 14,
+          "size": "7"
+        },
+        "2580730": {
+          "quantity": 25,
+          "size": "7.5"
+        },
+        "2580731": {
+          "quantity": 9,
+          "size": "8"
+        },
+        "2580732": {
+          "quantity": 2,
+          "size": "8.5"
+        },
+        "2580733": {
+          "quantity": 18,
+          "size": "9"
+        },
+        "2580734": {
+          "quantity": 12,
+          "size": "9.5"
+        },
+        "2580735": {
+          "quantity": 10,
+          "size": "10"
+        },
+        "2580736": {
+          "quantity": 18,
+          "size": "10.5"
+        },
+        "2580737": {
+          "quantity": 11,
+          "size": "11"
+        },
+        "2580738": {
+          "quantity": 35,
+          "size": "11.5"
+        },
+        "2580739": {
+          "quantity": 25,
+          "size": "12"
+        }
+      }
+    },
+    {
+      "style_id": 444251,
+      "name": "Tan Sole",
+      "original_price": "120.00",
+      "sale_price": null,
+      "default?": false,
+      "photos": [
+        {
+          "thumbnail_url": "https://images.unsplash.com/photo-1465124982537-9f918f1e1aaf?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80",
+          "url": "https://images.unsplash.com/photo-1465124982537-9f918f1e1aaf?ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80"
+        },
+        {
+          "thumbnail_url": "https://images.unsplash.com/photo-1449505278894-297fdb3edbc1?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80",
+          "url": "https://images.unsplash.com/photo-1449505278894-297fdb3edbc1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80"
+        }
+      ],
+      "skus": {
+        "2580740": {
+          "quantity": 14,
+          "size": "7"
+        },
+        "2580741": {
+          "quantity": 25,
+          "size": "7.5"
+        },
+        "2580742": {
+          "quantity": 9,
+          "size": "8"
+        },
+        "2580743": {
+          "quantity": 2,
+          "size": "8.5"
+        },
+        "2580744": {
+          "quantity": 18,
+          "size": "9"
+        },
+        "2580745": {
+          "quantity": 12,
+          "size": "9.5"
+        },
+        "2580746": {
+          "quantity": 10,
+          "size": "10"
+        },
+        "2580747": {
+          "quantity": 18,
+          "size": "10.5"
+        },
+        "2580748": {
+          "quantity": 11,
+          "size": "11"
+        },
+        "2580749": {
+          "quantity": 35,
+          "size": "11.5"
+        },
+        "2580750": {
+          "quantity": 25,
+          "size": "12"
+        }
+      }
+    },
+    {
+      "style_id": 444252,
+      "name": "Red Sole",
+      "original_price": "120.00",
+      "sale_price": null,
+      "default?": false,
+      "photos": [
+        {
+          "thumbnail_url": "https://images.unsplash.com/photo-1454177643390-7f100d1bbeec?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+          "url": "https://images.unsplash.com/photo-1454177643390-7f100d1bbeec?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"
+        }
+      ],
+      "skus": {
+        "2580751": {
+          "quantity": 14,
+          "size": "7"
+        },
+        "2580752": {
+          "quantity": 25,
+          "size": "7.5"
+        },
+        "2580753": {
+          "quantity": 9,
+          "size": "8"
+        },
+        "2580754": {
+          "quantity": 2,
+          "size": "8.5"
+        },
+        "2580755": {
+          "quantity": 18,
+          "size": "9"
+        },
+        "2580756": {
+          "quantity": 12,
+          "size": "9.5"
+        },
+        "2580757": {
+          "quantity": 10,
+          "size": "10"
+        },
+        "2580758": {
+          "quantity": 18,
+          "size": "10.5"
+        },
+        "2580759": {
+          "quantity": 11,
+          "size": "11"
+        },
+        "2580760": {
+          "quantity": 35,
+          "size": "11.5"
+        },
+        "2580761": {
+          "quantity": 25,
+          "size": "12"
+        }
+      }
+    },
+    {
+      "style_id": 444253,
+      "name": "Yellow Sole",
+      "original_price": "120.00",
+      "sale_price": null,
+      "default?": false,
+      "photos": [
+        {
+          "thumbnail_url": "https://images.unsplash.com/photo-1499013819532-e4ff41b00669?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+          "url": "https://images.unsplash.com/photo-1499013819532-e4ff41b00669?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1100&q=80"
+        },
+        {
+          "thumbnail_url": "https://images.unsplash.com/photo-1459631836437-1c2824882e3f?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80",
+          "url": "https://images.unsplash.com/photo-1459631836437-1c2824882e3f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80"
+        }
+      ],
+      "skus": {
+        "2580762": {
+          "quantity": 14,
+          "size": "7"
+        },
+        "2580763": {
+          "quantity": 25,
+          "size": "7.5"
+        },
+        "2580764": {
+          "quantity": 9,
+          "size": "8"
+        },
+        "2580765": {
+          "quantity": 2,
+          "size": "8.5"
+        },
+        "2580766": {
+          "quantity": 18,
+          "size": "9"
+        },
+        "2580767": {
+          "quantity": 12,
+          "size": "9.5"
+        },
+        "2580768": {
+          "quantity": 10,
+          "size": "10"
+        },
+        "2580769": {
+          "quantity": 18,
+          "size": "10.5"
+        },
+        "2580770": {
+          "quantity": 11,
+          "size": "11"
+        },
+        "2580771": {
+          "quantity": 35,
+          "size": "11.5"
+        },
+        "2580772": {
+          "quantity": 25,
+          "size": "12"
+        }
+      }
+    }
+  ],
+  "questionsWithAnswers": [
+    {
+      "question_id": 645511,
+      "question_body": "A new Question",
+      "question_date": "2023-03-25T00:00:00.000Z",
+      "asker_name": "Nick Name",
+      "question_helpfulness": 8,
+      "reported": false,
+      "answers": [
+        {
+          "id": 5991514,
+          "body": "zxczxc",
+          "date": "2023-04-06T00:00:00.000Z",
+          "answerer_name": "zxczxc",
+          "helpfulness": 0,
+          "photos": [
+            "https://firebasestorage.googleapis.com/v0/b/aerio-54e8f.appspot.com/o/images%2Fdownload11.jpgc5a60012-cd25-4fa2-8ba4-a2a4a1e48f33?alt=media&token=89090fab-a2b2-4e7a-a0d1-5ea05be9f9e5"
+          ]
+        },
+        {
+          "id": 5991515,
+          "body": "asd",
+          "date": "2023-04-06T00:00:00.000Z",
+          "answerer_name": "asd",
+          "helpfulness": 0,
+          "photos": []
+        },
+        {
+          "id": 5991516,
+          "body": "asda",
+          "date": "2023-04-06T00:00:00.000Z",
+          "answerer_name": "asda",
+          "helpfulness": 0,
+          "photos": [
+            "https://firebasestorage.googleapis.com/v0/b/aerio-54e8f.appspot.com/o/images%2Fdownload1123454556.jpg6463b9e9-e49d-44df-89ce-ceb8a26cd538?alt=media&token=19feb748-ac4c-49cf-a1b9-fd68061b23dc"
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": 645510,
+      "question_body": "new one",
+      "question_date": "2023-03-25T00:00:00.000Z",
+      "asker_name": "Nick Name",
+      "question_helpfulness": 1,
+      "reported": false,
+      "answers": []
+    },
+    {
+      "question_id": 644638,
+      "question_body": "How many are in stock?",
+      "question_date": "2022-12-19T00:00:00.000Z",
+      "asker_name": "bigSpender7756",
+      "question_helpfulness": 1,
+      "reported": false,
+      "answers": [
+        {
+          "id": 5991467,
+          "body": "asdas",
+          "date": "2023-03-31T00:00:00.000Z",
+          "answerer_name": "asdasd",
+          "helpfulness": 1,
+          "photos": []
+        },
+        {
+          "id": 5991543,
+          "body": "many",
+          "date": "2023-04-06T00:00:00.000Z",
+          "answerer_name": "joe",
+          "helpfulness": 1,
+          "photos": []
+        },
+        {
+          "id": 5991501,
+          "body": "sdfsdf",
+          "date": "2023-04-02T00:00:00.000Z",
+          "answerer_name": "sdfsdfsdf",
+          "helpfulness": 0,
+          "photos": []
+        }
+      ]
+    },
+    {
+      "question_id": 645760,
+      "question_body": "asd",
+      "question_date": "2023-04-08T00:00:00.000Z",
+      "asker_name": "asdasd",
+      "question_helpfulness": 0,
+      "reported": false,
+      "answers": []
+    },
+    {
+      "question_id": 645759,
+      "question_body": "asda",
+      "question_date": "2023-04-08T00:00:00.000Z",
+      "asker_name": "asdasd",
+      "question_helpfulness": 0,
+      "reported": false,
+      "answers": []
+    },
+    {
+      "question_id": 645751,
+      "question_body": "1234567",
+      "question_date": "2023-04-08T00:00:00.000Z",
+      "asker_name": "1111",
+      "question_helpfulness": 0,
+      "reported": false,
+      "answers": []
+    },
+    {
+      "question_id": 645749,
+      "question_body": "1234",
+      "question_date": "2023-04-08T00:00:00.000Z",
+      "asker_name": "12asd@asda",
+      "question_helpfulness": 0,
+      "reported": false,
+      "answers": []
+    },
+    {
+      "question_id": 645725,
+      "question_body": "asdas",
+      "question_date": "2023-04-06T00:00:00.000Z",
+      "asker_name": "asda",
+      "question_helpfulness": 0,
+      "reported": false,
+      "answers": []
+    },
+    {
+      "question_id": 645317,
+      "question_body": "mary",
+      "question_date": "2023-03-22T00:00:00.000Z",
+      "asker_name": "mary",
+      "question_helpfulness": 0,
+      "reported": false,
+      "answers": []
+    },
+    {
+      "question_id": 645316,
+      "question_body": "testing ",
+      "question_date": "2023-03-22T00:00:00.000Z",
+      "asker_name": "jason",
+      "question_helpfulness": 0,
+      "reported": false,
+      "answers": []
+    },
+    {
+      "question_id": 645113,
+      "question_body": "testing q submit",
+      "question_date": "2023-02-09T00:00:00.000Z",
+      "asker_name": "nickname",
+      "question_helpfulness": 0,
+      "reported": false,
+      "answers": [
+        {
+          "id": 5990640,
+          "body": "Test answer my own Q",
+          "date": "2023-02-09T00:00:00.000Z",
+          "answerer_name": "nickname",
+          "helpfulness": 0,
+          "photos": []
+        }
+      ]
+    },
+    {
+      "question_id": 644695,
+      "question_body": "What happened",
+      "question_date": "2023-01-06T00:00:00.000Z",
+      "asker_name": "me",
+      "question_helpfulness": 0,
+      "reported": false,
+      "answers": []
+    },
+    {
+      "question_id": 643696,
+      "question_body": "can anyone answer this question???????????",
+      "question_date": "2022-10-24T00:00:00.000Z",
+      "asker_name": "noone",
+      "question_helpfulness": 0,
+      "reported": false,
+      "answers": [
+        {
+          "id": 5988953,
+          "body": "look at this shoes",
+          "date": "2022-10-24T00:00:00.000Z",
+          "answerer_name": "niceguy",
+          "helpfulness": 0,
+          "photos": [
+            "https://i.ibb.co/938pJdd/34d3b8081eff.jpg"
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": 642595,
+      "question_body": "test",
+      "question_date": "2022-07-29T00:00:00.000Z",
+      "asker_name": "test",
+      "question_helpfulness": 0,
+      "reported": false,
+      "answers": [
+        {
+          "id": 5988701,
+          "body": "test what?",
+          "date": "2022-10-17T00:00:00.000Z",
+          "answerer_name": "what",
+          "helpfulness": 0,
+          "photos": []
+        }
+      ]
+    },
+    {
+      "question_id": 642564,
+      "question_body": "asking a question here",
+      "question_date": "2022-07-25T00:00:00.000Z",
+      "asker_name": "test-username",
+      "question_helpfulness": 0,
+      "reported": false,
+      "answers": [
+        {
+          "id": 5988700,
+          "body": "Submit an answer here",
+          "date": "2022-10-17T00:00:00.000Z",
+          "answerer_name": "john",
+          "helpfulness": 0,
+          "photos": []
+        }
+      ]
+    }
+  ],
+  "reviews": [
+    {
+      "review_id": 1278249,
+      "rating": 5,
+      "summary": "Example: Best Purchase Ever!",
+      "recommend": true,
+      "response": null,
+      "body": "Why did you like the product or not? Why did you like the product or not? Why did you like the product or not?",
+      "date": "2023-01-05T00:00:00.000Z",
+      "reviewer_name": "tvo",
+      "helpfulness": 7,
+      "photos": []
+    },
+    {
+      "review_id": 1278250,
+      "rating": 3,
+      "summary": "Example: Best Purchase Ever!",
+      "recommend": true,
+      "response": null,
+      "body": "Why did you like the product or not? Why did you like the product or not?",
+      "date": "2023-01-05T00:00:00.000Z",
+      "reviewer_name": "tvo",
+      "helpfulness": 5,
+      "photos": [
+        {
+          "id": 2457041,
+          "url": "http://res.cloudinary.com/djfpzruso/image/upload/v1672954470/we3qv0teyogvdmtqgpif.jpg"
+        }
+      ]
+    }
+  ],
+  "metaData": {
+    "product_id": "71703",
+    "ratings": {
+      "1": "3",
+      "2": "1",
+      "3": "1",
+      "4": "2",
+      "5": "8"
+    },
+    "recommended": {
+      "false": "2",
+      "true": "13"
+    },
+    "characteristics": {
+      "Size": {
+        "id": 240603,
+        "value": "2.4285714285714286"
+      },
+      "Width": {
+        "id": 240604,
+        "value": "2.9285714285714286"
+      },
+      "Comfort": {
+        "id": 240605,
+        "value": "3.1428571428571429"
+      },
+      "Quality": {
+        "id": 240606,
+        "value": "2.7857142857142857"
+      }
+    },
+    "percentRecommended": 86,
+    "totalReviews": 15,
+    "avgRating": 3.5
+  },
+  "id": 71703,
+  "campus": "hr-rpp",
+  "name": "Blues Suede Shoes",
+  "slogan": "2019 Stanley Cup Limited Edition",
+  "description": "Touch down in the land of the Delta Blues in the middle of the pouring rain",
+  "category": "Dress Shoes",
+  "default_price": "120.00",
+  "created_at": "2022-05-11T19:38:15.373Z",
+  "updated_at": "2022-05-11T19:38:15.373Z"
+}

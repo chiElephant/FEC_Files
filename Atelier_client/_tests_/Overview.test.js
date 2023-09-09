@@ -2,7 +2,7 @@ import renderer from 'react-test-renderer';
 import { render, screen, waitFor, act } from '@testing-library/react';
 import React from 'react';
 import userEvent from '@testing-library/user-event';
-import Overview from '../client/src/components/overview_module/Overview.jsx'
+import Overview from '../client/src/components/overview_module/Overview.jsx';
 import ProductInfo from '../client/src/components/overview_module/ProductInfo.jsx';
 import App from '../client/src/components/App.jsx';
 import Styles from '../client/src/components/overview_module/Styles.jsx';
@@ -106,7 +106,7 @@ describe('Overview Component', () => {
     test('Renders the style selector', async () => {
       // eslint-disable-next-line react/jsx-filename-extension
       waitFor(() => {
-        const styleSelector = screen.getByTestId('style-selector')
+        const styleSelector = screen.getByTestId('style-selector');
         expect(styleSelector).toBeInTheDocument();
       });
     });
