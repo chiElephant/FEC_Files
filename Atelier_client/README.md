@@ -34,12 +34,19 @@ To get Red Bean Shop up and running locally on your machine, follow the instruct
 - React.js
 - Express
 
-### Steps
-
-1. Clone the repository:
-
+### Instructions
+Run this command to bundle the application using Webpack
 ```bash
-git clone https://github.com/yourusername/RedBeanShop.git
+  npm run build
+```
+Then serve
+```bash
+  npm run start
+```
+
+Or bundle and serve the application in development using Webpack + nodemon
+```bash
+  npm run dev
 ```
 
 ### Team Members
