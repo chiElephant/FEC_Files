@@ -1,0 +1,681 @@
+{
+  "relatedProducts": [
+    {
+      "id": 72125,
+      "campus": "hr-rpp",
+      "name": "Korey 1700 Socks",
+      "slogan": "Quibusdam error a sit aliquam laborum quas voluptatem est illum.",
+      "description": "Nulla nisi voluptatem quis illum non occaecati eius sed. Aliquid voluptate quam veritatis assumenda. Dolores in id est quia reprehenderit sunt. Labore deleniti nam ut laboriosam consequatur recusandae esse expedita.",
+      "category": "Socks",
+      "created_at": "2022-05-11T19:38:15.536Z",
+      "updated_at": "2022-05-11T19:38:15.536Z",
+      "features": [
+        {
+          "feature": "Lens",
+          "value": "\"Ultrasheen Silver\""
+        },
+        {
+          "feature": "Frame",
+          "value": "\"DuraResin\""
+        },
+        {
+          "feature": "Satisfaction Guaranteed",
+          "value": null
+        },
+        {
+          "feature": "Non-GMO",
+          "value": null
+        }
+      ],
+      "defaultPrice": "792.00",
+      "photo": "https://images.unsplash.com/photo-1554774853-d50f9c681ae2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+      "ratingAverage": 3.5
+    },
+    {
+      "id": 72239,
+      "campus": "hr-rpp",
+      "name": "Matt Suit",
+      "slogan": "Delectus est accusantium quia est vero reprehenderit.",
+      "description": "Voluptatum dolorem et. Nesciunt excepturi perspiciatis est sit ratione distinctio facilis deleniti. Minus aut sint error velit aut esse.",
+      "category": "Suit",
+      "created_at": "2022-05-11T19:38:15.536Z",
+      "updated_at": "2022-05-11T19:38:15.536Z",
+      "features": [
+        {
+          "feature": "Lens",
+          "value": "\"Ultrasheen Basic\""
+        }
+      ],
+      "defaultPrice": "575.00",
+      "photo": "uhttps://images.unsplash.com/photo-1515243061678-14fc18b93935?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+      "ratingAverage": 2.5
+    },
+    {
+      "id": 71874,
+      "campus": "hr-rpp",
+      "name": "Joy Sweatpants",
+      "slogan": "Delectus qui debitis adipisci deserunt exercitationem.",
+      "description": "Error itaque aperiam quia magni rerum veniam vitae repellendus commodi. Ut quasi eligendi nisi. Eum vel est quo tempora et fugiat. Dolores eum sint.",
+      "category": "Sweatpants",
+      "created_at": "2022-05-11T19:38:15.536Z",
+      "updated_at": "2022-05-11T19:38:15.536Z",
+      "features": [
+        {
+          "feature": "Satisfaction Guaranteed",
+          "value": null
+        },
+        {
+          "feature": "Green Leaf Certified",
+          "value": null
+        },
+        {
+          "feature": "Material",
+          "value": "\"Rubber Mesh\""
+        },
+        {
+          "feature": "Lifetime Guarantee",
+          "value": null
+        }
+      ],
+      "defaultPrice": "362.00",
+      "photo": "https://images.unsplash.com/photo-1507920676663-3b72429774ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80",
+      "ratingAverage": 3
+    },
+    {
+      "id": 72637,
+      "campus": "hr-rpp",
+      "name": "Amiya Suit",
+      "slogan": "Mollitia rerum aut eligendi.",
+      "description": "Sint expedita debitis est saepe. Sunt dolore neque cumque in ex facere nam recusandae mollitia. Ipsam necessitatibus fugit voluptatem nisi. Facere minima id delectus totam. Impedit et vero. Vitae officia et.",
+      "category": "Suit",
+      "created_at": "2022-05-11T19:38:15.536Z",
+      "updated_at": "2022-05-11T19:38:15.536Z",
+      "features": [
+        {
+          "feature": "Fair Trade Certified",
+          "value": null
+        }
+      ],
+      "defaultPrice": "774.00",
+      "photo": "https://images.unsplash.com/photo-1526948128573-703ee1aeb6fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80",
+      "ratingAverage": 3
+    },
+    {
+      "id": 71820,
+      "campus": "hr-rpp",
+      "name": "Gino Skirt",
+      "slogan": "Ea voluptas dolores ipsam.",
+      "description": "Earum pariatur suscipit blanditiis suscipit eaque modi voluptatibus dolorum qui. Hic atque cupiditate excepturi. Nostrum enim eaque dolore accusamus.",
+      "category": "Skirt",
+      "created_at": "2022-05-11T19:38:15.536Z",
+      "updated_at": "2022-05-11T19:38:15.536Z",
+      "features": [
+        {
+          "feature": "Buttons",
+          "value": "\"White Resin\""
+        },
+        {
+          "feature": "Fabric",
+          "value": "\"Cashmere\""
+        },
+        {
+          "feature": "Sustainably Sourced",
+          "value": null
+        },
+        {
+          "feature": "Buttons",
+          "value": "\"Ivory\""
+        }
+      ],
+      "defaultPrice": "522.00",
+      "photo": "https://images.unsplash.com/photo-1546367791-e7447b431084?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+      "ratingAverage": 3
+    }
+  ],
+  "photo": "https://images.unsplash.com/photo-1556304653-cba65c59b3c5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+  "ratingAverage": 3,
+  "reviewsCount": 16,
+  "features": [
+    {
+      "feature": "Non-GMO",
+      "value": null
+    },
+    {
+      "feature": "Sustainably Sourced",
+      "value": null
+    },
+    {
+      "feature": "Non-GMO",
+      "value": null
+    }
+  ],
+  "styles": [
+    {
+      "style_id": 449323,
+      "name": "Red",
+      "original_price": "336.00",
+      "sale_price": null,
+      "default?": true,
+      "photos": [
+        {
+          "thumbnail_url": "https://images.unsplash.com/photo-1556304653-cba65c59b3c5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+          "url": "https://images.unsplash.com/photo-1530821875964-91927b611bad?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"
+        }
+      ],
+      "skus": {
+        "2610246": {
+          "quantity": 27,
+          "size": "7"
+        },
+        "2610247": {
+          "quantity": 19,
+          "size": "7.5"
+        },
+        "2610248": {
+          "quantity": 54,
+          "size": "8"
+        },
+        "2610249": {
+          "quantity": 32,
+          "size": "8.5"
+        },
+        "2610250": {
+          "quantity": 55,
+          "size": "9"
+        },
+        "2610251": {
+          "quantity": 59,
+          "size": "9.5"
+        },
+        "2610252": {
+          "quantity": 13,
+          "size": "10"
+        },
+        "2610253": {
+          "quantity": 44,
+          "size": "10.5"
+        },
+        "2610254": {
+          "quantity": 38,
+          "size": "11"
+        },
+        "2610255": {
+          "quantity": 20,
+          "size": "11.5"
+        },
+        "2610256": {
+          "quantity": 57,
+          "size": "12"
+        }
+      }
+    },
+    {
+      "style_id": 449324,
+      "name": "Silver",
+      "original_price": "336.00",
+      "sale_price": null,
+      "default?": false,
+      "photos": [
+        {
+          "thumbnail_url": "https://images.unsplash.com/photo-1517720359744-6d12f8a09b10?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+          "url": "https://images.unsplash.com/photo-1519396317879-83334cb422f8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"
+        }
+      ],
+      "skus": {
+        "2610257": {
+          "quantity": 55,
+          "size": "7"
+        },
+        "2610258": {
+          "quantity": 0,
+          "size": "7.5"
+        },
+        "2610259": {
+          "quantity": 6,
+          "size": "8"
+        },
+        "2610260": {
+          "quantity": 11,
+          "size": "8.5"
+        },
+        "2610261": {
+          "quantity": 38,
+          "size": "9"
+        },
+        "2610262": {
+          "quantity": 3,
+          "size": "9.5"
+        },
+        "2610263": {
+          "quantity": 16,
+          "size": "10"
+        },
+        "2610264": {
+          "quantity": 44,
+          "size": "10.5"
+        },
+        "2610265": {
+          "quantity": 45,
+          "size": "11"
+        },
+        "2610266": {
+          "quantity": 46,
+          "size": "11.5"
+        },
+        "2610267": {
+          "quantity": 56,
+          "size": "12"
+        }
+      }
+    },
+    {
+      "style_id": 449325,
+      "name": "Teal",
+      "original_price": "336.00",
+      "sale_price": "243.00",
+      "default?": false,
+      "photos": [
+        {
+          "thumbnail_url": "https://images.unsplash.com/photo-1510867759970-3d2ca293be77?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+          "url": "https://images.unsplash.com/photo-1530821875964-91927b611bad?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"
+        }
+      ],
+      "skus": {
+        "2610268": {
+          "quantity": 16,
+          "size": "7"
+        },
+        "2610269": {
+          "quantity": 46,
+          "size": "7.5"
+        },
+        "2610270": {
+          "quantity": 7,
+          "size": "8"
+        },
+        "2610271": {
+          "quantity": 12,
+          "size": "8.5"
+        },
+        "2610272": {
+          "quantity": 49,
+          "size": "9"
+        },
+        "2610273": {
+          "quantity": 38,
+          "size": "9.5"
+        },
+        "2610274": {
+          "quantity": 28,
+          "size": "10"
+        },
+        "2610275": {
+          "quantity": 2,
+          "size": "10.5"
+        },
+        "2610276": {
+          "quantity": 27,
+          "size": "11"
+        },
+        "2610277": {
+          "quantity": 17,
+          "size": "11.5"
+        },
+        "2610278": {
+          "quantity": 30,
+          "size": "12"
+        }
+      }
+    }
+  ],
+  "questionsWithAnswers": [],
+  "reviews": [
+    {
+      "review_id": 1270079,
+      "rating": 4,
+      "summary": "Reiciendis eos sit occaecati et neque dolore consequatur fugiat.",
+      "recommend": true,
+      "response": null,
+      "body": "Dolores dolorem eos. Sed ratione rerum repudiandae vitae. Vel facilis doloremque beatae cumque ut.",
+      "date": "2021-10-29T00:00:00.000Z",
+      "reviewer_name": "Nikolas16",
+      "helpfulness": 27,
+      "photos": [
+        {
+          "id": 2423111,
+          "url": "https://images.unsplash.com/photo-1560857792-215f9e3534ed?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80"
+        },
+        {
+          "id": 2423112,
+          "url": "https://images.unsplash.com/photo-1519857609704-61e751edba25?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80"
+        }
+      ]
+    },
+    {
+      "review_id": 1270078,
+      "rating": 5,
+      "summary": "Natus et eius.",
+      "recommend": true,
+      "response": null,
+      "body": "Officiis sunt labore reiciendis culpa sapiente. Esse neque ab impedit omnis sit exercitationem quos. Aut dolor placeat sint minus dolorem aspernatur. Aut pariatur quia. Quaerat suscipit atque quae iste dicta nemo totam at sit. Animi voluptatem est consectetur molestiae mollitia.",
+      "date": "2021-06-17T00:00:00.000Z",
+      "reviewer_name": "Shawn72",
+      "helpfulness": 27,
+      "photos": [
+        {
+          "id": 2423113,
+          "url": "https://images.unsplash.com/photo-1516199707327-5399434d0aa4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1083&q=80"
+        },
+        {
+          "id": 2423114,
+          "url": "https://images.unsplash.com/photo-1514866726862-0f081731e63f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"
+        }
+      ]
+    },
+    {
+      "review_id": 1270072,
+      "rating": 5,
+      "summary": "Quis unde consectetur facilis quia vero amet non ut harum.",
+      "recommend": true,
+      "response": null,
+      "body": "Ut consequatur harum tempora id voluptatem iste. Quia ea dignissimos tempore laborum molestiae est. Cupiditate est a architecto nemo necessitatibus iure. Voluptas animi enim. Fuga officia molestiae ut inventore sequi nesciunt consectetur. Qui quae voluptatem voluptate excepturi architecto dolor eaque.",
+      "date": "2022-02-03T00:00:00.000Z",
+      "reviewer_name": "Lamar.Dickens26",
+      "helpfulness": 24,
+      "photos": [
+        {
+          "id": 2423126,
+          "url": "https://images.unsplash.com/photo-1522653216850-4f1415a174fb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=975&q=80"
+        },
+        {
+          "id": 2423127,
+          "url": "https://images.unsplash.com/photo-1513531926349-466f15ec8cc7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"
+        }
+      ]
+    },
+    {
+      "review_id": 1270071,
+      "rating": 2,
+      "summary": "Tenetur ratione dolor distinctio amet quia voluptatem nam.",
+      "recommend": true,
+      "response": "\"Sapiente amet fugiat ipsam enim placeat accusamus.\"",
+      "body": "Consequatur fugiat ut voluptatum debitis saepe maxime quia qui facilis. Explicabo voluptates libero consequuntur nesciunt sequi fuga provident. Commodi voluptas suscipit incidunt voluptatem sint mollitia ipsa. Eius soluta aut. Nihil debitis et dicta amet iste aut animi.",
+      "date": "2021-06-07T00:00:00.000Z",
+      "reviewer_name": "Leanne.Hahn15",
+      "helpfulness": 24,
+      "photos": [
+        {
+          "id": 2423128,
+          "url": "https://images.unsplash.com/photo-1472186422470-1f3fbde547aa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1647&q=80"
+        },
+        {
+          "id": 2423129,
+          "url": "https://images.unsplash.com/photo-1544376664-80b17f09d399?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1525&q=80"
+        }
+      ]
+    },
+    {
+      "review_id": 1270077,
+      "rating": 4,
+      "summary": "Sunt laborum eveniet.",
+      "recommend": true,
+      "response": null,
+      "body": "Ex ullam aut maxime qui beatae dolorem. Pariatur consequuntur officia sit inventore. Nam maiores itaque saepe alias tenetur voluptatibus quia sunt. Omnis est dolorum necessitatibus fugiat rerum exercitationem voluptatum voluptas nam.",
+      "date": "2022-04-13T00:00:00.000Z",
+      "reviewer_name": "Ashlee_Quitzon",
+      "helpfulness": 18,
+      "photos": [
+        {
+          "id": 2423115,
+          "url": "https://images.unsplash.com/photo-1519862170344-6cd5e49cb996?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"
+        },
+        {
+          "id": 2423116,
+          "url": "https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1567&q=80"
+        }
+      ]
+    },
+    {
+      "review_id": 1270080,
+      "rating": 3,
+      "summary": "Placeat qui in doloribus.",
+      "recommend": true,
+      "response": null,
+      "body": "Nesciunt sit sint. Nesciunt libero aperiam accusantium. Ad et architecto nobis voluptates ab aut.",
+      "date": "2021-08-30T00:00:00.000Z",
+      "reviewer_name": "Jerome.Tromp",
+      "helpfulness": 15,
+      "photos": [
+        {
+          "id": 2423108,
+          "url": "https://images.unsplash.com/photo-1462833867037-0f06eab31cc4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80"
+        },
+        {
+          "id": 2423109,
+          "url": "https://images.unsplash.com/photo-1551489186-cf8726f514f8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"
+        },
+        {
+          "id": 2423110,
+          "url": "https://images.unsplash.com/photo-1550338300-f9a475b50ba2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1001&q=80"
+        }
+      ]
+    },
+    {
+      "review_id": 1270084,
+      "rating": 1,
+      "summary": "Recusandae deleniti quia quam qui ipsum aut voluptatum sed.",
+      "recommend": false,
+      "response": null,
+      "body": "Quos alias aliquid iste rem velit incidunt est ut ducimus. Suscipit sunt nihil ipsum eos occaecati perferendis sunt. Incidunt laborum esse eius rerum esse unde. Consequatur velit quas aspernatur velit distinctio. Tempore aliquam culpa perspiciatis aut sed ipsa et quia.",
+      "date": "2021-09-14T00:00:00.000Z",
+      "reviewer_name": "Doris27",
+      "helpfulness": 12,
+      "photos": [
+        {
+          "id": 2423103,
+          "url": "https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1567&q=80"
+        }
+      ]
+    },
+    {
+      "review_id": 1270073,
+      "rating": 4,
+      "summary": "Ex vel non atque sit vitae at.",
+      "recommend": true,
+      "response": null,
+      "body": "Id pariatur nemo voluptatibus et. Explicabo non et doloribus aut reiciendis voluptas. Vitae a ratione excepturi ad veniam laudantium velit. Commodi ea voluptatum numquam veniam in nesciunt accusantium occaecati molestiae. Nisi impedit dolorem odit provident voluptas nihil.",
+      "date": "2021-06-30T00:00:00.000Z",
+      "reviewer_name": "Roger9",
+      "helpfulness": 12,
+      "photos": [
+        {
+          "id": 2423124,
+          "url": "https://images.unsplash.com/photo-1526948128573-703ee1aeb6fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80"
+        },
+        {
+          "id": 2423125,
+          "url": "https://images.unsplash.com/photo-1454177643390-7f100d1bbeec?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"
+        }
+      ]
+    },
+    {
+      "review_id": 1270082,
+      "rating": 5,
+      "summary": "Rerum nisi enim doloribus aperiam sit facere et nam.",
+      "recommend": true,
+      "response": null,
+      "body": "Sunt hic qui libero. Eos perferendis sint. Explicabo vero autem aliquam.",
+      "date": "2022-04-27T00:00:00.000Z",
+      "reviewer_name": "Jalon.Wisozk21",
+      "helpfulness": 10,
+      "photos": [
+        {
+          "id": 2423105,
+          "url": "https://images.unsplash.com/photo-1448526478325-616f2b15b04e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1567&q=80"
+        }
+      ]
+    },
+    {
+      "review_id": 1270083,
+      "rating": 2,
+      "summary": "Sequi sit quasi.",
+      "recommend": true,
+      "response": null,
+      "body": "Voluptate dolorum ut sint exercitationem et eos. Omnis autem quia repellendus vel fugit. Sequi aut reprehenderit quo sint quos eligendi accusantium. Animi voluptatem omnis error suscipit enim iusto excepturi ut.",
+      "date": "2021-09-21T00:00:00.000Z",
+      "reviewer_name": "Gabrielle_Bahringer78",
+      "helpfulness": 8,
+      "photos": [
+        {
+          "id": 2423104,
+          "url": "https://images.unsplash.com/photo-1511766566737-1740d1da79be?ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80"
+        }
+      ]
+    },
+    {
+      "review_id": 1270081,
+      "rating": 1,
+      "summary": "Quo rerum corrupti cupiditate impedit architecto.",
+      "recommend": false,
+      "response": null,
+      "body": "Est ducimus beatae enim exercitationem cumque est eligendi maxime. Quas blanditiis quibusdam aut maiores maxime quisquam quia. Aperiam quas optio unde aliquid ut facere maiores.",
+      "date": "2021-08-25T00:00:00.000Z",
+      "reviewer_name": "Estevan.Schneider",
+      "helpfulness": 6,
+      "photos": [
+        {
+          "id": 2423106,
+          "url": "https://images.unsplash.com/photo-1542818212-9899bafcb9db?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1526&q=80"
+        },
+        {
+          "id": 2423107,
+          "url": "https://images.unsplash.com/photo-1554774853-d50f9c681ae2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1651&q=80"
+        }
+      ]
+    },
+    {
+      "review_id": 1270076,
+      "rating": 1,
+      "summary": "Ea architecto quisquam beatae repellat modi quia.",
+      "recommend": false,
+      "response": null,
+      "body": "Et nulla odio recusandae quidem iusto aut repellendus. Dignissimos officia aut accusantium ipsum voluptates voluptatem eaque vitae autem. Rerum quia quis reprehenderit nulla totam autem ut omnis perferendis. Qui autem quis dolor explicabo non. Ea corrupti doloremque. Corrupti qui quae non asperiores modi omnis asperiores omnis.",
+      "date": "2021-11-08T00:00:00.000Z",
+      "reviewer_name": "Shyann61",
+      "helpfulness": 6,
+      "photos": [
+        {
+          "id": 2423117,
+          "url": "https://images.unsplash.com/photo-1447879027584-9d17c2ca0333?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1651&q=80"
+        },
+        {
+          "id": 2423118,
+          "url": "https://images.unsplash.com/photo-1473691955023-da1c49c95c78?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"
+        }
+      ]
+    },
+    {
+      "review_id": 1270085,
+      "rating": 2,
+      "summary": "Accusantium itaque veniam esse harum doloribus.",
+      "recommend": true,
+      "response": null,
+      "body": "Labore est amet vel in qui iste ipsa. Fugiat rerum eos velit et qui eum placeat rerum officiis. Ex et maxime. Et libero officiis sunt aut et aut corrupti earum facere.",
+      "date": "2022-01-16T00:00:00.000Z",
+      "reviewer_name": "Carolyn12",
+      "helpfulness": 4,
+      "photos": [
+        {
+          "id": 2423102,
+          "url": "https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1567&q=80"
+        }
+      ]
+    },
+    {
+      "review_id": 1270074,
+      "rating": 4,
+      "summary": "Et magni eligendi tempore nihil qui ipsa.",
+      "recommend": true,
+      "response": null,
+      "body": "Assumenda et voluptas quia enim molestiae quod et officiis iste. Eos nisi repellendus inventore doloribus. Sed dolorem qui omnis harum. Consequatur autem laborum eius dolores officia saepe deleniti velit repellendus. Necessitatibus voluptas sequi. Atque voluptatum voluptatem sint et molestiae qui rerum voluptas ex.",
+      "date": "2021-07-06T00:00:00.000Z",
+      "reviewer_name": "Sherman37",
+      "helpfulness": 4,
+      "photos": [
+        {
+          "id": 2423122,
+          "url": "https://images.unsplash.com/photo-1498168208808-4c2706938a2f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1001&q=80"
+        },
+        {
+          "id": 2423123,
+          "url": "https://images.unsplash.com/photo-1554774853-d50f9c681ae2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1651&q=80"
+        }
+      ]
+    },
+    {
+      "review_id": 1270070,
+      "rating": 4,
+      "summary": "Accusamus quia eos nihil.",
+      "recommend": true,
+      "response": null,
+      "body": "Quos vel voluptas quis perferendis. Fuga quisquam mollitia quae in occaecati non natus quos voluptatibus. Labore aspernatur quia. Rerum et assumenda velit incidunt repudiandae consequatur sit sapiente temporibus. Doloremque laboriosam enim consectetur recusandae et.",
+      "date": "2022-03-22T00:00:00.000Z",
+      "reviewer_name": "Vivian57",
+      "helpfulness": 3,
+      "photos": [
+        {
+          "id": 2423130,
+          "url": "https://images.unsplash.com/photo-1517456837005-d757b959ae2b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+        },
+        {
+          "id": 2423131,
+          "url": "https://images.unsplash.com/photo-1517720359744-6d12f8a09b10?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1567&q=80"
+        }
+      ]
+    }
+  ],
+  "metaData": {
+    "product_id": "72489",
+    "ratings": {
+      "1": "3",
+      "2": "3",
+      "3": "2",
+      "4": "5",
+      "5": "3"
+    },
+    "recommended": {
+      "false": "3",
+      "true": "13"
+    },
+    "characteristics": {
+      "Size": {
+        "id": 243261,
+        "value": "2.8125000000000000"
+      },
+      "Width": {
+        "id": 243262,
+        "value": "2.8750000000000000"
+      },
+      "Comfort": {
+        "id": 243263,
+        "value": "3.0000000000000000"
+      },
+      "Quality": {
+        "id": 243264,
+        "value": "2.8750000000000000"
+      }
+    },
+    "percentRecommended": 81,
+    "totalReviews": 16,
+    "avgRating": 3
+  },
+  "id": 72489,
+  "campus": "hr-rpp",
+  "name": "Melvina Heels",
+  "slogan": "Molestiae ut ad placeat rem mollitia.",
+  "description": "Unde veritatis mollitia omnis at qui. Tenetur accusantium aspernatur officia. Ab animi voluptatum et soluta eveniet quo tempore placeat in.",
+  "category": "Heels",
+  "default_price": "336.00",
+  "created_at": "2022-05-11T19:38:15.536Z",
+  "updated_at": "2022-05-11T19:38:15.536Z"
+}
